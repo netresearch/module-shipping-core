@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * See LICENSE.md for license details.
+  */
+-->
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:DataGenerator/etc/dataProfileSchema.xsd">
+    <!-- Deutschland -->
+    <entity name="ShippingOrigin_DE" type="carrier">
+        <data key="country_id">DE</data>
+        <data key="postcode">20457</data>
+        <data key="city">Hamburg</data>
+        <array key="street">
+            <item>Platz der Deutschen Einheit 4</item>
+        </array>
+    </entity>
+
+    <!-- Österreich -->
+    <entity name="ShippingOrigin_AT" type="carrier">
+        <data key="country_id">AT</data>
+        <data key="postcode">1010</data>
+        <data key="city">Wien</data>
+        <array key="street">
+            <item>Opernring 2</item>
+        </array>
+    </entity>
+
+    <!-- Hong Kong -->
+    <entity name="ShippingOrigin_HK" type="carrier">
+        <data key="country_id">HK</data>
+        <data key="postcode">53113</data>
+        <data key="city">Kwai Chung</data>
+        <array key="street">
+            <item>No 31-39 Wo Tong Tsui St</item>
+        </array>
+    </entity>
+</entities>

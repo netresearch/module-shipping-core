@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * See LICENSE.md for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- # service interface preferences -->
+    <preference for="Netresearch\ShippingCore\Api\Pipeline\RateResponseProcessorInterface" type="Netresearch\ShippingCore\Model\Pipeline\Rate\RateResponseProcessor"/>
+    <preference for="Netresearch\ShippingCore\Api\Rate\ProxyCarrierFactoryInterface" type="Netresearch\ShippingCore\Model\Rate\Emulation\ProxyCarrierFactory"/>
+    <preference for="Netresearch\ShippingCore\Api\Rate\RateRequestEmulationInterface" type="Netresearch\ShippingCore\Model\Rate\Emulation\RateRequestService"/>
+
+    <!-- # interceptor plugins -->
+    <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
+        <plugin name="addShippingMethodData" type="Netresearch\ShippingCore\Plugin\Quote\Cart\ShippingMethodConverterPlugin"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Address\Rate">
+        <plugin name="addShippingMethodData" type="Netresearch\ShippingCore\Plugin\Quote\Cart\ShippingMethodConverterPlugin"/>
+    </type>
+</config>

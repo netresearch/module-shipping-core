@@ -1,5 +1,8 @@
+"Carrier ""%1"" not found.","Carrier ""%1"" not found."
 "Create a customized country list","Create a customized country list"
+"Display customized message","Display customized message"
 Errors,Errors
+"Hide this shipping method in checkout","Hide this shipping method in checkout"
 "Info (All API Activities)","Info (All API Activities)"
 "Use countries from <a href=""%1"">Allowed Countries</a> setting.","Use countries from <a href=""%1"">Allowed Countries</a> setting."
 Warnings,Warnings

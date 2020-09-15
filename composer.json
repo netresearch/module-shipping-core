@@ -22,7 +22,10 @@
     },
     "require": {
         "php": "^7.1.3",
-        "magento/framework": "^102.0.0 || ^103.0.0"
+        "magento/framework": "^102.0.0 || ^103.0.0",
+        "magento/module-quote": "^101.1.0",
+        "magento/module-shipping": "^100.3.0",
+        "magento/module-store": "^101.0.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~6.2.0",
@@ -31,7 +34,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "1.0.0.x-dev"
+            "dev-GLS-19": "1.0.0.x-dev"
         }
     }
 }

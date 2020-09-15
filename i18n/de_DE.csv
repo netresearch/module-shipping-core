@@ -1,5 +1,8 @@
+"Carrier ""%1"" not found.","Carrier ""%1"" konnte nicht gefunden werden."
 "Create a customized country list","Angepasste Länderliste erstellen"
+"Display customized message","Benutzerdefinierte Nachricht anzeigen"
 Errors,Fehler
+"Hide this shipping method in checkout","Diese Versandart im Checkout ausblenden"
 "Info (All API Activities)","Info (alle API-Aktivitäten)"
 "Use countries from <a href=""%1"">Allowed Countries</a> setting.","Erlaubte Länder aus den <a href=""%1"">allgemeinen Einstellungen</a> verwenden."
 Warnings,Warnungen
