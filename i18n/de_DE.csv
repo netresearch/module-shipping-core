@@ -4,5 +4,6 @@
 Errors,Fehler
 "Hide this shipping method in checkout","Diese Versandart im Checkout ausblenden"
 "Info (All API Activities)","Info (alle API-Aktivitäten)"
+"Unable to save label status","Labelstatus kann nicht gespeichert werden"
 "Use countries from <a href=""%1"">Allowed Countries</a> setting.","Erlaubte Länder aus den <a href=""%1"">allgemeinen Einstellungen</a> verwenden."
 Warnings,Warnungen

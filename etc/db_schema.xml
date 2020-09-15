@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="sales_order_grid">
+        <column xsi:type="varchar" name="nrshipping_label_status" nullable="true" length="10" comment="Label Status"/>
+    </table>
+    <table name="nrshipping_label_status" resource="sales" engine="innodb" comment="nrshipping_label_status">
+        <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Entity Id"/>
+        <column xsi:type="varchar" name="status_code" nullable="false" length="10" default="pending" comment="Status Code"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="order_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="NRSHIPPING_LABEL_STATUS_ORDER_ID_SALES_ORDER_ENTITY_ID" table="nrshipping_label_status" column="order_id" referenceTable="sales_order" referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+</schema>
