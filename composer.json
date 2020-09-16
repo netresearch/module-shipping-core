@@ -35,5 +35,10 @@
     },
     "suggest": {
         "magento/module-scalable-oms": "^100.2.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "1.0.x-dev"
+        }
     }
 }
