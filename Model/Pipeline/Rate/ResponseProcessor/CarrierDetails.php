@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace Netresearch\ShippingCore\Model\Pipeline\Rate\ResponseProcessor;
 
-use Netresearch\ShippingCore\Api\Pipeline\RateResponseProcessorInterface;
 use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Quote\Model\Quote\Address\RateResult\Method;
+use Netresearch\ShippingCore\Api\Pipeline\RateResponseProcessorInterface;
 
 class CarrierDetails implements RateResponseProcessorInterface
 {

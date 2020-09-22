@@ -8,4 +8,30 @@
     <extension_attributes for="Magento\Quote\Api\Data\ShippingMethodInterface">
         <attribute code="additional_info" type="Netresearch\ShippingCore\Api\Data\Rate\MethodAdditionalInfoInterface"/>
     </extension_attributes>
+
+
+    <extension_attributes for="Magento\Sales\Api\Data\OrderAddressInterface">
+        <attribute code="nrshipping_street_name" type="string">
+            <join reference_table="nrshipping_recipient_street"
+                  reference_field="order_address_id"
+                  join_on_field="entity_id">
+                <field>name</field>
+            </join>
+        </attribute>
+        <attribute code="nrshipping_street_number" type="string">
+            <join reference_table="nrshipping_recipient_street"
+                  reference_field="order_address_id"
+                  join_on_field="entity_id">
+                <field>number</field>
+            </join>
+        </attribute>
+        <attribute code="nrshipping_street_supplement" type="string">
+            <join reference_table="nrshipping_recipient_street"
+                  reference_field="order_address_id"
+                  join_on_field="entity_id">
+                <field>supplement</field>
+            </join>
+        </attribute>
+    </extension_attributes>
+
 </config>

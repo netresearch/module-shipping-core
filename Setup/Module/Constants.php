@@ -15,4 +15,6 @@ class Constants
     public const SALES_CONNECTION_NAME = 'sales';
 
     public const TABLE_LABEL_STATUS = 'nrshipping_label_status';
+
+    public const TABLE_RECIPIENT_STREET = 'nrshipping_recipient_street';
 }

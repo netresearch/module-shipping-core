@@ -4,6 +4,13 @@
 Errors,Errors
 "Hide this shipping method in checkout","Hide this shipping method in checkout"
 "Info (All API Activities)","Info (All API Activities)"
+"Not implemented yet.","Not implemented yet."
+"Package #%1 not found in shipment request.","Package #%1 not found in shipment request."
+"Recipient street with ID ""%1"" does not exist.","Recipient street with ID ""%1"" does not exist."
+"Return shipments are not supported.","Return shipments are not supported."
+"Unable to load recipient street with ID ""%1"".","Unable to load recipient street with ID ""%1""."
+"Unable to retrieve year %1 holidays for region %2.","Unable to retrieve year %1 holidays for region %2."
 "Unable to save label status","Unable to save label status"
+"Unable to save recipient street.","Unable to save recipient street."
 "Use countries from <a href=""%1"">Allowed Countries</a> setting.","Use countries from <a href=""%1"">Allowed Countries</a> setting."
 Warnings,Warnings

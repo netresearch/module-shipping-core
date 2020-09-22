@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * See LICENSE.md for license details.
+ */
+
+declare(strict_types=1);
+
+namespace Netresearch\ShippingCore\Api\Pipeline;
+
+use Magento\Shipping\Model\Shipment\Request;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
+
+/**
+ * Perform action on shipment requests as part of running the create shipments pipeline.
+ *
+ * A pipeline is composed of a sequence of configured stages. One stage performs a certain task on the request object,
+ * e.g. validation, transformation, mapping, sending, etc. The pipeline passes an artifacts container into all the
+ * stages to store intermediate results.
+ *
+ * @see ArtifactsContainerInterface
+ * @see CreateShipmentsPipelineInterface
+ *
+ * @api
+ */
+interface CreateShipmentsStageInterface
+{
+    /**
+     * Perform action on given shipment requests.
+     *
+     * @param Request[] $requests
+     * @param ArtifactsContainerInterface $artifactsContainer
+     * @return Request[]
+     */
+    public function execute(array $requests, ArtifactsContainerInterface $artifactsContainer): array;
+}

@@ -8,4 +8,7 @@
     <event name="sales_order_save_after">
         <observer name="nrshipping_set_initial_label_status" instance="Netresearch\ShippingCore\Observer\SetInitialLabelStatus" />
     </event>
+    <event name="sales_order_address_save_after">
+        <observer name="nr_split_shipping_address" instance="Netresearch\ShippingCore\Observer\SplitAddress"/>
+    </event>
 </config>

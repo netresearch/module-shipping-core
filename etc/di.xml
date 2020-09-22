@@ -6,24 +6,58 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <!-- # service interface preferences -->
+    <preference for="Netresearch\ShippingCore\Api\Config\ShippingConfigInterface" type="Netresearch\ShippingCore\Model\Config\ShippingConfig"/>
+    <preference for="Netresearch\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface" type="Netresearch\ShippingCore\Model\LabelStatus\LabelStatusManagement"/>
+    <preference for="Netresearch\ShippingCore\Api\Pipeline\CollectRatesPipelineInterface" type="Netresearch\ShippingCore\Model\Pipeline\Rate\CollectRatesPipeline"/>
+    <preference for="Netresearch\ShippingCore\Api\Pipeline\CreateShipmentsPipelineInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\CreateShipmentsPipeline"/>
     <preference for="Netresearch\ShippingCore\Api\Pipeline\RateResponseProcessorInterface" type="Netresearch\ShippingCore\Model\Pipeline\Rate\RateResponseProcessor"/>
+    <preference for="Netresearch\ShippingCore\Api\Pipeline\RequestTracksPipelineInterface" type="Netresearch\ShippingCore\Model\Pipeline\Track\RequestTracksPipeline"/>
+    <preference for="Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestExtractorInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\RequestExtractor"/>
+    <preference for="Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestModifierInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\RequestModifier"/>
+    <preference for="Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestValidatorInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Validator\CompositeValidator"/>
+    <preference for="Netresearch\ShippingCore\Api\Pipeline\ShipmentResponseProcessorInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentResponseProcessor"/>
+    <preference for="Netresearch\ShippingCore\Api\Pipeline\TrackResponseProcessorInterface" type="Netresearch\ShippingCore\Model\Pipeline\Track\TrackResponseProcessor"/>
     <preference for="Netresearch\ShippingCore\Api\Rate\ProxyCarrierFactoryInterface" type="Netresearch\ShippingCore\Model\Rate\Emulation\ProxyCarrierFactory"/>
     <preference for="Netresearch\ShippingCore\Api\Rate\RateRequestEmulationInterface" type="Netresearch\ShippingCore\Model\Rate\Emulation\RateRequestService"/>
-    <preference for="Netresearch\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface" type="Netresearch\ShippingCore\Model\LabelStatus\LabelStatusManagement"/>
-
-    <!-- # interceptor plugins -->
-    <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
-        <plugin name="addShippingMethodData" type="Netresearch\ShippingCore\Plugin\Quote\Cart\ShippingMethodConverterPlugin"/>
-    </type>
-    <type name="Magento\Quote\Model\Quote\Address\Rate">
-        <plugin name="addShippingMethodData" type="Netresearch\ShippingCore\Plugin\Quote\Cart\ShippingMethodConverterPlugin"/>
-    </type>
+    <preference for="Netresearch\ShippingCore\Api\SplitAddress\RecipientStreetLoaderInterface" type="Netresearch\ShippingCore\Model\SplitAddress\RecipientStreetLoader"/>
+    <preference for="Netresearch\ShippingCore\Api\SplitAddress\RecipientStreetRepositoryInterface" type="Netresearch\ShippingCore\Model\SplitAddress\RecipientStreetRepository"/>
+    <preference for="Netresearch\ShippingCore\Api\Util\UnitConverterInterface" type="Netresearch\ShippingCore\Model\Util\UnitConverter"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageAdditionalInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Data\PackageAdditional"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Data\Package"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageItemInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Data\PackageItem"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\RecipientInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Data\Recipient"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\ShipperInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Data\Shipper"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\LabelResponseInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentResponse\LabelResponse"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentErrorResponseInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentResponse\ErrorResponse"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\TrackRequest\TrackRequestInterface" type="Netresearch\ShippingCore\Model\Pipeline\Track\TrackRequest\TrackRequest"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\TrackResponse\TrackErrorResponseInterface" type="Netresearch\ShippingCore\Model\Pipeline\Track\TrackResponse\TrackErrorResponse"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\TrackResponse\TrackResponseInterface" type="Netresearch\ShippingCore\Model\Pipeline\Track\TrackResponse\TrackResponse"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\RecipientStreetInterface" type="Netresearch\ShippingCore\Model\SplitAddress\RecipientStreet"/>
 
     <!-- # virtual types -->
     <virtualType name="Netresearch\ShippingCore\SalesTableNameIterator\Virtual" type="Magento\Framework\ForeignKey\Migration\TableNameArrayIterator">
         <arguments>
             <argument name="tableNames" xsi:type="array">
                 <item name="nrshipping_label_status" xsi:type="const">Netresearch\ShippingCore\Setup\Module\Constants::TABLE_LABEL_STATUS</item>
+                <item name="nrshipping_recipient_street" xsi:type="const">Netresearch\ShippingCore\Setup\Module\Constants::TABLE_RECIPIENT_STREET</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Netresearch\ShippingCore\Model\Pipeline\BulkShipment\CreateLabelResponseProcessor\Virtual" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentResponseProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="addLabel" xsi:type="object">Netresearch\ShippingCore\Model\Pipeline\Shipment\ResponseProcessor\AddShippingLabel</item>
+                <item name="addTrack" xsi:type="object">Netresearch\ShippingCore\Model\Pipeline\Shipment\ResponseProcessor\AddTrack</item>
+                <item name="addComment" xsi:type="object">Netresearch\ShippingCore\Model\Pipeline\Shipment\ResponseProcessor\AddShipmentComment</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Netresearch\ShippingCore\Model\Pipeline\BulkShipment\CancelLabelResponseProcessor\Virtual" type="Netresearch\ShippingCore\Model\Pipeline\Track\TrackResponseProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="deleteTrack" xsi:type="object">Netresearch\ShippingCore\Model\Pipeline\Track\ResponseProcessor\DeleteTrack</item>
+                <item name="unsetLabel" xsi:type="object">Netresearch\ShippingCore\Model\Pipeline\Track\ResponseProcessor\UnsetShippingLabel</item>
+                <item name="updateLabelStatus" xsi:type="object">Netresearch\ShippingCore\Model\Pipeline\Track\ResponseProcessor\UpdateLabelStatus</item>
             </argument>
         </arguments>
     </virtualType>
@@ -60,6 +94,11 @@
             <argument name="connectionName" xsi:type="const">Netresearch\ShippingCore\Setup\Module\Constants::SALES_CONNECTION_NAME</argument>
         </arguments>
     </type>
+    <type name="Netresearch\ShippingCore\Model\ResourceModel\RecipientStreet">
+        <arguments>
+            <argument name="connectionName" xsi:type="const">Netresearch\ShippingCore\Setup\Module\Constants::SALES_CONNECTION_NAME</argument>
+        </arguments>
+    </type>
 
     <type name="Magento\ScalableOms\Console\Command\SplitSales">
         <arguments>
@@ -67,5 +106,33 @@
                 <item name="nrshippingSalesTableNameIterator" xsi:type="object">Netresearch\ShippingCore\SalesTableNameIterator\Virtual</item>
             </argument>
         </arguments>
+    </type>
+    <type name="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Validator\CompositeValidator">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="noReturnShipment" xsi:type="object">Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Validator\NoReturnValidator</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentResponseProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="updateLabelStatus" xsi:type="object">Netresearch\ShippingCore\Model\Pipeline\Shipment\ResponseProcessor\UpdateLabelStatus</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- # interceptor plugins -->
+    <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
+        <plugin name="addShippingMethodData" type="Netresearch\ShippingCore\Plugin\Quote\Cart\ShippingMethodConverterPlugin"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Address\Rate">
+        <plugin name="addShippingMethodData" type="Netresearch\ShippingCore\Plugin\Quote\Cart\ShippingMethodConverterPlugin"/>
+    </type>
+    <type name="Magento\Sales\Api\OrderAddressRepositoryInterface">
+        <plugin name="addSplitAddressAsExtensionAttributes" type="Netresearch\ShippingCore\Plugin\Order\AddRecipientStreetToAddress"/>
+    </type>
+    <type name="Magento\Sales\Model\ResourceModel\Order\Address\Collection">
+        <plugin name="addSplitAddressAsExtensionAttributes" type="Netresearch\ShippingCore\Plugin\Order\AddRecipientStreetToAddressCollection"/>
     </type>
 </config>

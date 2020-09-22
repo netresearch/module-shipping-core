@@ -17,7 +17,7 @@ class Collection extends AbstractCollection
     /**
      * Initialization
      */
-    public function _construct()
+    protected function _construct()
     {
         $this->_init(LabelStatus::class, LabelStatusResource::class);
     }

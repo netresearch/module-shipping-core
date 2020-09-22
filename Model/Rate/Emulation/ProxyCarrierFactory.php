@@ -8,11 +8,12 @@ declare(strict_types=1);
 
 namespace Netresearch\ShippingCore\Model\Rate\Emulation;
 
-use Netresearch\ShippingCore\Api\Rate\ProxyCarrierFactoryInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\NotFoundException;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
+use Magento\Store\Model\ScopeInterface;
+use Netresearch\ShippingCore\Api\Rate\ProxyCarrierFactoryInterface;
 
 class ProxyCarrierFactory implements ProxyCarrierFactoryInterface
 {
@@ -52,7 +53,7 @@ class ProxyCarrierFactory implements ProxyCarrierFactoryInterface
     {
         $carrierClass = $this->scopeConfig->getValue(
             'carriers/' . $carrierCode . '/model',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            ScopeInterface::SCOPE_STORE
         );
 
         if (empty($carrierClass)) {
