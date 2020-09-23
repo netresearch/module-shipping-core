@@ -5,11 +5,6 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
-    <extension_attributes for="Magento\Quote\Api\Data\ShippingMethodInterface">
-        <attribute code="additional_info" type="Netresearch\ShippingCore\Api\Data\Rate\MethodAdditionalInfoInterface"/>
-    </extension_attributes>
-
-
     <extension_attributes for="Magento\Sales\Api\Data\OrderAddressInterface">
         <attribute code="nrshipping_street_name" type="string">
             <join reference_table="nrshipping_recipient_street"
@@ -34,4 +29,34 @@
         </attribute>
     </extension_attributes>
 
+    <extension_attributes for="Magento\Sales\Api\Data\OrderItemInterface">
+        <attribute code="nrshipping_country_of_manufacture" type="string">
+            <join reference_table="nrshipping_order_item"
+                  reference_field="item_id"
+                  join_on_field="item_id">
+                <field>country_of_manufacture</field>
+            </join>
+        </attribute>
+        <attribute code="nrshipping_dg_category" type="string">
+            <join reference_table="nrshipping_order_item"
+                  reference_field="item_id"
+                  join_on_field="item_id">
+                <field>dangerous_goods_category</field>
+            </join>
+        </attribute>
+        <attribute code="nrshipping_tariff_number" type="string">
+            <join reference_table="nrshipping_order_item"
+                  reference_field="item_id"
+                  join_on_field="item_id">
+                <field>tariff_number</field>
+            </join>
+        </attribute>
+        <attribute code="nrshipping_export_description" type="string">
+            <join reference_table="nrshipping_order_item"
+                  reference_field="item_id"
+                  join_on_field="item_id">
+                <field>export_description</field>
+            </join>
+        </attribute>
+    </extension_attributes>
 </config>

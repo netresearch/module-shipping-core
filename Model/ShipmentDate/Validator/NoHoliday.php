@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Model\ShipmentDate\Validator;
+namespace Netresearch\ShippingCore\Model\ShipmentDate\Validator;
 
 use Magento\Framework\Exception\RuntimeException;
 use Netresearch\ShippingCore\Api\Config\ShippingConfigInterface;

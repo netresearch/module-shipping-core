@@ -1,29 +1,68 @@
 {
-    "sales_order_grid": {
-        "column": {
-            "nrshipping_label_status": true
-        }
-    },
-    "nrshipping_label_status": {
-        "column": {
-            "order_id": true,
-            "status_code": true
-        },
-        "constraint": {
-            "PRIMARY": true,
-            "NRSHIPPING_LABEL_STATUS_ORDER_ID_SALES_ORDER_ENTITY_ID": true
-        }
-    },
-    "nrshipping_recipient_street": {
-        "column": {
-            "order_address_id": true,
-            "name": true,
-            "number": true,
-            "supplement": true
-        },
-        "constraint": {
-            "PRIMARY": true,
-            "NRSHPP_RECIPIENT_STREET_ORDER_ADDR_ID_SALES_ORDER_ADDR_ENTT_ID": true
-        }
+  "sales_order_grid": {
+    "column": {
+      "nrshipping_label_status": true
     }
+  },
+  "nrshipping_label_status": {
+    "column": {
+      "order_id": true,
+      "status_code": true
+    },
+    "constraint": {
+      "PRIMARY": true,
+      "NRSHIPPING_LABEL_STATUS_ORDER_ID_SALES_ORDER_ENTITY_ID": true
+    }
+  },
+  "nrshipping_recipient_street": {
+    "column": {
+      "order_address_id": true,
+      "name": true,
+      "number": true,
+      "supplement": true
+    },
+    "constraint": {
+      "PRIMARY": true,
+      "NRSHIPPING_RECIPIENT_STREET_ORDER_ADDR_ID_SALES_ORDER_ADDR_ENTT_ID": true
+    }
+  },
+  "nrshipping_quote_address_shipping_option_selection": {
+    "column": {
+      "entity_id": true,
+      "parent_id": true,
+      "shipping_option_code": true,
+      "input_code": true,
+      "input_value": true
+    },
+    "constraint": {
+      "PRIMARY": true,
+      "NRSHIPPING_QUOTE_ADDR_SHPP_OPT_SELECTION_PARENT_ID_QUOTE_ADDR_ADDR_ID": true
+    }
+  },
+  "nrshipping_order_address_shipping_option_selection": {
+    "column": {
+      "entity_id": true,
+      "parent_id": true,
+      "shipping_option_code": true,
+      "input_code": true,
+      "input_value": true
+    },
+    "constraint": {
+      "PRIMARY": true,
+      "NRSHIPPING_ORDER_ADDR_SHPP_OPT_SELECTION_PARENT_ID_SALES_ORDER_ADDRESS_ENTT_ID": true
+    }
+  },
+  "nrshipping_order_item": {
+    "column": {
+      "item_id": true,
+      "tariff_number": true,
+      "dangerous_goods_category": true,
+      "export_description": true,
+      "country_of_manufacture": true
+    },
+    "constraint": {
+      "PRIMARY": true,
+      "NRSHIPPING_ORDER_ITEM_ITEM_ID_SALES_ORDER_ITEM_ITEM_ID": true
+    }
+  }
 }

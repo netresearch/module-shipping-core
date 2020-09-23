@@ -22,21 +22,12 @@ class ProxyScopeConfig implements ScopeConfigInterface
      */
     private $overrideMap;
 
-    /**
-     * ProxyScopeConfig constructor.
-     *
-     * @param ScopeConfigInterface $scopeConfig
-     * @param array $overrideMap
-     */
     public function __construct(ScopeConfigInterface $scopeConfig, $overrideMap = [])
     {
         $this->scopeConfig = $scopeConfig;
         $this->overrideMap = $overrideMap;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getValue($path, $scopeType = ScopeConfigInterface::SCOPE_TYPE_DEFAULT, $scopeCode = null)
     {
         if (array_key_exists($path, $this->overrideMap)) {
@@ -46,9 +37,6 @@ class ProxyScopeConfig implements ScopeConfigInterface
         return $this->scopeConfig->getValue($path, $scopeType, $scopeCode);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function isSetFlag($path, $scopeType = ScopeConfigInterface::SCOPE_TYPE_DEFAULT, $scopeCode = null)
     {
         if (array_key_exists($path, $this->overrideMap)) {

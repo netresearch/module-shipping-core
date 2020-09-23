@@ -11,11 +11,13 @@ namespace Netresearch\ShippingCore\Model\Config;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Store\Model\ScopeInterface;
+use Netresearch\ShippingCore\Model\ShippingBox\Package;
+use Netresearch\ShippingCore\Model\ShippingBox\PackageFactory;
 
 class ParcelProcessingConfig
 {
     private const CONFIG_PATH_COD_METHODS  = 'shipping/parcel_processing/cod_methods';
-    private const CONFIG_PATH_CUT_OFF_TIME = 'dhlshippingsolutions/dhlglobalwebservices/cut_off_time';
+    private const CONFIG_PATH_CUT_OFF_TIME = 'shipping/parcel_processing/cut_off_time';
     private const CONFIG_PATH_PACKAGES = 'shipping/parcel_processing/packages';
 
     public const CONFIG_FIELD_PACKAGE_ID = 'id';
@@ -36,12 +38,19 @@ class ParcelProcessingConfig
      */
     private $timezone;
 
+    /**
+     * @var PackageFactory
+     */
+    private $packageFactory;
+
     public function __construct(
         ScopeConfigInterface $scopeConfig,
-        TimezoneInterface $timezone
+        TimezoneInterface $timezone,
+        PackageFactory $packageFactory
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->timezone = $timezone;
+        $this->packageFactory = $packageFactory;
     }
 
     /**
@@ -96,5 +105,53 @@ class ParcelProcessingConfig
         list($hours, $minutes, $seconds) = array_map('intval', $cutOffTimeParts);
 
         return $this->timezone->scopeDate($store)->setTime($hours, $minutes, $seconds);
+    }
+
+    /**
+     * Obtain all configured packages.
+     *
+     * @param mixed $store
+     * @return Package[]
+     */
+    public function getPackages($store = null): array
+    {
+        $packages = [];
+
+        $packageParamsArray = $this->scopeConfig->getValue(
+            self::CONFIG_PATH_PACKAGES,
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+
+        foreach ($packageParamsArray as $packageId => $packageParams) {
+            $packages[] = $this->packageFactory->create([
+                'id' => $packageId,
+                'title' => $packageParams[self::CONFIG_FIELD_PACKAGE_TITLE],
+                'width' => $packageParams[self::CONFIG_FIELD_PACKAGE_WIDTH],
+                'length' => $packageParams[self::CONFIG_FIELD_PACKAGE_LENGTH],
+                'height' => $packageParams[self::CONFIG_FIELD_PACKAGE_HEIGHT],
+                'weight' => $packageParams[self::CONFIG_FIELD_PACKAGE_WEIGHT],
+                'isDefault' => $packageParams[self::CONFIG_FIELD_PACKAGE_IS_DEFAULT] ?? false,
+            ]);
+        }
+
+        return $packages;
+    }
+
+    /**
+     * Obtain the package configured as default
+     *
+     * @param mixed $store
+     * @return Package|null
+     */
+    public function getDefaultPackage($store = null): ?Package
+    {
+        foreach ($this->getPackages($store) as $package) {
+            if ($package->isDefault()) {
+                return $package;
+            }
+        }
+
+        return null;
     }
 }

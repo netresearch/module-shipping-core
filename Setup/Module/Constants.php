@@ -17,4 +17,10 @@ class Constants
     public const TABLE_LABEL_STATUS = 'nrshipping_label_status';
 
     public const TABLE_RECIPIENT_STREET = 'nrshipping_recipient_street';
+
+    public const TABLE_ORDER_ITEM = 'nrshipping_order_item';
+
+    public const TABLE_ORDER_SHIPPING_OPTION_SELECTION = 'nrshipping_order_address_shipping_option_selection';
+
+    public const TABLE_QUOTE_SHIPPING_OPTION_SELECTION = 'nrshipping_quote_address_shipping_option_selection';
 }

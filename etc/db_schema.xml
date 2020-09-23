@@ -3,8 +3,8 @@
     <table name="sales_order_grid">
         <column xsi:type="varchar" name="nrshipping_label_status" nullable="true" length="10" comment="Label Status"/>
     </table>
-    <table name="nrshipping_label_status" resource="sales" engine="innodb" comment="nrshipping_label_status">
-        <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Entity Id"/>
+    <table name="nrshipping_label_status" resource="sales" engine="innodb" comment="Label Status Table">
+        <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Entity ID"/>
         <column xsi:type="varchar" name="status_code" nullable="false" length="10" default="pending" comment="Status Code"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="order_id"/>
@@ -12,15 +12,49 @@
         <constraint xsi:type="foreign" referenceId="NRSHIPPING_LABEL_STATUS_ORDER_ID_SALES_ORDER_ENTITY_ID" table="nrshipping_label_status" column="order_id" referenceTable="sales_order" referenceColumn="entity_id" onDelete="CASCADE"/>
     </table>
 
-    <table name="nrshipping_recipient_street" resource="sales" engine="innodb" comment="nrshipping_recipient_street">
-        <column xsi:type="int" name="order_address_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Entity Id"/>
+    <table name="nrshipping_recipient_street" resource="sales" engine="innodb" comment="Recipient Street Table">
+        <column xsi:type="int" name="order_address_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Entity ID"/>
         <column xsi:type="varchar" name="name" nullable="true" length="255" comment="Street"/>
-        <column xsi:type="varchar" name="number" nullable="true" length="50" comment="Number"/>
-        <column xsi:type="varchar" name="supplement" nullable="true" length="100" comment="Supplement"/>
+        <column xsi:type="varchar" name="number" nullable="true" length="50" comment="Street Number"/>
+        <column xsi:type="varchar" name="supplement" nullable="true" length="100" comment="Address Supplement"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="order_address_id"/>
         </constraint>
         <constraint xsi:type="foreign" referenceId="NRSHIPPING_RECIPIENT_STREET_ORDER_ADDR_ID_SALES_ORDER_ADDR_ENTT_ID" table="nrshipping_recipient_street" column="order_address_id" referenceTable="sales_order_address" referenceColumn="entity_id" onDelete="CASCADE"/>
     </table>
 
+    <table name="nrshipping_quote_address_shipping_option_selection" resource="checkout" engine="innodb" comment="Quote Address Service Selection">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="parent_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Parent ID"/>
+        <column xsi:type="text" name="shipping_option_code" nullable="false" comment="Service Code"/>
+        <column xsi:type="text" name="input_code" nullable="false" comment="Service Input"/>
+        <column xsi:type="text" name="input_value" nullable="false" comment="Service Value"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="NRSHIPPING_QUOTE_ADDR_SHPP_OPT_SELECTION_PARENT_ID_QUOTE_ADDR_ADDR_ID" table="nrshipping_quote_address_shipping_option_selection" column="parent_id" referenceTable="quote_address" referenceColumn="address_id" onDelete="CASCADE"/>
+    </table>
+    <table name="nrshipping_order_address_shipping_option_selection" resource="sales" engine="innodb" comment="Order Address Service Selection">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="parent_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Parent ID"/>
+        <column xsi:type="text" name="shipping_option_code" nullable="false" comment="Service Code"/>
+        <column xsi:type="text" name="input_code" nullable="false" comment="Service Input"/>
+        <column xsi:type="text" name="input_value" nullable="false" comment="Service Value"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="NRSHIPPING_ORDER_ADDR_SHPP_OPT_SELECTION_PARENT_ID_SALES_ORDER_ADDRESS_ENTT_ID" table="nrshipping_order_address_shipping_option_selection" column="parent_id" referenceTable="sales_order_address" referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+    <table name="nrshipping_order_item" resource="sales" engine="innodb" comment="Order Item Data Snapshot">
+        <column xsi:type="int" name="item_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Order Item ID"/>
+        <column xsi:type="varchar" name="tariff_number" nullable="true" length="10" comment="Tariff Number (HS Code)"/>
+        <column xsi:type="varchar" name="dangerous_goods_category" nullable="true" length="50" comment="Dangerous Goods Category"/>
+        <column xsi:type="varchar" name="export_description" nullable="true" length="50" comment="Export Description"/>
+        <column xsi:type="varchar" name="country_of_manufacture" nullable="true" length="2"
+                comment="Country of Manufacture"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="item_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="NRSHIPPING_ORDER_ITEM_ITEM_ID_SALES_ORDER_ITEM_ITEM_ID" table="nrshipping_order_item" column="item_id" referenceTable="sales_order_item" referenceColumn="item_id" onDelete="CASCADE"/>
+    </table>
 </schema>
