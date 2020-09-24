@@ -52,6 +52,7 @@
         <xs:all>
             <xs:element name="title" minOccurs="0" type="string_translatable"/>
             <xs:element name="imageUrl" type="xs:string" minOccurs="0"/>
+            <xs:element name="color" type="xs:string" minOccurs="0"/>
             <xs:element name="commentsBefore" minOccurs="0">
                 <xs:complexType>
                     <xs:sequence minOccurs="0" maxOccurs="unbounded">

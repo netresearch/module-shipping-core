@@ -30,6 +30,13 @@ interface MetadataInterface
     public function getTitle(): string;
 
     /**
+     * Get the color to use in the shipping options area.
+     *
+     * @return string
+     */
+    public function getColor(): string;
+
+    /**
      * Get a list of Comment objects to display at the top of the shipping options area.
      *
      * @return \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CommentInterface[]
@@ -55,33 +62,40 @@ interface MetadataInterface
      *
      * @return void
      */
-    public function setImageUrl(string $imageUrl);
+    public function setImageUrl(string $imageUrl): void;
 
     /**
      * @param string $title
      *
      * @return void
      */
-    public function setTitle(string $title);
+    public function setTitle(string $title): void;
+
+    /**
+     * @param string $color
+     *
+     * @return void
+     */
+    public function setColor(string $color): void;
 
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CommentInterface[] $commentsBefore
      *
      * @return void
      */
-    public function setCommentsBefore(array $commentsBefore);
+    public function setCommentsBefore(array $commentsBefore): void;
 
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CommentInterface[] $commentsAfter
      *
      * @return void
      */
-    public function setCommentsAfter(array $commentsAfter);
+    public function setCommentsAfter(array $commentsAfter): void;
 
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\FootnoteInterface[] $footnotes
      *
      * @return void
      */
-    public function setFootnotes(array $footnotes);
+    public function setFootnotes(array $footnotes): void;
 }
