@@ -55,14 +55,14 @@ class PackageContainerInputDataProcessor implements ShippingOptionsProcessorInte
     {
         if (
             !isset(
-                $optionsData[Codes::PACKAGING_OPTION_PACKAGE_DETAILS],
-                $optionsData[Codes::PACKAGING_OPTION_PACKAGE_DETAILS]->getInputs()[Codes::PACKAGING_INPUT_CUSTOM_PACKAGE_ID]
+                $optionsData[Codes::PACKAGING_OPTION_DETAILS],
+                $optionsData[Codes::PACKAGING_OPTION_DETAILS]->getInputs()[Codes::PACKAGING_INPUT_CUSTOM_PACKAGE_ID]
             )
         ) {
             return $optionsData;
         }
 
-        $shippingOption = $optionsData[Codes::PACKAGING_OPTION_PACKAGE_DETAILS];
+        $shippingOption = $optionsData[Codes::PACKAGING_OPTION_DETAILS];
         $packages = $this->config->getPackages($shipment->getStoreId());
 
         if (empty($packages)) {

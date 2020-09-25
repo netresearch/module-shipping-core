@@ -13,7 +13,9 @@
     <preference for="Netresearch\ShippingCore\Api\Pipeline\RateResponseProcessorInterface" type="Netresearch\ShippingCore\Model\Pipeline\Rate\RateResponseProcessor"/>
     <preference for="Netresearch\ShippingCore\Api\Pipeline\RequestTracksPipelineInterface" type="Netresearch\ShippingCore\Model\Pipeline\Track\RequestTracksPipeline"/>
     <preference for="Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestExtractorInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\RequestExtractor"/>
+    <preference for="Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestExtractor\ServiceOptionReaderInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\RequestExtractor\ServiceOptionReader"/>
     <preference for="Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestModifierInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\RequestModifier"/>
+    <preference for="Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestModifier\PackagingOptionReaderInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\RequestModifier\PackagingOptionReader"/>
     <preference for="Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestValidatorInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Validator\CompositeValidator"/>
     <preference for="Netresearch\ShippingCore\Api\Pipeline\ShipmentResponseProcessorInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentResponseProcessor"/>
     <preference for="Netresearch\ShippingCore\Api\Pipeline\TrackResponseProcessorInterface" type="Netresearch\ShippingCore\Model\Pipeline\Track\TrackResponseProcessor"/>
@@ -27,6 +29,9 @@
     <preference for="Netresearch\ShippingCore\Api\Util\ItemAttributeReaderInterface" type="Netresearch\ShippingCore\Model\ItemAttribute\ItemAttributeReader"/>
     <preference for="Netresearch\ShippingCore\Api\Util\UnitConverterInterface" type="Netresearch\ShippingCore\Model\Util\UnitConverter"/>
     <!-- # data interface preferences -->
+    <preference for="Netresearch\ShippingCore\Api\Data\OrderExport\KeyValueObjectInterface" type="Netresearch\ShippingCore\Model\OrderExport\Data\KeyValueObject"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\OrderExport\ServiceDataInterface" type="Netresearch\ShippingCore\Model\OrderExport\Data\ServiceData"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\OrderExport\ShippingOptionInterface" type="Netresearch\ShippingCore\Model\OrderExport\Data\ShippingOption"/>
     <preference for="Netresearch\ShippingCore\Api\Data\OrderItemAttributesInterface" type="Netresearch\ShippingCore\Model\ItemAttribute\OrderItemAttributes"/>
     <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageAdditionalInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Data\PackageAdditional"/>
     <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Data\Package"/>
@@ -253,6 +258,7 @@
             <argument name="packagingServiceOptionsProcessors" xsi:type="array">
                 <item name="addDeliveryLocationInputsProcessor" sortOrder="50" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\Processor\Packaging\DeliveryLocationInputsProcessor</item>
                 <item name="applySelectionsProcessor" sortOrder="100" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\Processor\Packaging\ApplySelectionsProcessor</item>
+                <item name="codServiceInputProcessor" sortOrder="120" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\Processor\Packaging\CodServiceInputDataProcessor</item>
                 <item name="sortOrderProcessor" sortOrder="400" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\Processor\Packaging\SortOrderProcessor</item>
             </argument>
             <argument name="packagingPackageOptionsProcessors" xsi:type="array">
@@ -266,7 +272,6 @@
             </argument>
         </arguments>
     </type>
-
     <!-- # interceptor plugins -->
     <type name="Magento\Sales\Api\OrderAddressRepositoryInterface">
         <plugin name="addSplitAddressAsExtensionAttributes" type="Netresearch\ShippingCore\Plugin\Order\AddRecipientStreetToAddress"/>

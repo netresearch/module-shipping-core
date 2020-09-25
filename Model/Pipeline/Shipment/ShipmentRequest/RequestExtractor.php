@@ -22,8 +22,10 @@ use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\RecipientInterfac
 use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\RecipientInterfaceFactory;
 use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\ShipperInterface;
 use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\ShipperInterfaceFactory;
+use Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestExtractor\ServiceOptionReaderInterface;
 use Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestExtractorInterface;
 use Netresearch\ShippingCore\Model\ShipmentDate\ShipmentDate;
+use Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 use Netresearch\ShippingCore\Model\SplitAddress\RecipientStreetRepository;
 use Netresearch\ShippingCore\Model\Util\StreetSplitter;
 
@@ -77,6 +79,16 @@ class RequestExtractor implements RequestExtractorInterface
     private $packageItemFactory;
 
     /**
+     * @var ServiceOptionReaderInterface
+     */
+    private $serviceOptionReader;
+
+    /**
+     * @var ShipmentDate
+     */
+    private $shipmentDate;
+
+    /**
      * @var ShipperInterface
      */
     private $shipper;
@@ -96,11 +108,6 @@ class RequestExtractor implements RequestExtractorInterface
      */
     private $packageItems;
 
-    /**
-     * @var ShipmentDate
-     */
-    private $shipmentDate;
-
     public function __construct(
         Request $shipmentRequest,
         StreetSplitter $streetSplitter,
@@ -110,6 +117,7 @@ class RequestExtractor implements RequestExtractorInterface
         PackageInterfaceFactory $packageFactory,
         PackageAdditionalInterfaceFactory $packageAdditionalFactory,
         PackageItemInterfaceFactory $packageItemFactory,
+        ServiceOptionReaderInterface $serviceOptionReader,
         ShipmentDate $shipmentDate
     ) {
         $this->shipmentRequest = $shipmentRequest;
@@ -120,6 +128,7 @@ class RequestExtractor implements RequestExtractorInterface
         $this->packageFactory = $packageFactory;
         $this->packageAdditionalFactory = $packageAdditionalFactory;
         $this->packageItemFactory = $packageItemFactory;
+        $this->serviceOptionReader = $serviceOptionReader;
         $this->shipmentDate = $shipmentDate;
     }
 
@@ -323,5 +332,18 @@ class RequestExtractor implements RequestExtractorInterface
     public function getShipmentDate(): \DateTime
     {
         return $this->shipmentDate->getDate($this->getStoreId());
+    }
+
+    public function isCashOnDelivery(): bool
+    {
+        return $this->serviceOptionReader->isServiceEnabled(Codes::SERVICE_OPTION_CASH_ON_DELIVERY);
+    }
+
+    public function getCodReasonForPayment(): string
+    {
+        return $this->serviceOptionReader->getServiceOptionValue(
+            Codes::SERVICE_OPTION_CASH_ON_DELIVERY,
+            Codes::SERVICE_INPUT_COD_REASON_FOR_PAYMENT
+        );
     }
 }

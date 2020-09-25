@@ -3,6 +3,7 @@
     <default>
         <shipping>
             <parcel_processing>
+                <cod_reason_for_payment><![CDATA[{{firstname}} {{lastname}} #{{increment_id}}]]></cod_reason_for_payment>
                 <cut_off_time>18,00,00</cut_off_time>
                 <packages backend_model="Netresearch\ShippingCore\Model\Config\Backend\PackageParams">[]</packages>
             </parcel_processing>

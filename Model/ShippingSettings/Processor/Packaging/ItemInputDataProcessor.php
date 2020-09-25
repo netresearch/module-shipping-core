@@ -116,7 +116,7 @@ class ItemInputDataProcessor implements ItemShippingOptionsProcessorInterface
                     $totalAmount = $shipmentItem->getOrderItem()->getBaseRowTotal()
                         - $shipmentItem->getOrderItem()->getBaseDiscountAmount()
                         + $shipmentItem->getOrderItem()->getBaseTaxAmount()
-                        + $shipmentItem->getOrderItem()->getbaseDiscountTaxCompensationAmount();
+                        + $shipmentItem->getOrderItem()->getBaseDiscountTaxCompensationAmount();
 
                     $itemPrice = $totalAmount / $shipmentItem->getOrderItem()->getQtyOrdered();
                     $input->setDefaultValue((string) $itemPrice);
@@ -154,7 +154,7 @@ class ItemInputDataProcessor implements ItemShippingOptionsProcessorInterface
                     $totalAmount = $shipmentItem->getOrderItem()->getBaseRowTotal()
                         - $shipmentItem->getOrderItem()->getBaseDiscountAmount()
                         + $shipmentItem->getOrderItem()->getBaseTaxAmount()
-                        + $shipmentItem->getOrderItem()->getbaseDiscountTaxCompensationAmount();
+                        + $shipmentItem->getOrderItem()->getBaseDiscountTaxCompensationAmount();
                     $itemPrice = $totalAmount / $shipmentItem->getOrderItem()->getQtyOrdered();
                     $input->setDefaultValue((string) $itemPrice);
 

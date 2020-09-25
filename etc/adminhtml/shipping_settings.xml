@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<carriers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Netresearch_ShippingCore/etc/shipping_settings.xsd">
+    <carrier code="Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::CARRIER_BASE">
+        <serviceOptions>
+            <shippingOption code="Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::SERVICE_OPTION_CASH_ON_DELIVERY">
+                <label translate="true">Cash on Delivery</label>
+                <sortOrder>1010</sortOrder>
+                <inputs>
+                    <input code="enabled">
+                        <label translate="true">Cash on Delivery</label>
+                        <inputType>checkbox</inputType>
+                        <disabled>true</disabled>
+                    </input>
+                    <input code="reasonForPayment" defaultConfigValue="Netresearch\ShippingCore\Model\Config\ParcelProcessingConfig::CONFIG_PATH_COD_REASON_FOR_PAYMENT">
+                        <label translate="true">Reason for Payment</label>
+                        <inputType>text</inputType>
+                        <validationRules>
+                            <rule name="max_text_length">
+                                <param>70</param>
+                            </rule>
+                        </validationRules>
+                    </input>
+                </inputs>
+            </shippingOption>
+        </serviceOptions>
+        <compatibilityData>
+            <rule id="cashOnDeliveryDependency">
+                <masters>
+                    <master>Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::SERVICE_OPTION_CASH_ON_DELIVERY.enabled</master>
+                </masters>
+                <triggerValue>*</triggerValue>
+                <action>show</action>
+                <subjects>
+                    <subject>Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::SERVICE_OPTION_CASH_ON_DELIVERY.reasonForPayment</subject>
+                </subjects>
+            </rule>
+        </compatibilityData>
+    </carrier>
+</carriers>

@@ -112,4 +112,18 @@ interface RequestExtractorInterface
      * @throws \RuntimeException
      */
     public function getShipmentDate(): \DateTime;
+
+    /**
+     * Check if "cash on delivery" was chosen for the current shipment request.
+     *
+     * @return bool
+     */
+    public function isCashOnDelivery(): bool;
+
+    /**
+     * Obtain the "reasonForPayment" value for the current package.
+     *
+     * @return string
+     */
+    public function getCodReasonForPayment(): string;
 }

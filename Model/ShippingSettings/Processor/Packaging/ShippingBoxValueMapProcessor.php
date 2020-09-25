@@ -58,19 +58,19 @@ class ShippingBoxValueMapProcessor implements ShippingOptionsProcessorInterface
 
         foreach ($this->config->getPackages($scopeId) as $package) {
             $width = $this->inputValueFactory->create();
-            $width->setCode(Codes::PACKAGING_OPTION_PACKAGE_DETAILS . '.' . Codes::PACKAGING_INPUT_WIDTH);
+            $width->setCode(Codes::PACKAGING_OPTION_DETAILS . '.' . Codes::PACKAGING_INPUT_WIDTH);
             $width->setValue((string) $package->getWidth());
 
             $length = $this->inputValueFactory->create();
-            $length->setCode(Codes::PACKAGING_OPTION_PACKAGE_DETAILS . '.' . Codes::PACKAGING_INPUT_LENGTH);
+            $length->setCode(Codes::PACKAGING_OPTION_DETAILS . '.' . Codes::PACKAGING_INPUT_LENGTH);
             $length->setValue((string) $package->getLength());
 
             $height = $this->inputValueFactory->create();
-            $height->setCode(Codes::PACKAGING_OPTION_PACKAGE_DETAILS . '.' . Codes::PACKAGING_INPUT_HEIGHT);
+            $height->setCode(Codes::PACKAGING_OPTION_DETAILS . '.' . Codes::PACKAGING_INPUT_HEIGHT);
             $height->setValue((string) $package->getHeight());
 
             $weight = $this->inputValueFactory->create();
-            $weight->setCode(Codes::PACKAGING_OPTION_PACKAGE_DETAILS . '.' . Codes::PACKAGING_INPUT_PACKAGING_WEIGHT);
+            $weight->setCode(Codes::PACKAGING_OPTION_DETAILS . '.' . Codes::PACKAGING_INPUT_PACKAGING_WEIGHT);
             $weight->setValue((string) $package->getWeight());
 
             $map = $this->valueMapFactory->create();
@@ -92,15 +92,15 @@ class ShippingBoxValueMapProcessor implements ShippingOptionsProcessorInterface
     {
         if (
             !isset(
-                $optionsData[Codes::PACKAGING_OPTION_PACKAGE_DETAILS],
-                $optionsData[Codes::PACKAGING_OPTION_PACKAGE_DETAILS]
+                $optionsData[Codes::PACKAGING_OPTION_DETAILS],
+                $optionsData[Codes::PACKAGING_OPTION_DETAILS]
                 ->getInputs()[Codes::PACKAGING_INPUT_CUSTOM_PACKAGE_ID]
             )
         ) {
             return $optionsData;
         }
 
-        $input = $optionsData[Codes::PACKAGING_OPTION_PACKAGE_DETAILS]
+        $input = $optionsData[Codes::PACKAGING_OPTION_DETAILS]
             ->getInputs()[Codes::PACKAGING_INPUT_CUSTOM_PACKAGE_ID];
 
         $input->setValueMaps($this->buildValueMaps($shipment->getStoreId()));

@@ -23,7 +23,7 @@ class Codes
      */
     public const CARRIER_BASE = 'base';
 
-    public const PACKAGING_OPTION_PACKAGE_DETAILS = 'packageDetails';
+    public const PACKAGING_OPTION_DETAILS = 'packageDetails';
     public const PACKAGING_INPUT_PRODUCT_CODE = 'productCode';
     public const PACKAGING_INPUT_CUSTOM_PACKAGE_ID = 'customPackageId';
     public const PACKAGING_INPUT_PACKAGING_WEIGHT = 'packagingWeight';
@@ -34,7 +34,7 @@ class Codes
     public const PACKAGING_INPUT_HEIGHT = 'height';
     public const PACKAGING_INPUT_LENGTH = 'length';
 
-    public const PACKAGING_OPTION_PACKAGE_CUSTOMS = 'packageCustoms';
+    public const PACKAGING_OPTION_CUSTOMS = 'packageCustoms';
     public const PACKAGING_INPUT_CUSTOMS_VALUE = 'customsValue';
     public const PACKAGING_INPUT_EXPORT_DESCRIPTION = 'exportDescription';
     public const PACKAGING_INPUT_TERMS_OF_TRADE = 'termsOfTrade';
@@ -64,4 +64,7 @@ class Codes
     public const SHOPFINDER_INPUT_POSTAL_CODE = 'postalCode';
     public const SHOPFINDER_INPUT_CITY = 'city';
     public const SHOPFINDER_INPUT_COUNTRY_CODE = 'countryCode';
+
+    public const SERVICE_OPTION_CASH_ON_DELIVERY = 'cashOnDelivery';
+    public const SERVICE_INPUT_COD_REASON_FOR_PAYMENT = 'reasonForPayment';
 }

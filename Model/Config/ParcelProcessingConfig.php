@@ -19,6 +19,7 @@ class ParcelProcessingConfig
     private const CONFIG_PATH_COD_METHODS  = 'shipping/parcel_processing/cod_methods';
     private const CONFIG_PATH_CUT_OFF_TIME = 'shipping/parcel_processing/cut_off_time';
     private const CONFIG_PATH_PACKAGES = 'shipping/parcel_processing/packages';
+    private const CONFIG_PATH_COD_REASON_FOR_PAYMENT = 'shipping/parcel_processing/cod_reason_for_payment';
 
     public const CONFIG_FIELD_PACKAGE_ID = 'id';
     public const CONFIG_FIELD_PACKAGE_TITLE = 'title';

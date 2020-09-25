@@ -120,7 +120,7 @@ class ShipmentItemAttributeReader
             $totalAmount = $shipmentItem->getOrderItem()->getBaseRowTotal()
                 - $shipmentItem->getOrderItem()->getBaseDiscountAmount()
                 + $shipmentItem->getOrderItem()->getBaseTaxAmount()
-                + $shipmentItem->getOrderItem()->getbaseDiscountTaxCompensationAmount();
+                + $shipmentItem->getOrderItem()->getBaseDiscountTaxCompensationAmount();
 
             $itemPrice = $totalAmount / $shipmentItem->getOrderItem()->getQtyOrdered();
             $price += ($itemPrice * $shipmentItem->getQty());

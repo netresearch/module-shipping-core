@@ -59,4 +59,9 @@
             </join>
         </attribute>
     </extension_attributes>
+
+    <!-- Additional attributes fetched from the salesOrderRepositoryV1 M2 API -->
+    <extension_attributes for="Magento\Sales\Api\Data\ShippingInterface">
+        <attribute code="nrshipping_shipping_options" type="Netresearch\ShippingCore\Api\Data\OrderExport\ShippingOptionInterface"/>
+    </extension_attributes>
 </config>

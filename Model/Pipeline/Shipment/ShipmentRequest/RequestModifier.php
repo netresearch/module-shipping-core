@@ -15,7 +15,9 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Shipping\Model\Shipment\Request;
 use Magento\Store\Model\ScopeInterface;
+use Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestModifier\PackagingOptionReaderInterfaceFactory;
 use Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestModifierInterface;
+use Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 use Netresearch\ShippingCore\Model\Util\ShipmentItemFilter;
 
 class RequestModifier implements RequestModifierInterface
@@ -24,6 +26,11 @@ class RequestModifier implements RequestModifierInterface
      * @var ScopeConfigInterface
      */
     private $scopeConfig;
+
+    /**
+     * @var PackagingOptionReaderInterfaceFactory
+     */
+    private $packagingOptionReaderFactory;
 
     /**
      * @var ShipmentItemFilter
@@ -40,16 +47,9 @@ class RequestModifier implements RequestModifierInterface
      */
     private $dataObjectFactory;
 
-    /**
-     * RequestModifier constructor.
-     *
-     * @param ScopeConfigInterface $scopeConfig
-     * @param ShipmentItemFilter $itemFilter
-     * @param RegionFactory $regionFactory
-     * @param DataObjectFactory $dataObjectFactory
-     */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
+        PackagingOptionReaderInterfaceFactory $packagingOptionReaderFactory,
         ShipmentItemFilter $itemFilter,
         RegionFactory $regionFactory,
         DataObjectFactory $dataObjectFactory
@@ -185,7 +185,93 @@ class RequestModifier implements RequestModifierInterface
      */
     private function modifyPackage(Request $shipmentRequest): void
     {
-        throw new LocalizedException(__('Not implemented yet.'));
+        // fixed package id on bulk shipments
+        $packageId = 1;
+        $shipment = $shipmentRequest->getOrderShipment();
+
+        $packagingOptionReader = $this->packagingOptionReaderFactory->create(['shipment' => $shipment]);
+
+        $customs = $packagingOptionReader->getPackageOptionValues(Codes::PACKAGING_OPTION_CUSTOMS);
+        $customsValue = $customs[Codes::PACKAGING_INPUT_CUSTOMS_VALUE] ?? null;
+        $contentType = $customs[Codes::PACKAGING_INPUT_CONTENT_TYPE] ?? '';
+        $explanation = $customs[Codes::PACKAGING_INPUT_EXPLANATION] ?? '';
+        unset(
+            $customs[Codes::PACKAGING_INPUT_CUSTOMS_VALUE],
+            $customs[Codes::PACKAGING_INPUT_CONTENT_TYPE],
+            $customs[Codes::PACKAGING_INPUT_EXPLANATION]
+        );
+
+        $productCode = $packagingOptionReader->getPackageOptionValue(
+            Codes::PACKAGING_OPTION_DETAILS,
+            Codes::PACKAGING_INPUT_PRODUCT_CODE
+        );
+
+        $packageItems = [];
+        $packageParams = [
+            'shipping_product' => $productCode,
+            'container' => '',
+            'weight' => $packagingOptionReader->getPackageOptionValue(
+                Codes::PACKAGING_OPTION_DETAILS,
+                Codes::PACKAGING_INPUT_WEIGHT
+            ),
+            'weight_units' => $packagingOptionReader->getPackageOptionValue(
+                Codes::PACKAGING_OPTION_DETAILS,
+                Codes::PACKAGING_INPUT_WEIGHT_UNIT
+            ),
+            'length' => $packagingOptionReader->getPackageOptionValue(
+                Codes::PACKAGING_OPTION_DETAILS,
+                Codes::PACKAGING_INPUT_LENGTH
+            ),
+            'width' => $packagingOptionReader->getPackageOptionValue(
+                Codes::PACKAGING_OPTION_DETAILS,
+                Codes::PACKAGING_INPUT_WIDTH
+            ),
+            'height' => $packagingOptionReader->getPackageOptionValue(
+                Codes::PACKAGING_OPTION_DETAILS,
+                Codes::PACKAGING_INPUT_HEIGHT
+            ),
+            'dimension_units' => $packagingOptionReader->getPackageOptionValue(
+                Codes::PACKAGING_OPTION_DETAILS,
+                Codes::PACKAGING_INPUT_SIZE_UNIT
+            ),
+            'content_type' => $contentType,
+            'content_type_other' => $explanation,
+            'customs_value' => $customsValue,
+            'customs' => $customs,
+            'services' => $packagingOptionReader->getServiceValues(),
+        ];
+
+        $items = $this->itemFilter->getShippableItems($shipment->getAllItems());
+        foreach ($items as $item) {
+            $orderItemId = (int) $item->getOrderItemId();
+            $itemCustoms = $packagingOptionReader->getItemOptionValues($orderItemId, Codes::ITEM_OPTION_ITEM_CUSTOMS);
+            $itemCustomsValue = $itemCustoms['customsValue'] ?? null;
+            $packageItem = [
+                'qty' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'qty'),
+                'price' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'price'),
+                'name' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'productName'),
+                'weight' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'weight'),
+                'product_id' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'productId'),
+                'order_item_id' => $orderItemId,
+                'customs_value' => $itemCustomsValue,
+                'customs' => $itemCustoms,
+            ];
+            $packageItems[$orderItemId] = $packageItem;
+        }
+
+        $packages = [
+            $packageId => [
+                'params' => $packageParams,
+                'items' => $packageItems,
+            ]
+        ];
+
+        $shipmentRequest->setData('packages', $packages);
+        $shipmentRequest->setData('package_id', $packageId);
+        $shipmentRequest->setData('package_items', $packageItems);
+        $shipmentRequest->setData('package_params', $this->dataObjectFactory->create(['data' => $packageParams]));
+
+        $shipment->setPackages($packages);
     }
 
     /**

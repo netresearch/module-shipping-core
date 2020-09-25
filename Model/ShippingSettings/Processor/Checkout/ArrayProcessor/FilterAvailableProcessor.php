@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace Netresearch\ShippingCore\Model\ShippingSettings\Processor\Checkout\ArrayProcessor;
 
-use Netresearch\ShippingCore\Api\ShippingSettings\Processor\Checkout\ShippingOptionsArrayProcessorInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
+use Netresearch\ShippingCore\Api\ShippingSettings\Processor\Checkout\ShippingOptionsArrayProcessorInterface;
 
 class FilterAvailableProcessor implements ShippingOptionsArrayProcessorInterface
 {
