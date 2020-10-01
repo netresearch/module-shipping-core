@@ -8,8 +8,6 @@ declare(strict_types=1);
 
 namespace Netresearch\ShippingCore\Api\Data\ShippingSettings;
 
-use Netresearch\ShippingCore\Api\Data\ShippingSettings\MetadataInterface;
-
 /**
  * Interface CarrierDataInterface
  *

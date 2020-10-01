@@ -1,13 +1,15 @@
 "Add Package","Paket hinzufügen"
 "All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day. Value is interpreted as in the timezone configured for the current website","Es wird davon ausgegangen, dass alle Bestellungen, die nach dem konfigurierten Zeitpunkt aufgegeben werden, am nächsten Geschäftstag an den jeweiligen Spediteur übergeben werden. Alle Bestellungen, die vor diesem Zeitpunkt aufgegeben werden, werden voraussichtlich am selben Tag an den jeweiligen Spediteur übergeben. Der Wert wird nach der für die aktuelle Website konfigurierten Zeitzone interpretiert."
+"Cancel Labels","Versandaufträge stornieren"
 "Cannot initialize packaging data, please provide shipment.","Paketdaten konnten nicht geladen werden. Stellen Sie ein Shipment bereit."
 "Carrier ""%1"" not found.","Carrier ""%1"" konnte nicht gefunden werden."
 "Cash On Delivery Payment Methods",Nachnahmezahlungsmethoden
-"Cash on Delivery","Nachnahmezahlung"
+"Cash on Delivery",Nachnahmezahlung
 "Cash on Delivery Reason for Payment","Verwendungszweck Nachnahmezahlung"
 "Could not delete service selection.","Die Serviceauswahl konnte nicht gelöscht werden."
 "Could not save service selection.","Die Serviceauswahl konnte nicht gespeichert werden."
 "Create a customized country list","Angepasste Länderliste erstellen"
+"Deleting a single tracking number is not supported. Please use the ""Cancel Labels"" button on the shipment details page to cancel labels and tracks.","Das Löschen einer einzelnen Sendungsnummer wird nicht unterstützt. Bitte verwenden Sie den Button ""Versandaufträge stornieren"" auf der Sendungsansichtseite, um Versandaufträge zu stornieren und Sendungsnummern zu löschen."
 "Display customized message","Benutzerdefinierte Nachricht anzeigen"
 Errors,Fehler
 "Height %1","Höhe %1"
@@ -15,12 +17,12 @@ Errors,Fehler
 "Info (All API Activities)","Info (alle API-Aktivitäten)"
 "Length %1","Länge %1"
 "No additional attributes found for order item %1.","Es wurden keine Zusatzattribute für Artikel %1 gefunden."
-"Options for order item ""%1"" are not available.",Es sind keine Optionen für Order Item ""%1"" verfügbar."
+"Options for order item ""%1"" are not available.","Es sind keine Optionen für Order Item """"%1"""" verfügbar."""
 "Order Cut-off Time",Auftragsabschlusszeit
 "Package #%1 not found in shipment request.","Paket #%1 konnte nicht gefunden werden."
 Packages,Paketegrößen
 "Parcel Processing",Sendungsverarbeitung
-"Reason for Payment","Verwendungszweck"
+"Reason for Payment",Verwendungszweck
 "Recipient street with ID ""%1"" does not exist.","Empfängeradresse mit der ID ""%1"" ist nicht vorhanden."
 "Return shipments are not supported.","Retourenaufkleber werden nicht unterstützt."
 "Selected payment methods will be treated as CoD methods when booking a shipment label.","Die ausgewählten Zahlungsmethoden werden bei der Erstellung des Versandauftrags als Nachnahmemethoden behandelt."
@@ -29,6 +31,7 @@ Packages,Paketegrößen
 "The money transfer purpose for cash on delivery payments can include the following placeholders: {{entity_id}}, {{increment_id}}, {{firstname}}, {{lastname}}. They will be replaced by the respective order's values.","Beim Verwendungszweck für Nachnahmezahlungen können folgende Platzhalter eingesetzt werden: {{entity_id}}, {{increment_id}}, {{firstname}}, {{lastname}}. Sie werden durch die Werte der jeweiligen Bestellung ersetzt."
 "The package option ""%1"" is not available.","Die Paketoption ""%1"" ist nicht verfügbar."
 "The service option ""%1"" is not available.","Die Service-Option ""%1"" ist nicht verfügbar."
+"The shipment was successfully cancelled.","Die Lieferung wurde erfolgreich storniert."
 "The value ""%1"" is not available for item option ""%2"".","Der Wert ""%1"" für die Artikeloption ""%2"" ist nicht verfügbar."
 "The value ""%1"" is not available for package option ""%2"".","Der Wert ""%1"" für die Paketoption ""%2"" ist nicht verfügbar."
 "The value ""%1"" is not available for service option ""%2"".","Der Wert ""%1"" für die Serviceoption ""%2"" ist nicht verfügbar."

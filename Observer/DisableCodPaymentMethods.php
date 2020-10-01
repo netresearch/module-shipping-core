@@ -28,6 +28,12 @@ class DisableCodPaymentMethods implements ObserverInterface
      */
     private $codSupportMap;
 
+    /**
+     * DisableCodPaymentMethods constructor.
+     *
+     * @param ParcelProcessingConfig $config
+     * @param MethodAvailabilityInterface[] $codSupportMap
+     */
     public function __construct(
         ParcelProcessingConfig $config,
         array $codSupportMap = []

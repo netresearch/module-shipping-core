@@ -55,6 +55,7 @@ class RequestModifier implements RequestModifierInterface
         DataObjectFactory $dataObjectFactory
     ) {
         $this->scopeConfig = $scopeConfig;
+        $this->packagingOptionReaderFactory = $packagingOptionReaderFactory;
         $this->itemFilter = $itemFilter;
         $this->regionFactory = $regionFactory;
         $this->dataObjectFactory = $dataObjectFactory;

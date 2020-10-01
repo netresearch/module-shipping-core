@@ -18,4 +18,7 @@
         <observer name="nrshipping_persist_service_selection" instance="Netresearch\ShippingCore\Observer\PersistShippingOptionSelection" />
         <observer name="nrshipping_persist_cod_selection" instance="Netresearch\ShippingCore\Observer\PersistCodShippingOptionSelection" />
     </event>
+    <event name="controller_action_predispatch_adminhtml_order_shipment_removeTrack">
+        <observer name="nrshipping_prevent_track_deletion" instance="Netresearch\ShippingCore\Observer\PreventTrackDeletion"/>
+    </event>
 </config>

@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Netresearch\ShippingCore\Api\BulkShipment;
 
-use Magento\Framework\Exception\LocalizedException;
 use Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestModifierInterface;
 
 /**
@@ -27,7 +26,6 @@ interface BulkShipmentConfigurationInterface
      * Obtain the carrier's modifier to add carrier specific data to the shipment request.
      *
      * @return RequestModifierInterface
-     * @throws LocalizedException
      */
     public function getRequestModifier(): RequestModifierInterface;
 
@@ -35,7 +33,6 @@ interface BulkShipmentConfigurationInterface
      * Obtain the service that connects to the carrier's label api for creating labels.
      *
      * @return BulkLabelCreationInterface
-     * @throws LocalizedException
      */
     public function getLabelService(): BulkLabelCreationInterface;
 
@@ -43,7 +40,6 @@ interface BulkShipmentConfigurationInterface
      * Obtain the service that connects to the carrier's label api for cancelling labels.
      *
      * @return BulkLabelCancellationInterface
-     * @throws LocalizedException
      */
     public function getCancellationService(): BulkLabelCancellationInterface;
 

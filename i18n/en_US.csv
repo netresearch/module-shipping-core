@@ -1,5 +1,6 @@
 "Add Package","Add Package"
 "All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day. Value is interpreted as in the timezone configured for the current website","All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day. Value is interpreted as in the timezone configured for the current website"
+"Cancel Labels","Cancel Labels"
 "Cannot initialize packaging data, please provide shipment.","Cannot initialize packaging data, please provide shipment."
 "Carrier ""%1"" not found.","Carrier ""%1"" not found."
 "Cash On Delivery Payment Methods","Cash On Delivery Payment Methods"
@@ -8,6 +9,7 @@
 "Could not delete service selection.","Could not delete service selection."
 "Could not save service selection.","Could not save service selection."
 "Create a customized country list","Create a customized country list"
+"Deleting a single tracking number is not supported. Please use the ""Cancel Labels"" button on the shipment details page to cancel labels and tracks.","Deleting a single tracking number is not supported. Please use the ""Cancel Labels"" button on the shipment details page to cancel labels and tracks."
 "Display customized message","Display customized message"
 Errors,Errors
 "Height %1","Height %1"
@@ -29,6 +31,7 @@ Packages,Packages
 "The money transfer purpose for cash on delivery payments can include the following placeholders: {{entity_id}}, {{increment_id}}, {{firstname}}, {{lastname}}. They will be replaced by the respective order's values.","The money transfer purpose for cash on delivery payments can include the following placeholders: {{entity_id}}, {{increment_id}}, {{firstname}}, {{lastname}}. They will be replaced by the respective order's values."
 "The package option ""%1"" is not available.","The package option ""%1"" is not available."
 "The service option ""%1"" is not available.","The service option ""%1"" is not available."
+"The shipment was successfully cancelled.","The shipment was successfully cancelled."
 "The value ""%1"" is not available for item option ""%2"".","The value ""%1"" is not available for item option ""%2""."
 "The value ""%1"" is not available for package option ""%2"".","The value ""%1"" is not available for package option ""%2""."
 "The value ""%1"" is not available for service option ""%2"".","The value ""%1"" is not available for service option ""%2""."
