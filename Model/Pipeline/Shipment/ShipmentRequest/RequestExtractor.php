@@ -10,6 +10,7 @@ namespace Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest;
 
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Shipping\Model\Shipment\Request;
@@ -25,7 +26,6 @@ use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\ShipperInterfaceF
 use Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestExtractor\ServiceOptionReaderInterface;
 use Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestExtractor\ServiceOptionReaderInterfaceFactory;
 use Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestExtractorInterface;
-use Netresearch\ShippingCore\Model\ShipmentDate\ShipmentDate;
 use Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 use Netresearch\ShippingCore\Model\SplitAddress\RecipientStreetRepository;
 use Netresearch\ShippingCore\Model\Util\StreetSplitter;
@@ -85,14 +85,15 @@ class RequestExtractor implements RequestExtractorInterface
     private $serviceOptionReader;
 
     /**
+<<<<<<< HEAD
      * @var ServiceOptionReaderInterfaceFactory
      */
     private $serviceOptionReaderFactory;
 
     /**
-     * @var ShipmentDate
+     * @var TimezoneInterface
      */
-    private $shipmentDate;
+    private $timezone;
 
     /**
      * @var ShipperInterface
@@ -124,7 +125,7 @@ class RequestExtractor implements RequestExtractorInterface
         PackageAdditionalInterfaceFactory $packageAdditionalFactory,
         PackageItemInterfaceFactory $packageItemFactory,
         ServiceOptionReaderInterfaceFactory $serviceOptionReaderFactory,
-        ShipmentDate $shipmentDate
+        TimezoneInterface $timezone
     ) {
         $this->shipmentRequest = $shipmentRequest;
         $this->streetSplitter = $streetSplitter;
@@ -135,7 +136,7 @@ class RequestExtractor implements RequestExtractorInterface
         $this->packageAdditionalFactory = $packageAdditionalFactory;
         $this->packageItemFactory = $packageItemFactory;
         $this->serviceOptionReaderFactory = $serviceOptionReaderFactory;
-        $this->shipmentDate = $shipmentDate;
+        $this->timezone = $timezone;
     }
 
     /**
@@ -350,7 +351,7 @@ class RequestExtractor implements RequestExtractorInterface
 
     public function getShipmentDate(): \DateTime
     {
-        return $this->shipmentDate->getDate($this->getStoreId());
+        return $this->timezone->scopeDate($this->getStoreId());
     }
 
     public function isCashOnDelivery(): bool

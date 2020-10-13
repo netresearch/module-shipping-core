@@ -1,6 +1,5 @@
 "A confirmation email will be sent to the customer when the shipment was successfully created.","A confirmation email will be sent to the customer when the shipment was successfully created."
 "Add Package","Add Package"
-"All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day. Value is interpreted as in the timezone configured for the current website","All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day. Value is interpreted as in the timezone configured for the current website"
 "Automatic label creation failed: %1","Automatic label creation failed: %1"
 "Batch Processing","Batch Processing"
 "Cancel Labels","Cancel Labels"
@@ -37,7 +36,6 @@ Length,Length
 "Mail item category for international, non EU shipments.","Mail item category for international, non EU shipments."
 "No additional attributes found for order item %1.","No additional attributes found for order item %1."
 "Order %1: %2","Order %1: %2"
-"Order Cut-off Time","Order Cut-off Time"
 Other,Other
 "Package #%1 not found in shipment request.","Package #%1 not found in shipment request."
 "Package Details","Package Details"

@@ -1,6 +1,5 @@
 "A confirmation email will be sent to the customer when the shipment was successfully created.","Nach erfolgreicher Erstellung des Lieferscheins wird dem Kunden eine Versandbestätigung per E-Mail zugesandt."
 "Add Package","Paket hinzufügen"
-"All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day. Value is interpreted as in the timezone configured for the current website","Es wird davon ausgegangen, dass alle Bestellungen, die nach dem konfigurierten Zeitpunkt aufgegeben werden, am nächsten Geschäftstag an den jeweiligen Spediteur übergeben werden. Alle Bestellungen, die vor diesem Zeitpunkt aufgegeben werden, werden voraussichtlich am selben Tag an den jeweiligen Spediteur übergeben. Der Wert wird nach der für die aktuelle Website konfigurierten Zeitzone interpretiert."
 "Automatic label creation failed: %1","Die automatische Sendungserstellung ist fehlgeschlagen: %1"
 "Batch Processing",Massenverarbeitung
 "Cancel Labels","Versandaufträge stornieren"
@@ -37,7 +36,6 @@ Length,Länge
 "Mail item category for international, non EU shipments.","Art der Sendung für internationale Sendungen außerhalb der EU"
 "No additional attributes found for order item %1.","Es wurden keine Zusatzattribute für Artikel %1 gefunden."
 "Order %1: %2","Bestellung %1: %2"""
-"Order Cut-off Time",Auftragsabschlusszeit
 Other,Sonstiges
 "Package #%1 not found in shipment request.","Paket #%1 konnte nicht gefunden werden."
 "Package Details",Paket-Details

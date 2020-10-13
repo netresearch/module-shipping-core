@@ -17,7 +17,6 @@ use Netresearch\ShippingCore\Model\ShippingBox\PackageFactory;
 class ParcelProcessingConfig
 {
     private const CONFIG_PATH_COD_METHODS  = 'shipping/parcel_processing/cod_methods';
-    private const CONFIG_PATH_CUT_OFF_TIME = 'shipping/parcel_processing/cut_off_time';
     private const CONFIG_PATH_PACKAGES = 'shipping/parcel_processing/packages';
     private const CONFIG_PATH_COD_REASON_FOR_PAYMENT = 'shipping/parcel_processing/cod_reason_for_payment';
 
@@ -35,22 +34,15 @@ class ParcelProcessingConfig
     private $scopeConfig;
 
     /**
-     * @var TimezoneInterface
-     */
-    private $timezone;
-
-    /**
      * @var PackageFactory
      */
     private $packageFactory;
 
     public function __construct(
         ScopeConfigInterface $scopeConfig,
-        TimezoneInterface $timezone,
         PackageFactory $packageFactory
     ) {
         $this->scopeConfig = $scopeConfig;
-        $this->timezone = $timezone;
         $this->packageFactory = $packageFactory;
     }
 
@@ -85,27 +77,6 @@ class ParcelProcessingConfig
     public function isCodPaymentMethod(string $methodCode, $store = null): bool
     {
         return \in_array($methodCode, $this->getCodMethods($store), true);
-    }
-
-    /**
-     * Get the cut off time.
-     *
-     * @param mixed $store
-     * @return \DateTime
-     */
-    public function getCutOffTime($store = null): \DateTime
-    {
-        $cutOffTimeRaw = (string)$this->scopeConfig->getValue(
-            self::CONFIG_PATH_CUT_OFF_TIME,
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-
-        $cutOffTimeParts  = explode(',', $cutOffTimeRaw);
-
-        list($hours, $minutes, $seconds) = array_map('intval', $cutOffTimeParts);
-
-        return $this->timezone->scopeDate($store)->setTime($hours, $minutes, $seconds);
     }
 
     /**

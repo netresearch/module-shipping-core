@@ -21,6 +21,7 @@
     <preference for="Netresearch\ShippingCore\Api\Pipeline\TrackResponseProcessorInterface" type="Netresearch\ShippingCore\Model\Pipeline\Track\TrackResponseProcessor"/>
     <preference for="Netresearch\ShippingCore\Api\Rate\ProxyCarrierFactoryInterface" type="Netresearch\ShippingCore\Model\Rate\Emulation\ProxyCarrierFactory"/>
     <preference for="Netresearch\ShippingCore\Api\Rate\RateRequestEmulationInterface" type="Netresearch\ShippingCore\Model\Rate\Emulation\RateRequestService"/>
+    <preference for="Netresearch\ShippingCore\Api\ShipmentDate\ShipmentDateCalculatorInterface" type="Netresearch\ShippingCore\Model\ShipmentDate\ShipmentDateCalculator"/>
     <preference for="Netresearch\ShippingCore\Api\ShippingSettings\ArrayProcessor\ShippingSettingsProcessorInterface" type="Netresearch\ShippingCore\Model\ShippingSettings\ArrayProcessor\CompositeShippingSettingsProcessor"/>
     <preference for="Netresearch\ShippingCore\Api\ShippingSettings\CheckoutManagementInterface" type="Netresearch\ShippingCore\Model\ShippingSettings\CheckoutManagement"/>
     <preference for="Netresearch\ShippingCore\Api\ShippingSettings\GuestCheckoutManagementInterface" type="Netresearch\ShippingCore\Model\ShippingSettings\GuestCheckoutManagement"/>
@@ -233,6 +234,13 @@
     <type name="Netresearch\ShippingCore\Model\ResourceModel\RecipientStreet">
         <arguments>
             <argument name="connectionName" xsi:type="const">Netresearch\ShippingCore\Setup\Module\Constants::SALES_CONNECTION_NAME</argument>
+        </arguments>
+    </type>
+    <type name="Netresearch\ShippingCore\Model\ShipmentDate\ShipmentDateCalculator">
+        <arguments>
+            <argument name="dayValidators" xsi:type="array">
+                <item name="noHoliday" xsi:type="object">Netresearch\ShippingCore\Model\ShipmentDate\Validator\NoHoliday</item>
+            </argument>
         </arguments>
     </type>
     <type name="Netresearch\ShippingCore\Model\ShippingSettings\CheckoutDataProvider">

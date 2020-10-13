@@ -25,14 +25,7 @@
                     <comment><![CDATA[The money transfer purpose for cash on delivery payments can include the following placeholders: {{entity_id}}, {{increment_id}}, {{firstname}}, {{lastname}}. They will be replaced by the respective order's values.]]></comment>
                 </field>
 
-                <field id="cut_off_time" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="30"
-                       translate="label comment" type="time">
-                    <label>Order Cut-off Time</label>
-                    <comment>All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day. Value is interpreted as in the timezone configured for the current website</comment>
-                    <source_model>Magento\Config\Model\Config\Source\Date\Short</source_model>
-                </field>
-
-                <field id="packages" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="40"
+                <field id="packages" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="30"
                        translate="label comment" type="select">
                     <label>Packages</label>
                     <comment>Use this to create your own types of packages with your specific titles, sizes and tare weights.</comment>
