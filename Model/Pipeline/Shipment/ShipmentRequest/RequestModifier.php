@@ -9,12 +9,9 @@ declare(strict_types=1);
 namespace Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest;
 
 use Magento\Directory\Model\RegionFactory;
-use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\DataObjectFactory;
-use Magento\Framework\Exception\LocalizedException;
-use Magento\Sales\Model\Order\Shipment;
 use Magento\Shipping\Model\Shipment\Request;
-use Magento\Store\Model\ScopeInterface;
+use Netresearch\ShippingCore\Api\Config\ShippingConfigInterface;
 use Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestModifier\PackagingOptionReaderInterfaceFactory;
 use Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestModifierInterface;
 use Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
@@ -23,9 +20,9 @@ use Netresearch\ShippingCore\Model\Util\ShipmentItemFilter;
 class RequestModifier implements RequestModifierInterface
 {
     /**
-     * @var ScopeConfigInterface
+     * @var ShippingConfigInterface
      */
-    private $scopeConfig;
+    private $config;
 
     /**
      * @var PackagingOptionReaderInterfaceFactory
@@ -48,13 +45,13 @@ class RequestModifier implements RequestModifierInterface
     private $dataObjectFactory;
 
     public function __construct(
-        ScopeConfigInterface $scopeConfig,
+        ShippingConfigInterface $config,
         PackagingOptionReaderInterfaceFactory $packagingOptionReaderFactory,
         ShipmentItemFilter $itemFilter,
         RegionFactory $regionFactory,
         DataObjectFactory $dataObjectFactory
     ) {
-        $this->scopeConfig = $scopeConfig;
+        $this->config = $config;
         $this->packagingOptionReaderFactory = $packagingOptionReaderFactory;
         $this->itemFilter = $itemFilter;
         $this->regionFactory = $regionFactory;
@@ -115,29 +112,14 @@ class RequestModifier implements RequestModifierInterface
     private function modifyShipper(Request $shipmentRequest)
     {
         $storeId = $shipmentRequest->getOrderShipment()->getStoreId();
-        $originStreet = $this->scopeConfig->getValue(
-            Shipment::XML_PATH_STORE_ADDRESS1,
-            ScopeInterface::SCOPE_STORE,
-            $storeId
-        );
-        $originStreet2 = $this->scopeConfig->getValue(
-            Shipment::XML_PATH_STORE_ADDRESS2,
-            ScopeInterface::SCOPE_STORE,
-            $storeId
-        );
 
-        $storeInfo = (array)$this->scopeConfig->getValue(
-            'general/store_information',
-            ScopeInterface::SCOPE_STORE,
-            $storeId
-        );
-        $storeInfo = $this->dataObjectFactory->create(['data' => $storeInfo]);
+        $originStreet = $this->config->getOriginStreet($storeId);
+        $originCity = $this->config->getOriginCity($storeId);
+        $originPostcode = $this->config->getOriginPostcode($storeId);
+        $originCountry = $this->config->getOriginCountry($storeId);
+        $storeInfo = $this->config->getStoreInformation($storeId);
 
-        $shipperRegionCode = $this->scopeConfig->getValue(
-            Shipment::XML_PATH_STORE_REGION_ID,
-            ScopeInterface::SCOPE_STORE,
-            $storeId
-        );
+        $shipperRegionCode = $this->config->getOriginRegion($storeId);
         if (is_numeric($shipperRegionCode)) {
             $shipperRegionCode = $this->regionFactory->create()->load($shipperRegionCode)->getCode();
         }
@@ -148,32 +130,14 @@ class RequestModifier implements RequestModifierInterface
         $shipmentRequest->setShipperContactCompanyName($storeInfo->getData('name'));
         $shipmentRequest->setShipperContactPhoneNumber($storeInfo->getData('phone'));
         $shipmentRequest->setData('shipper_email', '');
-        $shipmentRequest->setShipperAddressStreet(trim($originStreet . ' ' . $originStreet2));
-        $shipmentRequest->setShipperAddressStreet1($originStreet);
-        $shipmentRequest->setShipperAddressStreet2($originStreet2);
-        $shipmentRequest->setShipperAddressCity(
-            (string)$this->scopeConfig->getValue(
-                Shipment::XML_PATH_STORE_CITY,
-                ScopeInterface::SCOPE_STORE,
-                $storeId
-            )
-        );
+        $shipmentRequest->setShipperAddressStreet(trim($originStreet[0] . ' ' . $originStreet[1]));
+        $shipmentRequest->setShipperAddressStreet1($originStreet[0]);
+        $shipmentRequest->setShipperAddressStreet2($originStreet[1]);
+        $shipmentRequest->setShipperAddressCity($originCity);
 
         $shipmentRequest->setShipperAddressStateOrProvinceCode($shipperRegionCode);
-        $shipmentRequest->setShipperAddressPostalCode(
-            $this->scopeConfig->getValue(
-                Shipment::XML_PATH_STORE_ZIP,
-                ScopeInterface::SCOPE_STORE,
-                $storeId
-            )
-        );
-        $shipmentRequest->setShipperAddressCountryCode(
-            (string)$this->scopeConfig->getValue(
-                Shipment::XML_PATH_STORE_COUNTRY_ID,
-                ScopeInterface::SCOPE_STORE,
-                $storeId
-            )
-        );
+        $shipmentRequest->setShipperAddressPostalCode($originPostcode);
+        $shipmentRequest->setShipperAddressCountryCode($originCountry);
     }
 
     /**
@@ -182,7 +146,6 @@ class RequestModifier implements RequestModifierInterface
      * Cross-border params are omitted because the carrier decides whether the route requires customs data or not.
      *
      * @param Request $shipmentRequest
-     * @throws LocalizedException
      */
     private function modifyPackage(Request $shipmentRequest): void
     {
@@ -192,7 +155,12 @@ class RequestModifier implements RequestModifierInterface
 
         $packagingOptionReader = $this->packagingOptionReaderFactory->create(['shipment' => $shipment]);
 
-        $customs = $packagingOptionReader->getPackageOptionValues(Codes::PACKAGING_OPTION_CUSTOMS);
+        try {
+            $customs = $packagingOptionReader->getPackageOptionValues(Codes::PACKAGING_OPTION_CUSTOMS);
+        } catch (\RuntimeException $exception) {
+            $customs = [];
+        }
+
         $customsValue = $customs[Codes::PACKAGING_INPUT_CUSTOMS_VALUE] ?? null;
         $contentType = $customs[Codes::PACKAGING_INPUT_CONTENT_TYPE] ?? '';
         $explanation = $customs[Codes::PACKAGING_INPUT_EXPLANATION] ?? '';
@@ -245,7 +213,15 @@ class RequestModifier implements RequestModifierInterface
         $items = $this->itemFilter->getShippableItems($shipment->getAllItems());
         foreach ($items as $item) {
             $orderItemId = (int) $item->getOrderItemId();
-            $itemCustoms = $packagingOptionReader->getItemOptionValues($orderItemId, Codes::ITEM_OPTION_ITEM_CUSTOMS);
+            try {
+                $itemCustoms = $packagingOptionReader->getItemOptionValues(
+                    $orderItemId,
+                    Codes::ITEM_OPTION_ITEM_CUSTOMS
+                );
+            } catch (\RuntimeException $exception) {
+                $itemCustoms = [];
+            }
+
             $itemCustomsValue = $itemCustoms['customsValue'] ?? null;
             $packageItem = [
                 'qty' => $packagingOptionReader->getItemOptionValue($orderItemId, 'details', 'qty'),
@@ -282,7 +258,6 @@ class RequestModifier implements RequestModifierInterface
      * during bulk label creation where no user input (packaging popup) is involved.
      *
      * @param Request $shipmentRequest
-     * @throws LocalizedException
      */
     public function modify(Request $shipmentRequest): void
     {

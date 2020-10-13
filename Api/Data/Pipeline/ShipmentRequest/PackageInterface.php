@@ -81,20 +81,6 @@ interface PackageInterface
     public function getCustomsValue(): ?float;
 
     /**
-     * Obtain package export description (optional).
-     *
-     * @return string
-     */
-    public function getExportDescription(): string;
-
-    /**
-     * Obtain package customs terms of trade (optional).
-     *
-     * @return string
-     */
-    public function getTermsOfTrade(): string;
-
-    /**
      * Obtain package customs declaration content type (optional).
      *
      * @return string

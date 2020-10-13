@@ -9,10 +9,11 @@ declare(strict_types=1);
 namespace Netresearch\ShippingCore\Model\ShippingSettings;
 
 use Magento\Framework\Config\ReaderInterface;
+use Magento\Sales\Api\Data\OrderAddressInterface;
 use Magento\Sales\Api\Data\ShipmentInterface;
 use Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingDataInterface;
-use Netresearch\ShippingCore\Model\ShippingSettings\Processor\Packaging\ArrayProcessor\PackagingArrayCompositeProcessor;
-use Netresearch\ShippingCore\Model\ShippingSettings\Processor\Packaging\PackagingDataCompositeProcessor;
+use Netresearch\ShippingCore\Api\ShippingSettings\ArrayProcessor\ShippingSettingsProcessorInterface;
+use Netresearch\ShippingCore\Api\ShippingSettings\TypeProcessor\ShippingDataProcessorInterface;
 
 class PackagingDataProvider
 {
@@ -26,19 +27,19 @@ class PackagingDataProvider
     private $reader;
 
     /**
-     * @var PackagingArrayCompositeProcessor
-     */
-    private $compositeArrayProcessor;
-
-    /**
-     * @var PackagingDataCompositeProcessor
-     */
-    private $compositeDataProcessor;
-
-    /**
      * @var ShippingDataHydrator
      */
     private $shippingDataHydrator;
+
+    /**
+     * @var ShippingSettingsProcessorInterface
+     */
+    private $shippingSettingsProcessor;
+
+    /**
+     * @var ShippingDataProcessorInterface
+     */
+    private $shippingDataProcessor;
 
     /**
      * @var ShippingDataInterface[]
@@ -47,14 +48,14 @@ class PackagingDataProvider
 
     public function __construct(
         ReaderInterface $reader,
-        PackagingArrayCompositeProcessor $compositeArrayProcessor,
-        PackagingDataCompositeProcessor $compositeDataProcessor,
-        ShippingDataHydrator $shippingDataHydrator
+        ShippingDataHydrator $shippingDataHydrator,
+        ShippingSettingsProcessorInterface $shippingSettingsProcessor,
+        ShippingDataProcessorInterface $shippingDataProcessor
     ) {
         $this->reader = $reader;
-        $this->compositeArrayProcessor = $compositeArrayProcessor;
-        $this->compositeDataProcessor = $compositeDataProcessor;
         $this->shippingDataHydrator = $shippingDataHydrator;
+        $this->shippingSettingsProcessor = $shippingSettingsProcessor;
+        $this->shippingDataProcessor = $shippingDataProcessor;
     }
 
     /**
@@ -70,17 +71,30 @@ class PackagingDataProvider
             return $this->shipmentData[$shipment->getEntityId()];
         }
 
-        $packagingDataArray = $this->reader->read('adminhtml');
-        $packagingDataArray = $this->compositeArrayProcessor->process($packagingDataArray, $shipment);
+        $shippingSettings = $this->reader->read('adminhtml');
+        $shippingSettings = $this->shippingSettingsProcessor->process(
+            $shippingSettings,
+            (int) $shipment->getStoreId(),
+            $shipment
+        );
 
-        $packagingData = $this->shippingDataHydrator->toObject($packagingDataArray);
-        $packagingData = $this->compositeDataProcessor->process($packagingData, $shipment);
+        /** @var OrderAddressInterface $shippingAddress */
+        $shippingAddress = $shipment->getShippingAddress();
+
+        $shippingData = $this->shippingDataHydrator->toObject($shippingSettings);
+        $shippingData = $this->shippingDataProcessor->process(
+            $shippingData,
+            (int) $shipment->getStoreId(),
+            $shippingAddress->getCountryId(),
+            $shippingAddress->getPostcode(),
+            $shipment
+        );
 
         if (!empty($shipment->getEntityId())) {
             // cache packaging data if shipment has an identifier
-            $this->shipmentData[$shipment->getEntityId()] = $packagingData;
+            $this->shipmentData[$shipment->getEntityId()] = $shippingData;
         }
 
-        return $packagingData;
+        return $shippingData;
     }
 }

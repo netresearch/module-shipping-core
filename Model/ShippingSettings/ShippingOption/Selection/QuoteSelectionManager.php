@@ -14,64 +14,51 @@ use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\Selection\AssignedSelectionInterface;
 use Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\Selection\SelectionInterface;
+use Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
 
 class QuoteSelectionManager
 {
-    /**
-     * @var QuoteSelectionFactory
-     */
-    private $quoteSelectionFactory;
-
     /**
      * @var QuoteSelectionRepository
      */
     private $selectionRepository;
 
     /**
-     * @var FilterBuilder
+     * @var QuoteSelectionFactory
      */
-    private $filterBuilder;
+    private $selectionFactory;
 
     /**
      * @var SearchCriteriaBuilderFactory
      */
     private $searchCriteriaBuilderFactory;
 
-    public function __construct(
-        QuoteSelectionFactory $quoteSelectionFactory,
-        QuoteSelectionRepository $selectionRepository,
-        FilterBuilder $filterBuilder,
-        SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory
-    ) {
-        $this->quoteSelectionFactory = $quoteSelectionFactory;
-        $this->selectionRepository = $selectionRepository;
-        $this->filterBuilder = $filterBuilder;
-        $this->searchCriteriaBuilderFactory = $searchCriteriaBuilderFactory;
-    }
-
     /**
-     * Update the given shipping option selections in persistent storage.
-     *
-     * @param int $shippingAddressId
-     * @param SelectionInterface[] $shippingOptionSelections
-     * @throws CouldNotDeleteException
-     * @throws CouldNotSaveException
+     * @var FilterBuilder
      */
-    public function updateSelections(int $shippingAddressId, array $shippingOptionSelections)
-    {
-        $this->deleteSelections($shippingAddressId);
-        $this->saveSelections($shippingAddressId, $shippingOptionSelections);
+    private $filterBuilder;
+
+    public function __construct(
+        QuoteSelectionRepository $selectionRepository,
+        QuoteSelectionFactory $selectionFactory,
+        SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory,
+        FilterBuilder $filterBuilder
+    ) {
+        $this->selectionRepository = $selectionRepository;
+        $this->selectionFactory = $selectionFactory;
+        $this->searchCriteriaBuilderFactory = $searchCriteriaBuilderFactory;
+        $this->filterBuilder = $filterBuilder;
     }
 
     /**
-     * Delete all Selections for the given Quote address id.
+     * Load assigned service selection for given quote shipping address ID.
      *
      * @param int $addressId
-     * @throws CouldNotDeleteException
+     *
+     * @return SelectionInterface[]|QuoteSelection[]
      */
-    private function deleteSelections(int $addressId)
+    public function load(int $addressId)
     {
-        // clean up previously selected values
         $addressFilter = $this->filterBuilder
             ->setField(AssignedSelectionInterface::PARENT_ID)
             ->setValue($addressId)
@@ -80,35 +67,71 @@ class QuoteSelectionManager
 
         $searchCriteriaBuilder = $this->searchCriteriaBuilderFactory->create();
         $searchCriteria = $searchCriteriaBuilder->addFilter($addressFilter)->create();
-        $previousSelections = $this->selectionRepository->getList($searchCriteria);
+        return $this->selectionRepository->getList($searchCriteria)->getItems();
+    }
 
-        /** @var QuoteSelection $selection */
-        foreach ($previousSelections as $selection) {
+    /**
+     * Assign service selection to given quote shipping address ID and save to persistent storage.
+     *
+     * @param int $addressId
+     * @param SelectionInterface[] $serviceSelection
+     *
+     * @return void
+     * @throws CouldNotDeleteException
+     * @throws CouldNotSaveException
+     */
+    public function save(int $addressId, array $serviceSelection)
+    {
+        foreach ($this->load($addressId) as $selection) {
             $this->selectionRepository->delete($selection);
+        }
+
+        foreach ($serviceSelection as $selection) {
+            $data = [
+                AssignedSelectionInterface::PARENT_ID => $addressId,
+                AssignedSelectionInterface::SHIPPING_OPTION_CODE => $selection->getShippingOptionCode(),
+                AssignedSelectionInterface::INPUT_CODE => $selection->getInputCode(),
+                AssignedSelectionInterface::INPUT_VALUE => $selection->getInputValue(),
+            ];
+
+            $assignedSelection = $this->selectionFactory->create();
+            $assignedSelection->setData($data);
+            $this->selectionRepository->save($assignedSelection);
         }
     }
 
     /**
-     * Store the given Selection
+     * Set assigned service values to given shipping options.
      *
      * @param int $addressId
-     * @param SelectionInterface[] $shippingOptionSelections
-     * @throws CouldNotSaveException
+     * @param ShippingOptionInterface[] $shippingOptions
+     *
+     * @return void
      */
-    private function saveSelections(int $addressId, array $shippingOptionSelections)
+    public function apply(int $addressId, array $shippingOptions)
     {
-        foreach ($shippingOptionSelections as $selection) {
-            /** @var SelectionInterface $selection */
-            $model = $this->quoteSelectionFactory->create();
-            $model->setData(
-                [
-                    AssignedSelectionInterface::PARENT_ID => $addressId,
-                    AssignedSelectionInterface::SHIPPING_OPTION_CODE => $selection->getShippingOptionCode(),
-                    AssignedSelectionInterface::INPUT_CODE => $selection->getInputCode(),
-                    AssignedSelectionInterface::INPUT_VALUE => $selection->getInputValue(),
-                ]
-            );
-            $this->selectionRepository->save($model);
+        // re-build service array, index by service option code
+        $serviceSelection = array_reduce(
+            $this->load($addressId),
+            function (array $carry, SelectionInterface $selection) {
+                $carry[$selection->getShippingOptionCode()][$selection->getInputCode()] = $selection->getInputValue();
+                return $carry;
+            },
+            []
+        );
+
+        foreach ($shippingOptions as $shippingOption) {
+            $serviceValues = $serviceSelection[$shippingOption->getCode()] ?? [];
+            if (empty($serviceValues)) {
+                // no selection made for current shipping option, next…
+                continue;
+            }
+
+            foreach ($shippingOption->getInputs() as $input) {
+                if (isset($serviceValues[$input->getCode()])) {
+                    $input->setDefaultValue($serviceValues[$input->getCode()]);
+                }
+            }
         }
     }
 }

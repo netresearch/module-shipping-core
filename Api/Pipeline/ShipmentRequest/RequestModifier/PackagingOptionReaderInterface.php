@@ -8,8 +8,6 @@ declare(strict_types=1);
 
 namespace Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestModifier;
 
-use Magento\Framework\Exception\LocalizedException;
-
 /**
  * @api
  */
@@ -19,7 +17,7 @@ interface PackagingOptionReaderInterface
      * Read all package options' settings.
      *
      * @return mixed[][]
-     * @throws LocalizedException
+     * @throws \RuntimeException
      */
     public function getPackageValues(): array;
 
@@ -28,7 +26,7 @@ interface PackagingOptionReaderInterface
      *
      * @param string $optionCode
      * @return mixed[]
-     * @throws LocalizedException
+     * @throws \RuntimeException
      */
     public function getPackageOptionValues(string $optionCode): array;
 
@@ -38,7 +36,7 @@ interface PackagingOptionReaderInterface
      * @param string $optionCode
      * @param string $inputCode
      * @return mixed
-     * @throws LocalizedException
+     * @throws \RuntimeException
      */
     public function getPackageOptionValue(string $optionCode, string $inputCode);
 
@@ -47,7 +45,7 @@ interface PackagingOptionReaderInterface
      *
      * @param int $orderItemId
      * @return mixed[][]
-     * @throws LocalizedException
+     * @throws \RuntimeException
      */
     public function getItemValues(int $orderItemId): array;
 
@@ -57,7 +55,7 @@ interface PackagingOptionReaderInterface
      * @param int $orderItemId
      * @param string $optionCode
      * @return mixed[]
-     * @throws LocalizedException
+     * @throws \RuntimeException
      */
     public function getItemOptionValues(int $orderItemId, string $optionCode): array;
 
@@ -68,7 +66,7 @@ interface PackagingOptionReaderInterface
      * @param string $optionCode
      * @param string $inputCode
      * @return mixed
-     * @throws LocalizedException
+     * @throws \RuntimeException
      */
     public function getItemOptionValue(int $orderItemId, string $optionCode, string $inputCode);
 
@@ -76,7 +74,7 @@ interface PackagingOptionReaderInterface
      * Read all service options' settings.
      *
      * @return string[][]
-     * @throws LocalizedException
+     * @throws \RuntimeException
      */
     public function getServiceValues(): array;
 
@@ -85,7 +83,7 @@ interface PackagingOptionReaderInterface
      *
      * @param string $serviceCode
      * @return mixed[]
-     * @throws LocalizedException
+     * @throws \RuntimeException
      */
     public function getServiceOptionValues(string $serviceCode): array;
 
@@ -95,7 +93,7 @@ interface PackagingOptionReaderInterface
      * @param string $serviceCode
      * @param string $inputCode
      * @return mixed
-     * @throws LocalizedException
+     * @throws \RuntimeException
      */
     public function getServiceOptionValue(string $serviceCode, string $inputCode);
 }

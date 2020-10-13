@@ -10,7 +10,6 @@
             <group id="parcel_processing" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="1000" translate="label">
                 <label>Parcel Processing</label>
 
-                <!-- Cash On Delivery Payment Methods -->
                 <field id="cod_methods" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="10"
                        translate="label comment" type="multiselect">
                     <label>Cash On Delivery Payment Methods</label>
@@ -20,20 +19,20 @@
                     <can_be_empty>1</can_be_empty>
                 </field>
 
-                <field id="cod_reason_for_payment" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="45" translate="label comment">
+                <field id="cod_reason_for_payment" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="20"
+                       translate="label comment">
                     <label>Cash on Delivery Reason for Payment</label>
                     <comment><![CDATA[The money transfer purpose for cash on delivery payments can include the following placeholders: {{entity_id}}, {{increment_id}}, {{firstname}}, {{lastname}}. They will be replaced by the respective order's values.]]></comment>
                 </field>
 
-                <!-- Cut-off Time -->
-                <field id="cut_off_time" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="20"
+                <field id="cut_off_time" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="30"
                        translate="label comment" type="time">
                     <label>Order Cut-off Time</label>
                     <comment>All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day. Value is interpreted as in the timezone configured for the current website</comment>
                     <source_model>Magento\Config\Model\Config\Source\Date\Short</source_model>
                 </field>
 
-                <field id="packages" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="30"
+                <field id="packages" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="40"
                        translate="label comment" type="select">
                     <label>Packages</label>
                     <comment>Use this to create your own types of packages with your specific titles, sizes and tare weights.</comment>
@@ -41,6 +40,44 @@
                     <backend_model>Netresearch\ShippingCore\Model\Config\Backend\PackageParams</backend_model>
                 </field>
 
+                <field id="export_content_type" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="50"
+                       translate="label comment" type="Netresearch\ConfigFields\Model\Type\Radioset">
+                    <label>Export Content Type</label>
+                    <comment>Mail item category for international, non EU shipments.</comment>
+                    <source_model>Netresearch\ShippingCore\Model\Config\Source\ExportContentType</source_model>
+                </field>
+                <field id="export_content_explanation" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="60"
+                       translate="label comment">
+                    <label>Export Content Explanation</label>
+                    <comment><![CDATA[The content description is mandatory if export content type is <em>OTHER</em>.]]></comment>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="export_content_type">OTHER</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="batch_processing" translate="label" sortOrder="2000" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Batch Processing</label>
+
+                <field id="cron_enabled" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10"
+                       translate="label comment button_label" type="Netresearch\ConfigFields\Model\Type\Checkbox">
+                    <label>Enable Automatic Label Retrieval</label>
+                    <button_label>Create shipments and retrieve labels via cron job.</button_label>
+                </field>
+
+                <field id="retry_failed_shipments" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="20"
+                       translate="label comment tooltip" type="Netresearch\ConfigFields\Model\Type\Checkbox">
+                    <label>Retry Failed Shipments</label>
+                    <comment><![CDATA[Processing of shipments with <em>Label Status: Failed</em> will automatically be retried.]]></comment>
+                    <tooltip>If automatic retry is disabled, then all previously failed labels must be requested manually after revision of the shipment data. If enabled, label requests are repeatedly sent to the web service – even when shipment data was not yet corrected. This may seem more convenient but failing label requests can pile up drastically, increasing load for the automatic processing in general.</tooltip>
+                </field>
+
+                <field id="autocreate_notify" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="30"
+                       translate="label comment" type="Netresearch\ConfigFields\Model\Type\Checkbox">
+                    <label>Email Copy of Shipment</label>
+                    <comment>A confirmation email will be sent to the customer when the shipment was successfully created.</comment>
+                </field>
             </group>
         </section>
     </system>

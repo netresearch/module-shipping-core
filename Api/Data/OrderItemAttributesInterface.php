@@ -14,9 +14,7 @@ namespace Netresearch\ShippingCore\Api\Data;
 interface OrderItemAttributesInterface
 {
     const ITEM_ID = 'item_id';
-    const DG_CATEGORY = 'dangerous_goods_category';
-    const TARIFF_NUMBER = 'tariff_number';
-    const EXPORT_DESCRIPTION = 'export_description';
+    const HS_CODE = 'hs_code';
     const COUNTRY_OF_MANUFACTURE = 'country_of_manufacture';
 
     /**
@@ -27,17 +25,7 @@ interface OrderItemAttributesInterface
     /**
      * @return string
      */
-    public function getDgCategory(): string;
-
-    /**
-     * @return string
-     */
-    public function getTariffNumber(): string;
-
-    /**
-     * @return string
-     */
-    public function getExportDescription(): string;
+    public function getHsCode(): string;
 
     /**
      * @return string
@@ -50,19 +38,9 @@ interface OrderItemAttributesInterface
     public function setItemId(int $itemId);
 
     /**
-     * @param string|null $dgCategory
+     * @param string|null $hsCode
      */
-    public function setDgCategory(string $dgCategory = null);
-
-    /**
-     * @param string|null $tariffNumber
-     */
-    public function setTariffNumber(string $tariffNumber = null);
-
-    /**
-     * @param string|null $exportDescription
-     */
-    public function setExportDescription(string $exportDescription = null);
+    public function setHsCode(string $hsCode = null);
 
     /**
      * @param string|null $countryOfManufacture

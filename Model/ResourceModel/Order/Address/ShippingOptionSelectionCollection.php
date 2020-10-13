@@ -12,6 +12,9 @@ use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 use Netresearch\ShippingCore\Model\ResourceModel\Order\Address\ShippingOptionSelection as ServiceSelectionResource;
 use Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Selection\OrderSelection;
 
+/**
+ * @method OrderSelection[] getItems()
+ */
 class ShippingOptionSelectionCollection extends AbstractCollection
 {
     protected function _construct()

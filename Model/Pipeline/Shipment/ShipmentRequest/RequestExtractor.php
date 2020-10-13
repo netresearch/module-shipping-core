@@ -23,6 +23,7 @@ use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\RecipientInterfac
 use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\ShipperInterface;
 use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\ShipperInterfaceFactory;
 use Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestExtractor\ServiceOptionReaderInterface;
+use Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestExtractor\ServiceOptionReaderInterfaceFactory;
 use Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestExtractorInterface;
 use Netresearch\ShippingCore\Model\ShipmentDate\ShipmentDate;
 use Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
@@ -84,6 +85,11 @@ class RequestExtractor implements RequestExtractorInterface
     private $serviceOptionReader;
 
     /**
+     * @var ServiceOptionReaderInterfaceFactory
+     */
+    private $serviceOptionReaderFactory;
+
+    /**
      * @var ShipmentDate
      */
     private $shipmentDate;
@@ -117,7 +123,7 @@ class RequestExtractor implements RequestExtractorInterface
         PackageInterfaceFactory $packageFactory,
         PackageAdditionalInterfaceFactory $packageAdditionalFactory,
         PackageItemInterfaceFactory $packageItemFactory,
-        ServiceOptionReaderInterface $serviceOptionReader,
+        ServiceOptionReaderInterfaceFactory $serviceOptionReaderFactory,
         ShipmentDate $shipmentDate
     ) {
         $this->shipmentRequest = $shipmentRequest;
@@ -128,8 +134,24 @@ class RequestExtractor implements RequestExtractorInterface
         $this->packageFactory = $packageFactory;
         $this->packageAdditionalFactory = $packageAdditionalFactory;
         $this->packageItemFactory = $packageItemFactory;
-        $this->serviceOptionReader = $serviceOptionReader;
+        $this->serviceOptionReaderFactory = $serviceOptionReaderFactory;
         $this->shipmentDate = $shipmentDate;
+    }
+
+    /**
+     * Obtain service option reader to read core specific service data.
+     *
+     * @return ServiceOptionReaderInterface
+     */
+    private function getServiceOptionReader(): ServiceOptionReaderInterface
+    {
+        if (empty($this->serviceOptionReader)) {
+            $this->serviceOptionReader = $this->serviceOptionReaderFactory->create(
+                ['shipmentRequest' => $this->shipmentRequest]
+            );
+        }
+
+        return $this->serviceOptionReader;
     }
 
     public function isReturnShipmentRequest(): bool
@@ -256,8 +278,6 @@ class RequestExtractor implements RequestExtractorInterface
                     'width' => isset($params['width']) ? (float) $params['width'] : null,
                     'height' => isset($params['height']) ? (float) $params['height'] : null,
                     'customsValue' => isset($params['customs_value']) ? (float) $params['customs_value'] : null,
-                    'exportDescription' => $params['customs']['exportDescription'] ?? '',
-                    'termsOfTrade' => $params['customs']['termsOfTrade'] ?? '',
                     'contentType' => $params['content_type'] ?? '',
                     'contentExplanation' => $params['content_type_other'] ?? '',
                     'packageAdditional' => $this->packageAdditionalFactory->create(),
@@ -299,7 +319,6 @@ class RequestExtractor implements RequestExtractorInterface
                         'price' => (float)$itemData['price'],
                         'customsValue' => isset($itemData['customs_value']) ? (float)$itemData['customs_value'] : null,
                         'sku' => $itemData['sku'] ?? '',
-                        'exportDescription' => $itemData['customs']['exportDescription'] ?? '',
                         'hsCode' => $itemData['customs']['hsCode'] ?? '',
                         'countryOfOrigin' => $itemData['customs']['countryOfOrigin'] ?? '',
                     ]);
@@ -336,12 +355,12 @@ class RequestExtractor implements RequestExtractorInterface
 
     public function isCashOnDelivery(): bool
     {
-        return $this->serviceOptionReader->isServiceEnabled(Codes::SERVICE_OPTION_CASH_ON_DELIVERY);
+        return $this->getServiceOptionReader()->isServiceEnabled(Codes::SERVICE_OPTION_CASH_ON_DELIVERY);
     }
 
     public function getCodReasonForPayment(): string
     {
-        return $this->serviceOptionReader->getServiceOptionValue(
+        return $this->getServiceOptionReader()->getServiceOptionValue(
             Codes::SERVICE_OPTION_CASH_ON_DELIVERY,
             Codes::SERVICE_INPUT_COD_REASON_FOR_PAYMENT
         );

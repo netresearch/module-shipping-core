@@ -1,44 +1,74 @@
+"A confirmation email will be sent to the customer when the shipment was successfully created.","Nach erfolgreicher Erstellung des Lieferscheins wird dem Kunden eine Versandbestätigung per E-Mail zugesandt."
 "Add Package","Paket hinzufügen"
 "All orders that are placed after the configured time are assumed to be handed over to the respective carrier on the next business day. All orders that are placed before that time are expected to be handed over to the respective carrier on the same day. Value is interpreted as in the timezone configured for the current website","Es wird davon ausgegangen, dass alle Bestellungen, die nach dem konfigurierten Zeitpunkt aufgegeben werden, am nächsten Geschäftstag an den jeweiligen Spediteur übergeben werden. Alle Bestellungen, die vor diesem Zeitpunkt aufgegeben werden, werden voraussichtlich am selben Tag an den jeweiligen Spediteur übergeben. Der Wert wird nach der für die aktuelle Website konfigurierten Zeitzone interpretiert."
+"Automatic label creation failed: %1","Die automatische Sendungserstellung ist fehlgeschlagen: %1"
+"Batch Processing",Massenverarbeitung
 "Cancel Labels","Versandaufträge stornieren"
-"Cannot initialize packaging data, please provide shipment.","Paketdaten konnten nicht geladen werden. Stellen Sie ein Shipment bereit."
 "Carrier ""%1"" not found.","Carrier ""%1"" konnte nicht gefunden werden."
 "Cash On Delivery Payment Methods",Nachnahmezahlungsmethoden
 "Cash on Delivery",Nachnahmezahlung
 "Cash on Delivery Reason for Payment","Verwendungszweck Nachnahmezahlung"
+"Commercial Sample",Warenmuster
+Container,Container
 "Could not delete service selection.","Die Serviceauswahl konnte nicht gelöscht werden."
 "Could not save service selection.","Die Serviceauswahl konnte nicht gespeichert werden."
+"Country of Origin",Ursprungsland
 "Create a customized country list","Angepasste Länderliste erstellen"
+"Create shipments and retrieve labels via cron job.","Erstellen Sie Lieferscheine und Versandetiketten mittels Cron Job."
+"Customs Data",Zolldaten
+"Customs Value",Zollwert
 "Deleting a single tracking number is not supported. Please use the ""Cancel Labels"" button on the shipment details page to cancel labels and tracks.","Das Löschen einer einzelnen Sendungsnummer wird nicht unterstützt. Bitte verwenden Sie den Button ""Versandaufträge stornieren"" auf der Sendungsansichtseite, um Versandaufträge zu stornieren und Sendungsnummern zu löschen."
 "Display customized message","Benutzerdefinierte Nachricht anzeigen"
+Document,Dokument
+"Email Copy of Shipment","Versandbestätigung versenden"
+"Enable Automatic Label Retrieval","Automatische Sendungserstellung aktivieren"
 Errors,Fehler
+"Export Content Explanation","Beschreibung des Inhalts"
+"Export Content Type",Inhaltskategorie
+"HS Code","HS Code"
+Height,Height
 "Height %1","Höhe %1"
 "Hide this shipping method in checkout","Diese Versandart im Checkout ausblenden"
+"If automatic retry is disabled, then all previously failed labels must be requested manually after revision of the shipment data. If enabled, label requests are repeatedly sent to the web service – even when shipment data was not yet corrected. This may seem more convenient but failing label requests can pile up drastically, increasing load for the automatic processing in general.","Ist die automatische Wiederholung deaktiviert, so müssen alle zuvor fehlgeschlagenen Versandetiketten nach Korrektur der Versanddaten manuell angefordert werden. Ist sie aktiviert, dann wird wiederholt versucht, Versandetiketten vom Webservice abzurufen – auch wenn noch keine Korrektur der Sendungsdaten vorgenommen wurde. Dies mag komfortabel erscheinen, kann die Anzahl der Versandetikettenanfragen und damit die Last der automatischen Verarbeitung aber drastisch erhöhen."
 "Info (All API Activities)","Info (alle API-Aktivitäten)"
+"Item Details",Artikeldetails
+Length,Länge
 "Length %1","Länge %1"
+"Mail item category for international, non EU shipments.","Art der Sendung für internationale Sendungen außerhalb der EU"
 "No additional attributes found for order item %1.","Es wurden keine Zusatzattribute für Artikel %1 gefunden."
-"Options for order item ""%1"" are not available.","Es sind keine Optionen für Order Item """"%1"""" verfügbar."""
+"Order %1: %2","Bestellung %1: %2"""
 "Order Cut-off Time",Auftragsabschlusszeit
+Other,Sonstiges
 "Package #%1 not found in shipment request.","Paket #%1 konnte nicht gefunden werden."
+"Package Details",Paket-Details
 Packages,Paketegrößen
 "Parcel Processing",Sendungsverarbeitung
+Present,Geschenk
+"Processing of shipments with <em>Label Status: Failed</em> will automatically be retried.","Die Verarbeitung von Sendungen mit <em>Label Status: Fehlgeschlagen</em> wird automatisch erneut ausgeführt."
+Quantity,Menge
+"Quantity to Ship",Liefermenge
 "Reason for Payment",Verwendungszweck
 "Recipient street with ID ""%1"" does not exist.","Empfängeradresse mit der ID ""%1"" ist nicht vorhanden."
+"Retry Failed Shipments","Wiederholung fehlgeschlagener Sendungen"
+"Return of Goods",Warenrücksendung
 "Return shipments are not supported.","Retourenaufkleber werden nicht unterstützt."
 "Selected payment methods will be treated as CoD methods when booking a shipment label.","Die ausgewählten Zahlungsmethoden werden bei der Erstellung des Versandauftrags als Nachnahmemethoden behandelt."
 "Set Default","Als Standard festlegen"
-"The item option ""%1"" is not available.","Die Artikeloption ""%1"" ist nicht verfügbar."
+"Shipment(s) for the order(s) %1 could not be created.","Lieferschein(e) für die Bestellung(en) %1 konnten nicht erstellt werden."
+"Shipping Product",Versandprodukt
+"Shipping label(s) for the order(s) %1 could not be created.","Versandetiketten für die Bestellung(en) %1 konnten nicht erstellt werden."
+"Shipping label(s) for the order(s) %1 could not be requested. Please review shipment comments.","Versandetiketten für die Bestellung(en) %1 konnten nicht abgerufen werden. Bitte prüfen Sie die Lieferscheinkommentare."
+"Shipping label(s) for the order(s) %1 were successfully created.","Versandetiketten für die Bestellung(en) %1 wurden erfolgreich erstellt."
+"Tare weight",Leergewicht
+"The content description is mandatory if export content type is <em>OTHER</em>.","Eine Inhaltsbeschreibung ist vorgeschrieben, wenn die Inhaltskategorie <em>SONSTIGES</em> ist."
 "The money transfer purpose for cash on delivery payments can include the following placeholders: {{entity_id}}, {{increment_id}}, {{firstname}}, {{lastname}}. They will be replaced by the respective order's values.","Beim Verwendungszweck für Nachnahmezahlungen können folgende Platzhalter eingesetzt werden: {{entity_id}}, {{increment_id}}, {{firstname}}, {{lastname}}. Sie werden durch die Werte der jeweiligen Bestellung ersetzt."
-"The package option ""%1"" is not available.","Die Paketoption ""%1"" ist nicht verfügbar."
-"The service option ""%1"" is not available.","Die Service-Option ""%1"" ist nicht verfügbar."
 "The shipment was successfully cancelled.","Die Lieferung wurde erfolgreich storniert."
-"The value ""%1"" is not available for item option ""%2"".","Der Wert ""%1"" für die Artikeloption ""%2"" ist nicht verfügbar."
-"The value ""%1"" is not available for package option ""%2"".","Der Wert ""%1"" für die Paketoption ""%2"" ist nicht verfügbar."
-"The value ""%1"" is not available for service option ""%2"".","Der Wert ""%1"" für die Serviceoption ""%2"" ist nicht verfügbar."
+"The value of attribute ""%1"" must be numeric.","Der Wert des Attributes ""%1"" muss numerisch sein."
+"The value of attribute ""%1"" must not be longer than %2 characters.","Der Wert des Attributes ""%1"" darf nicht länger als %2 Zeichen sein."
 Title,Titel
+"Total Weight",Gesamtgewicht
 "Unable to load additional attributes for order item %1.","Zusatzattribute für Artikel %1 konnten nicht geladen werden."
 "Unable to load recipient street with ID ""%1"".","Empfängeradresse mit der ID ""%1"" kann nicht geladen werden."
-"Unable to load shipment request properties.","Die Daten für den Versandauftrag konnten nicht geladen werden."
 "Unable to retrieve year %1 holidays for region %2.","Feiertage in Region %2 für das Jahr %1 konnten nicht ermittelt werden."
 "Unable to save additional attributes for order item %1: %2","Zusatzattribute für Artikel %1 konnten nicht gespeichert werden: %2"
 "Unable to save label status","Labelstatus kann nicht gespeichert werden"
@@ -46,6 +76,9 @@ Title,Titel
 "Use countries from <a href=""%1"">Allowed Countries</a> setting.","Erlaubte Länder aus den <a href=""%1"">allgemeinen Einstellungen</a> verwenden."
 "Use this to create your own types of packages with your specific titles, sizes and tare weights.","Verwenden Sie diese Option, um Ihre eigenen Pakettypen mit Ihren spezifischen Titeln, Größen und Gewichten zu erstellen."
 Warnings,Warnungen
+Weight,Gewicht
 "Weight %1","Gewicht %1"
+Width,Breite
 "Width %1","Breite %1"
+"You can configure your preset package sizes in the system configuration","Ihre voreingestellten Paketgrößen können Sie in der Systemkonfiguration konfigurieren"
 "You need to have at least one drop off day.","Sie müssen mindestens einen Tag für die Paketübergabe angeben."

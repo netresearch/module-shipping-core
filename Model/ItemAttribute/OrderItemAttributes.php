@@ -34,25 +34,9 @@ class OrderItemAttributes extends AbstractModel implements OrderItemAttributesIn
     /**
      * @return string
      */
-    public function getDgCategory(): string
+    public function getHsCode(): string
     {
-        return (string) $this->getData(self::DG_CATEGORY);
-    }
-
-    /**
-     * @return string
-     */
-    public function getTariffNumber(): string
-    {
-        return (string) $this->getData(self::TARIFF_NUMBER);
-    }
-
-    /**
-     * @return string
-     */
-    public function getExportDescription(): string
-    {
-        return (string) $this->getData(self::EXPORT_DESCRIPTION);
+        return (string) $this->getData(self::HS_CODE);
     }
 
     /**
@@ -72,27 +56,11 @@ class OrderItemAttributes extends AbstractModel implements OrderItemAttributesIn
     }
 
     /**
-     * @param string|null $dgCategory
+     * @param string|null $hsCode
      */
-    public function setDgCategory(string $dgCategory = null)
+    public function setHsCode(string $hsCode = null)
     {
-        $this->setData(self::DG_CATEGORY, $dgCategory);
-    }
-
-    /**
-     * @param string|null $tariffNumber
-     */
-    public function setTariffNumber(string $tariffNumber = null)
-    {
-        $this->setData(self::TARIFF_NUMBER, $tariffNumber);
-    }
-
-    /**
-     * @param string|null $exportDescription
-     */
-    public function setExportDescription(string $exportDescription = null)
-    {
-        $this->setData(self::EXPORT_DESCRIPTION, $exportDescription);
+        $this->setData(self::HS_CODE, $hsCode);
     }
 
     /**

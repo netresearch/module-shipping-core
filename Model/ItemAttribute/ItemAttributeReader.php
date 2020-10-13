@@ -29,39 +29,7 @@ class ItemAttributeReader implements ItemAttributeReaderInterface
             return '';
         }
 
-        return (string) $extensionAttributes->getNrshippingTariffNumber();
-    }
-
-    /**
-     * Read dangerous goods category from extension attributes.
-     *
-     * @param OrderItemInterface $orderItem
-     * @return string
-     */
-    public function getDgCategory(OrderItemInterface $orderItem): string
-    {
-        $extensionAttributes = $orderItem->getExtensionAttributes();
-        if (!$extensionAttributes) {
-            return '';
-        }
-
-        return (string)$extensionAttributes->getNrshippingDgCategory();
-    }
-
-    /**
-     * Read export description from extension attributes.
-     *
-     * @param OrderItemInterface $orderItem
-     * @return string
-     */
-    public function getExportDescription(OrderItemInterface $orderItem): string
-    {
-        $extensionAttributes = $orderItem->getExtensionAttributes();
-        if (!$extensionAttributes) {
-            return '';
-        }
-
-        return (string) $extensionAttributes->getNrshippingExportDescription();
+        return (string) $extensionAttributes->getNrshippingHsCode();
     }
 
     /**

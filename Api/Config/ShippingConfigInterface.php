@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Netresearch\ShippingCore\Api\Config;
 
+use Magento\Framework\DataObject;
+
 /**
  * Wrapper around Magento core modules' configuration settings.
  *
@@ -43,7 +45,7 @@ interface ShippingConfigInterface
      * Returns the shipping origin postal code.
      *
      * @param mixed $store
-     * @return string
+     * @return string|int
      */
     public function getOriginPostcode($store = null): string;
 
@@ -54,6 +56,14 @@ interface ShippingConfigInterface
      * @return string[]
      */
     public function getOriginStreet($store = null): array;
+
+    /**
+     * Returns all the store information settings wrapped in a data object.
+     *
+     * @param mixed $store
+     * @return DataObject
+     */
+    public function getStoreInformation($store = null): DataObject;
 
     /**
      * Returns countries that are marked as EU-Countries

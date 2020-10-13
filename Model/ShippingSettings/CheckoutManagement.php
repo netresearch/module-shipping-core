@@ -64,7 +64,7 @@ class CheckoutManagement implements CheckoutManagementInterface
     {
         $storeId = (int) $this->storeManager->getStore()->getId();
 
-        return $this->checkoutDataProvider->getData($countryId, $storeId, $postalCode);
+        return $this->checkoutDataProvider->getData($storeId, $countryId, $postalCode);
     }
 
     /**
@@ -77,6 +77,6 @@ class CheckoutManagement implements CheckoutManagementInterface
     public function updateShippingOptionSelections(int $cartId, array $shippingOptionSelections)
     {
         $shippingAddressId = (int) $this->addressManagement->get($cartId)->getId();
-        $this->selectionManager->updateSelections($shippingAddressId, $shippingOptionSelections);
+        $this->selectionManager->save($shippingAddressId, $shippingOptionSelections);
     }
 }

@@ -6,6 +6,8 @@
                 <cod_reason_for_payment><![CDATA[{{firstname}} {{lastname}} #{{increment_id}}]]></cod_reason_for_payment>
                 <cut_off_time>18,00,00</cut_off_time>
                 <packages backend_model="Netresearch\ShippingCore\Model\Config\Backend\PackageParams">[]</packages>
+                <export_content_type>OTHER</export_content_type>
+                <export_content_explanation>Commercial Goods</export_content_explanation>
             </parcel_processing>
         </shipping>
     </default>

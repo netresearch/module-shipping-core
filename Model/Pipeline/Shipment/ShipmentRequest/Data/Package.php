@@ -65,16 +65,6 @@ class Package implements PackageInterface
     /**
      * @var string
      */
-    private $exportDescription;
-
-    /**
-     * @var string
-     */
-    private $termsOfTrade;
-
-    /**
-     * @var string
-     */
     private $contentType;
 
     /**
@@ -97,8 +87,6 @@ class Package implements PackageInterface
         float $width = null,
         float $height = null,
         float $customsValue = null,
-        string $exportDescription = '',
-        string $termsOfTrade = '',
         string $contentType = '',
         string $contentExplanation = '',
         PackageAdditionalInterface $packageAdditional = null
@@ -112,8 +100,6 @@ class Package implements PackageInterface
         $this->width = $width;
         $this->height = $height;
         $this->customsValue = $customsValue;
-        $this->exportDescription = $exportDescription;
-        $this->termsOfTrade = $termsOfTrade;
         $this->contentType = $contentType;
         $this->contentExplanation = $contentExplanation;
         $this->packageAdditional = $packageAdditional ?? new PackageAdditional();
@@ -169,16 +155,6 @@ class Package implements PackageInterface
     public function getCustomsValue(): ?float
     {
         return $this->customsValue;
-    }
-
-    public function getExportDescription(): string
-    {
-        return $this->exportDescription;
-    }
-
-    public function getTermsOfTrade(): string
-    {
-        return $this->termsOfTrade;
     }
 
     public function getContentType(): string

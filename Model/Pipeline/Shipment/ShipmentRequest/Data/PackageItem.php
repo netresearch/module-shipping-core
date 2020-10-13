@@ -60,11 +60,6 @@ class PackageItem implements PackageItemInterface
     /**
      * @var string
      */
-    private $exportDescription;
-
-    /**
-     * @var string
-     */
     private $hsCode;
 
     /**
@@ -82,7 +77,6 @@ class PackageItem implements PackageItemInterface
         float $price,
         float $customsValue = null,
         string $sku = '',
-        string $exportDescription = '',
         string $hsCode = '',
         string $countryOfOrigin = ''
     ) {
@@ -95,7 +89,6 @@ class PackageItem implements PackageItemInterface
         $this->price = $price;
         $this->customsValue = $customsValue;
         $this->sku = $sku;
-        $this->exportDescription = $exportDescription;
         $this->hsCode = $hsCode;
         $this->countryOfOrigin = $countryOfOrigin;
     }
@@ -143,11 +136,6 @@ class PackageItem implements PackageItemInterface
     public function getSku(): string
     {
         return $this->sku;
-    }
-
-    public function getExportDescription(): string
-    {
-        return $this->exportDescription;
     }
 
     public function getHsCode(): string

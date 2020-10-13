@@ -114,7 +114,7 @@ class CancelRequestBuilder
                 return [];
             }
 
-            $cancelRequests[$track->getTrackNumber()]= $this->requestFactory->create([
+            $cancelRequests[$track->getTrackNumber()] = $this->requestFactory->create([
                 'storeId' => (int) $shipment->getStoreId(),
                 'trackNumber' => (string) $track->getTrackNumber(),
                 'salesShipment' => $shipment,

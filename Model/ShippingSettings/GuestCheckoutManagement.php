@@ -48,6 +48,6 @@ class GuestCheckoutManagement implements GuestCheckoutManagementInterface
     public function updateShippingOptionSelections(string $cartId, array $shippingOptionSelections)
     {
         $shippingAddressId = (int) $this->addressManagement->get($cartId)->getId();
-        $this->selectionManager->updateSelections($shippingAddressId, $shippingOptionSelections);
+        $this->selectionManager->save($shippingAddressId, $shippingOptionSelections);
     }
 }

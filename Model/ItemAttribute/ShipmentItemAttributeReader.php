@@ -56,30 +56,6 @@ class ShipmentItemAttributeReader
     }
 
     /**
-     * Read dangerous goods category from extension attributes.
-     *
-     * @param Item $shipmentItem
-     * @return string
-     */
-    public function getDgCategory(Item $shipmentItem): string
-    {
-        $orderItem = $shipmentItem->getOrderItem();
-        return $this->orderItemAttributeReader->getDgCategory($orderItem);
-    }
-
-    /**
-     * Read export description from extension attributes.
-     *
-     * @param Item $shipmentItem
-     * @return string
-     */
-    public function getExportDescription(Item $shipmentItem): string
-    {
-        $orderItem = $shipmentItem->getOrderItem();
-        return $this->orderItemAttributeReader->getExportDescription($orderItem);
-    }
-
-    /**
      * Read country of manufacture from extension attributes.
      *
      * @param Item $shipmentItem
@@ -130,48 +106,5 @@ class ShipmentItemAttributeReader
 
         $items = $this->itemFilter->getShippableItems($shipment->getAllItems());
         return (float) array_reduce($items, $fnAdd, 0);
-    }
-
-    /**
-     * Obtain all items' export description.
-     *
-     * @param ShipmentInterface|Shipment $shipment
-     * @return string[]
-     */
-    public function getPackageExportDescriptions(ShipmentInterface $shipment): array
-    {
-        $fnCollect = function (Item $shipmentItem) {
-            $itemExportDescription = $this->getExportDescription($shipmentItem);
-            if ($itemExportDescription) {
-                return $itemExportDescription;
-            }
-
-            if ($shipmentItem->getDescription()) {
-                return $shipmentItem->getDescription();
-            }
-
-            return $shipmentItem->getName();
-        };
-
-        $items = $this->itemFilter->getShippableItems($shipment->getAllItems());
-        return array_map($fnCollect, $items);
-    }
-
-    /**
-     * Obtain all items' dangerous goods categories.
-     *
-     * @param ShipmentInterface|Shipment $shipment
-     * @return string[]
-     */
-    public function getPackageDgCategories(ShipmentInterface $shipment): array
-    {
-        $fnCollect = function (Item $shipmentItem) {
-            return $this->getDgCategory($shipmentItem);
-        };
-
-        $items = $this->itemFilter->getShippableItems($shipment->getAllItems());
-        $dgCategories = array_map($fnCollect, $items);
-
-        return array_filter($dgCategories);
     }
 }

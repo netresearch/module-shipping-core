@@ -55,9 +55,7 @@
   "nrshipping_order_item": {
     "column": {
       "item_id": true,
-      "tariff_number": true,
-      "dangerous_goods_category": true,
-      "export_description": true,
+      "hs_code": true,
       "country_of_manufacture": true
     },
     "constraint": {

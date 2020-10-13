@@ -10,6 +10,8 @@ namespace Netresearch\ShippingCore\Model\Config;
 
 use Magento\Directory\Helper\Data;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\DataObject;
+use Magento\Framework\DataObjectFactory;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Shipping\Helper\Carrier;
 use Magento\Store\Model\ScopeInterface;
@@ -24,14 +26,23 @@ class ShippingConfig implements ShippingConfigInterface
     private $scopeConfig;
 
     /**
+     * @var DataObjectFactory
+     */
+    private $dataObjectFactory;
+
+    /**
      * @var UnitConverterInterface
      */
     private $unitConverter;
 
-    public function __construct(ScopeConfigInterface $scopeConfig, UnitConverterInterface $unitConverter)
-    {
+    public function __construct(
+        ScopeConfigInterface $scopeConfig,
+        UnitConverterInterface $unitConverter,
+        DataObjectFactory $dataObjectFactory
+    ) {
         $this->scopeConfig = $scopeConfig;
         $this->unitConverter = $unitConverter;
+        $this->dataObjectFactory = $dataObjectFactory;
     }
 
     public function getOriginCountry($store = null): string
@@ -78,6 +89,17 @@ class ShippingConfig implements ShippingConfigInterface
             (string) $this->scopeConfig->getValue(Shipment::XML_PATH_STORE_ADDRESS1, $scope, $store),
             (string) $this->scopeConfig->getValue(Shipment::XML_PATH_STORE_ADDRESS2, $scope, $store),
         ];
+    }
+
+    public function getStoreInformation($store = null): DataObject
+    {
+        $storeInfo = (array) $this->scopeConfig->getValue(
+            'general/store_information',
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+
+        return $this->dataObjectFactory->create(['data' => $storeInfo]);
     }
 
     public function getEuCountries($store = null): array

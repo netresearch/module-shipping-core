@@ -8,8 +8,10 @@ declare(strict_types=1);
 
 namespace Netresearch\ShippingCore\Model\Pipeline\Shipment\ResponseProcessor;
 
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Shipping\Model\Order\TrackFactory;
+use Magento\Store\Model\ScopeInterface;
 use Netresearch\ShippingCore\Api\Pipeline\ShipmentResponseProcessorInterface;
 
 /**
@@ -18,12 +20,18 @@ use Netresearch\ShippingCore\Api\Pipeline\ShipmentResponseProcessorInterface;
 class AddTrack implements ShipmentResponseProcessorInterface
 {
     /**
+     * @var ScopeConfigInterface
+     */
+    private $scopeConfig;
+
+    /**
      * @var TrackFactory
      */
     private $trackFactory;
 
-    public function __construct(TrackFactory $trackFactory)
+    public function __construct(ScopeConfigInterface $scopeConfig, TrackFactory $trackFactory)
     {
+        $this->scopeConfig = $scopeConfig;
         $this->trackFactory = $trackFactory;
     }
 
@@ -35,8 +43,11 @@ class AddTrack implements ShipmentResponseProcessorInterface
             $order = $shipment->getOrder();
 
             $carrierCode = strtok((string)$order->getShippingMethod(), '_');
-            //todo(nr): get carrier title by code here
-            $carrierTitle = 'something comes here';
+            $carrierTitle = $this->scopeConfig->getValue(
+                'carriers/' . $carrierCode . '/title',
+                ScopeInterface::SCOPE_STORE,
+                $order->getStoreId()
+            );
 
             $track = $this->trackFactory->create();
             $track->setNumber($labelResponse->getTrackingNumber());

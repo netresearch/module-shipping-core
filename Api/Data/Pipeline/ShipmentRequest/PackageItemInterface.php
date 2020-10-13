@@ -77,13 +77,6 @@ interface PackageItemInterface
     public function getSku(): string;
 
     /**
-     * Obtain item's custom declaration description.
-     *
-     * @return string
-     */
-    public function getExportDescription(): string;
-
-    /**
      * Obtain item's HS code / tariff number (optional).
      *
      * @return string

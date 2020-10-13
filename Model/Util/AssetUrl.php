@@ -47,7 +47,7 @@ class AssetUrl implements AssetUrlInterface
 
         if (!in_array($this->design->getArea(), [Area::AREA_FRONTEND, Area::AREA_ADMINHTML], true)) {
             // if resource is requested in webapi scope, then allocate from frontend theme.
-            $params = ['area' => Area::AREA_FRONTEND];
+            $params['area'] = Area::AREA_FRONTEND;
             $themeId = $this->design->getConfigurationDesignTheme(Area::AREA_FRONTEND);
 
             if (is_numeric($themeId)) {

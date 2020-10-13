@@ -10,8 +10,8 @@ namespace Netresearch\ShippingCore\Model\ShippingSettings;
 
 use Magento\Framework\Config\ReaderInterface;
 use Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingDataInterface;
-use Netresearch\ShippingCore\Model\ShippingSettings\Processor\Checkout\ArrayProcessor\CheckoutArrayCompositeProcessor;
-use Netresearch\ShippingCore\Model\ShippingSettings\Processor\Checkout\CheckoutDataCompositeProcessor;
+use Netresearch\ShippingCore\Api\ShippingSettings\ArrayProcessor\ShippingSettingsProcessorInterface;
+use Netresearch\ShippingCore\Api\ShippingSettings\TypeProcessor\ShippingDataProcessorInterface;
 
 class CheckoutDataProvider
 {
@@ -21,57 +21,49 @@ class CheckoutDataProvider
     private $reader;
 
     /**
-     * @var CheckoutArrayCompositeProcessor
-     */
-    private $compositeArrayProcessor;
-
-    /**
-     * @var CheckoutDataCompositeProcessor
-     */
-    private $compositeDataProcessor;
-
-    /**
      * @var ShippingDataHydrator
      */
     private $shippingDataHydrator;
 
+    /**
+     * @var ShippingSettingsProcessorInterface
+     */
+    private $shippingSettingsProcessor;
+
+    /**
+     * @var ShippingDataProcessorInterface
+     */
+    private $shippingDataProcessor;
+
     public function __construct(
         ReaderInterface $reader,
-        CheckoutArrayCompositeProcessor $compositeArrayProcessor,
-        CheckoutDataCompositeProcessor $compositeDataProcessor,
-        ShippingDataHydrator $shippingDataHydrator
+        ShippingDataHydrator $shippingDataHydrator,
+        ShippingSettingsProcessorInterface $shippingSettingsProcessor,
+        ShippingDataProcessorInterface $shippingDataProcessor
     ) {
         $this->reader = $reader;
-        $this->compositeArrayProcessor = $compositeArrayProcessor;
-        $this->compositeDataProcessor = $compositeDataProcessor;
         $this->shippingDataHydrator = $shippingDataHydrator;
+        $this->shippingSettingsProcessor = $shippingSettingsProcessor;
+        $this->shippingDataProcessor = $shippingDataProcessor;
     }
 
     /**
-     * @param string $countryCode
      * @param int $storeId
+     * @param string $countryCode
      * @param string $postalCode
      *
      * @return ShippingDataInterface
      *
      * @throws \RuntimeException
      */
-    public function getData(string $countryCode, int $storeId, string $postalCode): ShippingDataInterface
+    public function getData(int $storeId, string $countryCode, string $postalCode): ShippingDataInterface
     {
-        $shippingDataArray = $this->reader->read('frontend');
+        $shippingSettings = $this->reader->read('frontend');
+        $shippingSettings = $this->shippingSettingsProcessor->process($shippingSettings, $storeId);
 
-        $shippingDataArray = $this->compositeArrayProcessor->process(
-            $shippingDataArray,
-            $storeId
-        );
+        $shippingData = $this->shippingDataHydrator->toObject($shippingSettings);
+        $shippingData = $this->shippingDataProcessor->process($shippingData, $storeId, $countryCode, $postalCode);
 
-        $shippingData = $this->shippingDataHydrator->toObject($shippingDataArray);
-
-        return $this->compositeDataProcessor->process(
-            $shippingData,
-            $countryCode,
-            $postalCode,
-            $storeId
-        );
+        return $shippingData;
     }
 }

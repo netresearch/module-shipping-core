@@ -24,22 +24,6 @@ interface ItemAttributeReaderInterface
     public function getHsCode(OrderItemInterface $orderItem): string;
 
     /**
-     * Read dangerous goods category from order item.
-     *
-     * @param OrderItemInterface $orderItem
-     * @return string
-     */
-    public function getDgCategory(OrderItemInterface $orderItem): string;
-
-    /**
-     * Read export description from order item.
-     *
-     * @param OrderItemInterface $orderItem
-     * @return string
-     */
-    public function getExportDescription(OrderItemInterface $orderItem): string;
-
-    /**
      * Read country of manufacture from order item.
      *
      * @param OrderItemInterface $orderItem
