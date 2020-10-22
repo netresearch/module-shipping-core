@@ -13,8 +13,8 @@ namespace Netresearch\ShippingCore\Api\Data\OrderExport;
  */
 interface ShippingOptionInterface
 {
-    const PACKAGE = 'package';
-    const SERVICES = 'services';
+    public const PACKAGE = 'package';
+    public const SERVICES = 'services';
 
     /**
      * @return \Netresearch\ShippingCore\Api\Data\OrderExport\KeyValueObjectInterface[]

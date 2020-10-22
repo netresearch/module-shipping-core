@@ -17,8 +17,10 @@ use Netresearch\ShippingCore\Model\ShippingBox\PackageFactory;
 class ParcelProcessingConfig
 {
     private const CONFIG_PATH_COD_METHODS  = 'shipping/parcel_processing/cod_methods';
-    private const CONFIG_PATH_PACKAGES = 'shipping/parcel_processing/packages';
     private const CONFIG_PATH_COD_REASON_FOR_PAYMENT = 'shipping/parcel_processing/cod_reason_for_payment';
+    private const CONFIG_PATH_PACKAGES = 'shipping/parcel_processing/packages';
+    private const CONFIG_PATH_CONTENT_TYPE = 'shipping/parcel_processing/export_content_type';
+    private const CONFIG_PATH_CONTENT_EXPLANATION = 'shipping/parcel_processing/export_content_explanation';
 
     public const CONFIG_FIELD_PACKAGE_ID = 'id';
     public const CONFIG_FIELD_PACKAGE_TITLE = 'title';

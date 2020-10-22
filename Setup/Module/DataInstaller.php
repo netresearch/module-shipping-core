@@ -17,7 +17,7 @@ use Magento\Framework\Exception\LocalizedException;
 
 class DataInstaller
 {
-    const ATTRIBUTE_CODE_HS_CODE = 'nrshipping_hs_code';
+    public const ATTRIBUTE_CODE_HS_CODE = 'nrshipping_hs_code';
 
     /**
      * @param EavSetup $eavSetup

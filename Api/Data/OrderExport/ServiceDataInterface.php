@@ -15,8 +15,8 @@ namespace Netresearch\ShippingCore\Api\Data\OrderExport;
  */
 interface ServiceDataInterface
 {
-    const CODE = 'code';
-    const DETAILS = 'details';
+    public const CODE = 'code';
+    public const DETAILS = 'details';
 
     /**
      * @return string

@@ -15,6 +15,7 @@ use Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\OptionInte
 use Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
 use Netresearch\ShippingCore\Api\ShippingSettings\TypeProcessor\ShippingOptionsProcessorInterface;
 use Netresearch\ShippingCore\Model\Config\ParcelProcessingConfig;
+use Netresearch\ShippingCore\Model\Config\Source\ExportContentType;
 use Netresearch\ShippingCore\Model\ItemAttribute\ShipmentItemAttributeReader;
 use Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 
@@ -36,6 +37,11 @@ class InputDataProcessor implements ShippingOptionsProcessorInterface
     private $itemAttributeReader;
 
     /**
+     * @var ExportContentType
+     */
+    private $contentTypeSource;
+
+    /**
      * @var CommentInterfaceFactory
      */
     private $commentFactory;
@@ -49,12 +55,14 @@ class InputDataProcessor implements ShippingOptionsProcessorInterface
         ShippingConfigInterface $shippingConfig,
         ParcelProcessingConfig $parcelConfig,
         ShipmentItemAttributeReader $itemAttributeReader,
+        ExportContentType $contentTypeSource,
         CommentInterfaceFactory $commentFactory,
         OptionInterfaceFactory $optionFactory
     ) {
         $this->shippingConfig = $shippingConfig;
         $this->parcelConfig = $parcelConfig;
         $this->itemAttributeReader = $itemAttributeReader;
+        $this->contentTypeSource = $contentTypeSource;
         $this->commentFactory = $commentFactory;
         $this->optionFactory = $optionFactory;
     }
@@ -146,6 +154,20 @@ class InputDataProcessor implements ShippingOptionsProcessorInterface
                     $comment->setContent($currencySymbol);
                     $input->setComment($comment);
                     $input->setDefaultValue((string) $price);
+                    break;
+
+                case Codes::PACKAGING_INPUT_CONTENT_TYPE:
+                    $input->setOptions(
+                        array_map(
+                            function ($optionArray) {
+                                $option = $this->optionFactory->create();
+                                $option->setValue($optionArray['value']);
+                                $option->setLabel((string)$optionArray['label']);
+                                return $option;
+                            },
+                            $this->contentTypeSource->toOptionArray()
+                        )
+                    );
                     break;
             }
         }

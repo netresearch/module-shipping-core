@@ -133,7 +133,8 @@ class UpdateLabelStatus implements ShipmentResponseProcessorInterface
         $qtyOrdered = array_reduce($orderItems, $fnSumOrdered, 0);
         $qtyShipped = array_reduce($orderItems, $fnSumShipped, 0);
 
-        return ($qtyOrdered === $qtyShipped);
+        // avoid comparing floats / float with int
+        return (int) (1000 * $qtyOrdered) === (int) (1000 * $qtyShipped);
     }
 
     /**

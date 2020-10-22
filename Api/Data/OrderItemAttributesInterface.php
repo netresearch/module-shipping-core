@@ -13,9 +13,9 @@ namespace Netresearch\ShippingCore\Api\Data;
  */
 interface OrderItemAttributesInterface
 {
-    const ITEM_ID = 'item_id';
-    const HS_CODE = 'hs_code';
-    const COUNTRY_OF_MANUFACTURE = 'country_of_manufacture';
+    public const ITEM_ID = 'item_id';
+    public const HS_CODE = 'hs_code';
+    public const COUNTRY_OF_MANUFACTURE = 'country_of_manufacture';
 
     /**
      * @return int

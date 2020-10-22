@@ -23,7 +23,7 @@ class ServiceOptionReader implements ServiceOptionReaderInterface
         $this->shipmentRequest = $shipmentRequest;
     }
 
-    public function getServiceOptionValue(string $optionCode, string $inputCode): string
+    public function getServiceOptionValue(string $optionCode, string $inputCode)
     {
         $packages = $this->shipmentRequest->getData('packages');
         $packageId = $this->shipmentRequest->getData('package_id');

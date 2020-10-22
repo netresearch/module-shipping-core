@@ -86,11 +86,6 @@ class CompositeShippingDataProcessor implements ShippingDataProcessorInterface
         $carriers = [];
 
         foreach ($shippingData->getCarriers() as $carrier) {
-            // process carrier settings
-            foreach ($this->carrierDataProcessors as $processor) {
-                $carrier = $processor->process($carrier, $storeId, $countryCode, $postalCode, $shipment);
-            }
-
             // process shipping options
             $packageOptions = $carrier->getPackageOptions();
             $serviceOptions = $carrier->getServiceOptions();
@@ -123,6 +118,11 @@ class CompositeShippingDataProcessor implements ShippingDataProcessorInterface
                 $processor->process($metadata, $storeId, $countryCode, $postalCode, $shipment);
             }
             $carrier->setMetadata($metadata);
+
+            // process the whole carrier settings after the individual sections were processed
+            foreach ($this->carrierDataProcessors as $processor) {
+                $carrier = $processor->process($carrier, $storeId, $countryCode, $postalCode, $shipment);
+            }
 
             $carriers[] = $carrier;
         }

@@ -83,8 +83,8 @@ class SplitAddress implements ObserverInterface
         }
 
         $order = $address->getOrder();
-        $shippingMethod = strtok((string)$order->getShippingMethod(), '_');
-        if (!in_array($shippingMethod, $this->carrierCodes, true)) {
+        $carrierCode = strtok((string)$order->getShippingMethod(), '_');
+        if (!in_array($carrierCode, $this->carrierCodes, true)) {
             // carrier does not support split street
             return;
         }

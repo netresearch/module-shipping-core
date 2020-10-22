@@ -47,7 +47,7 @@ class Codes
     public const ITEM_INPUT_QTY_TO_SHIP = 'qtyToShip';
     public const ITEM_INPUT_WEIGHT = 'weight';
 
-    public const ITEM_OPTION_ITEM_CUSTOMS = 'itemCustoms';
+    public const ITEM_OPTION_CUSTOMS = 'itemCustoms';
     public const ITEM_INPUT_CUSTOMS_VALUE = 'customsValue';
     public const ITEM_INPUT_HS_CODE = 'hsCode';
     public const ITEM_INPUT_COUNTRY_OF_ORIGIN = 'countryOfOrigin';

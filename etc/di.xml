@@ -143,6 +143,7 @@
                 <item name="applySortOrder" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\SortOrderProcessor</item>
             </argument>
             <argument name="itemShippingOptionsProcessors" xsi:type="array">
+                <item name="filterRoutes" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ItemShippingOptions\RouteProcessor</item>
                 <item name="processInputs" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ItemShippingOptions\InputDataProcessor</item>
             </argument>
             <argument name="metadataProcessors" xsi:type="array">
@@ -292,6 +293,9 @@
     </type>
     <type name="Magento\Sales\Api\OrderAddressRepositoryInterface">
         <plugin name="addSplitAddressAsExtensionAttributes" type="Netresearch\ShippingCore\Plugin\Order\AddRecipientStreetToAddress"/>
+    </type>
+    <type name="Magento\Sales\Api\OrderItemRepositoryInterface">
+        <plugin name="persistOrderItemExtensionAttributes" type="Netresearch\ShippingCore\Plugin\Order\PersistOrderItemAttributes"/>
     </type>
     <type name="Magento\Sales\Model\ResourceModel\Order\Address\Collection">
         <plugin name="addSplitAddressAsExtensionAttributes" type="Netresearch\ShippingCore\Plugin\Order\AddRecipientStreetToAddressCollection"/>

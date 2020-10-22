@@ -21,4 +21,7 @@
     <event name="controller_action_predispatch_adminhtml_order_shipment_removeTrack">
         <observer name="nrshipping_prevent_track_deletion" instance="Netresearch\ShippingCore\Observer\PreventTrackDeletion"/>
     </event>
+    <event name="sales_order_item_collection_load_before">
+        <observer name="nrshipping_join_order_item_attributes" instance="Netresearch\ShippingCore\Observer\JoinOrderItemAttributes"/>
+    </event>
 </config>

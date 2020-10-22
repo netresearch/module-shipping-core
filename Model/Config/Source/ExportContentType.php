@@ -12,11 +12,11 @@ use Magento\Framework\Data\OptionSourceInterface;
 
 class ExportContentType implements OptionSourceInterface
 {
-    const TYPE_COMMERCIAL_SAMPLE = 'COMMERCIAL_SAMPLE';
-    const TYPE_DOCUMENT = 'DOCUMENT';
-    const TYPE_PRESENT = 'PRESENT';
-    const TYPE_RETURN_OF_GOODS = 'RETURN_OF_GOODS';
-    const TYPE_OTHER = 'OTHER';
+    private const TYPE_COMMERCIAL_SAMPLE = 'COMMERCIAL_SAMPLE';
+    private const TYPE_DOCUMENT = 'DOCUMENT';
+    private const TYPE_PRESENT = 'PRESENT';
+    private const TYPE_RETURN_OF_GOODS = 'RETURN_OF_GOODS';
+    private const TYPE_OTHER = 'OTHER';
 
     /**
      * Options getter

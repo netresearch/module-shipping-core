@@ -66,8 +66,6 @@ class MigrateProductAttributesPatch implements DataPatchInterface, PatchVersionI
 
         $productTypes = [Type::TYPE_SIMPLE, Type::TYPE_BUNDLE, Configurable::TYPE_CODE];
 
-        $result = [];
-
         $this->productCollection
             ->addAttributeToSelect(['dhlgw_tariff_number'])
             ->addFieldToFilter('type_id', ['in' => $productTypes]);

@@ -216,7 +216,7 @@ class RequestModifier implements RequestModifierInterface
             try {
                 $itemCustoms = $packagingOptionReader->getItemOptionValues(
                     $orderItemId,
-                    Codes::ITEM_OPTION_ITEM_CUSTOMS
+                    Codes::ITEM_OPTION_CUSTOMS
                 );
             } catch (\RuntimeException $exception) {
                 $itemCustoms = [];
