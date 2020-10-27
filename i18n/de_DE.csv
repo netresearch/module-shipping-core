@@ -29,13 +29,17 @@ Height,Height
 "Height %1","Höhe %1"
 "Hide this shipping method in checkout","Diese Versandart im Checkout ausblenden"
 "If automatic retry is disabled, then all previously failed labels must be requested manually after revision of the shipment data. If enabled, label requests are repeatedly sent to the web service – even when shipment data was not yet corrected. This may seem more convenient but failing label requests can pile up drastically, increasing load for the automatic processing in general.","Ist die automatische Wiederholung deaktiviert, so müssen alle zuvor fehlgeschlagenen Versandetiketten nach Korrektur der Versanddaten manuell angefordert werden. Ist sie aktiviert, dann wird wiederholt versucht, Versandetiketten vom Webservice abzurufen – auch wenn noch keine Korrektur der Sendungsdaten vorgenommen wurde. Dies mag komfortabel erscheinen, kann die Anzahl der Versandetikettenanfragen und damit die Last der automatischen Verarbeitung aber drastisch erhöhen."
+"Include orders with the given status for automatic label retrieval.","Führen Sie die automatische Sendungserstellung für Bestellungen mit angegebenem Status durch."
 "Info (All API Activities)","Info (alle API-Aktivitäten)"
 "Item Details",Artikeldetails
 Length,Länge
 "Length %1","Länge %1"
 "Mail item category for international, non EU shipments.","Art der Sendung für internationale Sendungen außerhalb der EU"
 "No additional attributes found for order item %1.","Es wurden keine Zusatzattribute für Artikel %1 gefunden."
+"No orders found (automatic label retrieval is not enabled).","Keine Bestellungen gefunden (automatische Sendungserstellung ist nicht aktiviert)."
+"No orders found for automatic label retrieval with status %1 in stores %2 for carriers %3.","Keine Bestellungen für die automatische Sendungserstellung mit Status %1 in den Stores %2 für die Carrier %3 gefunden."
 "Order %1: %2","Bestellung %1: %2"""
+"Order Status","Bestell-Status"
 Other,Sonstiges
 "Package #%1 not found in shipment request.","Paket #%1 konnte nicht gefunden werden."
 "Package Details",Paket-Details

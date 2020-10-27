@@ -29,13 +29,17 @@ Height,Height
 "Height %1","Height %1"
 "Hide this shipping method in checkout","Hide this shipping method in checkout"
 "If automatic retry is disabled, then all previously failed labels must be requested manually after revision of the shipment data. If enabled, label requests are repeatedly sent to the web service – even when shipment data was not yet corrected. This may seem more convenient but failing label requests can pile up drastically, increasing load for the automatic processing in general.","If automatic retry is disabled, then all previously failed labels must be requested manually after revision of the shipment data. If enabled, label requests are repeatedly sent to the web service – even when shipment data was not yet corrected. This may seem more convenient but failing label requests can pile up drastically, increasing load for the automatic processing in general."
+"Include orders with the given status for automatic label retrieval.","Include orders with the given status for automatic label retrieval."
 "Info (All API Activities)","Info (All API Activities)"
 "Item Details","Item Details"
 Length,Length
 "Length %1","Length %1"
 "Mail item category for international, non EU shipments.","Mail item category for international, non EU shipments."
 "No additional attributes found for order item %1.","No additional attributes found for order item %1."
+"No orders found (automatic label retrieval is not enabled).","No orders found (automatic label retrieval is not enabled)."
+"No orders found for automatic label retrieval with status %1 in stores %2 for carriers %3.","No orders found for automatic label retrieval with status %1 in stores %2 for carriers %3."
 "Order %1: %2","Order %1: %2"
+"Order Status","Order Status"
 Other,Other
 "Package #%1 not found in shipment request.","Package #%1 not found in shipment request."
 "Package Details","Package Details"
