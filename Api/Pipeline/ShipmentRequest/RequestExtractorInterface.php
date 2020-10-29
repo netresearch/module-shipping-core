@@ -70,6 +70,13 @@ interface RequestExtractorInterface
     public function getShipper(): ShipperInterface;
 
     /**
+     * Extract return shipment receiver from shipment request.
+     *
+     * @return ShipperInterface
+     */
+    public function getReturnRecipient(): ShipperInterface;
+
+    /**
      * Extract recipient from shipment request.
      *
      * @return RecipientInterface

@@ -85,7 +85,6 @@ class RequestExtractor implements RequestExtractorInterface
     private $serviceOptionReader;
 
     /**
-<<<<<<< HEAD
      * @var ServiceOptionReaderInterfaceFactory
      */
     private $serviceOptionReaderFactory;
@@ -213,6 +212,11 @@ class RequestExtractor implements RequestExtractorInterface
         }
 
         return $this->shipper;
+    }
+
+    public function getReturnRecipient(): ShipperInterface
+    {
+        return $this->getShipper();
     }
 
     public function getRecipient(): RecipientInterface
