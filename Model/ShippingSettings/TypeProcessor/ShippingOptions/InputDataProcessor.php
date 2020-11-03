@@ -103,10 +103,13 @@ class InputDataProcessor implements ShippingOptionsProcessorInterface
                     $itemTotalWeight = $this->itemAttributeReader->getTotalWeight($shipment);
                     $packagingWeight = $defaultPackage ? $defaultPackage->getWeight() : 0;
                     $totalWeight = $itemTotalWeight + $packagingWeight;
+                    if (!empty($totalWeight)) {
+                        $input->setDefaultValue((string) $totalWeight);
+                    }
+
                     $comment = $this->commentFactory->create();
                     $comment->setContent($this->shippingConfig->getWeightUnit($shipment->getStoreId()));
                     $input->setComment($comment);
-                    $input->setDefaultValue((string) $totalWeight);
                     break;
 
                 case Codes::PACKAGING_INPUT_WEIGHT_UNIT:

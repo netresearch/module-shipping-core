@@ -158,10 +158,10 @@ class Converter implements ConverterInterface
 
         // Keep original behaviour to use the first attribute value
         // as the key in the result set, so we need to remove all other attributes.
-        // As the order of attributes may differ, we need to specify a black list
+        // As the order of attributes may differ, we need to specify a deny list
         // of attribute names.
-        $blackList = ['defaultConfigValue', 'available'];
-        $keys = array_diff_key($attributes, array_flip($blackList));
+        $denyList = ['defaultConfigValue', 'available'];
+        $keys = array_diff_key($attributes, array_flip($denyList));
         $firstKey = key($keys);
         $firstValue = $attributes[$firstKey];
 
