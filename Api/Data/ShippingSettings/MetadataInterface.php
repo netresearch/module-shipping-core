@@ -20,7 +20,14 @@ interface MetadataInterface
      *
      * @return string
      */
-    public function getImageUrl(): string;
+    public function getLogoUrl(): string;
+
+    /**
+     * Get the display width for the logo in the shipping options area.
+     *
+     * @return int
+     */
+    public function getLogoWidth(): int;
 
     /**
      * Get the title to display in the to display in the shipping options area.
@@ -58,11 +65,18 @@ interface MetadataInterface
     public function getFootnotes(): array;
 
     /**
-     * @param string $imageUrl
+     * @param string $logoUrl
      *
      * @return void
      */
-    public function setImageUrl(string $imageUrl): void;
+    public function setLogoUrl(string $logoUrl): void;
+
+    /**
+     * @param int $logoWidth
+     *
+     * @return void
+     */
+    public function setLogoWidth(int $logoWidth): void;
 
     /**
      * @param string $title

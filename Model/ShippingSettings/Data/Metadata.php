@@ -20,7 +20,12 @@ class Metadata implements MetadataInterface
     /**
      * @var string
      */
-    private $imageUrl = '';
+    private $logoUrl = '';
+
+    /**
+     * @var int
+     */
+    private $logoWidth = '';
 
     /**
      * @var string
@@ -42,9 +47,14 @@ class Metadata implements MetadataInterface
      */
     private $footnotes = [];
 
-    public function getImageUrl(): string
+    public function getLogoUrl(): string
     {
-        return $this->imageUrl;
+        return $this->logoUrl;
+    }
+
+    public function getLogoWidth(): int
+    {
+        return $this->logoWidth;
     }
 
     public function getTitle(): string
@@ -72,9 +82,14 @@ class Metadata implements MetadataInterface
         return $this->footnotes;
     }
 
-    public function setImageUrl(string $imageUrl): void
+    public function setLogoUrl(string $logoUrl): void
     {
-        $this->imageUrl = $imageUrl;
+        $this->logoUrl = $logoUrl;
+    }
+
+    public function setLogoWidth(int $logoWidth): void
+    {
+        $this->logoWidth = $logoWidth;
     }
 
     public function setTitle(string $title): void

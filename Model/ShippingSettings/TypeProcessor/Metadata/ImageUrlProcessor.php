@@ -48,12 +48,12 @@ class ImageUrlProcessor implements MetadataProcessorInterface
         string $postalCode,
         ShipmentInterface $shipment = null
     ): MetadataInterface {
-        $imageId = $metadata->getImageUrl();
+        $imageId = $metadata->getLogoUrl();
         if (!$imageId) {
             return $metadata;
         }
 
-        $metadata->setImageUrl($this->assetUrl->get($imageId));
+        $metadata->setLogoUrl($this->assetUrl->get($imageId));
         return $metadata;
     }
 }
