@@ -62,5 +62,37 @@
       "PRIMARY": true,
       "NRSHIPPING_ORDER_ITEM_ITEM_ID_SALES_ORDER_ITEM_ITEM_ID": true
     }
+  },
+  "quote": {
+    "column": {
+      "base_nrshipping_additional_fee": true,
+      "base_nrshipping_additional_fee_incl_tax": true,
+      "nrshipping_additional_fee": true,
+      "nrshipping_additional_fee_incl_tax": true
+    }
+  },
+  "sales_order": {
+    "column": {
+      "base_nrshipping_additional_fee": true,
+      "base_nrshipping_additional_fee_incl_tax": true,
+      "nrshipping_additional_fee": true,
+      "nrshipping_additional_fee_incl_tax": true
+    }
+  },
+  "sales_invoice": {
+    "column": {
+      "base_nrshipping_additional_fee": true,
+      "base_nrshipping_additional_fee_incl_tax": true,
+      "nrshipping_additional_fee": true,
+      "nrshipping_additional_fee_incl_tax": true
+    }
+  },
+  "sales_creditmemo": {
+    "column": {
+      "base_nrshipping_additional_fee": true,
+      "base_nrshipping_additional_fee_incl_tax": true,
+      "nrshipping_additional_fee": true,
+      "nrshipping_additional_fee_incl_tax": true
+    }
   }
 }

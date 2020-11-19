@@ -98,7 +98,7 @@ class OrderCollectionLoader
 
         $carrierFilters = [];
         foreach ($carrierCodes as $carrierCode) {
-            $carrierFilters[]= $this->filterBuilder
+            $carrierFilters[] = $this->filterBuilder
                 ->setField('main_table.shipping_method')
                 ->setValue("$carrierCode%")
                 ->setConditionType('like')

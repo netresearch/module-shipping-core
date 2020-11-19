@@ -1,5 +1,6 @@
 "A confirmation email will be sent to the customer when the shipment was successfully created.","Nach erfolgreicher Erstellung des Lieferscheins wird dem Kunden eine Versandbestätigung per E-Mail zugesandt."
 "Add Package","Paket hinzufügen"
+"Additional Fee",Zusatzkosten
 "Automatic label creation failed: %1","Die automatische Sendungserstellung ist fehlgeschlagen: %1"
 "Batch Processing",Massenverarbeitung
 "Cancel Labels","Versandaufträge stornieren"

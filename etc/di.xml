@@ -6,6 +6,7 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <!-- # service interface preferences -->
+    <preference for="Netresearch\ShippingCore\Api\AdditionalFee\TaxConfigInterface" type="Netresearch\ShippingCore\Model\Config\TaxConfig"/>
     <preference for="Netresearch\ShippingCore\Api\Config\ShippingConfigInterface" type="Netresearch\ShippingCore\Model\Config\ShippingConfig"/>
     <preference for="Netresearch\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface" type="Netresearch\ShippingCore\Model\LabelStatus\LabelStatusManagement"/>
     <preference for="Netresearch\ShippingCore\Api\Pipeline\CollectRatesPipelineInterface" type="Netresearch\ShippingCore\Model\Pipeline\Rate\CollectRatesPipeline"/>
@@ -193,6 +194,14 @@
             </argument>
         </arguments>
     </type>
+    <type name="Netresearch\ShippingCore\Model\AdditionalFee\Total">
+        <arguments>
+            <argument name="taxHelper" xsi:type="object">Magento\Tax\Helper\Data\Proxy</argument>
+            <argument name="taxCalculation" xsi:type="object">Magento\Tax\Api\TaxCalculationInterface\Proxy</argument>
+            <argument name="taxConfig" xsi:type="object">Netresearch\ShippingCore\Api\AdditionalFee\TaxConfigInterface\Proxy</argument>
+            <argument name="totalsManager" xsi:type="object">Netresearch\ShippingCore\Model\AdditionalFee\TotalsManager\Proxy</argument>
+        </arguments>
+    </type>
     <type name="Netresearch\ShippingCore\Model\LabelStatus\LabelStatusManagement">
         <arguments>
             <argument name="orderGrid" xsi:type="object">Magento\Sales\Model\ResourceModel\Order\Grid</argument>
@@ -288,8 +297,17 @@
     <type name="Magento\Eav\Model\Entity\Attribute\Backend\AbstractBackend">
         <plugin name="validateHsCodeAttribute" type="Netresearch\ShippingCore\Plugin\Eav\Attribute\Backend\ValidateHsCodeAttribute"/>
     </type>
+    <type name="Magento\Quote\Api\CartTotalRepositoryInterface">
+        <plugin name="updateAdditionalFeeTotalsSegment" type="Netresearch\ShippingCore\Plugin\AdditionalFee\Quote\AddTotalSegmentExtensionAttributes"/>
+    </type>
     <type name="Magento\Quote\Model\Quote\Item\ToOrderItem">
         <plugin name="addOrderItemExtensionAttributes" type="Netresearch\ShippingCore\Plugin\Quote\Item\AttributesToOrderItem"/>
+    </type>
+    <type name="Magento\Sales\Api\CreditmemoRepositoryInterface">
+        <plugin name="addTotalsAsExtensionAttributes" type="Netresearch\ShippingCore\Plugin\AdditionalFee\Creditmemo\AddTotalsAsExtensionAttributes"/>
+    </type>
+    <type name="Magento\Sales\Api\InvoiceRepositoryInterface">
+        <plugin name="addTotalsAsExtensionAttributes" type="Netresearch\ShippingCore\Plugin\AdditionalFee\Invoice\AddTotalsAsExtensionAttributes"/>
     </type>
     <type name="Magento\Sales\Api\OrderAddressRepositoryInterface">
         <plugin name="addSplitAddressAsExtensionAttributes" type="Netresearch\ShippingCore\Plugin\Order\AddRecipientStreetToAddress"/>
@@ -297,7 +315,16 @@
     <type name="Magento\Sales\Api\OrderItemRepositoryInterface">
         <plugin name="persistOrderItemExtensionAttributes" type="Netresearch\ShippingCore\Plugin\Order\PersistOrderItemAttributes"/>
     </type>
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="addTotalsAsExtensionAttributes" type="Netresearch\ShippingCore\Plugin\AdditionalFee\Order\AddTotalsAsExtensionAttributes"/>
+    </type>
     <type name="Magento\Sales\Model\ResourceModel\Order\Address\Collection">
         <plugin name="addSplitAddressAsExtensionAttributes" type="Netresearch\ShippingCore\Plugin\Order\AddRecipientStreetToAddressCollection"/>
+    </type>
+    <type name="Magento\Tax\Helper\Data">
+        <plugin name="addAdditionalFeeTax" type="Netresearch\ShippingCore\Plugin\AdditionalFee\Tax\AddFeeTaxAmounts"/>
+    </type>
+    <type name="Magento\Tax\Model\Calculation\AbstractCalculator">
+        <plugin name="fixAdditionalFeeTax" type="Netresearch\ShippingCore\Plugin\AdditionalFee\Tax\FixTaxItemDetailAmounts"/>
     </type>
 </config>

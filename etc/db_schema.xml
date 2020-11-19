@@ -45,6 +45,7 @@
         </constraint>
         <constraint xsi:type="foreign" referenceId="NRSHIPPING_ORDER_ADDR_SHPP_OPT_SELECTION_PARENT_ID_SALES_ORDER_ADDRESS_ENTT_ID" table="nrshipping_order_address_shipping_option_selection" column="parent_id" referenceTable="sales_order_address" referenceColumn="entity_id" onDelete="CASCADE"/>
     </table>
+
     <table name="nrshipping_order_item" resource="sales" engine="innodb" comment="Order Item Data Snapshot">
         <column xsi:type="int" name="item_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Order Item ID"/>
         <column xsi:type="varchar" name="hs_code" nullable="true" length="10" comment="HS Code"/>
@@ -54,5 +55,30 @@
             <column name="item_id"/>
         </constraint>
         <constraint xsi:type="foreign" referenceId="NRSHIPPING_ORDER_ITEM_ITEM_ID_SALES_ORDER_ITEM_ITEM_ID" table="nrshipping_order_item" column="item_id" referenceTable="sales_order_item" referenceColumn="item_id" onDelete="CASCADE"/>
+    </table>
+
+    <table name="quote">
+        <column xsi:type="decimal" name="base_nrshipping_additional_fee" scale="4" precision="12" unsigned="false" nullable="true" comment="Shipping Additional Base Fee"/>
+        <column xsi:type="decimal" name="base_nrshipping_additional_fee_incl_tax" scale="4" precision="12" unsigned="false" nullable="true" comment="Shipping Additional Base Fee (Incl. Tax)"/>
+        <column xsi:type="decimal" name="nrshipping_additional_fee" scale="4" precision="12" unsigned="false" nullable="true" comment="Shipping Additional Fee"/>
+        <column xsi:type="decimal" name="nrshipping_additional_fee_incl_tax" scale="4" precision="12" unsigned="false" nullable="true" comment="Shipping Additional Fee (Incl. Tax)"/>
+    </table>
+    <table name="sales_order">
+        <column xsi:type="decimal" name="base_nrshipping_additional_fee" scale="4" precision="12" unsigned="false" nullable="true" comment="Shipping Additional Base Fee"/>
+        <column xsi:type="decimal" name="base_nrshipping_additional_fee_incl_tax" scale="4" precision="12" unsigned="false" nullable="true" comment="Shipping Additional Base Fee (Incl. Tax)"/>
+        <column xsi:type="decimal" name="nrshipping_additional_fee" scale="4" precision="12" unsigned="false" nullable="true" comment="Shipping Additional Fee"/>
+        <column xsi:type="decimal" name="nrshipping_additional_fee_incl_tax" scale="4" precision="12" unsigned="false" nullable="true" comment="Shipping Additional Fee (Incl. Tax)"/>
+    </table>
+    <table name="sales_invoice">
+        <column xsi:type="decimal" name="base_nrshipping_additional_fee" scale="4" precision="12" unsigned="false" nullable="true" comment="Shipping Additional Base Fee"/>
+        <column xsi:type="decimal" name="base_nrshipping_additional_fee_incl_tax" scale="4" precision="12" unsigned="false" nullable="true" comment="Shipping Additional Base Fee (Incl. Tax)"/>
+        <column xsi:type="decimal" name="nrshipping_additional_fee" scale="4" precision="12" unsigned="false" nullable="true" comment="Shipping Additional Fee"/>
+        <column xsi:type="decimal" name="nrshipping_additional_fee_incl_tax" scale="4" precision="12" unsigned="false" nullable="true" comment="Shipping Additional Fee (Incl. Tax)"/>
+    </table>
+    <table name="sales_creditmemo">
+        <column xsi:type="decimal" name="base_nrshipping_additional_fee" scale="4" precision="12" unsigned="false" nullable="true" comment="Shipping Additional Base Fee"/>
+        <column xsi:type="decimal" name="base_nrshipping_additional_fee_incl_tax" scale="4" precision="12" unsigned="false" nullable="true" comment="Shipping Additional Base Fee (Incl. Tax)"/>
+        <column xsi:type="decimal" name="nrshipping_additional_fee" scale="4" precision="12" unsigned="false" nullable="true" comment="Shipping Additional Fee"/>
+        <column xsi:type="decimal" name="nrshipping_additional_fee_incl_tax" scale="4" precision="12" unsigned="false" nullable="true" comment="Shipping Additional Fee (Incl. Tax)"/>
     </table>
 </schema>
