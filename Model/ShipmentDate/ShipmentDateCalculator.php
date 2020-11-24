@@ -25,41 +25,48 @@ class ShipmentDateCalculator implements ShipmentDateCalculatorInterface
     private $dayValidators;
 
     /**
-     * ShipmentDate constructor.
+     * ShipmentDateCalculator constructor.
      *
      * @param TimezoneInterface $timezone
-     * @param DayValidatorInterface[] $dayValidators A list of validators used to check if the current
-     *                                               date can be uses as the shipping date.
+     * @param DayValidatorInterface[] $dayValidators Validators used to check if a date can be used as shipping date.
      */
-    public function __construct(
-        TimezoneInterface $timezone,
-        array $dayValidators = []
-    ) {
+    public function __construct(TimezoneInterface $timezone, array $dayValidators = [])
+    {
         $this->timezone = $timezone;
         $this->dayValidators = $dayValidators;
     }
 
-    public function getDate(array $dates, $store = null): \DateTime
+    public function getDate(array $dropOffTimes, $store = null): \DateTimeInterface
     {
-        usort($dates, function (\DateTime $a, \DateTime $b) {
+        usort($dropOffTimes, function (\DateTimeInterface $a, \DateTimeInterface $b) {
             return $a->getTimestamp() > $b->getTimestamp();
         });
 
-        $currentTime =  $this->timezone->scopeDate($store, null, true);
-        foreach ($dates as $shipmentTime) {
-            if ($currentTime > $shipmentTime) {
-                continue;
-            }
+        $currentTime = $this->timezone->scopeDate($store, null, true);
 
-            // Apply all validators to the current date/time
-            foreach ($this->dayValidators as $dayValidator) {
-                // All validators have to agree that a date is valid before it can be used
-                if (!$dayValidator->validate($shipmentTime, $store)) {
+        // check three weeks ahead for a match
+        for ($week = 0; $week < 3; $week++) {
+            /** @var \DateTime|\DateTimeImmutable $shipmentTime */
+            foreach ($dropOffTimes as $shipmentTime) {
+                if ($currentTime > $shipmentTime) {
                     continue;
                 }
-            }
 
-            return $shipmentTime;
+                if ($week > 0) {
+                    $shipmentTime = $shipmentTime->modify(("+$week weeks"));
+                }
+
+                $isValid = true;
+                // Apply all validators to the current date/time
+                foreach ($this->dayValidators as $dayValidator) {
+                    // All validators have to agree that a date is valid before it can be used
+                    $isValid = $isValid && $dayValidator->validate($shipmentTime, $store);
+                }
+
+                if ($isValid) {
+                    return $shipmentTime;
+                }
+            }
         }
 
         throw new \RuntimeException('No applicable shipment date found.');

@@ -353,11 +353,6 @@ class RequestExtractor implements RequestExtractorInterface
         return $items;
     }
 
-    public function getShipmentDate(): \DateTime
-    {
-        return $this->timezone->scopeDate($this->getStoreId());
-    }
-
     public function isCashOnDelivery(): bool
     {
         return $this->getServiceOptionReader()->isServiceEnabled(Codes::SERVICE_OPTION_CASH_ON_DELIVERY);

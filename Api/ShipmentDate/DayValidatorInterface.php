@@ -16,10 +16,10 @@ interface DayValidatorInterface
     /**
      * Returns TRUE if the given date is valid for this validator or FALSE otherwise.
      *
-     * @param \DateTime $dateTime The date/time object to check
+     * @param \DateTimeInterface $dateTime The date/time object to check
      * @param mixed $store The store to use for validation
      *
      * @return bool
      */
-    public function validate(\DateTime $dateTime, $store = null): bool;
+    public function validate(\DateTimeInterface $dateTime, $store = null): bool;
 }

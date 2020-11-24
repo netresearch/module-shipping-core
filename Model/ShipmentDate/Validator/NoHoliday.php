@@ -47,12 +47,12 @@ class NoHoliday implements DayValidatorInterface
     /**
      * Returns TRUE if the date is NOT a holiday otherwise FALSE.
      *
-     * @param \DateTime $dateTime The date/time object to check
+     * @param \DateTimeInterface $dateTime The date/time object to check
      * @param mixed $store The store to use for validation
      *
      * @return bool
      */
-    public function validate(\DateTime $dateTime, $store = null): bool
+    public function validate(\DateTimeInterface $dateTime, $store = null): bool
     {
         try {
             return !$this->holidayCalculator->isHoliday(
