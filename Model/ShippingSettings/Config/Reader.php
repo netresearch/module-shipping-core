@@ -15,13 +15,20 @@ use Magento\Framework\Config\FileResolverInterface;
 use Magento\Framework\Config\Reader\Filesystem;
 use Magento\Framework\Config\SchemaLocatorInterface;
 use Magento\Framework\Config\ValidationStateInterface;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Serialize\SerializerInterface;
+use Magento\Store\Model\StoreManagerInterface;
 use Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 use Psr\Log\LoggerInterface;
 
 class Reader extends Filesystem
 {
     private const CACHE_KEY_SHIPPING_OPTIONS_CONFIG = 'nrshipping_option_config';
+
+    /**
+     * @var StoreManagerInterface
+     */
+    private $storeManager;
 
     /**
      * @var CacheInterface
@@ -43,6 +50,7 @@ class Reader extends Filesystem
         ConverterInterface $converter,
         SchemaLocatorInterface $schemaLocator,
         ValidationStateInterface $validationState,
+        StoreManagerInterface $storeManager,
         CacheInterface $cache,
         SerializerInterface $serializer,
         LoggerInterface $logger,
@@ -51,6 +59,7 @@ class Reader extends Filesystem
         string $domDocumentClass = Dom::class,
         string $defaultScope = 'global'
     ) {
+        $this->storeManager = $storeManager;
         $this->cache = $cache;
         $this->serializer = $serializer;
         $this->logger = $logger;
@@ -67,6 +76,17 @@ class Reader extends Filesystem
         );
     }
 
+    private function getCacheKey($scope = null): string
+    {
+        try {
+            $storeId = $this->storeManager->getStore()->getId();
+        } catch (NoSuchEntityException $exception) {
+            $storeId = 0;
+        }
+
+        return sprintf('%s_%s_%s', self::CACHE_KEY_SHIPPING_OPTIONS_CONFIG, $scope, $storeId);
+    }
+
     /**
      * Do base configuration post processing and cache the result. Load from cache on successive requests.
      *
@@ -77,7 +97,8 @@ class Reader extends Filesystem
      */
     public function read($scope = null): array
     {
-        $data = $this->cache->load(self::CACHE_KEY_SHIPPING_OPTIONS_CONFIG . $scope);
+        $cacheKey = $this->getCacheKey($scope);
+        $data = $this->cache->load($cacheKey);
 
         if ($data) {
             try {
@@ -92,7 +113,7 @@ class Reader extends Filesystem
         $data = $this->applyBaseConfiguration($data);
         $this->cache->save(
             $this->serializer->serialize($data),
-            self::CACHE_KEY_SHIPPING_OPTIONS_CONFIG . $scope,
+            $cacheKey,
             [\Magento\Framework\App\Config::CACHE_TAG]
         );
 
