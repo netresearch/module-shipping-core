@@ -15,10 +15,9 @@ use Magento\Catalog\Model\ResourceModel\Product\Collection;
 use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 use Magento\Eav\Setup\EavSetup;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
-use Magento\Framework\Setup\Patch\PatchVersionInterface;
 use Netresearch\ShippingCore\Setup\Module\DataInstaller;
 
-class MigrateProductAttributesPatch implements DataPatchInterface, PatchVersionInterface
+class MigrateProductAttributesPatch implements DataPatchInterface
 {
     /**
      * @var EavSetup
@@ -75,10 +74,5 @@ class MigrateProductAttributesPatch implements DataPatchInterface, PatchVersionI
             $product->addData([DataInstaller::ATTRIBUTE_CODE_HS_CODE => $product->getData('dhlgw_tariff_number')]);
             $this->productResource->saveAttribute($product, DataInstaller::ATTRIBUTE_CODE_HS_CODE);
         }
-    }
-
-    public static function getVersion(): string
-    {
-        return '0.1.0';
     }
 }

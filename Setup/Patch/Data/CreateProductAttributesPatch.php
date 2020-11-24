@@ -13,11 +13,10 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Framework\Setup\Patch\PatchRevertableInterface;
-use Magento\Framework\Setup\Patch\PatchVersionInterface;
 use Netresearch\ShippingCore\Setup\Module\DataInstaller;
 use Netresearch\ShippingCore\Setup\Module\Uninstaller;
 
-class CreateProductAttributesPatch implements PatchRevertableInterface, DataPatchInterface, PatchVersionInterface
+class CreateProductAttributesPatch implements PatchRevertableInterface, DataPatchInterface
 {
     /**
      * @var ModuleDataSetupInterface
@@ -64,10 +63,5 @@ class CreateProductAttributesPatch implements PatchRevertableInterface, DataPatc
     {
         $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
         Uninstaller::deleteAttributes($eavSetup);
-    }
-
-    public static function getVersion(): string
-    {
-        return '0.1.0';
     }
 }
