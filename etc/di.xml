@@ -30,6 +30,7 @@
     <preference for="Netresearch\ShippingCore\Api\SplitAddress\RecipientStreetLoaderInterface" type="Netresearch\ShippingCore\Model\SplitAddress\RecipientStreetLoader"/>
     <preference for="Netresearch\ShippingCore\Api\SplitAddress\RecipientStreetRepositoryInterface" type="Netresearch\ShippingCore\Model\SplitAddress\RecipientStreetRepository"/>
     <preference for="Netresearch\ShippingCore\Api\Util\AssetUrlInterface" type="Netresearch\ShippingCore\Model\Util\AssetUrl"/>
+    <preference for="Netresearch\ShippingCore\Api\Util\DeliveryAreaInterface" type="Netresearch\ShippingCore\Model\Util\DeliveryArea"/>
     <preference for="Netresearch\ShippingCore\Api\Util\ItemAttributeReaderInterface" type="Netresearch\ShippingCore\Model\ItemAttribute\ItemAttributeReader"/>
     <preference for="Netresearch\ShippingCore\Api\Util\UnitConverterInterface" type="Netresearch\ShippingCore\Model\Util\UnitConverter"/>
     <!-- # data interface preferences -->
