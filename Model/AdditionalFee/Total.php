@@ -110,16 +110,23 @@ class Total extends Address\Total\AbstractTotal
             return $this;
         }
 
-        if ($shippingAssignment->getShipping()->getAddress()->getAddressType() !== Address::ADDRESS_TYPE_SHIPPING) {
+        /** @var Address $shippingAddress */
+        $shippingAddress = $shippingAssignment->getShipping()->getAddress();
+        if ($shippingAddress->getAddressType() !== Address::ADDRESS_TYPE_SHIPPING) {
             // only collect total for shipping address to avoid glitches with gift-card-account module
             return $this;
         }
 
         $baseFee = $this->additionalFeeManagement->getTotalAmount($quote);
         if (abs($baseFee) > 0) {
-            $taxClass = $this->taxHelper->getShippingTaxClass($quote->getStoreId());
+            if ($shippingAddress->getBaseShippingAmount() + $baseFee < 0) {
+                // make sure that shipping amount never drops below zero
+                $baseFee = 0 - $shippingAddress->getBaseShippingAmount();
+            }
 
+            $taxClass = $this->taxHelper->getShippingTaxClass($quote->getStoreId());
             $taxRate = $this->taxCalculation->getCalculatedRate($taxClass);
+
             if ($this->taxConfig->isShippingPriceInclTax($quote->getStoreId())) {
                 // price includes tax, deduct tax from total
                 $baseFeeInclTax = $baseFee;
@@ -180,6 +187,11 @@ class Total extends Address\Total\AbstractTotal
         }
 
         $baseFee = $this->additionalFeeManagement->getTotalAmount($quote);
+        if ($shippingAddress->getBaseShippingAmount() + $baseFee < 0) {
+            // make sure that shipping amount never drops below zero
+            $baseFee = 0 - $shippingAddress->getBaseShippingAmount();
+        }
+
         try {
             $fee = $this->unitConverter->convertMonetaryValue(
                 $baseFee,
