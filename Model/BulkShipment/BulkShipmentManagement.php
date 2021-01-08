@@ -66,6 +66,11 @@ class BulkShipmentManagement
      */
     private $requestFactory;
 
+    /**
+     * @var ShipmentNotification
+     */
+    private $shipmentNotification;
+
     public function __construct(
         BatchProcessingConfig $batchConfig,
         BulkShipmentConfiguration $serviceConfig,
@@ -75,7 +80,8 @@ class BulkShipmentManagement
         ShipOrderInterface $shipOrder,
         CancelRequestBuilder $cancelRequestBuilder,
         LoggerInterface $logger,
-        RequestFactory $requestFactory
+        RequestFactory $requestFactory,
+        ShipmentNotification $shipmentNotification
     ) {
         $this->batchConfig = $batchConfig;
         $this->serviceConfig = $serviceConfig;
@@ -86,6 +92,7 @@ class BulkShipmentManagement
         $this->cancelRequestBuilder = $cancelRequestBuilder;
         $this->logger = $logger;
         $this->requestFactory = $requestFactory;
+        $this->shipmentNotification = $shipmentNotification;
     }
 
     /**
@@ -114,7 +121,6 @@ class BulkShipmentManagement
 
         /** @var Order $order */
         foreach ($orders as $order) {
-            $notify = $this->batchConfig->isNotificationEnabled($order->getStoreId());
             $shipmentsCollection = $order->getShipmentsCollection()
                 ->addFieldToFilter(ShipmentInterface::SHIPPING_LABEL, ['null' => true]);
 
@@ -127,7 +133,7 @@ class BulkShipmentManagement
 
             if ($order->canShip()) {
                 try {
-                    $shipmentId = $this->shipOrder->execute($order->getId(), [], $notify);
+                    $shipmentId = $this->shipOrder->execute($order->getId());
                     $shipmentIds[] = $shipmentId;
                 } catch (\Exception $exception) {
                     $this->logger->error($exception->getMessage(), ['exception' => $exception]);
@@ -146,7 +152,7 @@ class BulkShipmentManagement
      * @param int[] $shipmentIds
      * @return ShipmentResponseInterface[]
      */
-    public function createLabels(array $shipmentIds)
+    public function createLabels(array $shipmentIds): array
     {
         /** @var \Magento\Sales\Model\ResourceModel\Order\Shipment\Collection $shipmentCollection */
         $shipmentCollection = $this->shipmentCollectionLoader->load($shipmentIds);
@@ -190,6 +196,9 @@ class BulkShipmentManagement
             // convert results per carrier to flat response
             $carrierResults = array_reduce($carrierResults, 'array_merge', []);
         }
+
+        // notify receivers after tracking details were persisted
+        $this->shipmentNotification->send($carrierResults);
 
         return $carrierResults;
     }

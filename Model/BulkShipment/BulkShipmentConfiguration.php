@@ -48,7 +48,7 @@ class BulkShipmentConfiguration
             }
         }
 
-        throw new \RuntimeException('No configuration found for given carrier code.');
+        throw new \RuntimeException("Bulk shipment configuration for carrier $carrierCode is not available.");
     }
 
     /**

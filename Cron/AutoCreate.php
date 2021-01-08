@@ -66,7 +66,7 @@ class AutoCreate
         $fnFilter = function (string $carrierCode) {
             try {
                 return $this->bulkConfig->getBulkShipmentService($carrierCode);
-            } catch (LocalizedException $exception) {
+            } catch (\RuntimeException $exception) {
                 return false;
             }
         };
