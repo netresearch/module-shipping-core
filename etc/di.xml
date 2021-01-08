@@ -336,33 +336,36 @@
         <plugin name="nrShippingValidateExportDescriptionAttribute" type="Netresearch\ShippingCore\Plugin\Eav\Attribute\Backend\ValidateExportDescriptionAttribute"/>
     </type>
     <type name="Magento\Quote\Api\CartTotalRepositoryInterface">
-        <plugin name="updateAdditionalFeeTotalsSegment" type="Netresearch\ShippingCore\Plugin\AdditionalFee\Quote\AddTotalSegmentExtensionAttributes"/>
+        <plugin name="nrShippingUpdateAdditionalFeeTotalsSegment" type="Netresearch\ShippingCore\Plugin\AdditionalFee\Quote\AddTotalSegmentExtensionAttributes"/>
     </type>
     <type name="Magento\Quote\Model\Quote\Item\ToOrderItem">
-        <plugin name="addOrderItemExtensionAttributes" type="Netresearch\ShippingCore\Plugin\Quote\Item\AttributesToOrderItem"/>
+        <plugin name="nrShippingAddOrderItemExtensionAttributes" type="Netresearch\ShippingCore\Plugin\Quote\Item\AttributesToOrderItem"/>
     </type>
     <type name="Magento\Sales\Api\CreditmemoRepositoryInterface">
-        <plugin name="addTotalsAsExtensionAttributes" type="Netresearch\ShippingCore\Plugin\AdditionalFee\Creditmemo\AddTotalsAsExtensionAttributes"/>
+        <plugin name="nrShippingAddTotalsAsExtensionAttributes" type="Netresearch\ShippingCore\Plugin\AdditionalFee\Creditmemo\AddTotalsAsExtensionAttributes"/>
     </type>
     <type name="Magento\Sales\Api\InvoiceRepositoryInterface">
-        <plugin name="addTotalsAsExtensionAttributes" type="Netresearch\ShippingCore\Plugin\AdditionalFee\Invoice\AddTotalsAsExtensionAttributes"/>
+        <plugin name="nrShippingAddTotalsAsExtensionAttributes" type="Netresearch\ShippingCore\Plugin\AdditionalFee\Invoice\AddTotalsAsExtensionAttributes"/>
     </type>
     <type name="Magento\Sales\Api\OrderAddressRepositoryInterface">
-        <plugin name="addSplitAddressAsExtensionAttributes" type="Netresearch\ShippingCore\Plugin\Order\AddRecipientStreetToAddress"/>
+        <plugin name="nrShippingAddSplitAddressAsExtensionAttributes" type="Netresearch\ShippingCore\Plugin\Order\AddRecipientStreetToAddress"/>
     </type>
     <type name="Magento\Sales\Api\OrderItemRepositoryInterface">
-        <plugin name="persistOrderItemExtensionAttributes" type="Netresearch\ShippingCore\Plugin\Order\PersistOrderItemAttributes"/>
+        <plugin name="nrShippingPersistOrderItemExtensionAttributes" type="Netresearch\ShippingCore\Plugin\Order\PersistOrderItemAttributes"/>
     </type>
     <type name="Magento\Sales\Api\OrderRepositoryInterface">
-        <plugin name="addTotalsAsExtensionAttributes" type="Netresearch\ShippingCore\Plugin\AdditionalFee\Order\AddTotalsAsExtensionAttributes"/>
+        <plugin name="nrShippingAddTotalsAsExtensionAttributes" type="Netresearch\ShippingCore\Plugin\AdditionalFee\Order\AddTotalsAsExtensionAttributes"/>
     </type>
     <type name="Magento\Sales\Model\ResourceModel\Order\Address\Collection">
-        <plugin name="addSplitAddressAsExtensionAttributes" type="Netresearch\ShippingCore\Plugin\Order\AddRecipientStreetToAddressCollection"/>
+        <plugin name="nrShippingAddSplitAddressAsExtensionAttributes" type="Netresearch\ShippingCore\Plugin\Order\AddRecipientStreetToAddressCollection"/>
+    </type>
+    <type name="Magento\Sales\Model\ResourceModel\Order\Item\Collection">
+        <plugin name="nrShippingFixAmbiguousFilterField" type="Netresearch\ShippingCore\Plugin\Order\AddItemIdFilterMapping"/>
     </type>
     <type name="Magento\Tax\Helper\Data">
-        <plugin name="addAdditionalFeeTax" type="Netresearch\ShippingCore\Plugin\AdditionalFee\Tax\AddFeeTaxAmounts"/>
+        <plugin name="nrShippingAddAdditionalFeeTax" type="Netresearch\ShippingCore\Plugin\AdditionalFee\Tax\AddFeeTaxAmounts"/>
     </type>
     <type name="Magento\Tax\Model\Calculation\AbstractCalculator">
-        <plugin name="fixAdditionalFeeTax" type="Netresearch\ShippingCore\Plugin\AdditionalFee\Tax\FixTaxItemDetailAmounts"/>
+        <plugin name="nrShippingFixAdditionalFeeTax" type="Netresearch\ShippingCore\Plugin\AdditionalFee\Tax\FixTaxItemDetailAmounts"/>
     </type>
 </config>

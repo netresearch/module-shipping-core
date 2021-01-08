@@ -1,10 +1,12 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
-namespace Dhl\ShippingCore\Test\Integration\Model\ShipmentDate;
+namespace Netresearch\ShippingCore\Test\Integration\Model\ShipmentDate;
 
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Sales\Model\Order;
