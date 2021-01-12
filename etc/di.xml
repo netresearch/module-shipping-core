@@ -88,6 +88,18 @@
             </argument>
         </arguments>
     </virtualType>
+    <virtualType name="Netresearch\ShippingCore\Model\BulkShipment\CollectionProcessor\Virtual" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="joins" xsi:type="object">Netresearch\ShippingCore\Model\LabelStatus\LabelStatusJoinProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Netresearch\ShippingCore\Model\BulkShipment\OrderRepository\Virtual" type="Magento\Sales\Model\OrderRepository">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">Netresearch\ShippingCore\Model\BulkShipment\CollectionProcessor\Virtual</argument>
+        </arguments>
+    </virtualType>
     <virtualType name="Netresearch\ShippingCore\Model\Pipeline\BulkShipment\CreateLabelResponseProcessor\Virtual" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentResponseProcessor">
         <arguments>
             <argument name="processors" xsi:type="array">
@@ -193,6 +205,16 @@
             <argument name="tableIterators" xsi:type="array">
                 <item name="nrshippingSalesTableNameIterator" xsi:type="object">Netresearch\ShippingCore\SalesTableNameIterator\Virtual</item>
             </argument>
+        </arguments>
+    </type>
+    <type name="Netresearch\ShippingCore\Cron\AutoCreate\OrderCollectionLoader">
+        <arguments>
+            <argument name="orderRepository" xsi:type="object">Netresearch\ShippingCore\Model\BulkShipment\OrderRepository\Virtual</argument>
+        </arguments>
+    </type>
+    <type name="Netresearch\ShippingCore\Model\BulkShipment\OrderCollectionLoader">
+        <arguments>
+            <argument name="orderRepository" xsi:type="object">Netresearch\ShippingCore\Model\BulkShipment\OrderRepository\Virtual</argument>
         </arguments>
     </type>
     <type name="Netresearch\ShippingCore\Model\AdditionalFee\Total">
