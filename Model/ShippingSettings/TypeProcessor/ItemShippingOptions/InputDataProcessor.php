@@ -112,6 +112,10 @@ class InputDataProcessor implements ItemShippingOptionsProcessorInterface
                     $input->setDefaultValue((string) $shipmentItem->getProductId());
                     break;
 
+                case Codes::ITEM_INPUT_SKU:
+                    $input->setDefaultValue((string) $shipmentItem->getSku());
+                    break;
+
                 case Codes::ITEM_INPUT_PRODUCT_NAME:
                     $input->setDefaultValue((string) $shipmentItem->getName());
                     break;

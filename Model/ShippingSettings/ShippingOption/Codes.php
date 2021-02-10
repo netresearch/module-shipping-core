@@ -21,6 +21,7 @@ class Codes
     // item details
     public const ITEM_OPTION_DETAILS = 'itemDetails';
     public const ITEM_INPUT_PRODUCT_ID = 'productId';
+    public const ITEM_INPUT_SKU = 'sku';
     public const ITEM_INPUT_PRODUCT_NAME = 'productName';
     public const ITEM_INPUT_PRICE = 'price';
     public const ITEM_INPUT_QTY = 'qty';

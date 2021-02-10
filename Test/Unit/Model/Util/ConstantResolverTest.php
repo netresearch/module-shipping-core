@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Netresearch\ShippingCore\Test\Unit\Model\ShippingOption\Config;
+namespace Netresearch\ShippingCore\Test\Unit\Model\Util;
 
 use Netresearch\ShippingCore\Model\Util\ConstantResolver;
 use PHPUnit\Framework\TestCase;
@@ -16,13 +16,13 @@ class ConstantResolverTest extends TestCase
     const TEST_CONST = 'test123';
 
     private $positiveTestLines = [
-        '\Netresearch\ShippingCore\Test\Unit\Model\ShippingOption\Config\ConstantResolverTest::TEST_CONST',
-        'Netresearch\ShippingCore\Test\Unit\Model\ShippingOption\Config\ConstantResolverTest::TEST_CONST',
+        '\Netresearch\ShippingCore\Test\Unit\Model\Util\ConstantResolverTest::TEST_CONST',
+        'Netresearch\ShippingCore\Test\Unit\Model\Util\ConstantResolverTest::TEST_CONST',
     ];
     private $negativeTestLines = [
-        '----Netresearch\ShippingCore\Test\Unit\Model\ShippingOption\Config\ConstantResolverTest::TEST_CONST',
-        'Netresearch\ShippingCore\Test\Unit\Model\ShippingOption\Config\ConstantResolverTest::TEST-CONST',
-        'Netresearch\ShippingCore\Test\Unit\Model\ShippingOption\Config\ConstantResolverTest::TEST_CONST-',
+        '----Netresearch\ShippingCore\Test\Unit\Model\Util\ConstantResolverTest::TEST_CONST',
+        'Netresearch\ShippingCore\Test\Unit\Model\Util\ConstantResolverTest::TEST-CONST',
+        'Netresearch\ShippingCore\Test\Unit\Model\Util\ConstantResolverTest::TEST_CONST-',
         'CODE_PARCEL_ANNOUNCEMENT',
         'My:test',
         'this\is\a\test',
@@ -31,14 +31,14 @@ class ConstantResolverTest extends TestCase
     ];
 
     private $brokenTestLines = [
-        'Netresearch\ShippingCore\Test\Unit\Model\ShippingOption\Config\ConverterTest::NONEXISTANT_CONSTANT',
+        'Netresearch\ShippingCore\Test\Unit\Model\Util\ConverterTest::NONEXISTANT_CONSTANT',
         'Netresearch\Nonexistant\Class::CODE-PARCEL-ANNOUNCEMENT',
     ];
 
     private $combinedTestLines = [
-        'Netresearch\ShippingCore\Test\Unit\Model\ShippingOption\Config\ConstantResolverTest::TEST_CONST.enabled',
-        'Netresearch\ShippingCore\Test\Unit\Model\ShippingOption\Config\ConstantResolverTest::TEST_CONST.2cool4school',
-        'Netresearch\ShippingCore\Test\Unit\Model\ShippingOption\Config\ConstantResolverTest::TEST_CONST.Netresearch\ShippingCore\Test\Unit\Model\ShippingOption\Config\ConstantResolverTest::TEST_CONST',
+        'Netresearch\ShippingCore\Test\Unit\Model\Util\ConstantResolverTest::TEST_CONST.enabled',
+        'Netresearch\ShippingCore\Test\Unit\Model\Util\ConstantResolverTest::TEST_CONST.2cool4school',
+        'Netresearch\ShippingCore\Test\Unit\Model\Util\ConstantResolverTest::TEST_CONST.Netresearch\ShippingCore\Test\Unit\Model\Util\ConstantResolverTest::TEST_CONST',
     ];
 
     public function testResolve()

@@ -113,4 +113,29 @@ class ShipmentItemAttributeReader
         $items = $this->itemFilter->getShippableItems($shipment->getAllItems());
         return (float) array_reduce($items, $fnAdd, 0);
     }
+
+    /**
+     * Obtain all items' export description.
+     *
+     * @param ShipmentInterface|Shipment $shipment
+     * @return string[]
+     */
+    public function getPackageExportDescriptions(ShipmentInterface $shipment): array
+    {
+        $fnCollect = function (Item $shipmentItem) {
+            $itemExportDescription = $this->getExportDescription($shipmentItem);
+            if ($itemExportDescription) {
+                return $itemExportDescription;
+            }
+
+            if ($shipmentItem->getDescription()) {
+                return $shipmentItem->getDescription();
+            }
+
+            return $shipmentItem->getName();
+        };
+
+        $items = $this->itemFilter->getShippableItems($shipment->getAllItems());
+        return array_map($fnCollect, $items);
+    }
 }

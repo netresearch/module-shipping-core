@@ -229,6 +229,7 @@ class RequestModifier implements RequestModifierInterface
                 'name' => $packagingOptionReader->getItemOptionValue($orderItemId, 'itemDetails', 'productName'),
                 'weight' => $packagingOptionReader->getItemOptionValue($orderItemId, 'itemDetails', 'weight'),
                 'product_id' => $packagingOptionReader->getItemOptionValue($orderItemId, 'itemDetails', 'productId'),
+                'sku' => $packagingOptionReader->getItemOptionValue($orderItemId, 'itemDetails', 'sku'),
                 'order_item_id' => $orderItemId,
                 'customs_value' => $itemCustomsValue,
                 'customs' => $itemCustoms,

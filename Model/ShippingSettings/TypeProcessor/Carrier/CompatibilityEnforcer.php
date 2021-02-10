@@ -23,7 +23,7 @@ class CompatibilityEnforcer implements CarrierDataProcessorInterface
      * @param CarrierDataInterface $carrierData
      * @return InputInterface|null
      */
-    private function getInputByCode(string $compoundCode, CarrierDataInterface $carrierData)
+    private function getInputByCode(string $compoundCode, CarrierDataInterface $carrierData): ?InputInterface
     {
         /** @var ShippingOptionInterface[] $shippingOptions */
         $shippingOptions = array_merge(

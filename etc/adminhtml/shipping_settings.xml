@@ -33,13 +33,17 @@
                                 <inputType>hidden</inputType>
                                 <sortOrder>40</sortOrder>
                             </input>
-                            <input code="Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::ITEM_INPUT_PRODUCT_NAME">
+                            <input code="Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::ITEM_INPUT_SKU">
                                 <inputType>hidden</inputType>
                                 <sortOrder>50</sortOrder>
                             </input>
-                            <input code="Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::ITEM_INPUT_PRICE">
+                            <input code="Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::ITEM_INPUT_PRODUCT_NAME">
                                 <inputType>hidden</inputType>
                                 <sortOrder>60</sortOrder>
+                            </input>
+                            <input code="Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::ITEM_INPUT_PRICE">
+                                <inputType>hidden</inputType>
+                                <sortOrder>70</sortOrder>
                             </input>
                         </inputs>
                     </shippingOption>

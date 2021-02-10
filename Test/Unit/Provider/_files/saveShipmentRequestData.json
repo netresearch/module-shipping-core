@@ -1,0 +1,122 @@
+{
+  "packages": [
+    {
+      "packageId": 1,
+      "items": {
+        "159": {
+          "itemDetails": {
+            "qty": 2,
+            "qtyToShip": 2,
+            "weight": "0.55",
+            "productId": "8",
+            "sku": "24-WB01",
+            "productName": "Voyage Yoga Bag",
+            "price": "32"
+          },
+          "itemCustoms": {
+            "customsValue": "32",
+            "hsCode": "62104000",
+            "countryOfOrigin": "PL",
+            "exportDescription": "Foo Bar"
+          }
+        }
+      },
+      "package": {
+        "packageDetails": {
+          "productCode": "V53WPAK",
+          "packagingId": "_1600420981250_250",
+          "weightUnit": "KILOGRAM",
+          "packagingWeight": "0.2",
+          "sizeUnit": "CENTIMETER",
+          "length": "30",
+          "width": "20",
+          "height": "20",
+          "weight": "1.30",
+          "foo": "bar"
+        },
+        "packageCustoms": {
+          "customsValue": "64.00",
+          "termsOfTrade": "DDU",
+          "contentType": "OTHER",
+          "explanation": "Commercial Goods",
+          "customsFees": "0",
+          "electronicExportNotification": false,
+          "exportDescription": "Foo Bar",
+          "placeOfCommittal": "Leipzig"
+        }
+      },
+      "service": {
+        "parcelAnnouncement": {
+          "enabled": false
+        },
+        "printOnlyIfCodeable": {
+          "enabled": true
+        },
+        "additionalInsurance": {
+          "enabled": true
+        }
+      }
+    },
+    {
+      "packageId": 2,
+      "items": {
+        "157": {
+          "itemDetails": {
+            "qty": 1,
+            "qtyToShip": 1,
+            "weight": "0.35",
+            "productId": "388",
+            "sku": "MJ11-M-Black",
+            "productName": "Typhon Performance Fleece-lined Jacket",
+            "price": "60"
+          },
+          "itemCustoms": {
+            "customsValue": "60",
+            "hsCode": "43039000",
+            "countryOfOrigin": "UA",
+            "exportDescription": "Fox Baz"
+          }
+        }
+      },
+      "package": {
+        "packageDetails": {
+          "productCode": "V53WPAK",
+          "packagingId": "_1600420970377_377",
+          "weightUnit": "KILOGRAM",
+          "packagingWeight": "0.1",
+          "sizeUnit": "CENTIMETER",
+          "length": "15",
+          "width": "8",
+          "height": "4",
+          "weight": "0.45",
+          "foo": "fox"
+        },
+        "packageCustoms": {
+          "customsValue": "60.00",
+          "termsOfTrade": "DDU",
+          "contentType": "OTHER",
+          "explanation": "Commercial Goods",
+          "customsFees": "0",
+          "electronicExportNotification": false,
+          "exportDescription": "Fox Baz"
+        }
+      },
+      "service": {
+        "parcelAnnouncement": {
+          "enabled": false
+        },
+        "printOnlyIfCodeable": {
+          "enabled": true
+        },
+        "additionalInsurance": {
+          "enabled": false
+        }
+      }
+    }
+  ],
+  "shipment": {
+    "shipmentComment": "Foo Comment Text",
+    "sendEmail": true,
+    "notifyCustomer": true
+  }
+}
