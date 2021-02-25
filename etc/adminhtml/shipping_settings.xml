@@ -117,7 +117,7 @@
                         <sortOrder>30</sortOrder>
                     </input>
                     <input code="Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::PACKAGE_INPUT_PACKAGING_WEIGHT">
-                        <label translate="true">Tare weight</label>
+                        <label translate="true">Tare Weight</label>
                         <inputType>prefixed</inputType>
                         <sortOrder>40</sortOrder>
                     </input>

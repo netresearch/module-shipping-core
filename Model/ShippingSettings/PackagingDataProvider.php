@@ -86,7 +86,7 @@ class PackagingDataProvider
             $shippingData,
             (int) $shipment->getStoreId(),
             $shippingAddress->getCountryId(),
-            $shippingAddress->getPostcode(),
+            (string) $shippingAddress->getPostcode(),
             $shipment
         );
 

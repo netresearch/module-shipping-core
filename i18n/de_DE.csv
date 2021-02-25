@@ -51,7 +51,7 @@ Other,Sonstiges
 "Package #%1 not found in shipment request.","Paket #%1 konnte nicht gefunden werden."
 "Package Description",Paketbeschreibung
 "Package Details",Paket-Details
-Packages,Paketegrößen
+Packages,Paketgrößen
 "Parcel Processing",Sendungsverarbeitung
 Present,Geschenk
 "Processing of shipments with <em>Label Status: Failed</em> will automatically be retried.","Die Verarbeitung von Sendungen mit <em>Label Status: Fehlgeschlagen</em> wird automatisch erneut ausgeführt."
@@ -71,7 +71,7 @@ Quantity,Menge
 "Shipping label(s) for the order(s) %1 could not be created.","Versandetiketten für die Bestellung(en) %1 konnten nicht erstellt werden."
 "Shipping label(s) for the order(s) %1 could not be requested. Please review shipment comments.","Versandetiketten für die Bestellung(en) %1 konnten nicht abgerufen werden. Bitte prüfen Sie die Lieferscheinkommentare."
 "Shipping label(s) for the order(s) %1 were successfully created.","Versandetiketten für die Bestellung(en) %1 wurden erfolgreich erstellt."
-"Tare weight",Leergewicht
+"Tare Weight",Leergewicht
 "The content description is mandatory if export content type is <em>OTHER</em>.","Eine Inhaltsbeschreibung ist vorgeschrieben, wenn die Inhaltskategorie <em>SONSTIGES</em> ist."
 "The money transfer purpose for cash on delivery payments can include the following placeholders: {{entity_id}}, {{increment_id}}, {{firstname}}, {{lastname}}. They will be replaced by the respective order's values.","Beim Verwendungszweck für Nachnahmezahlungen können folgende Platzhalter eingesetzt werden: {{entity_id}}, {{increment_id}}, {{firstname}}, {{lastname}}. Sie werden durch die Werte der jeweiligen Bestellung ersetzt."
 "The shipment was successfully cancelled.","Die Lieferung wurde erfolgreich storniert."

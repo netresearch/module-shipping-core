@@ -71,7 +71,7 @@ Quantity,Quantity
 "Shipping label(s) for the order(s) %1 could not be created.","Shipping label(s) for the order(s) %1 could not be created."
 "Shipping label(s) for the order(s) %1 could not be requested. Please review shipment comments.","Shipping label(s) for the order(s) %1 could not be requested. Please review shipment comments."
 "Shipping label(s) for the order(s) %1 were successfully created.","Shipping label(s) for the order(s) %1 were successfully created."
-"Tare weight","Tare weight"
+"Tare Weight","Tare Weight"
 "The content description is mandatory if export content type is <em>OTHER</em>.","The content description is mandatory if export content type is <em>OTHER</em>."
 "The money transfer purpose for cash on delivery payments can include the following placeholders: {{entity_id}}, {{increment_id}}, {{firstname}}, {{lastname}}. They will be replaced by the respective order's values.","The money transfer purpose for cash on delivery payments can include the following placeholders: {{entity_id}}, {{increment_id}}, {{firstname}}, {{lastname}}. They will be replaced by the respective order's values."
 "The shipment was successfully cancelled.","The shipment was successfully cancelled."
