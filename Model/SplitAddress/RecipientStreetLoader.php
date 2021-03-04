@@ -36,13 +36,6 @@ class RecipientStreetLoader implements RecipientStreetLoaderInterface
      */
     private $streetSplitter;
 
-    /**
-     * RecipientStreetLoader constructor.
-     *
-     * @param RecipientStreetRepositoryInterface $recipientStreetRepository
-     * @param RecipientStreetInterfaceFactory $recipientStreetFactory
-     * @param StreetSplitter $streetSplitter
-     */
     public function __construct(
         RecipientStreetRepositoryInterface $recipientStreetRepository,
         RecipientStreetInterfaceFactory $recipientStreetFactory,
@@ -58,20 +51,20 @@ class RecipientStreetLoader implements RecipientStreetLoaderInterface
         try {
             $recipientStreet = $this->recipientStreetRepository->get((int)$address->getEntityId());
         } catch (NoSuchEntityException $exception) {
-            $street = implode(', ', $address->getStreet());
-            $addressParts = $this->streetSplitter->splitStreet($street);
-
-            /** @var RecipientStreet $recipientStreet */
             $recipientStreet = $this->recipientStreetFactory->create();
-
-            // set data explicitly to switch isObjectNew flag
-            $recipientStreet->setData([
-                RecipientStreetInterface::ORDER_ADDRESS_ID => (int) $address->getEntityId(),
-                RecipientStreetInterface::NAME => $addressParts['street_name'],
-                RecipientStreetInterface::NUMBER => $addressParts['street_number'],
-                RecipientStreetInterface::SUPPLEMENT => $addressParts['supplement'],
-            ]);
         }
+
+        // update recipient street with street data from address argument
+        $street = implode(', ', $address->getStreet());
+        $addressParts = $this->streetSplitter->splitStreet($street);
+
+        /** @var RecipientStreet $recipientStreet */
+        $recipientStreet->setData([
+            RecipientStreetInterface::ORDER_ADDRESS_ID => (int) $address->getEntityId(),
+            RecipientStreetInterface::NAME => $addressParts['street_name'],
+            RecipientStreetInterface::NUMBER => $addressParts['street_number'],
+            RecipientStreetInterface::SUPPLEMENT => $addressParts['supplement'],
+        ]);
 
         return $recipientStreet;
     }
