@@ -14,32 +14,12 @@ namespace Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption;
 class Codes
 {
     /**
-     * The input type for the special shopfinder component.
-     */
-    public const INPUT_TYPE_SHOPFINDER = 'shopfinder';
-
-    /**
      * The carrier code for the template carrier
      */
     public const CARRIER_BASE = 'base';
 
-    public const PACKAGING_OPTION_DETAILS = 'packageDetails';
-    public const PACKAGING_INPUT_PRODUCT_CODE = 'productCode';
-    public const PACKAGING_INPUT_CUSTOM_PACKAGE_ID = 'customPackageId';
-    public const PACKAGING_INPUT_PACKAGING_WEIGHT = 'packagingWeight';
-    public const PACKAGING_INPUT_WEIGHT = 'weight';
-    public const PACKAGING_INPUT_WEIGHT_UNIT = 'weightUnit';
-    public const PACKAGING_INPUT_SIZE_UNIT = 'sizeUnit';
-    public const PACKAGING_INPUT_WIDTH = 'width';
-    public const PACKAGING_INPUT_HEIGHT = 'height';
-    public const PACKAGING_INPUT_LENGTH = 'length';
-
-    public const PACKAGING_OPTION_CUSTOMS = 'packageCustoms';
-    public const PACKAGING_INPUT_CUSTOMS_VALUE = 'customsValue';
-    public const PACKAGING_INPUT_CONTENT_TYPE = 'contentType';
-    public const PACKAGING_INPUT_EXPLANATION = 'explanation';
-
-    public const ITEM_OPTION_DETAILS = 'details';
+    // item details
+    public const ITEM_OPTION_DETAILS = 'itemDetails';
     public const ITEM_INPUT_PRODUCT_ID = 'productId';
     public const ITEM_INPUT_PRODUCT_NAME = 'productName';
     public const ITEM_INPUT_PRICE = 'price';
@@ -47,20 +27,45 @@ class Codes
     public const ITEM_INPUT_QTY_TO_SHIP = 'qtyToShip';
     public const ITEM_INPUT_WEIGHT = 'weight';
 
+    // item customs
     public const ITEM_OPTION_CUSTOMS = 'itemCustoms';
     public const ITEM_INPUT_CUSTOMS_VALUE = 'customsValue';
-    public const ITEM_INPUT_HS_CODE = 'hsCode';
     public const ITEM_INPUT_COUNTRY_OF_ORIGIN = 'countryOfOrigin';
+    public const ITEM_INPUT_HS_CODE = 'hsCode';
+    public const ITEM_INPUT_EXPORT_DESCRIPTION = 'exportDescription';
 
-    public const SHOPFINDER_INPUT_COMPANY = 'company';
-    public const SHOPFINDER_INPUT_LOCATION_TYPE = 'locationType';
-    public const SHOPFINDER_INPUT_LOCATION_NUMBER = 'locationNumber';
-    public const SHOPFINDER_INPUT_LOCATION_ID = 'locationId';
-    public const SHOPFINDER_INPUT_STREET = 'street';
-    public const SHOPFINDER_INPUT_POSTAL_CODE = 'postalCode';
-    public const SHOPFINDER_INPUT_CITY = 'city';
-    public const SHOPFINDER_INPUT_COUNTRY_CODE = 'countryCode';
+    // package details
+    public const PACKAGE_OPTION_DETAILS = 'packageDetails';
+    public const PACKAGE_INPUT_PRODUCT_CODE = 'productCode';
+    public const PACKAGE_INPUT_PACKAGING_ID = 'packagingId';
+    public const PACKAGE_INPUT_PACKAGING_WEIGHT = 'packagingWeight';
+    public const PACKAGE_INPUT_WEIGHT_UNIT = 'weightUnit';
+    public const PACKAGE_INPUT_WEIGHT = 'weight';
+    public const PACKAGE_INPUT_SIZE_UNIT = 'sizeUnit';
+    public const PACKAGE_INPUT_LENGTH = 'length';
+    public const PACKAGE_INPUT_WIDTH = 'width';
+    public const PACKAGE_INPUT_HEIGHT = 'height';
 
+    // package customs
+    public const PACKAGE_OPTION_CUSTOMS = 'packageCustoms';
+    public const PACKAGE_INPUT_CUSTOMS_VALUE = 'customsValue';
+    public const PACKAGE_INPUT_CONTENT_TYPE = 'contentType';
+    public const PACKAGE_INPUT_EXPLANATION = 'explanation';
+    public const PACKAGE_INPUT_EXPORT_DESCRIPTION = 'exportDescription';
+
+    // cash on delivery service
     public const SERVICE_OPTION_CASH_ON_DELIVERY = 'cashOnDelivery';
     public const SERVICE_INPUT_COD_REASON_FOR_PAYMENT = 'reasonForPayment';
+
+    // delivery location service
+    public const SERVICE_OPTION_DELIVERY_LOCATION = 'deliveryLocation';
+    public const INPUT_TYPE_LOCATION_FINDER = 'locationfinder';
+    public const SERVICE_INPUT_DELIVERY_LOCATION_TYPE = 'type';
+    public const SERVICE_INPUT_DELIVERY_LOCATION_ID = 'id';
+    public const SERVICE_INPUT_DELIVERY_LOCATION_NUMBER = 'number';
+    public const SERVICE_INPUT_DELIVERY_LOCATION_COMPANY = 'company';
+    public const SERVICE_INPUT_DELIVERY_LOCATION_COUNTRY_CODE = 'countryCode';
+    public const SERVICE_INPUT_DELIVERY_LOCATION_POSTAL_CODE = 'postalCode';
+    public const SERVICE_INPUT_DELIVERY_LOCATION_CITY = 'city';
+    public const SERVICE_INPUT_DELIVERY_LOCATION_STREET = 'street';
 }

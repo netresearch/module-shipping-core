@@ -66,7 +66,7 @@ class RecipientStreetLoader implements RecipientStreetLoaderInterface
 
             // set data explicitly to switch isObjectNew flag
             $recipientStreet->setData([
-                RecipientStreetInterface::ORDER_ADDRESS_ID => $address->getEntityId(),
+                RecipientStreetInterface::ORDER_ADDRESS_ID => (int) $address->getEntityId(),
                 RecipientStreetInterface::NAME => $addressParts['street_name'],
                 RecipientStreetInterface::NUMBER => $addressParts['street_number'],
                 RecipientStreetInterface::SUPPLEMENT => $addressParts['supplement'],

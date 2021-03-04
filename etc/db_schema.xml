@@ -48,9 +48,9 @@
 
     <table name="nrshipping_order_item" resource="sales" engine="innodb" comment="Order Item Data Snapshot">
         <column xsi:type="int" name="item_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Order Item ID"/>
+        <column xsi:type="varchar" name="country_of_manufacture" nullable="true" length="2" comment="Country of Manufacture"/>
+        <column xsi:type="varchar" name="export_description" nullable="true" length="50" comment="Export Description"/>
         <column xsi:type="varchar" name="hs_code" nullable="true" length="10" comment="HS Code"/>
-        <column xsi:type="varchar" name="country_of_manufacture" nullable="true" length="2"
-                comment="Country of Manufacture"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="item_id"/>
         </constraint>

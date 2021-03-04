@@ -33,6 +33,7 @@ class ImageUrlProcessor implements MetadataProcessorInterface
      * Area emulation does not help either as the theme does not get properly initialized.
      * The workaround is to load the configured frontend theme manually.
      *
+     * @param string $carrierCode
      * @param MetadataInterface $metadata
      * @param int|null $storeId
      * @param string $countryCode
@@ -42,6 +43,7 @@ class ImageUrlProcessor implements MetadataProcessorInterface
      * @return MetadataInterface
      */
     public function process(
+        string $carrierCode,
         MetadataInterface $metadata,
         int $storeId,
         string $countryCode,

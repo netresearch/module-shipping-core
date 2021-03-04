@@ -96,31 +96,31 @@ class Save extends Action
 
             $packageParams = $packageDetails['package'];
             // set to orig packaging popup property names and unset them from customs array
-            $customsKey = Codes::PACKAGING_OPTION_CUSTOMS;
-            $customsValue = $packageParams[$customsKey][Codes::PACKAGING_INPUT_CUSTOMS_VALUE] ?? null;
-            $contentType = $packageParams[$customsKey][Codes::PACKAGING_INPUT_CONTENT_TYPE] ?? '';
-            $contentTypeOther = $packageParams[$customsKey][Codes::PACKAGING_INPUT_EXPLANATION] ?? '';
+            $customsKey = Codes::PACKAGE_OPTION_CUSTOMS;
+            $customsValue = $packageParams[$customsKey][Codes::PACKAGE_INPUT_CUSTOMS_VALUE] ?? null;
+            $contentType = $packageParams[$customsKey][Codes::PACKAGE_INPUT_CONTENT_TYPE] ?? '';
+            $contentTypeOther = $packageParams[$customsKey][Codes::PACKAGE_INPUT_EXPLANATION] ?? '';
             unset(
-                $packageParams[$customsKey][Codes::PACKAGING_INPUT_CUSTOMS_VALUE],
-                $packageParams[$customsKey][Codes::PACKAGING_INPUT_CONTENT_TYPE],
-                $packageParams[$customsKey][Codes::PACKAGING_INPUT_EXPLANATION]
+                $packageParams[$customsKey][Codes::PACKAGE_INPUT_CUSTOMS_VALUE],
+                $packageParams[$customsKey][Codes::PACKAGE_INPUT_CONTENT_TYPE],
+                $packageParams[$customsKey][Codes::PACKAGE_INPUT_EXPLANATION]
             );
 
-            $detailsKey = Codes::PACKAGING_OPTION_DETAILS;
+            $detailsKey = Codes::PACKAGE_OPTION_DETAILS;
             $packages[$packageDetails['packageId']] = [
                 'params' => [
-                    'shipping_product' => $packageParams[$detailsKey][Codes::PACKAGING_INPUT_PRODUCT_CODE] ?? '',
+                    'shipping_product' => $packageParams[$detailsKey][Codes::PACKAGE_INPUT_PRODUCT_CODE] ?? '',
                     'container' => '',
-                    'weight' => $packageParams[$detailsKey][Codes::PACKAGING_INPUT_WEIGHT] ?? '',
-                    'weight_units' => $packageParams[$detailsKey][Codes::PACKAGING_INPUT_WEIGHT_UNIT] ?? '',
-                    'length' => $packageParams[$detailsKey][Codes::PACKAGING_INPUT_LENGTH] ?? '',
-                    'width' => $packageParams[$detailsKey][Codes::PACKAGING_INPUT_WIDTH] ?? '',
-                    'height' => $packageParams[$detailsKey][Codes::PACKAGING_INPUT_HEIGHT] ?? '',
-                    'dimension_units' => $packageParams[$detailsKey][Codes::PACKAGING_INPUT_SIZE_UNIT] ?? '',
+                    'weight' => $packageParams[$detailsKey][Codes::PACKAGE_INPUT_WEIGHT] ?? '',
+                    'weight_units' => $packageParams[$detailsKey][Codes::PACKAGE_INPUT_WEIGHT_UNIT] ?? '',
+                    'length' => $packageParams[$detailsKey][Codes::PACKAGE_INPUT_LENGTH] ?? '',
+                    'width' => $packageParams[$detailsKey][Codes::PACKAGE_INPUT_WIDTH] ?? '',
+                    'height' => $packageParams[$detailsKey][Codes::PACKAGE_INPUT_HEIGHT] ?? '',
+                    'dimension_units' => $packageParams[$detailsKey][Codes::PACKAGE_INPUT_SIZE_UNIT] ?? '',
                     'content_type' => $contentType,
                     'content_type_other' => $contentTypeOther,
                     'customs_value' => $customsValue,
-                    'customs' => $packageParams[Codes::PACKAGING_OPTION_CUSTOMS] ?? [],
+                    'customs' => $packageParams[Codes::PACKAGE_OPTION_CUSTOMS] ?? [],
                     'services' => $packageDetails['service'] ?? [],
                 ],
                 'items' => $packageItems,

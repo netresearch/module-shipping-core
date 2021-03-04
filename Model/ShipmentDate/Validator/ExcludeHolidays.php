@@ -14,10 +14,7 @@ use Netresearch\ShippingCore\Api\ShipmentDate\DayValidatorInterface;
 use Netresearch\ShippingCore\Model\Util\HolidayCalculator;
 use Psr\Log\LoggerInterface;
 
-/**
- * NoHoliday validator class. This class checks if the given date/time is NOT a holiday.
- */
-class NoHoliday implements DayValidatorInterface
+class ExcludeHolidays implements DayValidatorInterface
 {
     /**
      * @var ShippingConfigInterface

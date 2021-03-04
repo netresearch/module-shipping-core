@@ -77,7 +77,7 @@ class CompatibilityPreProcessor implements CarrierDataProcessorInterface
      * splitting rules, which allows to specify only the option as subject as opposed to
      * all its inputs individually (a catch-all shortcut).
      *
-     * @param CarrierDataInterface $carrierSettings
+     * @param CarrierDataInterface $shippingSettings
      * @param int $storeId
      * @param string $countryCode
      * @param string $postalCode
@@ -87,16 +87,16 @@ class CompatibilityPreProcessor implements CarrierDataProcessorInterface
      * @throws \InvalidArgumentException
      */
     public function process(
-        CarrierDataInterface $carrierSettings,
+        CarrierDataInterface $shippingSettings,
         int $storeId,
         string $countryCode,
         string $postalCode,
         ShipmentInterface $shipment = null
     ): CarrierDataInterface {
         $processedRules = [];
-        $shippingOptions = array_merge($carrierSettings->getServiceOptions(), $carrierSettings->getPackageOptions());
+        $shippingOptions = array_merge($shippingSettings->getServiceOptions(), $shippingSettings->getPackageOptions());
 
-        foreach ($carrierSettings->getCompatibilityData() as $rule) {
+        foreach ($shippingSettings->getCompatibilityData() as $rule) {
             $masters = $this->convertToCompoundCodes($rule->getMasters(), $shippingOptions);
             if (empty($masters) && !empty($rule->getMasters())) {
                 // This rule has none of its masters available at runtime. We remove it so it does not get turned
@@ -149,8 +149,8 @@ class CompatibilityPreProcessor implements CarrierDataProcessorInterface
             }
         }
 
-        $carrierSettings->setCompatibilityData($processedRules);
+        $shippingSettings->setCompatibilityData($processedRules);
 
-        return $carrierSettings;
+        return $shippingSettings;
     }
 }

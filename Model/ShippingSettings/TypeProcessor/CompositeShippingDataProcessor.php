@@ -85,14 +85,28 @@ class CompositeShippingDataProcessor implements ShippingDataProcessorInterface
     ): ShippingDataInterface {
         $carriers = [];
 
-        foreach ($shippingData->getCarriers() as $carrier) {
+        foreach ($shippingData->getCarriers() as $carrierCode => $carrier) {
             // process shipping options
             $packageOptions = $carrier->getPackageOptions();
             $serviceOptions = $carrier->getServiceOptions();
 
             foreach ($this->shippingOptionsProcessors as $processor) {
-                $packageOptions = $processor->process($packageOptions, $storeId, $countryCode, $postalCode, $shipment);
-                $serviceOptions = $processor->process($serviceOptions, $storeId, $countryCode, $postalCode, $shipment);
+                $packageOptions = $processor->process(
+                    $carrierCode,
+                    $packageOptions,
+                    $storeId,
+                    $countryCode,
+                    $postalCode,
+                    $shipment
+                );
+                $serviceOptions = $processor->process(
+                    $carrierCode,
+                    $serviceOptions,
+                    $storeId,
+                    $countryCode,
+                    $postalCode,
+                    $shipment
+                );
             }
 
             $carrier->setPackageOptions($packageOptions);
@@ -101,21 +115,28 @@ class CompositeShippingDataProcessor implements ShippingDataProcessorInterface
             // process item shipping options
             $itemOptions = $carrier->getItemOptions();
             foreach ($this->itemShippingOptionsProcessors as $processor) {
-                $itemOptions = $processor->process($itemOptions, $storeId, $countryCode, $postalCode, $shipment);
+                $itemOptions = $processor->process(
+                    $carrierCode,
+                    $itemOptions,
+                    $storeId,
+                    $countryCode,
+                    $postalCode,
+                    $shipment
+                );
             }
             $carrier->setItemOptions($itemOptions);
 
             // process compatibility rules
             $rules = $carrier->getCompatibilityData();
             foreach ($this->compatibilityProcessors as $processor) {
-                $rules = $processor->process($rules, $storeId, $countryCode, $postalCode, $shipment);
+                $rules = $processor->process($carrierCode, $rules, $storeId, $countryCode, $postalCode, $shipment);
             }
             $carrier->setCompatibilityData($rules);
 
             // process metadata
             $metadata = $carrier->getMetadata();
             foreach ($this->metadataProcessors as $processor) {
-                $processor->process($metadata, $storeId, $countryCode, $postalCode, $shipment);
+                $processor->process($carrierCode, $metadata, $storeId, $countryCode, $postalCode, $shipment);
             }
             $carrier->setMetadata($metadata);
 
@@ -124,7 +145,7 @@ class CompositeShippingDataProcessor implements ShippingDataProcessorInterface
                 $carrier = $processor->process($carrier, $storeId, $countryCode, $postalCode, $shipment);
             }
 
-            $carriers[] = $carrier;
+            $carriers[$carrierCode] = $carrier;
         }
 
         $shippingData->setCarriers($carriers);

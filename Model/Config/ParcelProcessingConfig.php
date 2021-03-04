@@ -9,27 +9,13 @@ declare(strict_types=1);
 namespace Netresearch\ShippingCore\Model\Config;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Store\Model\ScopeInterface;
+use Netresearch\ShippingCore\Api\Config\ParcelProcessingConfigInterface;
 use Netresearch\ShippingCore\Model\ShippingBox\Package;
 use Netresearch\ShippingCore\Model\ShippingBox\PackageFactory;
 
-class ParcelProcessingConfig
+class ParcelProcessingConfig implements ParcelProcessingConfigInterface
 {
-    private const CONFIG_PATH_COD_METHODS  = 'shipping/parcel_processing/cod_methods';
-    private const CONFIG_PATH_COD_REASON_FOR_PAYMENT = 'shipping/parcel_processing/cod_reason_for_payment';
-    private const CONFIG_PATH_PACKAGES = 'shipping/parcel_processing/packages';
-    private const CONFIG_PATH_CONTENT_TYPE = 'shipping/parcel_processing/export_content_type';
-    private const CONFIG_PATH_CONTENT_EXPLANATION = 'shipping/parcel_processing/export_content_explanation';
-
-    public const CONFIG_FIELD_PACKAGE_ID = 'id';
-    public const CONFIG_FIELD_PACKAGE_TITLE = 'title';
-    public const CONFIG_FIELD_PACKAGE_WIDTH = 'width';
-    public const CONFIG_FIELD_PACKAGE_LENGTH = 'length';
-    public const CONFIG_FIELD_PACKAGE_HEIGHT = 'height';
-    public const CONFIG_FIELD_PACKAGE_WEIGHT = 'weight';
-    public const CONFIG_FIELD_PACKAGE_IS_DEFAULT = 'is_default';
-
     /**
      * @var ScopeConfigInterface
      */
@@ -48,12 +34,6 @@ class ParcelProcessingConfig
         $this->packageFactory = $packageFactory;
     }
 
-    /**
-     * Get payment methods that were marked as cash on delivery methods in configuration
-     *
-     * @param mixed $store
-     * @return string[]
-     */
     public function getCodMethods($store = null): array
     {
         $paymentMethods = $this->scopeConfig->getValue(
@@ -69,24 +49,11 @@ class ParcelProcessingConfig
         return explode(',', $paymentMethods);
     }
 
-    /**
-     * Check whether a payment method code was marked as cash on delivery method
-     *
-     * @param string $methodCode
-     * @param mixed $store
-     * @return bool
-     */
     public function isCodPaymentMethod(string $methodCode, $store = null): bool
     {
         return \in_array($methodCode, $this->getCodMethods($store), true);
     }
 
-    /**
-     * Obtain all configured packages.
-     *
-     * @param mixed $store
-     * @return Package[]
-     */
     public function getPackages($store = null): array
     {
         $packages = [];
@@ -112,12 +79,6 @@ class ParcelProcessingConfig
         return $packages;
     }
 
-    /**
-     * Obtain the package configured as default
-     *
-     * @param mixed $store
-     * @return Package|null
-     */
     public function getDefaultPackage($store = null): ?Package
     {
         foreach ($this->getPackages($store) as $package) {

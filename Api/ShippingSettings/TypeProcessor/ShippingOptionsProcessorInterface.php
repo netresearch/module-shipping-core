@@ -21,6 +21,7 @@ use Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
 interface ShippingOptionsProcessorInterface
 {
     /**
+     * @param string $carrierCode
      * @param ShippingOptionInterface[] $shippingOptions
      * @param int $storeId
      * @param string $countryCode Recipient country
@@ -31,6 +32,7 @@ interface ShippingOptionsProcessorInterface
      * @throws \InvalidArgumentException
      */
     public function process(
+        string $carrierCode,
         array $shippingOptions,
         int $storeId,
         string $countryCode,

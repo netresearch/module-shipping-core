@@ -17,6 +17,7 @@ use Magento\Quote\Model\Quote\Item\AbstractItem;
 use Magento\Quote\Model\Quote\Item\ToOrderItem;
 use Magento\Sales\Api\Data\OrderItemExtensionInterfaceFactory;
 use Magento\Sales\Api\Data\OrderItemInterface;
+use Netresearch\ShippingCore\Setup\Module\DataInstaller;
 
 /**
  * Add custom product attributes to order item.
@@ -112,7 +113,8 @@ class AttributesToOrderItem
         }
 
         $countryOfManufacture = $this->readAttribute($item, 'country_of_manufacture');
-        $hsCode = $this->readAttribute($item, 'nrshipping_hs_code');
+        $exportDescription = $this->readAttribute($item, DataInstaller::ATTRIBUTE_CODE_EXPORT_DESCRIPTION);
+        $hsCode = $this->readAttribute($item, DataInstaller::ATTRIBUTE_CODE_HS_CODE);
         if (!$countryOfManufacture && !$hsCode) {
             return $orderItem;
         }
@@ -124,6 +126,7 @@ class AttributesToOrderItem
 
         /** @var Product $product */
         $extensionAttributes->setNrshippingCountryOfManufacture($countryOfManufacture);
+        $extensionAttributes->setNrshippingExportDescription($exportDescription);
         $extensionAttributes->setNrshippingHsCode($hsCode);
         $orderItem->setExtensionAttributes($extensionAttributes);
 

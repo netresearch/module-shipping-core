@@ -14,10 +14,10 @@ use Magento\Store\Model\StoresConfig;
 
 class BatchProcessingConfig
 {
-    private const CONFIG_PATH_CRON_ENABLED = 'shipping/batch_processing/cron_enabled';
-    private const CONFIG_PATH_CRON_ORDER_STATUS = 'shipping/batch_processing/cron_order_status';
-    private const CONFIG_PATH_RETRY_FAILED = 'shipping/batch_processing/retry_failed_shipments';
-    private const CONFIG_PATH_NOTIFY_CUSTOMER = 'shipping/batch_processing/autocreate_notify';
+    public const CONFIG_PATH_CRON_ENABLED = 'shipping/batch_processing/shipping_label/cron_enabled';
+    public const CONFIG_PATH_CRON_ORDER_STATUS = 'shipping/batch_processing/shipping_label/cron_order_status';
+    public const CONFIG_PATH_RETRY_FAILED = 'shipping/batch_processing/shipping_label/retry_failed_shipments';
+    public const CONFIG_PATH_NOTIFY_CUSTOMER = 'shipping/batch_processing/shipping_label/autocreate_notify';
 
     /**
      * @var ScopeConfigInterface

@@ -37,6 +37,7 @@ class RouteProcessor implements ItemShippingOptionsProcessorInterface
      * Remove all shipping options that do not apply for the given route
      * (origin to destination), e.g. customs options for domestic routes.
      *
+     * @param string $carrierCode
      * @param ItemShippingOptionsInterface[] $itemOptions
      * @param int $storeId
      * @param string $countryCode
@@ -46,6 +47,7 @@ class RouteProcessor implements ItemShippingOptionsProcessorInterface
      * @return ItemShippingOptionsInterface[]
      */
     public function process(
+        string $carrierCode,
         array $itemOptions,
         int $storeId,
         string $countryCode,

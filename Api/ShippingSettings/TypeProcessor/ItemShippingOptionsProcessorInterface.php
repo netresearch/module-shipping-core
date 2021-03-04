@@ -18,13 +18,14 @@ use Magento\Sales\Api\Data\ShipmentInterface;
  *
  * Note that the actual item shipping options need to be created dynamically using
  * a data pre-processor. The item options defined in XML serve as a template only.
- * @see \Netresearch\ShippingCore\Api\ShippingSettings\DataProcessor\CarrierProcessorInterface
+ * @see \Netresearch\ShippingCore\Model\ShippingSettings\ArrayProcessor\PrepareItemOptionsProcessor
  *
  * @api
  */
 interface ItemShippingOptionsProcessorInterface
 {
     /**
+     * @param string $carrierCode
      * @param ItemShippingOptionsInterface[] $itemOptions
      * @param int $storeId
      * @param string $countryCode Recipient country
@@ -35,6 +36,7 @@ interface ItemShippingOptionsProcessorInterface
      * @throws \InvalidArgumentException
      */
     public function process(
+        string $carrierCode,
         array $itemOptions,
         int $storeId,
         string $countryCode,

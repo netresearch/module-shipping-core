@@ -18,6 +18,32 @@ use Magento\Framework\Exception\LocalizedException;
 class DataInstaller
 {
     public const ATTRIBUTE_CODE_HS_CODE = 'nrshipping_hs_code';
+    public const ATTRIBUTE_CODE_EXPORT_DESCRIPTION = 'nrshipping_export_description';
+
+    /**
+     * @param EavSetup $eavSetup
+     * @throws LocalizedException
+     * @throws \Zend_Validate_Exception
+     */
+    public static function addExportDescriptionAttribute(EavSetup $eavSetup)
+    {
+        $eavSetup->addAttribute(
+            Product::ENTITY,
+            self::ATTRIBUTE_CODE_EXPORT_DESCRIPTION,
+            [
+                'group' => '',
+                'type' => 'varchar',
+                'label' => 'Item Export Description',
+                'frontend_class' => 'validate-length maximum-length-50',
+                'input' => 'text',
+                'required' => false,
+                'sort_order' => 52,
+                'global' => ScopedAttributeInterface::SCOPE_WEBSITE,
+                'visible' => true,
+                'apply_to' => implode(',', [Type::TYPE_SIMPLE, Type::TYPE_BUNDLE, Configurable::TYPE_CODE]),
+            ]
+        );
+    }
 
     /**
      * @param EavSetup $eavSetup

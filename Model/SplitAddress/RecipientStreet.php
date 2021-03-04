@@ -30,7 +30,7 @@ class RecipientStreet extends AbstractModel implements RecipientStreetInterface
      */
     public function getOrderAddressId(): ?int
     {
-        return $this->getData(self::ORDER_ADDRESS_ID);
+        return $this->hasData(self::ORDER_ADDRESS_ID) ? (int) $this->getData(self::ORDER_ADDRESS_ID) : null;
     }
 
     /**

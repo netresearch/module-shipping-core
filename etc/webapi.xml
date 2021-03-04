@@ -9,6 +9,13 @@
         </resources>
     </route>
 
+    <route url="/V1/nrshipping/delivery-locations/:carrierCode/search" method="POST">
+        <service class="Netresearch\ShippingCore\Api\DeliveryLocation\SearchInterface" method="search"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
     <route url="/V1/carts/mine/nrshipping/shipping-option/selection/update" method="POST">
         <service class="Netresearch\ShippingCore\Api\ShippingSettings\CheckoutManagementInterface" method="updateShippingOptionSelections"/>
         <resources>

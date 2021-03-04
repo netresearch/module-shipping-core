@@ -29,6 +29,7 @@ class CodReasonForPaymentProcessor implements ShippingOptionsProcessorInterface
     /**
      * Replace the CoD Reason for Payment template with actual values from the current order.
      *
+     * @param string $carrierCode
      * @param ShippingOptionInterface[] $shippingOptions
      * @param int $storeId
      * @param string $countryCode
@@ -38,6 +39,7 @@ class CodReasonForPaymentProcessor implements ShippingOptionsProcessorInterface
      * @return ShippingOptionInterface[]
      */
     public function process(
+        string $carrierCode,
         array $shippingOptions,
         int $storeId,
         string $countryCode,

@@ -60,7 +60,8 @@ class RouteMatcher
 
         // exactly one rule matches, use it
         if (count($rules) === 1) {
-            return $this->processRule($rules[0], $shippingOrigin, $destination);
+            $rule = array_shift($rules);
+            return $this->processRule($rule, $shippingOrigin, $destination);
         }
 
         // determine the most specific route (with fewest origins) to process

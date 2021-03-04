@@ -35,5 +35,6 @@ class Uninstaller
     public static function deleteAttributes(EavSetup $eavSetup)
     {
         $eavSetup->removeAttribute(Product::ENTITY, DataInstaller::ATTRIBUTE_CODE_HS_CODE);
+        $eavSetup->removeAttribute(Product::ENTITY, DataInstaller::ATTRIBUTE_CODE_EXPORT_DESCRIPTION);
     }
 }

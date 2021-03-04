@@ -20,6 +20,7 @@ use Netresearch\ShippingCore\Api\Data\ShippingSettings\MetadataInterface;
 interface MetadataProcessorInterface
 {
     /**
+     * @param string $carrierCode
      * @param MetadataInterface $metadata
      * @param int $storeId
      * @param string $countryCode Recipient country
@@ -30,6 +31,7 @@ interface MetadataProcessorInterface
      * @throws \InvalidArgumentException
      */
     public function process(
+        string $carrierCode,
         MetadataInterface $metadata,
         int $storeId,
         string $countryCode,

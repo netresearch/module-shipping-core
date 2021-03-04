@@ -77,16 +77,23 @@ interface PackageItemInterface
     public function getSku(): string;
 
     /**
-     * Obtain item's HS code / tariff number (optional).
-     *
-     * @return string
-     */
-    public function getHsCode(): string;
-
-    /**
      * Obtain item's country of origin (optional).
      *
      * @return string
      */
     public function getCountryOfOrigin(): string;
+
+    /**
+     * Obtain item's customs declaration description.
+     *
+     * @return string
+     */
+    public function getExportDescription(): string;
+
+    /**
+     * Obtain item's HS code / tariff number (optional).
+     *
+     * @return string
+     */
+    public function getHsCode(): string;
 }

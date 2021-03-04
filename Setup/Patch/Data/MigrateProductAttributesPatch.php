@@ -8,37 +8,20 @@ declare(strict_types=1);
 
 namespace Netresearch\ShippingCore\Setup\Patch\Data;
 
-use Magento\Catalog\Model\Product;
-use Magento\Catalog\Model\Product\Type;
-use Magento\Catalog\Model\ResourceModel\Product as ProductResource;
-use Magento\Catalog\Model\ResourceModel\Product\Collection;
-use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
-use Magento\Eav\Setup\EavSetup;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Netresearch\ShippingCore\Setup\Module\DataInstaller;
+use Netresearch\ShippingCore\Setup\Patch\Data\Migration\ProductAttributes;
 
 class MigrateProductAttributesPatch implements DataPatchInterface
 {
     /**
-     * @var EavSetup
+     * @var ProductAttributes
      */
-    private $eavSetup;
+    private $productAttributes;
 
-    /**
-     * @var Collection
-     */
-    private $productCollection;
-
-    /**
-     * @var ProductResource
-     */
-    private $productResource;
-
-    public function __construct(EavSetup $eavSetup, Collection $productCollection, ProductResource $productResource)
+    public function __construct(ProductAttributes $productAttributes)
     {
-        $this->eavSetup = $eavSetup;
-        $this->productCollection = $productCollection;
-        $this->productResource = $productResource;
+        $this->productAttributes = $productAttributes;
     }
 
     public static function getDependencies(): array
@@ -59,20 +42,9 @@ class MigrateProductAttributesPatch implements DataPatchInterface
      */
     public function apply()
     {
-        if (!$this->eavSetup->getAttribute(Product::ENTITY, 'dhlgw_tariff_number')) {
-            return;
-        }
-
-        $productTypes = [Type::TYPE_SIMPLE, Type::TYPE_BUNDLE, Configurable::TYPE_CODE];
-
-        $this->productCollection
-            ->addAttributeToSelect(['dhlgw_tariff_number'])
-            ->addFieldToFilter('type_id', ['in' => $productTypes]);
-
-        /** @var Product $product */
-        foreach ($this->productCollection as $product) {
-            $product->addData([DataInstaller::ATTRIBUTE_CODE_HS_CODE => $product->getData('dhlgw_tariff_number')]);
-            $this->productResource->saveAttribute($product, DataInstaller::ATTRIBUTE_CODE_HS_CODE);
-        }
+        $this->productAttributes->migrate([
+            'dhlgw_tariff_number' => DataInstaller::ATTRIBUTE_CODE_HS_CODE,
+            'dhlgw_export_description' => DataInstaller::ATTRIBUTE_CODE_EXPORT_DESCRIPTION,
+        ]);
     }
 }

@@ -10,6 +10,7 @@ namespace Netresearch\ShippingCore\Plugin\Order;
 
 use Magento\Sales\Api\Data\ShippingExtensionFactory;
 use Magento\Sales\Api\Data\ShippingInterface;
+use Magento\Sales\Api\Data\TotalExtensionInterfaceFactory;
 use Magento\Sales\Model\Order\Address;
 use Magento\Sales\Model\Order\ShippingBuilder;
 use Netresearch\ShippingCore\Api\Data\OrderExport\KeyValueObjectInterface;
@@ -18,6 +19,7 @@ use Netresearch\ShippingCore\Api\Data\OrderExport\ServiceDataInterface;
 use Netresearch\ShippingCore\Api\Data\OrderExport\ServiceDataInterfaceFactory;
 use Netresearch\ShippingCore\Api\Data\OrderExport\ShippingOptionInterface;
 use Netresearch\ShippingCore\Api\Data\OrderExport\ShippingOptionInterfaceFactory;
+use Netresearch\ShippingCore\Model\AdditionalFee\TotalsManager;
 use Netresearch\ShippingCore\Model\ShippingSettings\OrderDataProvider;
 use Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 
@@ -48,18 +50,25 @@ class ShippingBuilderPlugin
      */
     private $orderDataProvider;
 
+    /**
+     * @var TotalExtensionInterfaceFactory
+     */
+    private $totalExtensionFactory;
+
     public function __construct(
         ShippingExtensionFactory $shippingExtensionFactory,
         ServiceDataInterfaceFactory $serviceDataFactory,
         ShippingOptionInterfaceFactory $packageDataFactory,
         KeyValueObjectInterfaceFactory $keyValueObjectFactory,
-        OrderDataProvider $orderDataProvider
+        OrderDataProvider $orderDataProvider,
+        TotalExtensionInterfaceFactory $totalExtensionFactory
     ) {
         $this->shippingExtensionFactory = $shippingExtensionFactory;
         $this->serviceDataFactory = $serviceDataFactory;
         $this->packageDataFactory = $packageDataFactory;
         $this->keyValueObjectFactory = $keyValueObjectFactory;
         $this->orderDataProvider = $orderDataProvider;
+        $this->totalExtensionFactory = $totalExtensionFactory;
     }
 
     /**
@@ -67,12 +76,11 @@ class ShippingBuilderPlugin
      * all customs data to the shipment.
      *
      * @param ShippingBuilder $shippingBuilder
-     * @param ShippingInterface $shipping
+     * @param ShippingInterface|null $shipping
      *
      * @return ShippingInterface
-     * @see \Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\RequestModifier::modifyPackage for package/data
-     *     structure
-     *
+     * @see \Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\RequestModifier::modifyPackage
+     *      for package/data structure
      */
     public function afterCreate(
         ShippingBuilder $shippingBuilder,
@@ -112,7 +120,7 @@ class ShippingBuilderPlugin
                 foreach ($shippingOption->getInputs() as $input) {
                     // drop empty default values (meaning there was no preconfigured value)
                     if (empty($input->getDefaultValue())
-                        || $input->getCode() === Codes::PACKAGING_INPUT_CUSTOM_PACKAGE_ID
+                        || $input->getCode() === Codes::PACKAGE_INPUT_PACKAGING_ID
                     ) {
                         continue;
                     }
@@ -163,6 +171,30 @@ class ShippingBuilderPlugin
 
         $extensionAttributes->setNrshippingShippingOptions($packageData);
         $shipping->setExtensionAttributes($extensionAttributes);
+
+        if (!$shipping->getTotal()) {
+            return $shipping;
+        }
+
+        $totalsExtensionAttributes = $shipping->getTotal()->getExtensionAttributes();
+        if (!$totalsExtensionAttributes) {
+            $totalsExtensionAttributes = $this->totalExtensionFactory->create();
+        }
+
+        $totalsExtensionAttributes->setBaseNrshippingAdditionalFee(
+            $order->getData(TotalsManager::ADDITIONAL_FEE_BASE_FIELD_NAME)
+        );
+        $totalsExtensionAttributes->setBaseNrshippingAdditionalFeeInclTax(
+            $order->getData(TotalsManager::ADDITIONAL_FEE_BASE_INCL_TAX_FIELD_NAME)
+        );
+        $totalsExtensionAttributes->setNrshippingAdditionalFee(
+            $order->getData(TotalsManager::ADDITIONAL_FEE_FIELD_NAME)
+        );
+        $totalsExtensionAttributes->setNrshippingAdditionalFeeInclTax(
+            $order->getData(TotalsManager::ADDITIONAL_FEE_INCL_TAX_FIELD_NAME)
+        );
+
+        $shipping->getTotal()->setExtensionAttributes($totalsExtensionAttributes);
 
         return $shipping;
     }

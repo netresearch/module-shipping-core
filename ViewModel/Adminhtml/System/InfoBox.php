@@ -18,19 +18,11 @@ class InfoBox implements ArgumentInterface
      */
     private $version;
 
-    /**
-     * InfoBox constructor.
-     *
-     * @param VersionInterface $version
-     */
     public function __construct(VersionInterface $version)
     {
         $this->version = $version;
     }
 
-    /**
-     * @return string
-     */
     public function getModuleVersion(): string
     {
         return $this->version->getModuleVersion();

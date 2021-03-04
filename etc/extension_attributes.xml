@@ -56,6 +56,13 @@
                 <field>country_of_manufacture</field>
             </join>
         </attribute>
+        <attribute code="nrshipping_export_description" type="string">
+            <join reference_table="nrshipping_order_item"
+                  reference_field="item_id"
+                  join_on_field="item_id">
+                <field>export_description</field>
+            </join>
+        </attribute>
         <attribute code="nrshipping_hs_code" type="string">
             <join reference_table="nrshipping_order_item"
                   reference_field="item_id"

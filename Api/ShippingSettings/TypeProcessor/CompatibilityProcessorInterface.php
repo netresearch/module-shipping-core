@@ -21,6 +21,7 @@ use Magento\Sales\Api\Data\ShipmentInterface;
 interface CompatibilityProcessorInterface
 {
     /**
+     * @param string $carrierCode
      * @param CompatibilityInterface[] $rules
      * @param int $storeId
      * @param string $countryCode Recipient country
@@ -31,6 +32,7 @@ interface CompatibilityProcessorInterface
      * @throws \InvalidArgumentException
      */
     public function process(
+        string $carrierCode,
         array $rules,
         int $storeId,
         string $countryCode,

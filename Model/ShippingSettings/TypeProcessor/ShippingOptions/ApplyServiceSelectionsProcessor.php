@@ -28,6 +28,7 @@ class ApplyServiceSelectionsProcessor implements ShippingOptionsProcessorInterfa
     /**
      * Apply shipping address service selection from persistent storage to the shipping options.
      *
+     * @param string $carrierCode
      * @param ShippingOptionInterface[] $shippingOptions
      * @param int $storeId
      * @param string $countryCode
@@ -37,6 +38,7 @@ class ApplyServiceSelectionsProcessor implements ShippingOptionsProcessorInterfa
      * @return ShippingOptionInterface[]
      */
     public function process(
+        string $carrierCode,
         array $shippingOptions,
         int $storeId,
         string $countryCode,

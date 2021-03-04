@@ -8,6 +8,11 @@
                 <export_content_type>OTHER</export_content_type>
                 <export_content_explanation>Commercial Goods</export_content_explanation>
             </parcel_processing>
+            <batch_processing>
+                <shipping_label>
+                    <cron_order_status>pending,processing</cron_order_status>
+                </shipping_label>
+            </batch_processing>
         </shipping>
     </default>
 </config>

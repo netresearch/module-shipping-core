@@ -42,16 +42,24 @@
     "magento/module-tax": "^100.3.0",
     "magento/module-ui": "^101.1.0",
     "magento/module-webapi": "^100.3.0",
+    "netresearch/config-fields-m2": "^1.2.2",
     "nyholm/psr7": "^1.2.0",
     "php-http/curl-client": "^2.1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^6.5.0 || ^9.0.0",
     "symfony/yaml": "^3.3.0 || ^4.0.0",
-    "tddwizard/magento2-fixtures": "^0.12.0"
+    "tddwizard/magento2-fixtures": "^0.12.0",
+    "magento/module-customer": "^102.0.0 || ^103.0.0 ",
+    "magento/module-checkout": "^100.3.0"
   },
   "suggest": {
     "magento/module-scalable-checkout": "^100.2.0",
     "magento/module-scalable-oms": "^100.2.0"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-DHLGW-964": "2.0.0.x-dev"
+    }
   }
 }

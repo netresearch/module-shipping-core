@@ -21,15 +21,15 @@ use Magento\Store\Model\Store;
  */
 interface TaxConfigInterface
 {
-    const CONFIG_XML_PATH_SHIPPING_TAX_CLASS = 'tax/classes/shipping_tax_class';
-    const CONFIG_XML_PATH_SHIPPING_INCLUDES_TAX = 'tax/calculation/shipping_includes_tax';
-    const XML_PATH_DISPLAY_CART_SHIPPING = 'tax/cart_display/shipping';
-    const XML_PATH_DISPLAY_SALES_SHIPPING = 'tax/sales_display/shipping';
+    public const CONFIG_XML_PATH_SHIPPING_TAX_CLASS = 'tax/classes/shipping_tax_class';
+    public const CONFIG_XML_PATH_SHIPPING_INCLUDES_TAX = 'tax/calculation/shipping_includes_tax';
+    public const XML_PATH_DISPLAY_CART_SHIPPING = 'tax/cart_display/shipping';
+    public const XML_PATH_DISPLAY_SALES_SHIPPING = 'tax/sales_display/shipping';
 
     /** Tax display types */
-    const DISPLAY_TYPE_EXCLUDING_TAX = 1;
-    const DISPLAY_TYPE_INCLUDING_TAX = 2;
-    const DISPLAY_TYPE_BOTH = 3;
+    public const DISPLAY_TYPE_EXCLUDING_TAX = 1;
+    public const DISPLAY_TYPE_INCLUDING_TAX = 2;
+    public const DISPLAY_TYPE_BOTH = 3;
 
     /**
      * Get tax class id specified for shipping tax estimation

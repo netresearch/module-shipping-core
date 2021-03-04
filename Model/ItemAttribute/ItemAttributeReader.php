@@ -17,22 +17,6 @@ use Netresearch\ShippingCore\Api\Util\ItemAttributeReaderInterface;
 class ItemAttributeReader implements ItemAttributeReaderInterface
 {
     /**
-     * Read HS code from extension attributes.
-     *
-     * @param OrderItemInterface $orderItem
-     * @return string
-     */
-    public function getHsCode(OrderItemInterface $orderItem): string
-    {
-        $extensionAttributes = $orderItem->getExtensionAttributes();
-        if (!$extensionAttributes) {
-            return '';
-        }
-
-        return (string) $extensionAttributes->getNrshippingHsCode();
-    }
-
-    /**
      * Read country of manufacture from extension attributes.
      *
      * @param OrderItemInterface $orderItem
@@ -46,5 +30,37 @@ class ItemAttributeReader implements ItemAttributeReaderInterface
         }
 
         return (string) $extensionAttributes->getNrshippingCountryOfManufacture();
+    }
+
+    /**
+     * Read export description from extension attributes.
+     *
+     * @param OrderItemInterface $orderItem
+     * @return string
+     */
+    public function getExportDescription(OrderItemInterface $orderItem): string
+    {
+        $extensionAttributes = $orderItem->getExtensionAttributes();
+        if (!$extensionAttributes) {
+            return '';
+        }
+
+        return (string) $extensionAttributes->getNrshippingExportDescription();
+    }
+
+    /**
+     * Read HS code from extension attributes.
+     *
+     * @param OrderItemInterface $orderItem
+     * @return string
+     */
+    public function getHsCode(OrderItemInterface $orderItem): string
+    {
+        $extensionAttributes = $orderItem->getExtensionAttributes();
+        if (!$extensionAttributes) {
+            return '';
+        }
+
+        return (string) $extensionAttributes->getNrshippingHsCode();
     }
 }

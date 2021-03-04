@@ -47,7 +47,7 @@ class CreateProductAttributesPatch implements PatchRevertableInterface, DataPatc
     }
 
     /**
-     * Create product attributes for customs relevant data
+     * Create product attributes
      *
      * @return void
      * @throws LocalizedException
@@ -57,6 +57,7 @@ class CreateProductAttributesPatch implements PatchRevertableInterface, DataPatc
     {
         $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
         DataInstaller::addHsCodeAttribute($eavSetup);
+        DataInstaller::addExportDescriptionAttribute($eavSetup);
     }
 
     public function revert()

@@ -143,7 +143,7 @@ class CompatibilityEnforcer implements CarrierDataProcessorInterface
      *
      * There is an (arbitrary) limit of 5 iterations to avoid infinite loops or overly convoluted rule setups.
      *
-     * @param CarrierDataInterface $carrierSettings
+     * @param CarrierDataInterface $shippingSettings
      * @param int $storeId
      * @param string $countryCode
      * @param string $postalCode
@@ -153,16 +153,16 @@ class CompatibilityEnforcer implements CarrierDataProcessorInterface
      * @throws LocalizedException Thrown if a required input is missing a value
      */
     public function process(
-        CarrierDataInterface $carrierSettings,
+        CarrierDataInterface $shippingSettings,
         int $storeId,
         string $countryCode,
         string $postalCode,
         ShipmentInterface $shipment = null
     ): CarrierDataInterface {
         for ($iteration = 0; $iteration <= 5; $iteration++) {
-            $inputsModified = $this->processRules($carrierSettings);
+            $inputsModified = $this->processRules($shippingSettings);
             if (!$inputsModified) {
-                return $carrierSettings;
+                return $shippingSettings;
             }
         }
 

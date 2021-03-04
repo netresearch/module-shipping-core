@@ -66,6 +66,7 @@ class PersistOrderItemAttributes
         }
 
         $countryOfManufacture = $extensionAttributes->getNrshippingCountryOfManufacture();
+        $exportDescription = $extensionAttributes->getNrshippingExportDescription();
         $hsCode = $extensionAttributes->getNrshippingHsCode();
 
         if (!$countryOfManufacture && !$hsCode) {
@@ -76,6 +77,7 @@ class PersistOrderItemAttributes
             $orderItemAttribute = $this->orderItemAttributeFactory->create();
             $orderItemAttribute->setItemId((int) $orderItem->getItemId());
             $orderItemAttribute->setCountryOfManufacture($countryOfManufacture);
+            $orderItemAttribute->setExportDescription($exportDescription);
             $orderItemAttribute->setHsCode($hsCode);
 
             $this->orderItemAttributeRepository->save($orderItemAttribute);

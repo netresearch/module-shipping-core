@@ -80,7 +80,7 @@ class InputDataProcessor implements ShippingOptionsProcessorInterface
         foreach ($shippingOption->getInputs() as $input) {
             switch ($input->getCode()) {
                 // shipping product
-                case Codes::PACKAGING_INPUT_PRODUCT_CODE:
+                case Codes::PACKAGE_INPUT_PRODUCT_CODE:
                     $option = $this->optionFactory->create();
                     $value = substr(strrchr((string) $shipment->getOrder()->getShippingMethod(), '_'), 1);
                     $option->setValue($value);
@@ -91,15 +91,15 @@ class InputDataProcessor implements ShippingOptionsProcessorInterface
                     $input->setDefaultValue($value);
                     break;
 
-                case Codes::PACKAGING_INPUT_PACKAGING_WEIGHT:
+                // weight
+                case Codes::PACKAGE_INPUT_PACKAGING_WEIGHT:
                     $comment = $this->commentFactory->create();
                     $comment->setContent($this->shippingConfig->getWeightUnit($shipment->getStoreId()));
                     $input->setComment($comment);
                     $input->setDefaultValue($defaultPackage ? (string) $defaultPackage->getWeight() : '');
                     break;
 
-                // weight
-                case Codes::PACKAGING_INPUT_WEIGHT:
+                case Codes::PACKAGE_INPUT_WEIGHT:
                     $itemTotalWeight = $this->itemAttributeReader->getTotalWeight($shipment);
                     $packagingWeight = $defaultPackage ? $defaultPackage->getWeight() : 0;
                     $totalWeight = $itemTotalWeight + $packagingWeight;
@@ -112,7 +112,7 @@ class InputDataProcessor implements ShippingOptionsProcessorInterface
                     $input->setComment($comment);
                     break;
 
-                case Codes::PACKAGING_INPUT_WEIGHT_UNIT:
+                case Codes::PACKAGE_INPUT_WEIGHT_UNIT:
                     $weightUnit = $this->shippingConfig->getWeightUnit($shipment->getStoreId()) === 'kg'
                         ? \Zend_Measure_Weight::KILOGRAM
                         : \Zend_Measure_Weight::POUND;
@@ -120,28 +120,28 @@ class InputDataProcessor implements ShippingOptionsProcessorInterface
                     break;
 
                 // dimensions
-                case Codes::PACKAGING_INPUT_WIDTH:
-                    $comment = $this->commentFactory->create();
-                    $comment->setContent($this->shippingConfig->getDimensionUnit($shipment->getStoreId()));
-                    $input->setComment($comment);
-                    $input->setDefaultValue($defaultPackage ? (string) $defaultPackage->getWidth() : '');
-                    break;
-
-                case Codes::PACKAGING_INPUT_HEIGHT:
-                    $comment = $this->commentFactory->create();
-                    $comment->setContent($this->shippingConfig->getDimensionUnit($shipment->getStoreId()));
-                    $input->setComment($comment);
-                    $input->setDefaultValue($defaultPackage ? (string) $defaultPackage->getHeight() : '');
-                    break;
-
-                case Codes::PACKAGING_INPUT_LENGTH:
+                case Codes::PACKAGE_INPUT_LENGTH:
                     $comment = $this->commentFactory->create();
                     $comment->setContent($this->shippingConfig->getDimensionUnit($shipment->getStoreId()));
                     $input->setComment($comment);
                     $input->setDefaultValue($defaultPackage ? (string) $defaultPackage->getLength() : '');
                     break;
 
-                case Codes::PACKAGING_INPUT_SIZE_UNIT:
+                case Codes::PACKAGE_INPUT_WIDTH:
+                    $comment = $this->commentFactory->create();
+                    $comment->setContent($this->shippingConfig->getDimensionUnit($shipment->getStoreId()));
+                    $input->setComment($comment);
+                    $input->setDefaultValue($defaultPackage ? (string) $defaultPackage->getWidth() : '');
+                    break;
+
+                case Codes::PACKAGE_INPUT_HEIGHT:
+                    $comment = $this->commentFactory->create();
+                    $comment->setContent($this->shippingConfig->getDimensionUnit($shipment->getStoreId()));
+                    $input->setComment($comment);
+                    $input->setDefaultValue($defaultPackage ? (string) $defaultPackage->getHeight() : '');
+                    break;
+
+                case Codes::PACKAGE_INPUT_SIZE_UNIT:
                     $dimensionsUnit = $this->shippingConfig->getDimensionUnit($shipment->getStoreId()) === 'cm'
                         ? \Zend_Measure_Length::CENTIMETER
                         : \Zend_Measure_Length::INCH;
@@ -149,7 +149,7 @@ class InputDataProcessor implements ShippingOptionsProcessorInterface
                     break;
 
                 // customs
-                case Codes::PACKAGING_INPUT_CUSTOMS_VALUE:
+                case Codes::PACKAGE_INPUT_CUSTOMS_VALUE:
                     $price = $this->itemAttributeReader->getTotalPrice($shipment);
                     $currency = $shipment->getStore()->getBaseCurrency();
                     $currencySymbol = $currency->getCurrencySymbol() ?: $currency->getCode();
@@ -159,7 +159,7 @@ class InputDataProcessor implements ShippingOptionsProcessorInterface
                     $input->setDefaultValue((string) $price);
                     break;
 
-                case Codes::PACKAGING_INPUT_CONTENT_TYPE:
+                case Codes::PACKAGE_INPUT_CONTENT_TYPE:
                     $input->setOptions(
                         array_map(
                             function ($optionArray) {
@@ -177,6 +177,7 @@ class InputDataProcessor implements ShippingOptionsProcessorInterface
     }
 
     /**
+     * @param string $carrierCode
      * @param ShippingOptionInterface[] $shippingOptions
      * @param int $storeId
      * @param string $countryCode
@@ -186,6 +187,7 @@ class InputDataProcessor implements ShippingOptionsProcessorInterface
      * @return ShippingOptionInterface[]
      */
     public function process(
+        string $carrierCode,
         array $shippingOptions,
         int $storeId,
         string $countryCode,

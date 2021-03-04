@@ -115,7 +115,7 @@ class ArraySerialized extends Value implements ProcessorInterface
 
             $value = $this->serializer->serialize($value);
         } else {
-            $value = [];
+            $value = $this->getOldValue();
         }
 
         $this->setValue($value);

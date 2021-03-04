@@ -173,6 +173,10 @@ class InputDataProcessor implements ItemShippingOptionsProcessorInterface
                     ));
                     $input->setDefaultValue($this->itemAttributeReader->getCountryOfManufacture($shipmentItem));
                     break;
+
+                case Codes::ITEM_INPUT_EXPORT_DESCRIPTION:
+                    $input->setDefaultValue($this->itemAttributeReader->getExportDescription($shipmentItem));
+                    break;
             }
         }
     }
@@ -180,6 +184,7 @@ class InputDataProcessor implements ItemShippingOptionsProcessorInterface
     /**
      * Set default values for item detail and item customs inputs from the shipment items.
      *
+     * @param string $carrierCode
      * @param ItemShippingOptionsInterface[] $itemOptions
      * @param int $storeId
      * @param string $countryCode
@@ -189,6 +194,7 @@ class InputDataProcessor implements ItemShippingOptionsProcessorInterface
      * @return ItemShippingOptionsInterface[]
      */
     public function process(
+        string $carrierCode,
         array $itemOptions,
         int $storeId,
         string $countryCode,

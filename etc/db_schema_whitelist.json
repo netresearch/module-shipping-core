@@ -55,8 +55,9 @@
   "nrshipping_order_item": {
     "column": {
       "item_id": true,
-      "hs_code": true,
-      "country_of_manufacture": true
+      "country_of_manufacture": true,
+      "export_description": true,
+      "hs_code": true
     },
     "constraint": {
       "PRIMARY": true,

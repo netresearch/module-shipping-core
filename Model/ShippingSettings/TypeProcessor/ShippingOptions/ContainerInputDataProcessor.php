@@ -106,19 +106,19 @@ class ContainerInputDataProcessor implements ShippingOptionsProcessorInterface
         $maps = array_map(
             function (Package $package) {
                 $width = $this->inputValueFactory->create();
-                $width->setCode(Codes::PACKAGING_OPTION_DETAILS . '.' . Codes::PACKAGING_INPUT_WIDTH);
+                $width->setCode(Codes::PACKAGE_OPTION_DETAILS . '.' . Codes::PACKAGE_INPUT_WIDTH);
                 $width->setValue((string) $package->getWidth());
 
                 $length = $this->inputValueFactory->create();
-                $length->setCode(Codes::PACKAGING_OPTION_DETAILS . '.' . Codes::PACKAGING_INPUT_LENGTH);
+                $length->setCode(Codes::PACKAGE_OPTION_DETAILS . '.' . Codes::PACKAGE_INPUT_LENGTH);
                 $length->setValue((string) $package->getLength());
 
                 $height = $this->inputValueFactory->create();
-                $height->setCode(Codes::PACKAGING_OPTION_DETAILS . '.' . Codes::PACKAGING_INPUT_HEIGHT);
+                $height->setCode(Codes::PACKAGE_OPTION_DETAILS . '.' . Codes::PACKAGE_INPUT_HEIGHT);
                 $height->setValue((string) $package->getHeight());
 
                 $weight = $this->inputValueFactory->create();
-                $weight->setCode(Codes::PACKAGING_OPTION_DETAILS . '.' . Codes::PACKAGING_INPUT_PACKAGING_WEIGHT);
+                $weight->setCode(Codes::PACKAGE_OPTION_DETAILS . '.' . Codes::PACKAGE_INPUT_PACKAGING_WEIGHT);
                 $weight->setValue((string) $package->getWeight());
 
                 $map = $this->valueMapFactory->create();
@@ -138,6 +138,7 @@ class ContainerInputDataProcessor implements ShippingOptionsProcessorInterface
      *
      * Set the default package if configured and build the package properties value map.
      *
+     * @param string $carrierCode
      * @param ShippingOptionInterface[] $shippingOptions
      * @param int $storeId
      * @param string $countryCode
@@ -147,21 +148,22 @@ class ContainerInputDataProcessor implements ShippingOptionsProcessorInterface
      * @return ShippingOptionInterface[]
      */
     public function process(
+        string $carrierCode,
         array $shippingOptions,
         int $storeId,
         string $countryCode,
         string $postalCode,
         ShipmentInterface $shipment = null
     ): array {
-        if (!isset($shippingOptions[Codes::PACKAGING_OPTION_DETAILS])) {
+        if (!isset($shippingOptions[Codes::PACKAGE_OPTION_DETAILS])) {
             // packageDetails shipping option does not exist, nothing to modify
             return $shippingOptions;
         }
 
-        $shippingOption = $shippingOptions[Codes::PACKAGING_OPTION_DETAILS];
+        $shippingOption = $shippingOptions[Codes::PACKAGE_OPTION_DETAILS];
         $inputs = $shippingOption->getInputs();
 
-        if (!isset($inputs[Codes::PACKAGING_INPUT_CUSTOM_PACKAGE_ID])) {
+        if (!isset($inputs[Codes::PACKAGE_INPUT_PACKAGING_ID])) {
             // customPackageId input does not exist, nothing to modify
             return $shippingOptions;
         }
@@ -169,13 +171,13 @@ class ContainerInputDataProcessor implements ShippingOptionsProcessorInterface
         $packages = $this->config->getPackages($storeId);
         if (empty($packages)) {
             // no container presets configured, remove the input entirely
-            unset($inputs[Codes::PACKAGING_INPUT_CUSTOM_PACKAGE_ID]);
+            unset($inputs[Codes::PACKAGE_INPUT_PACKAGING_ID]);
             $shippingOption->setInputs($inputs);
             return $shippingOptions;
         }
 
-        $this->setOptions($inputs[Codes::PACKAGING_INPUT_CUSTOM_PACKAGE_ID], $packages);
-        $this->setValueMaps($inputs[Codes::PACKAGING_INPUT_CUSTOM_PACKAGE_ID], $packages);
+        $this->setOptions($inputs[Codes::PACKAGE_INPUT_PACKAGING_ID], $packages);
+        $this->setValueMaps($inputs[Codes::PACKAGE_INPUT_PACKAGING_ID], $packages);
 
         return $shippingOptions;
     }

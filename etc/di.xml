@@ -7,7 +7,10 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <!-- # service interface preferences -->
     <preference for="Netresearch\ShippingCore\Api\AdditionalFee\TaxConfigInterface" type="Netresearch\ShippingCore\Model\Config\TaxConfig"/>
+    <preference for="Netresearch\ShippingCore\Api\Config\MapBoxConfigInterface" type="Netresearch\ShippingCore\Model\Config\MapBoxDummyConfig"/>
+    <preference for="Netresearch\ShippingCore\Api\Config\ParcelProcessingConfigInterface" type="Netresearch\ShippingCore\Model\Config\ParcelProcessingConfig"/>
     <preference for="Netresearch\ShippingCore\Api\Config\ShippingConfigInterface" type="Netresearch\ShippingCore\Model\Config\ShippingConfig"/>
+    <preference for="Netresearch\ShippingCore\Api\DeliveryLocation\SearchInterface" type="Netresearch\ShippingCore\Model\DeliveryLocation\Search"/>
     <preference for="Netresearch\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface" type="Netresearch\ShippingCore\Model\LabelStatus\LabelStatusManagement"/>
     <preference for="Netresearch\ShippingCore\Api\Pipeline\CollectRatesPipelineInterface" type="Netresearch\ShippingCore\Model\Pipeline\Rate\CollectRatesPipeline"/>
     <preference for="Netresearch\ShippingCore\Api\Pipeline\CreateShipmentsPipelineInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\CreateShipmentsPipeline"/>
@@ -22,6 +25,7 @@
     <preference for="Netresearch\ShippingCore\Api\Pipeline\TrackResponseProcessorInterface" type="Netresearch\ShippingCore\Model\Pipeline\Track\TrackResponseProcessor"/>
     <preference for="Netresearch\ShippingCore\Api\Rate\ProxyCarrierFactoryInterface" type="Netresearch\ShippingCore\Model\Rate\Emulation\ProxyCarrierFactory"/>
     <preference for="Netresearch\ShippingCore\Api\Rate\RateRequestEmulationInterface" type="Netresearch\ShippingCore\Model\Rate\Emulation\RateRequestService"/>
+    <preference for="Netresearch\ShippingCore\Api\ShipmentDate\CutOffTimeConverterInterface" type="Netresearch\ShippingCore\Model\ShipmentDate\CutOffTimeConverter"/>
     <preference for="Netresearch\ShippingCore\Api\ShipmentDate\ShipmentDateCalculatorInterface" type="Netresearch\ShippingCore\Model\ShipmentDate\ShipmentDateCalculator"/>
     <preference for="Netresearch\ShippingCore\Api\ShippingSettings\ArrayProcessor\ShippingSettingsProcessorInterface" type="Netresearch\ShippingCore\Model\ShippingSettings\ArrayProcessor\CompositeShippingSettingsProcessor"/>
     <preference for="Netresearch\ShippingCore\Api\ShippingSettings\CheckoutManagementInterface" type="Netresearch\ShippingCore\Model\ShippingSettings\CheckoutManagement"/>
@@ -32,8 +36,13 @@
     <preference for="Netresearch\ShippingCore\Api\Util\AssetUrlInterface" type="Netresearch\ShippingCore\Model\Util\AssetUrl"/>
     <preference for="Netresearch\ShippingCore\Api\Util\DeliveryAreaInterface" type="Netresearch\ShippingCore\Model\Util\DeliveryArea"/>
     <preference for="Netresearch\ShippingCore\Api\Util\ItemAttributeReaderInterface" type="Netresearch\ShippingCore\Model\ItemAttribute\ItemAttributeReader"/>
+    <preference for="Netresearch\ShippingCore\Api\Util\PdfCombinatorInterface" type="Netresearch\ShippingCore\Model\Util\PdfCombinator"/>
     <preference for="Netresearch\ShippingCore\Api\Util\UnitConverterInterface" type="Netresearch\ShippingCore\Model\Util\UnitConverter"/>
     <!-- # data interface preferences -->
+    <preference for="Netresearch\ShippingCore\Api\Data\DeliveryLocation\AddressInterface" type="Netresearch\ShippingCore\Model\DeliveryLocation\Address"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\DeliveryLocation\LocationInterface" type="Netresearch\ShippingCore\Model\DeliveryLocation\Location"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\DeliveryLocation\OpeningHoursInterface" type="Netresearch\ShippingCore\Model\DeliveryLocation\OpeningHours"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\DeliveryLocation\TimeFrameInterface" type="Netresearch\ShippingCore\Model\DeliveryLocation\TimeFrame"/>
     <preference for="Netresearch\ShippingCore\Api\Data\OrderExport\KeyValueObjectInterface" type="Netresearch\ShippingCore\Model\OrderExport\Data\KeyValueObject"/>
     <preference for="Netresearch\ShippingCore\Api\Data\OrderExport\ServiceDataInterface" type="Netresearch\ShippingCore\Model\OrderExport\Data\ServiceData"/>
     <preference for="Netresearch\ShippingCore\Api\Data\OrderExport\ShippingOptionInterface" type="Netresearch\ShippingCore\Model\OrderExport\Data\ShippingOption"/>
@@ -121,56 +130,56 @@
     <virtualType name="Netresearch\ShippingCore\Model\ShippingSettings\Checkout\ShippingDataProcessor\Virtual" type="Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\CompositeShippingDataProcessor">
         <arguments>
             <argument name="carrierDataProcessors" xsi:type="array">
-                <item name="convertRules" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\Carrier\CompatibilityPreProcessor</item>
+                <item name="convertRules" xsi:type="object" sortOrder="10">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\Carrier\CompatibilityPreProcessor</item>
             </argument>
             <argument name="shippingOptionsProcessors" xsi:type="array">
-                <item name="filterRoutes" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\RouteProcessor</item>
-                <item name="applySortOrder" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\SortOrderProcessor</item>
+                <item name="filterRoutes" xsi:type="object" sortOrder="10">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\RouteProcessor</item>
+                <item name="applySortOrder" xsi:type="object" sortOrder="20">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\SortOrderProcessor</item>
             </argument>
             <argument name="metadataProcessors" xsi:type="array">
-                <item name="updateImageUrl" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\Metadata\ImageUrlProcessor</item>
+                <item name="updateImageUrl" xsi:type="object" sortOrder="10">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\Metadata\ImageUrlProcessor</item>
             </argument>
         </arguments>
     </virtualType>
     <virtualType name="Netresearch\ShippingCore\Model\ShippingSettings\Checkout\ShippingSettingsProcessor\Virtual" type="Netresearch\ShippingCore\Model\ShippingSettings\ArrayProcessor\CompositeShippingSettingsProcessor">
         <arguments>
             <argument name="processors" xsi:type="array">
-                <item name="removeUnavailableOptions" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\ArrayProcessor\ShippingOptionAvailabilityProcessor</item>
+                <item name="removeUnavailableOptions" xsi:type="object" sortOrder="10">Netresearch\ShippingCore\Model\ShippingSettings\ArrayProcessor\ShippingOptionAvailabilityProcessor</item>
             </argument>
         </arguments>
     </virtualType>
     <virtualType name="Netresearch\ShippingCore\Model\ShippingSettings\Packaging\ShippingDataProcessor\Virtual" type="Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\CompositeShippingDataProcessor">
         <arguments>
             <argument name="carrierDataProcessors" xsi:type="array">
-                <item name="convertRules" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\Carrier\CompatibilityPreProcessor</item>
-                <item name="applyRules" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\Carrier\CompatibilityEnforcer</item>
+                <item name="convertRules" xsi:type="object" sortOrder="10">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\Carrier\CompatibilityPreProcessor</item>
+                <item name="applyRules" xsi:type="object" sortOrder="20">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\Carrier\CompatibilityEnforcer</item>
             </argument>
             <argument name="shippingOptionsProcessors" xsi:type="array">
-                <item name="filterRoutes" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\RouteProcessor</item>
-                <item name="removeConsumerServices" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\RemoveUnusedConsumerServicesProcessor</item>
-                <item name="processInputs" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\InputDataProcessor</item>
-                <item name="processContainerInput" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\ContainerInputDataProcessor</item>
-                <item name="applyServiceSelections" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\ApplyServiceSelectionsProcessor</item>
-                <item name="parseCodTemplate" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\CodReasonForPaymentProcessor</item>
-                <item name="setServiceEnabled" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\SetServiceEnabledProcessor</item>
-                <item name="addDeliveryLocationInputs" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\DeliveryLocationInputsProcessor</item>
-                <item name="applySortOrder" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\SortOrderProcessor</item>
+                <item name="filterRoutes" xsi:type="object" sortOrder="10">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\RouteProcessor</item>
+                <item name="removeConsumerServices" xsi:type="object" sortOrder="20">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\RemoveUnusedConsumerServicesProcessor</item>
+                <item name="addDeliveryLocationInputs" xsi:type="object" sortOrder="30">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\DeliveryLocationInputsProcessor</item>
+                <item name="processInputs" xsi:type="object" sortOrder="40">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\InputDataProcessor</item>
+                <item name="processContainerInput" xsi:type="object" sortOrder="50">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\ContainerInputDataProcessor</item>
+                <item name="applyServiceSelections" xsi:type="object" sortOrder="60">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\ApplyServiceSelectionsProcessor</item>
+                <item name="parseCodTemplate" xsi:type="object" sortOrder="70">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\CodReasonForPaymentProcessor</item>
+                <item name="setServiceEnabled" xsi:type="object" sortOrder="80">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\SetServiceEnabledProcessor</item>
+                <item name="applySortOrder" xsi:type="object" sortOrder="90">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\SortOrderProcessor</item>
             </argument>
             <argument name="itemShippingOptionsProcessors" xsi:type="array">
-                <item name="filterRoutes" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ItemShippingOptions\RouteProcessor</item>
-                <item name="processInputs" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ItemShippingOptions\InputDataProcessor</item>
+                <item name="filterRoutes" xsi:type="object" sortOrder="10">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ItemShippingOptions\RouteProcessor</item>
+                <item name="processInputs" xsi:type="object" sortOrder="20">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ItemShippingOptions\InputDataProcessor</item>
             </argument>
             <argument name="metadataProcessors" xsi:type="array">
-                <item name="updateImageUrl" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\Metadata\ImageUrlProcessor</item>
+                <item name="updateImageUrl" xsi:type="object" sortOrder="20">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\Metadata\ImageUrlProcessor</item>
             </argument>
         </arguments>
     </virtualType>
     <virtualType name="Netresearch\ShippingCore\Model\ShippingSettings\Packaging\ShippingSettingsProcessor\Virtual" type="Netresearch\ShippingCore\Model\ShippingSettings\ArrayProcessor\CompositeShippingSettingsProcessor">
         <arguments>
             <argument name="processors" xsi:type="array">
-                <item name="filterCarriers" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\ArrayProcessor\FilterCarriersProcessor</item>
-                <item name="cloneItemTemplates" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\ArrayProcessor\PrepareItemOptionsProcessor</item>
-                <item name="setDefaultConfigValues" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\ArrayProcessor\DefaultConfigValueProcessor</item>
+                <item name="filterCarriers" xsi:type="object" sortOrder="10">Netresearch\ShippingCore\Model\ShippingSettings\ArrayProcessor\FilterCarriersProcessor</item>
+                <item name="cloneItemTemplates" xsi:type="object" sortOrder="20">Netresearch\ShippingCore\Model\ShippingSettings\ArrayProcessor\PrepareItemOptionsProcessor</item>
+                <item name="setDefaultConfigValues" xsi:type="object" sortOrder="30">Netresearch\ShippingCore\Model\ShippingSettings\ArrayProcessor\DefaultConfigValueProcessor</item>
             </argument>
         </arguments>
     </virtualType>
@@ -272,7 +281,7 @@
     <type name="Netresearch\ShippingCore\Model\ShipmentDate\ShipmentDateCalculator">
         <arguments>
             <argument name="dayValidators" xsi:type="array">
-                <item name="noHoliday" xsi:type="object">Netresearch\ShippingCore\Model\ShipmentDate\Validator\NoHoliday</item>
+                <item name="noHoliday" xsi:type="object">Netresearch\ShippingCore\Model\ShipmentDate\Validator\ExcludeHolidays</item>
             </argument>
         </arguments>
     </type>
@@ -315,10 +324,16 @@
             <argument name="shippingDataProcessor" xsi:type="object">Netresearch\ShippingCore\Model\ShippingSettings\Packaging\ShippingDataProcessor\Virtual</argument>
         </arguments>
     </type>
+    <type name="Netresearch\ShippingCore\Setup\Patch\Data\Migration\LabelStatus">
+        <arguments>
+            <argument name="orderGrid" xsi:type="object">Magento\Sales\Model\ResourceModel\Order\Grid</argument>
+        </arguments>
+    </type>
 
     <!-- # interceptor plugins -->
     <type name="Magento\Eav\Model\Entity\Attribute\Backend\AbstractBackend">
-        <plugin name="validateHsCodeAttribute" type="Netresearch\ShippingCore\Plugin\Eav\Attribute\Backend\ValidateHsCodeAttribute"/>
+        <plugin name="nrShippingValidateHsCodeAttribute" type="Netresearch\ShippingCore\Plugin\Eav\Attribute\Backend\ValidateHsCodeAttribute"/>
+        <plugin name="nrShippingValidateExportDescriptionAttribute" type="Netresearch\ShippingCore\Plugin\Eav\Attribute\Backend\ValidateExportDescriptionAttribute"/>
     </type>
     <type name="Magento\Quote\Api\CartTotalRepositoryInterface">
         <plugin name="updateAdditionalFeeTotalsSegment" type="Netresearch\ShippingCore\Plugin\AdditionalFee\Quote\AddTotalSegmentExtensionAttributes"/>

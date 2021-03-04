@@ -21,11 +21,6 @@ class SetServiceEnabledProcessor implements ShippingOptionsProcessorInterface
      */
     private $selectionManager;
 
-    /**
-     * SetServiceEnabledProcessor constructor.
-     *
-     * @param OrderSelectionManager $selectionManager
-     */
     public function __construct(OrderSelectionManager $selectionManager)
     {
         $this->selectionManager = $selectionManager;
@@ -36,6 +31,7 @@ class SetServiceEnabledProcessor implements ShippingOptionsProcessorInterface
      * property. For display in packaging popup, update the "enabled" setting
      * if added via adminhtml/shipping_settings.xml file.
      *
+     * @param string $carrierCode
      * @param ShippingOptionInterface[] $shippingOptions
      * @param int $storeId
      * @param string $countryCode
@@ -45,6 +41,7 @@ class SetServiceEnabledProcessor implements ShippingOptionsProcessorInterface
      * @return ShippingOptionInterface[]
      */
     public function process(
+        string $carrierCode,
         array $shippingOptions,
         int $storeId,
         string $countryCode,

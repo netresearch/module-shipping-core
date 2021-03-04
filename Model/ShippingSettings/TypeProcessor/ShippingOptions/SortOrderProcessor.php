@@ -18,6 +18,7 @@ class SortOrderProcessor implements ShippingOptionsProcessorInterface
     /**
      * Sort shipping options within one option group as well as their inputs according to their "sortOrder" property.
      *
+     * @param string $carrierCode
      * @param ShippingOptionInterface[] $shippingOptions
      * @param int|null $storeId
      * @param string $countryCode
@@ -27,6 +28,7 @@ class SortOrderProcessor implements ShippingOptionsProcessorInterface
      * @return ShippingOptionInterface[]
      */
     public function process(
+        string $carrierCode,
         array $shippingOptions,
         int $storeId,
         string $countryCode,

@@ -29,30 +29,12 @@ class ShipmentItemAttributeReader
      */
     private $itemFilter;
 
-    /**
-     * ShipmentItemAttributeReader constructor.
-     *
-     * @param ItemAttributeReaderInterface $orderItemAttributeReader
-     * @param ShipmentItemFilter $itemFilter
-     */
     public function __construct(
         ItemAttributeReaderInterface $orderItemAttributeReader,
         ShipmentItemFilter $itemFilter
     ) {
         $this->orderItemAttributeReader = $orderItemAttributeReader;
         $this->itemFilter = $itemFilter;
-    }
-
-    /**
-     * Read HS code from extension attributes.
-     *
-     * @param Item $shipmentItem
-     * @return string
-     */
-    public function getHsCode(Item $shipmentItem): string
-    {
-        $orderItem = $shipmentItem->getOrderItem();
-        return $this->orderItemAttributeReader->getHsCode($orderItem);
     }
 
     /**
@@ -65,6 +47,30 @@ class ShipmentItemAttributeReader
     {
         $orderItem = $shipmentItem->getOrderItem();
         return $this->orderItemAttributeReader->getCountryOfManufacture($orderItem);
+    }
+
+    /**
+     * Read export description from extension attributes.
+     *
+     * @param Item $shipmentItem
+     * @return string
+     */
+    public function getExportDescription(Item $shipmentItem): string
+    {
+        $orderItem = $shipmentItem->getOrderItem();
+        return $this->orderItemAttributeReader->getExportDescription($orderItem);
+    }
+
+    /**
+     * Read HS code from extension attributes.
+     *
+     * @param Item $shipmentItem
+     * @return string
+     */
+    public function getHsCode(Item $shipmentItem): string
+    {
+        $orderItem = $shipmentItem->getOrderItem();
+        return $this->orderItemAttributeReader->getHsCode($orderItem);
     }
 
     /**

@@ -324,8 +324,9 @@ class RequestExtractor implements RequestExtractorInterface
                         'price' => (float)$itemData['price'],
                         'customsValue' => isset($itemData['customs_value']) ? (float)$itemData['customs_value'] : null,
                         'sku' => $itemData['sku'] ?? '',
-                        'hsCode' => $itemData['customs']['hsCode'] ?? '',
                         'countryOfOrigin' => $itemData['customs']['countryOfOrigin'] ?? '',
+                        'exportDescription' => $itemData['customs']['exportDescription'] ?? '',
+                        'hsCode' => $itemData['customs']['hsCode'] ?? '',
                     ]);
 
                     return $packageItem;
@@ -363,6 +364,67 @@ class RequestExtractor implements RequestExtractorInterface
         return $this->getServiceOptionReader()->getServiceOptionValue(
             Codes::SERVICE_OPTION_CASH_ON_DELIVERY,
             Codes::SERVICE_INPUT_COD_REASON_FOR_PAYMENT
+        );
+    }
+
+    public function isPickupLocationDelivery(): bool
+    {
+        return $this->getServiceOptionReader()->isServiceEnabled(Codes::SERVICE_OPTION_DELIVERY_LOCATION);
+    }
+
+    public function getDeliveryLocationType(): string
+    {
+        return $this->getServiceOptionReader()->getServiceOptionValue(
+            Codes::SERVICE_OPTION_DELIVERY_LOCATION,
+            Codes::SERVICE_INPUT_DELIVERY_LOCATION_TYPE
+        );
+    }
+
+    public function getDeliveryLocationId(): string
+    {
+        return $this->getServiceOptionReader()->getServiceOptionValue(
+            Codes::SERVICE_OPTION_DELIVERY_LOCATION,
+            Codes::SERVICE_INPUT_DELIVERY_LOCATION_ID
+        );
+    }
+
+    public function getDeliveryLocationNumber(): string
+    {
+        return $this->getServiceOptionReader()->getServiceOptionValue(
+            Codes::SERVICE_OPTION_DELIVERY_LOCATION,
+            Codes::SERVICE_INPUT_DELIVERY_LOCATION_NUMBER
+        );
+    }
+
+    public function getDeliveryLocationCountryCode(): string
+    {
+        return $this->getServiceOptionReader()->getServiceOptionValue(
+            Codes::SERVICE_OPTION_DELIVERY_LOCATION,
+            Codes::SERVICE_INPUT_DELIVERY_LOCATION_COUNTRY_CODE
+        );
+    }
+
+    public function getDeliveryLocationPostalCode(): string
+    {
+        return $this->getServiceOptionReader()->getServiceOptionValue(
+            Codes::SERVICE_OPTION_DELIVERY_LOCATION,
+            Codes::SERVICE_INPUT_DELIVERY_LOCATION_POSTAL_CODE
+        );
+    }
+
+    public function getDeliveryLocationCity(): string
+    {
+        return $this->getServiceOptionReader()->getServiceOptionValue(
+            Codes::SERVICE_OPTION_DELIVERY_LOCATION,
+            Codes::SERVICE_INPUT_DELIVERY_LOCATION_CITY
+        );
+    }
+
+    public function getDeliveryLocationStreet(): string
+    {
+        return $this->getServiceOptionReader()->getServiceOptionValue(
+            Codes::SERVICE_OPTION_DELIVERY_LOCATION,
+            Codes::SERVICE_INPUT_DELIVERY_LOCATION_STREET
         );
     }
 }

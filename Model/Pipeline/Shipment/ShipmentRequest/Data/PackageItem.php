@@ -60,12 +60,17 @@ class PackageItem implements PackageItemInterface
     /**
      * @var string
      */
-    private $hsCode;
+    private $countryOfOrigin;
 
     /**
      * @var string
      */
-    private $countryOfOrigin;
+    private $exportDescription;
+
+    /**
+     * @var string
+     */
+    private $hsCode;
 
     public function __construct(
         int $orderItemId,
@@ -77,8 +82,9 @@ class PackageItem implements PackageItemInterface
         float $price,
         float $customsValue = null,
         string $sku = '',
-        string $hsCode = '',
-        string $countryOfOrigin = ''
+        string $countryOfOrigin = '',
+        string $exportDescription = '',
+        string $hsCode = ''
     ) {
         $this->orderItemId = $orderItemId;
         $this->productId = $productId;
@@ -89,8 +95,9 @@ class PackageItem implements PackageItemInterface
         $this->price = $price;
         $this->customsValue = $customsValue;
         $this->sku = $sku;
-        $this->hsCode = $hsCode;
         $this->countryOfOrigin = $countryOfOrigin;
+        $this->exportDescription = $exportDescription;
+        $this->hsCode = $hsCode;
     }
 
     public function getOrderItemId(): int
@@ -138,13 +145,18 @@ class PackageItem implements PackageItemInterface
         return $this->sku;
     }
 
-    public function getHsCode(): string
-    {
-        return $this->hsCode;
-    }
-
     public function getCountryOfOrigin(): string
     {
         return $this->countryOfOrigin;
+    }
+
+    public function getExportDescription(): string
+    {
+        return $this->exportDescription;
+    }
+
+    public function getHsCode(): string
+    {
+        return $this->hsCode;
     }
 }

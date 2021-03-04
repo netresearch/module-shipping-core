@@ -1,6 +1,7 @@
 "A confirmation email will be sent to the customer when the shipment was successfully created.","Nach erfolgreicher Erstellung des Lieferscheins wird dem Kunden eine Versandbestätigung per E-Mail zugesandt."
 "Add Package","Paket hinzufügen"
 "Additional Fee",Zusatzkosten
+"An error occurred while updating the recipient street.","Beim Aktualisieren der Empfängeradresse ist ein Fehler aufgetreten."
 "Automatic label creation failed: %1","Die automatische Sendungserstellung ist fehlgeschlagen: %1"
 "Batch Processing",Massenverarbeitung
 "Cancel Labels","Versandaufträge stornieren"
@@ -9,6 +10,7 @@
 "Cash on Delivery",Nachnahmezahlung
 "Cash on Delivery Reason for Payment","Verwendungszweck Nachnahmezahlung"
 "Commercial Sample",Warenmuster
+"Configure bulk shipping label retrieval via mass action and cron.","Konfigurieren Sie die das Erzeugen von Versandetiketten via Mass-Action und Cron."
 Container,Container
 "Could not delete service selection.","Die Serviceauswahl konnte nicht gelöscht werden."
 "Could not save service selection.","Die Serviceauswahl konnte nicht gespeichert werden."
@@ -17,6 +19,7 @@ Container,Container
 "Create shipments and retrieve labels via cron job.","Erstellen Sie Lieferscheine und Versandetiketten mittels Cron Job."
 "Customs Data",Zolldaten
 "Customs Value",Zollwert
+Day,Tag
 "Deleting a single tracking number is not supported. Please use the ""Cancel Labels"" button on the shipment details page to cancel labels and tracks.","Das Löschen einer einzelnen Sendungsnummer wird nicht unterstützt. Bitte verwenden Sie den Button ""Versandaufträge stornieren"" auf der Sendungsansichtseite, um Versandaufträge zu stornieren und Sendungsnummern zu löschen."
 "Display customized message","Benutzerdefinierte Nachricht anzeigen"
 Document,Dokument
@@ -25,6 +28,7 @@ Document,Dokument
 Errors,Fehler
 "Export Content Explanation","Beschreibung des Inhalts"
 "Export Content Type",Inhaltskategorie
+"Export Description",Exportbeschreibung
 "HS Code","HS Code"
 Height,Height
 "Height %1","Höhe %1"
@@ -36,13 +40,16 @@ Height,Height
 Length,Länge
 "Length %1","Länge %1"
 "Mail item category for international, non EU shipments.","Art der Sendung für internationale Sendungen außerhalb der EU"
+"Module version:",Modulversion:
 "No additional attributes found for order item %1.","Es wurden keine Zusatzattribute für Artikel %1 gefunden."
 "No orders found (automatic label retrieval is not enabled).","Keine Bestellungen gefunden (automatische Sendungserstellung ist nicht aktiviert)."
 "No orders found for automatic label retrieval with status %1 in stores %2 for carriers %3.","Keine Bestellungen für die automatische Sendungserstellung mit Status %1 in den Stores %2 für die Carrier %3 gefunden."
 "Order %1: %2","Bestellung %1: %2"""
-"Order Status","Bestell-Status"
+"Order Status",Bestell-Status
+"Order Time",Bestellzeit
 Other,Sonstiges
 "Package #%1 not found in shipment request.","Paket #%1 konnte nicht gefunden werden."
+"Package Description",Paketbeschreibung
 "Package Details",Paket-Details
 Packages,Paketegrößen
 "Parcel Processing",Sendungsverarbeitung
@@ -51,6 +58,7 @@ Present,Geschenk
 Quantity,Menge
 "Quantity to Ship",Liefermenge
 "Reason for Payment",Verwendungszweck
+"Recipient street was successfully updated.","Empfängeradresse wurde erfolgreich aktualisiert."
 "Recipient street with ID ""%1"" does not exist.","Empfängeradresse mit der ID ""%1"" ist nicht vorhanden."
 "Retry Failed Shipments","Wiederholung fehlgeschlagener Sendungen"
 "Return of Goods",Warenrücksendung
@@ -58,6 +66,7 @@ Quantity,Menge
 "Selected payment methods will be treated as CoD methods when booking a shipment label.","Die ausgewählten Zahlungsmethoden werden bei der Erstellung des Versandauftrags als Nachnahmemethoden behandelt."
 "Set Default","Als Standard festlegen"
 "Shipment(s) for the order(s) %1 could not be created.","Lieferschein(e) für die Bestellung(en) %1 konnten nicht erstellt werden."
+"Shipping Label Automation","Automatische Erzeugung von Versandetiketten"
 "Shipping Product",Versandprodukt
 "Shipping label(s) for the order(s) %1 could not be created.","Versandetiketten für die Bestellung(en) %1 konnten nicht erstellt werden."
 "Shipping label(s) for the order(s) %1 could not be requested. Please review shipment comments.","Versandetiketten für die Bestellung(en) %1 konnten nicht abgerufen werden. Bitte prüfen Sie die Lieferscheinkommentare."
@@ -66,12 +75,14 @@ Quantity,Menge
 "The content description is mandatory if export content type is <em>OTHER</em>.","Eine Inhaltsbeschreibung ist vorgeschrieben, wenn die Inhaltskategorie <em>SONSTIGES</em> ist."
 "The money transfer purpose for cash on delivery payments can include the following placeholders: {{entity_id}}, {{increment_id}}, {{firstname}}, {{lastname}}. They will be replaced by the respective order's values.","Beim Verwendungszweck für Nachnahmezahlungen können folgende Platzhalter eingesetzt werden: {{entity_id}}, {{increment_id}}, {{firstname}}, {{lastname}}. Sie werden durch die Werte der jeweiligen Bestellung ersetzt."
 "The shipment was successfully cancelled.","Die Lieferung wurde erfolgreich storniert."
+"The value of attribute ""%1"" must be either 6, 8 or 10 digits long.","Der Wert des Attributs ""%1"" muss entweder 6, 8 oder 10 Stellen lang sein."
 "The value of attribute ""%1"" must be numeric.","Der Wert des Attributes ""%1"" muss numerisch sein."
 "The value of attribute ""%1"" must not be longer than %2 characters.","Der Wert des Attributes ""%1"" darf nicht länger als %2 Zeichen sein."
 Title,Titel
 "Total Weight",Gesamtgewicht
 "Unable to load additional attributes for order item %1.","Zusatzattribute für Artikel %1 konnten nicht geladen werden."
 "Unable to load recipient street with ID ""%1"".","Empfängeradresse mit der ID ""%1"" kann nicht geladen werden."
+"Unable to process PDF content.","PDF-Inhalt kann nicht verarbeitet werden."
 "Unable to retrieve year %1 holidays for region %2.","Feiertage in Region %2 für das Jahr %1 konnten nicht ermittelt werden."
 "Unable to save additional attributes for order item %1: %2","Zusatzattribute für Artikel %1 konnten nicht gespeichert werden: %2"
 "Unable to save label status","Labelstatus kann nicht gespeichert werden"

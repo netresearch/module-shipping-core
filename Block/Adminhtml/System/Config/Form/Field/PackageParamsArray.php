@@ -56,7 +56,7 @@ class PackageParamsArray extends AbstractFieldArray
             ParcelProcessingConfig::CONFIG_FIELD_PACKAGE_LENGTH,
             [
                 'label' => __('Length %1', $this->getMeasureLengthUnit()),
-                'style' => 'width:40px',
+                'style' => 'width:50px',
                 'class' => 'validate-digits required',
             ]
         );
@@ -64,7 +64,7 @@ class PackageParamsArray extends AbstractFieldArray
             ParcelProcessingConfig::CONFIG_FIELD_PACKAGE_WIDTH,
             [
                 'label' => __('Width %1', $this->getMeasureLengthUnit()),
-                'style' => 'width:40px',
+                'style' => 'width:50px',
                 'class' => 'validate-digits required',
             ]
         );
@@ -72,7 +72,7 @@ class PackageParamsArray extends AbstractFieldArray
             ParcelProcessingConfig::CONFIG_FIELD_PACKAGE_HEIGHT,
             [
                 'label' => __('Height %1', $this->getMeasureLengthUnit()),
-                'style' => 'width:40px',
+                'style' => 'width:50px',
                 'class' => 'validate-number required',
             ]
         );
@@ -81,7 +81,7 @@ class PackageParamsArray extends AbstractFieldArray
             ParcelProcessingConfig::CONFIG_FIELD_PACKAGE_WEIGHT,
             [
                 'label' => __('Weight %1', $this->getWeightUnit()),
-                'style' => 'width:40px',
+                'style' => 'width:50px',
                 'class' => 'validate-number required',
             ]
         );

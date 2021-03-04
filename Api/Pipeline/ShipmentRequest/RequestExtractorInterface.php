@@ -120,9 +120,65 @@ interface RequestExtractorInterface
     public function isCashOnDelivery(): bool;
 
     /**
-     * Obtain the "reasonForPayment" value for the current package.
+     * Obtain the "cashOnDelivery.reasonForPayment" value for the current package.
      *
      * @return string
      */
     public function getCodReasonForPayment(): string;
+
+    /**
+     * Check if "delivery location" was chosen for the current shipment request.
+     *
+     * @return bool
+     */
+    public function isPickupLocationDelivery(): bool;
+
+    /**
+     * Obtain the "deliveryLocation.type" value.
+     *
+     * @return string
+     */
+    public function getDeliveryLocationType(): string;
+
+    /**
+     * Obtain the "deliveryLocation.id" value.
+     *
+     * @return string
+     */
+    public function getDeliveryLocationId(): string;
+
+    /**
+     * Obtain the "deliveryLocation.number" value.
+     *
+     * @return string
+     */
+    public function getDeliveryLocationNumber(): string;
+
+    /**
+     * Obtain the "deliveryLocation.countryCode" value.
+     *
+     * @return string
+     */
+    public function getDeliveryLocationCountryCode(): string;
+
+    /**
+     * Obtain the "deliveryLocation.postalCode" value.
+     *
+     * @return string
+     */
+    public function getDeliveryLocationPostalCode(): string;
+
+    /**
+     * Obtain the "deliveryLocation.city" value.
+     *
+     * @return string
+     */
+    public function getDeliveryLocationCity(): string;
+
+    /**
+     * Obtain the "deliveryLocation.street" value.
+     *
+     * @return string
+     */
+    public function getDeliveryLocationStreet(): string;
 }

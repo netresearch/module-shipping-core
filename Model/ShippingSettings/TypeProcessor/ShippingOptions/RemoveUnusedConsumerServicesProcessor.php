@@ -50,6 +50,7 @@ class RemoveUnusedConsumerServicesProcessor implements ShippingOptionsProcessorI
      * between merchant and consumer services is not available at the shipping option,
      * so the carriers need to register their consumer services via DI configuration.
      *
+     * @param string $carrierCode
      * @param ShippingOptionInterface[] $shippingOptions
      * @param int $storeId
      * @param string $countryCode
@@ -59,6 +60,7 @@ class RemoveUnusedConsumerServicesProcessor implements ShippingOptionsProcessorI
      * @return ShippingOptionInterface[]
      */
     public function process(
+        string $carrierCode,
         array $shippingOptions,
         int $storeId,
         string $countryCode,
@@ -69,9 +71,6 @@ class RemoveUnusedConsumerServicesProcessor implements ShippingOptionsProcessorI
             return $shippingOptions;
         }
 
-        /** @var \Magento\Sales\Model\Order $order */
-        $order = $shipment->getOrder();
-        $carrierCode = strtok((string) $order->getShippingMethod(), '_');
         $consumerServices = $this->carrierConsumerServices[$carrierCode] ?? [];
 
         if (empty($consumerServices)) {
