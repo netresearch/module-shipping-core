@@ -59,7 +59,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-DHLGW-964": "2.0.0.x-dev"
+      "dev-develop": "2.0.0.x-dev"
     }
   }
 }
