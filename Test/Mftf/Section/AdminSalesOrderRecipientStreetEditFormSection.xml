@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * See LICENSE.md for license details.
+ */
+-->
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+    <section name="AdminSalesOrderRecipientStreetEditFormSection">
+        <element name="streetName" type="input" selector="input[name='name']"/>
+        <element name="streetNumber" type="input" selector="input[name='number']"/>
+        <element name="supplement" type="input" selector="input[name='supplement']"/>
+        <element name="submitButton" type="button" selector="#save" timeout="30"/>
+        <element name="backButton" type="button" selector="#back" timeout="30"/>
+    </section>
+</sections>
