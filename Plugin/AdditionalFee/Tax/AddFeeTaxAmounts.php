@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Netresearch\ShippingCore\Plugin\AdditionalFee\Tax;
 
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Sales\Model\AbstractModel;
 use Magento\Sales\Model\Order;
 use Magento\Tax\Api\Data\OrderTaxDetailsItemInterface;
 use Magento\Tax\Api\OrderTaxManagementInterface;
@@ -41,12 +42,16 @@ class AddFeeTaxAmounts
      */
     public function afterGetCalculatedTaxes(TaxHelper $subject, array $result, $source): array
     {
-        if ($source instanceof Order ||
-            $source->getData(TotalsManager::ADDITIONAL_FEE_FIELD_NAME) === null
-        ) {
+        if (!$source instanceof AbstractModel || $source instanceof Order) {
+            // nothing to do for orders or arguments that are not sales documents
+            return $result;
+        }
+
+        if ($source->getData(TotalsManager::ADDITIONAL_FEE_FIELD_NAME) === null) {
             // no total in sales document, do nothing
             return $result;
         }
+
         $order = $source->getOrder();
         $orderTaxDetails = $this->orderTaxManagement->getOrderTaxDetails($order->getId());
 
