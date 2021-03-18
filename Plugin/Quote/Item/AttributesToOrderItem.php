@@ -52,6 +52,10 @@ class AttributesToOrderItem
             $children = $quoteItem->getChildren();
             $childItem = current($children);
 
+            if ($childItem === false) {
+                return '';
+            }
+            
             $value = $childItem->getProduct() ? (string)$childItem->getProduct()->getData($attributeCode) : '';
             if ($value) {
                 return $value;
