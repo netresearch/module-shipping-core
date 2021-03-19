@@ -50,11 +50,16 @@
     "phpunit/phpunit": "^6.5.0 || ^9.0.0",
     "symfony/yaml": "^3.3.0 || ^4.0.0",
     "tddwizard/magento2-fixtures": "^0.12.0",
-    "magento/module-customer": "^102.0.0 || ^103.0.0 ",
+    "magento/module-customer": "^102.0.0 || ^103.0.0",
     "magento/module-checkout": "^100.3.0"
   },
   "suggest": {
     "magento/module-scalable-checkout": "^100.2.0",
     "magento/module-scalable-oms": "^100.2.0"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-develop": "2.0.1.x-dev"
+    }
   }
 }

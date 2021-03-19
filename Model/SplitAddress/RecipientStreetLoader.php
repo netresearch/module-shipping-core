@@ -14,10 +14,11 @@ use Netresearch\ShippingCore\Api\Data\RecipientStreetInterface;
 use Netresearch\ShippingCore\Api\Data\RecipientStreetInterfaceFactory;
 use Netresearch\ShippingCore\Api\SplitAddress\RecipientStreetLoaderInterface;
 use Netresearch\ShippingCore\Api\SplitAddress\RecipientStreetRepositoryInterface;
+use Netresearch\ShippingCore\Api\SplitAddress\SplittingRuleInterface;
 use Netresearch\ShippingCore\Model\Util\StreetSplitter;
 
 /**
- * Load a GLS recipient street by given address.
+ * Load a recipient street by given address.
  */
 class RecipientStreetLoader implements RecipientStreetLoaderInterface
 {
@@ -36,14 +37,21 @@ class RecipientStreetLoader implements RecipientStreetLoaderInterface
      */
     private $streetSplitter;
 
+    /**
+     * @var SplittingRuleInterface[]
+     */
+    private $rules;
+
     public function __construct(
         RecipientStreetRepositoryInterface $recipientStreetRepository,
         RecipientStreetInterfaceFactory $recipientStreetFactory,
-        StreetSplitter $streetSplitter
+        StreetSplitter $streetSplitter,
+        array $rules = []
     ) {
         $this->recipientStreetRepository = $recipientStreetRepository;
         $this->recipientStreetFactory = $recipientStreetFactory;
         $this->streetSplitter = $streetSplitter;
+        $this->rules = $rules;
     }
 
     public function load(OrderAddressInterface $address): RecipientStreetInterface
@@ -65,6 +73,15 @@ class RecipientStreetLoader implements RecipientStreetLoaderInterface
             RecipientStreetInterface::NUMBER => $addressParts['street_number'],
             RecipientStreetInterface::SUPPLEMENT => $addressParts['supplement'],
         ]);
+
+        $country = $address->getCountryId();
+        $region = $address->getCountryId() . '-' . $address->getRegionCode();
+
+        foreach ($this->rules as $key => $rule) {
+            if ($key === $region || $key === $country) {
+                $rule->apply($address, $recipientStreet);
+            }
+        }
 
         return $recipientStreet;
     }
