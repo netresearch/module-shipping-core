@@ -107,6 +107,8 @@ class Total extends Address\Total\AbstractTotal
         parent::collect($quote, $shippingAssignment, $total);
 
         if (!$this->additionalFeeManagement->isActive($quote)) {
+            // unset totals in case they were added to the quote before
+            $this->totalsManager->unsetAdditionalFee($quote);
             return $this;
         }
 
@@ -225,7 +227,7 @@ class Total extends Address\Total\AbstractTotal
      * @param Order|Order\Invoice|Order\Creditmemo $source
      * @return DisplayObject|null
      */
-    public function createTotalDisplayObject($source)
+    public function createTotalDisplayObject($source): ?DisplayObject
     {
         if ($source->getOrder()) {
             $shippingMethod = $source->getOrder()->getShippingMethod();

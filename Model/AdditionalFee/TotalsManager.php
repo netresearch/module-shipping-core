@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Netresearch\ShippingCore\Model\AdditionalFee;
 
+use Magento\Framework\DataObject;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\Quote\Address\Total;
@@ -96,7 +97,7 @@ class TotalsManager
      * @param Quote|Order|Total $source
      * @param Creditmemo|Invoice|Quote|Order $destination
      */
-    public function transferAdditionalFees($source, $destination)
+    public function transferAdditionalFees($source, $destination): void
     {
         $amount = $source->getData(self::ADDITIONAL_FEE_FIELD_NAME);
         $amountInclTax = $source->getData(self::ADDITIONAL_FEE_INCL_TAX_FIELD_NAME);
@@ -150,12 +151,25 @@ class TotalsManager
     }
 
     /**
+     * Remove additional fee from the source object.
+     *
+     * @param DataObject $source
+     */
+    public function unsetAdditionalFee(DataObject $source): void
+    {
+        $source->unsetData(self::ADDITIONAL_FEE_FIELD_NAME);
+        $source->unsetData(self::ADDITIONAL_FEE_INCL_TAX_FIELD_NAME);
+        $source->unsetData(self::ADDITIONAL_FEE_BASE_FIELD_NAME);
+        $source->unsetData(self::ADDITIONAL_FEE_BASE_INCL_TAX_FIELD_NAME);
+    }
+
+    /**
      * @param Order|Order\Invoice|Order\Creditmemo $source
      * @param string $code
      * @param string $label
      * @return DisplayObject|null
      */
-    public function createTotalDisplayObject($source, string $code, string $label)
+    public function createTotalDisplayObject($source, string $code, string $label): ?DisplayObject
     {
         $amount = (float) $source->getData(self::ADDITIONAL_FEE_FIELD_NAME);
         $amountInclTax = (float) $source->getData(self::ADDITIONAL_FEE_INCL_TAX_FIELD_NAME);

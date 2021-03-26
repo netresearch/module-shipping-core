@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Allow registering post-processing rules for the street splitting algorithm.
 
+### Fixed
+
+- Unset additional charges when service gets deselected indirectly, e.g. by address change.
+
 ## 2.0.0
 
 ### Changed
