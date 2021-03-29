@@ -12,7 +12,6 @@ use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Quote\Model\ShippingAddressManagementInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingDataInterface;
 use Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\Selection\SelectionInterface;
@@ -32,7 +31,7 @@ class CheckoutManagement implements CheckoutManagementInterface
     private $storeManager;
 
     /**
-     * @var ShippingAddressManagementInterface
+     * @var ShippingAddressManagement
      */
     private $addressManagement;
 
@@ -44,7 +43,7 @@ class CheckoutManagement implements CheckoutManagementInterface
     public function __construct(
         CheckoutDataProvider $checkoutDataProvider,
         StoreManagerInterface $storeManager,
-        ShippingAddressManagementInterface $addressManagement,
+        ShippingAddressManagement $addressManagement,
         QuoteSelectionManager $selectionManager
     ) {
         $this->checkoutDataProvider = $checkoutDataProvider;

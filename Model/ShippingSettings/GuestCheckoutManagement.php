@@ -11,7 +11,6 @@ namespace Netresearch\ShippingCore\Model\ShippingSettings;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Quote\Model\GuestCart\GuestShippingAddressManagementInterface;
 use Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\Selection\SelectionInterface;
 use Netresearch\ShippingCore\Api\ShippingSettings\GuestCheckoutManagementInterface;
 use Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Selection\QuoteSelectionManager;
@@ -19,7 +18,7 @@ use Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Selection\Quo
 class GuestCheckoutManagement implements GuestCheckoutManagementInterface
 {
     /**
-     * @var GuestShippingAddressManagementInterface
+     * @var GuestShippingAddressManagement
      */
     private $addressManagement;
 
@@ -29,7 +28,7 @@ class GuestCheckoutManagement implements GuestCheckoutManagementInterface
     private $selectionManager;
 
     public function __construct(
-        GuestShippingAddressManagementInterface $addressManagement,
+        GuestShippingAddressManagement $addressManagement,
         QuoteSelectionManager $selectionManager
     ) {
         $this->addressManagement = $addressManagement;

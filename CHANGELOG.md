@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
-- Unset additional charges when service gets deselected indirectly, e.g. by address change.
+- Unset additional charges when services get deselected indirectly by an address change or cart item update.
 
 ## 2.0.0
 
