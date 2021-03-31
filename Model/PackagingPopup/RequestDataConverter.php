@@ -9,15 +9,10 @@ declare(strict_types=1);
 namespace Netresearch\ShippingCore\Model\PackagingPopup;
 
 use Magento\Framework\Serialize\Serializer\Json;
+use Netresearch\ShippingCore\Api\PackagingPopup\RequestDataConverterInterface;
 use Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 
-/**
- * Prepare package data coming from the packaging popup in JSON format for the shipment request.
- *
- * The NR packaging popup sends a custom POST data structure to the NR controller. This request
- * data must be converted to a format that the Magento core controller understands.
- */
-class RequestDataConverter
+class RequestDataConverter implements RequestDataConverterInterface
 {
     /**
      * @var Json
@@ -191,5 +186,21 @@ class RequestDataConverter
             'commentNotificationEnabled' => $this->isCommentNotificationEnabled($shipmentData),
             'shipmentNotificationEnabled' => $this->isShipmentNotificationEnabled($shipmentData),
         ]);
+    }
+
+    public function getParams(string $json): array
+    {
+        $requestData = $this->getData($json);
+
+        return [
+            'shipment' => [
+                'comment_text' => $requestData->getShipmentComment(),
+                'send_email' => $requestData->isShipmentNotificationEnabled(),
+                'comment_customer_notify' => $requestData->isCommentNotificationEnabled(),
+                'create_shipping_label' => '1',
+                'items' => $requestData->getShipmentItems(),
+            ],
+            'packages' => $requestData->getPackages()
+        ];
     }
 }

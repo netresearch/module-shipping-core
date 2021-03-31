@@ -55,7 +55,8 @@
   },
   "suggest": {
     "magento/module-scalable-checkout": "^100.2.0",
-    "magento/module-scalable-oms": "^100.2.0"
+    "magento/module-scalable-oms": "^100.2.0",
+    "netresearch/module-shipping-inventory": "^1.0.0"
   },
   "extra": {
     "branch-alias": {

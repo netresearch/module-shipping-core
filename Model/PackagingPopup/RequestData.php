@@ -8,10 +8,9 @@ declare(strict_types=1);
 
 namespace Netresearch\ShippingCore\Model\PackagingPopup;
 
-/**
- * Data object containing normalized packaging popup request data.
- */
-class RequestData
+use Netresearch\ShippingCore\Api\Data\PackagingPopup\RequestDataInterface;
+
+class RequestData implements RequestDataInterface
 {
     /**
      * @var mixed[]
@@ -62,33 +61,16 @@ class RequestData
         return $this->shipmentItems;
     }
 
-    /**
-     * Get comment text for the shipment.
-     *
-     * @return string
-     */
     public function getShipmentComment(): string
     {
         return $this->shipmentComment;
     }
 
-    /**
-     * Check if comment can be shown to customer.
-     *
-     * If true, comment will be visible in customer account and shipment confirmation email.
-     *
-     * @return true|null
-     */
     public function isCommentNotificationEnabled(): ?bool
     {
         return $this->commentNotificationEnabled;
     }
 
-    /**
-     * Check if shipment confirmation email should be sent.
-     *
-     * @return true|null
-     */
     public function isShipmentNotificationEnabled(): ?bool
     {
         return $this->shipmentNotificationEnabled;

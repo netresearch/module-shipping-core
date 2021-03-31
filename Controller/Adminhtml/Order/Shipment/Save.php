@@ -13,7 +13,7 @@ use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Forward;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
-use Netresearch\ShippingCore\Model\PackagingPopup\RequestDataConverter;
+use Netresearch\ShippingCore\Api\PackagingPopup\RequestDataConverterInterface;
 
 class Save extends Action
 {
@@ -25,13 +25,13 @@ class Save extends Action
     public const ADMIN_RESOURCE = 'Magento_Sales::shipment';
 
     /**
-     * @var RequestDataConverter
+     * @var RequestDataConverterInterface
      */
     private $dataConverter;
 
     public function __construct(
         Context $context,
-        RequestDataConverter $dataConverter
+        RequestDataConverterInterface $dataConverter
     ) {
         parent::__construct($context);
 
@@ -46,17 +46,7 @@ class Save extends Action
     public function execute(): ResultInterface
     {
         $json = $this->getRequest()->getParam('data');
-        $requestData = $this->dataConverter->getData($json);
-        $requestParams = [
-            'shipment' => [
-                'comment_text' => $requestData->getShipmentComment(),
-                'send_email' => $requestData->isShipmentNotificationEnabled(),
-                'comment_customer_notify' => $requestData->isCommentNotificationEnabled(),
-                'create_shipping_label' => '1',
-                'items' => $requestData->getShipmentItems(),
-            ],
-            'packages' => $requestData->getPackages()
-        ];
+        $requestParams = $this->dataConverter->getParams($json);
 
         /** @var Forward $resultForward */
         $resultForward = $this->resultFactory->create(ResultFactory::TYPE_FORWARD);

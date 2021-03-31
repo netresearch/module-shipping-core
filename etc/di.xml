@@ -12,6 +12,7 @@
     <preference for="Netresearch\ShippingCore\Api\Config\ShippingConfigInterface" type="Netresearch\ShippingCore\Model\Config\ShippingConfig"/>
     <preference for="Netresearch\ShippingCore\Api\DeliveryLocation\SearchInterface" type="Netresearch\ShippingCore\Model\DeliveryLocation\Search"/>
     <preference for="Netresearch\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface" type="Netresearch\ShippingCore\Model\LabelStatus\LabelStatusManagement"/>
+    <preference for="Netresearch\ShippingCore\Api\PackagingPopup\RequestDataConverterInterface" type="Netresearch\ShippingCore\Model\PackagingPopup\RequestDataConverter"/>
     <preference for="Netresearch\ShippingCore\Api\Pipeline\CollectRatesPipelineInterface" type="Netresearch\ShippingCore\Model\Pipeline\Rate\CollectRatesPipeline"/>
     <preference for="Netresearch\ShippingCore\Api\Pipeline\CreateShipmentsPipelineInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\CreateShipmentsPipeline"/>
     <preference for="Netresearch\ShippingCore\Api\Pipeline\RateResponseProcessorInterface" type="Netresearch\ShippingCore\Model\Pipeline\Rate\RateResponseProcessor"/>
@@ -47,6 +48,7 @@
     <preference for="Netresearch\ShippingCore\Api\Data\OrderExport\ServiceDataInterface" type="Netresearch\ShippingCore\Model\OrderExport\Data\ServiceData"/>
     <preference for="Netresearch\ShippingCore\Api\Data\OrderExport\ShippingOptionInterface" type="Netresearch\ShippingCore\Model\OrderExport\Data\ShippingOption"/>
     <preference for="Netresearch\ShippingCore\Api\Data\OrderItemAttributesInterface" type="Netresearch\ShippingCore\Model\ItemAttribute\OrderItemAttributes"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\PackagingPopup\RequestDataInterface" type="Netresearch\ShippingCore\Model\PackagingPopup\RequestData"/>
     <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageAdditionalInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Data\PackageAdditional"/>
     <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Data\Package"/>
     <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageItemInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Data\PackageItem"/>
