@@ -73,6 +73,7 @@ Quantity,Menge
 "Shipping label(s) for the order(s) %1 were successfully created.","Versandetiketten für die Bestellung(en) %1 wurden erfolgreich erstellt."
 "Tare Weight",Leergewicht
 "The content description is mandatory if export content type is <em>OTHER</em>.","Eine Inhaltsbeschreibung ist vorgeschrieben, wenn die Inhaltskategorie <em>SONSTIGES</em> ist."
+"The country code %1 is not available.","Ländercode %1 ist ungültig."
 "The money transfer purpose for cash on delivery payments can include the following placeholders: {{entity_id}}, {{increment_id}}, {{firstname}}, {{lastname}}. They will be replaced by the respective order's values.","Beim Verwendungszweck für Nachnahmezahlungen können folgende Platzhalter eingesetzt werden: {{entity_id}}, {{increment_id}}, {{firstname}}, {{lastname}}. Sie werden durch die Werte der jeweiligen Bestellung ersetzt."
 "The shipment was successfully cancelled.","Die Lieferung wurde erfolgreich storniert."
 "The value of attribute ""%1"" must be either 6, 8 or 10 digits long.","Der Wert des Attributs ""%1"" muss entweder 6, 8 oder 10 Stellen lang sein."

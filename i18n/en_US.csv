@@ -73,6 +73,7 @@ Quantity,Quantity
 "Shipping label(s) for the order(s) %1 were successfully created.","Shipping label(s) for the order(s) %1 were successfully created."
 "Tare Weight","Tare Weight"
 "The content description is mandatory if export content type is <em>OTHER</em>.","The content description is mandatory if export content type is <em>OTHER</em>."
+"The country code %1 is not available.","The country code %1 is not available."
 "The money transfer purpose for cash on delivery payments can include the following placeholders: {{entity_id}}, {{increment_id}}, {{firstname}}, {{lastname}}. They will be replaced by the respective order's values.","The money transfer purpose for cash on delivery payments can include the following placeholders: {{entity_id}}, {{increment_id}}, {{firstname}}, {{lastname}}. They will be replaced by the respective order's values."
 "The shipment was successfully cancelled.","The shipment was successfully cancelled."
 "The value of attribute ""%1"" must be either 6, 8 or 10 digits long.","The value of attribute ""%1"" must be either 6, 8 or 10 digits long."
