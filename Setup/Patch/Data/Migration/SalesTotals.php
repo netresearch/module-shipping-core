@@ -47,7 +47,7 @@ class SalesTotals
 
         foreach ($tables as $table => $connectionName) {
             $connection = $this->resourceConnection->getConnection($connectionName);
-            $tableName = $connection->getTableName($table);
+            $tableName = $this->resourceConnection->getTableName($table);
             if (!$connection->tableColumnExists($tableName, 'base_dhlgw_additional_fee')) {
                 continue;
             }

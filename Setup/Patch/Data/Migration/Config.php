@@ -33,7 +33,7 @@ class Config
     public function migrate(array $configPathMap): void
     {
         $connection = $this->resourceConnection->getConnection();
-        $table = $connection->getTableName('core_config_data');
+        $table = $this->resourceConnection->getTableName('core_config_data');
 
         foreach ($configPathMap as $oldPath => $newPath) {
             $cols = [

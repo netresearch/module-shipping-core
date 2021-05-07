@@ -31,8 +31,8 @@ class OrderItemAttributes
     public function migrate(array $columnMap): void
     {
         $connection = $this->resourceConnection->getConnection(Constants::SALES_CONNECTION_NAME);
-        $oldTable = $connection->getTableName('dhlgw_order_item');
-        $newTable = $connection->getTableName(Constants::TABLE_ORDER_ITEM);
+        $oldTable = $this->resourceConnection->getTableName('dhlgw_order_item');
+        $newTable = $this->resourceConnection->getTableName(Constants::TABLE_ORDER_ITEM);
 
         if (!$connection->isTableExists($oldTable)) {
             return;

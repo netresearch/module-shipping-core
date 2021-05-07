@@ -29,8 +29,8 @@ class ServiceSelections
     private function migrateData(string $connectionName, string $oldTable, string $newTable): void
     {
         $connection = $this->resourceConnection->getConnection($connectionName);
-        $oldTable = $connection->getTableName($oldTable);
-        $newTable = $connection->getTableName($newTable);
+        $oldTable = $this->resourceConnection->getTableName($oldTable);
+        $newTable = $this->resourceConnection->getTableName($newTable);
 
         if (!$connection->isTableExists($oldTable)) {
             return;
@@ -63,7 +63,7 @@ class ServiceSelections
         array $inputCodes
     ): void {
         $connection = $this->resourceConnection->getConnection($connectionName);
-        $tableName = $connection->getTableName($table);
+        $tableName = $this->resourceConnection->getTableName($table);
 
         foreach ($inputCodes as $oldInputCode => $newInputCode) {
             $connection->update(

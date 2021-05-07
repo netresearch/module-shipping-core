@@ -51,8 +51,8 @@ class UpdatedStatusIdListProvider implements NotSyncedDataProviderInterface
             $connection = $this->resourceModel->getConnection();
             $mainTableName = $this->resourceModel->getMainTable();
 
-            $mainTableName = $connection->getTableName($mainTableName);
-            $gridTableName = $connection->getTableName($gridTableName);
+            $mainTableName = $this->resourceModel->getTable($mainTableName);
+            $gridTableName = $this->resourceModel->getTable($gridTableName);
 
             $select = $connection->select()
                 ->from(['label_status' => $mainTableName], ['order_id'])

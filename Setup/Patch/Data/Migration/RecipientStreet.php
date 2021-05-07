@@ -30,8 +30,8 @@ class RecipientStreet
     public function migrate(): void
     {
         $connection = $this->resourceConnection->getConnection(Constants::SALES_CONNECTION_NAME);
-        $oldTable = $connection->getTableName('dhlgw_recipient_street');
-        $newTable = $connection->getTableName(Constants::TABLE_RECIPIENT_STREET);
+        $oldTable = $this->resourceConnection->getTableName('dhlgw_recipient_street');
+        $newTable = $this->resourceConnection->getTableName(Constants::TABLE_RECIPIENT_STREET);
 
         if (!$connection->isTableExists($oldTable)) {
             return;

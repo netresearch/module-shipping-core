@@ -37,8 +37,8 @@ class LabelStatus
     public function migrate(): void
     {
         $connection = $this->resourceConnection->getConnection(Constants::SALES_CONNECTION_NAME);
-        $oldTable = $connection->getTableName('dhlgw_label_status');
-        $newTable = $connection->getTableName(Constants::TABLE_LABEL_STATUS);
+        $oldTable = $this->resourceConnection->getTableName('dhlgw_label_status');
+        $newTable = $this->resourceConnection->getTableName(Constants::TABLE_LABEL_STATUS);
 
         if (!$connection->isTableExists($oldTable)) {
             return;
