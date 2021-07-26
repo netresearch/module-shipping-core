@@ -158,7 +158,8 @@
                 <item name="applyRules" xsi:type="object" sortOrder="20">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\Carrier\CompatibilityEnforcer</item>
             </argument>
             <argument name="shippingOptionsProcessors" xsi:type="array">
-                <item name="filterRoutes" xsi:type="object" sortOrder="10">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\RouteProcessor</item>
+                <item name="extendRoutesForCustomsOptions" xsi:type="object" sortOrder="10">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\ExtendCustomsOptionsRoutesProcessor</item>
+                <item name="filterRoutes" xsi:type="object" sortOrder="11">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\RouteProcessor</item>
                 <item name="removeConsumerServices" xsi:type="object" sortOrder="20">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\RemoveUnusedConsumerServicesProcessor</item>
                 <item name="addDeliveryLocationInputs" xsi:type="object" sortOrder="30">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\DeliveryLocationInputsProcessor</item>
                 <item name="processInputs" xsi:type="object" sortOrder="40">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\InputDataProcessor</item>
@@ -169,7 +170,8 @@
                 <item name="applySortOrder" xsi:type="object" sortOrder="90">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\SortOrderProcessor</item>
             </argument>
             <argument name="itemShippingOptionsProcessors" xsi:type="array">
-                <item name="filterRoutes" xsi:type="object" sortOrder="10">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ItemShippingOptions\RouteProcessor</item>
+                <item name="extendRoutesForCustomsOptions" xsi:type="object" sortOrder="10">\Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ItemShippingOptions\ExtendCustomsOptionsRoutesProcessor</item>
+                <item name="filterRoutes" xsi:type="object" sortOrder="11">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ItemShippingOptions\RouteProcessor</item>
                 <item name="processInputs" xsi:type="object" sortOrder="20">Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ItemShippingOptions\InputDataProcessor</item>
             </argument>
             <argument name="metadataProcessors" xsi:type="array">
