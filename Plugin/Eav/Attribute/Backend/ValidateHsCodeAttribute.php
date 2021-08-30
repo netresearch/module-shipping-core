@@ -17,12 +17,12 @@ class ValidateHsCodeAttribute
 {
     /**
      * @param AbstractBackend $backendModel
-     * @param bool $result
+     * @param bool|mixed $result
      * @param mixed $eavEntity
      * @return bool
      * @throws LocalizedException
      */
-    public function afterValidate(AbstractBackend $backendModel, bool $result, $eavEntity)
+    public function afterValidate(AbstractBackend $backendModel, $result, $eavEntity)
     {
         if (!$eavEntity instanceof Product) {
             return $result;
