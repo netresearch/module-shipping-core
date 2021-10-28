@@ -11,6 +11,8 @@ namespace Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse;
 use Magento\Framework\Phrase;
 
 /**
+ * A negative label response with reason phrase.
+ *
  * @api
  */
 interface ShipmentErrorResponseInterface extends ShipmentResponseInterface

@@ -7,8 +7,10 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <!-- # service interface preferences -->
     <preference for="Netresearch\ShippingCore\Api\AdditionalFee\TaxConfigInterface" type="Netresearch\ShippingCore\Model\Config\TaxConfig"/>
+    <preference for="Netresearch\ShippingCore\Api\Config\CarrierConfigInterface" type="Netresearch\ShippingCore\Model\Config\CarrierConfig"/>
     <preference for="Netresearch\ShippingCore\Api\Config\MapBoxConfigInterface" type="Netresearch\ShippingCore\Model\Config\MapBoxDummyConfig"/>
     <preference for="Netresearch\ShippingCore\Api\Config\ParcelProcessingConfigInterface" type="Netresearch\ShippingCore\Model\Config\ParcelProcessingConfig"/>
+    <preference for="Netresearch\ShippingCore\Api\Config\RmaConfigInterface" type="Netresearch\ShippingCore\Model\Config\RmaConfig"/>
     <preference for="Netresearch\ShippingCore\Api\Config\ShippingConfigInterface" type="Netresearch\ShippingCore\Model\Config\ShippingConfig"/>
     <preference for="Netresearch\ShippingCore\Api\DeliveryLocation\SearchInterface" type="Netresearch\ShippingCore\Model\DeliveryLocation\Search"/>
     <preference for="Netresearch\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface" type="Netresearch\ShippingCore\Model\LabelStatus\LabelStatusManagement"/>
@@ -26,6 +28,10 @@
     <preference for="Netresearch\ShippingCore\Api\Pipeline\TrackResponseProcessorInterface" type="Netresearch\ShippingCore\Model\Pipeline\Track\TrackResponseProcessor"/>
     <preference for="Netresearch\ShippingCore\Api\Rate\ProxyCarrierFactoryInterface" type="Netresearch\ShippingCore\Model\Rate\Emulation\ProxyCarrierFactory"/>
     <preference for="Netresearch\ShippingCore\Api\Rate\RateRequestEmulationInterface" type="Netresearch\ShippingCore\Model\Rate\Emulation\RateRequestService"/>
+    <preference for="Netresearch\ShippingCore\Api\ReturnShipment\CanCreateReturnInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\CanCreateStorefrontReturn"/>
+    <preference for="Netresearch\ShippingCore\Api\ReturnShipment\DocumentRepositoryInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\DocumentRepository"/>
+    <preference for="Netresearch\ShippingCore\Api\ReturnShipment\GetDocumentLinksInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\GetDocumentLinks"/>
+    <preference for="Netresearch\ShippingCore\Api\ReturnShipment\TrackRepositoryInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\TrackRepository"/>
     <preference for="Netresearch\ShippingCore\Api\ShipmentDate\CutOffTimeConverterInterface" type="Netresearch\ShippingCore\Model\ShipmentDate\CutOffTimeConverter"/>
     <preference for="Netresearch\ShippingCore\Api\ShipmentDate\ShipmentDateCalculatorInterface" type="Netresearch\ShippingCore\Model\ShipmentDate\ShipmentDateCalculator"/>
     <preference for="Netresearch\ShippingCore\Api\ShippingSettings\ArrayProcessor\ShippingSettingsProcessorInterface" type="Netresearch\ShippingCore\Model\ShippingSettings\ArrayProcessor\CompositeShippingSettingsProcessor"/>
@@ -38,6 +44,8 @@
     <preference for="Netresearch\ShippingCore\Api\Util\CountryCodeInterface" type="Netresearch\ShippingCore\Model\Util\CountryCode"/>
     <preference for="Netresearch\ShippingCore\Api\Util\DeliveryAreaInterface" type="Netresearch\ShippingCore\Model\Util\DeliveryArea"/>
     <preference for="Netresearch\ShippingCore\Api\Util\ItemAttributeReaderInterface" type="Netresearch\ShippingCore\Model\ItemAttribute\ItemAttributeReader"/>
+    <preference for="Netresearch\ShippingCore\Api\Util\LabelDataProviderInterface" type="Netresearch\ShippingCore\Model\Util\LabelDataProvider"/>
+    <preference for="Netresearch\ShippingCore\Api\Util\OrderProviderInterface" type="Netresearch\ShippingCore\Model\Util\OrderProvider"/>
     <preference for="Netresearch\ShippingCore\Api\Util\PdfCombinatorInterface" type="Netresearch\ShippingCore\Model\Util\PdfCombinator"/>
     <preference for="Netresearch\ShippingCore\Api\Util\UnitConverterInterface" type="Netresearch\ShippingCore\Model\Util\UnitConverter"/>
     <!-- # data interface preferences -->
@@ -56,11 +64,18 @@
     <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\RecipientInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Data\Recipient"/>
     <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\ShipperInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Data\Shipper"/>
     <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\LabelResponseInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentResponse\LabelResponse"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ReturnShipmentDocumentInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentResponse\ReturnShipmentDocument"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentDocumentInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentResponse\ShipmentDocument"/>
     <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentErrorResponseInterface" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentResponse\ErrorResponse"/>
     <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\TrackRequest\TrackRequestInterface" type="Netresearch\ShippingCore\Model\Pipeline\Track\TrackRequest\TrackRequest"/>
     <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\TrackResponse\TrackErrorResponseInterface" type="Netresearch\ShippingCore\Model\Pipeline\Track\TrackResponse\TrackErrorResponse"/>
     <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\TrackResponse\TrackResponseInterface" type="Netresearch\ShippingCore\Model\Pipeline\Track\TrackResponse\TrackResponse"/>
     <preference for="Netresearch\ShippingCore\Api\Data\RecipientStreetInterface" type="Netresearch\ShippingCore\Model\SplitAddress\RecipientStreet"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\ReturnShipment\DocumentInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\Document"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\ReturnShipment\DocumentLinkInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\DocumentLink"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\ReturnShipment\DocumentSearchResultsInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\DocumentSearchResults"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\ReturnShipment\TrackInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\Track"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\ReturnShipment\TrackSearchResultsInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\TrackSearchResults"/>
     <preference for="Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMap\InputValueInterface" type="Netresearch\ShippingCore\Model\ShippingSettings\Data\ValueMap\InputValue"/>
     <preference for="Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMapInterface" type="Netresearch\ShippingCore\Model\ShippingSettings\Data\ValueMap"/>
     <preference for="Netresearch\ShippingCore\Api\Data\ShippingSettings\CarrierDataInterface" type="Netresearch\ShippingCore\Model\ShippingSettings\Data\CarrierData"/>
@@ -112,7 +127,16 @@
             <argument name="collectionProcessor" xsi:type="object">Netresearch\ShippingCore\Model\BulkShipment\CollectionProcessor\Virtual</argument>
         </arguments>
     </virtualType>
-    <virtualType name="Netresearch\ShippingCore\Model\Pipeline\BulkShipment\CreateLabelResponseProcessor\Virtual" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentResponseProcessor">
+    <!-- packaging popup response processor -->
+    <virtualType name="Netresearch\ShippingCore\Model\Pipeline\Shipment\CreateLabelResponseProcessor\Virtual" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentResponseProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="updateLabelStatus" xsi:type="object">Netresearch\ShippingCore\Model\Pipeline\Shipment\ResponseProcessor\UpdateLabelStatus</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- bulk shipment response processor -->
+    <virtualType name="Netresearch\ShippingCore\Model\Pipeline\BulkShipment\CreateLabelResponseProcessor\Virtual" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\CreateLabelResponseProcessor\Virtual">
         <arguments>
             <argument name="processors" xsi:type="array">
                 <item name="addLabel" xsi:type="object">Netresearch\ShippingCore\Model\Pipeline\Shipment\ResponseProcessor\AddShippingLabel</item>
@@ -121,6 +145,15 @@
             </argument>
         </arguments>
     </virtualType>
+    <!-- bulk return shipment response processor -->
+    <virtualType name="Netresearch\ShippingCore\Model\Pipeline\ReturnShipment\CreateLabelResponseProcessor\Virtual" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentResponseProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="saveTrack" xsi:type="object">Netresearch\ShippingCore\Model\Pipeline\ReturnShipment\ResponseProcessor\SaveTrack</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- shipment cancellation response processor -->
     <virtualType name="Netresearch\ShippingCore\Model\Pipeline\BulkShipment\CancelLabelResponseProcessor\Virtual" type="Netresearch\ShippingCore\Model\Pipeline\Track\TrackResponseProcessor">
         <arguments>
             <argument name="processors" xsi:type="array">
@@ -221,6 +254,16 @@
             </argument>
         </arguments>
     </type>
+    <type name="Netresearch\ShippingCore\Controller\Rma\Create\Guest">
+        <arguments>
+            <argument name="orderAuthorization" xsi:type="object">Magento\Sales\Controller\Guest\OrderViewAuthorization</argument>
+        </arguments>
+    </type>
+    <type name="Netresearch\ShippingCore\Controller\Rma\Label\Guest">
+        <arguments>
+            <argument name="orderAuthorization" xsi:type="object">Magento\Sales\Controller\Guest\OrderViewAuthorization</argument>
+        </arguments>
+    </type>
     <type name="Netresearch\ShippingCore\Cron\AutoCreate\OrderCollectionLoader">
         <arguments>
             <argument name="orderRepository" xsi:type="object">Netresearch\ShippingCore\Model\BulkShipment\OrderRepository\Virtual</argument>
@@ -251,13 +294,6 @@
             </argument>
         </arguments>
     </type>
-    <type name="Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentResponseProcessor">
-        <arguments>
-            <argument name="processors" xsi:type="array">
-                <item name="updateLabelStatus" xsi:type="object">Netresearch\ShippingCore\Model\Pipeline\Shipment\ResponseProcessor\UpdateLabelStatus</item>
-            </argument>
-        </arguments>
-    </type>
     <type name="Netresearch\ShippingCore\Model\ResourceModel\LabelStatus">
         <arguments>
             <argument name="connectionName" xsi:type="const">Netresearch\ShippingCore\Setup\Module\Constants::SALES_CONNECTION_NAME</argument>
@@ -279,6 +315,16 @@
         </arguments>
     </type>
     <type name="Netresearch\ShippingCore\Model\ResourceModel\RecipientStreet">
+        <arguments>
+            <argument name="connectionName" xsi:type="const">Netresearch\ShippingCore\Setup\Module\Constants::SALES_CONNECTION_NAME</argument>
+        </arguments>
+    </type>
+    <type name="Netresearch\ShippingCore\Model\ResourceModel\ReturnShipment\Document">
+        <arguments>
+            <argument name="connectionName" xsi:type="const">Netresearch\ShippingCore\Setup\Module\Constants::SALES_CONNECTION_NAME</argument>
+        </arguments>
+    </type>
+    <type name="Netresearch\ShippingCore\Model\ResourceModel\ReturnShipment\Track">
         <arguments>
             <argument name="connectionName" xsi:type="const">Netresearch\ShippingCore\Setup\Module\Constants::SALES_CONNECTION_NAME</argument>
         </arguments>
@@ -334,7 +380,6 @@
             <argument name="orderGrid" xsi:type="object">Magento\Sales\Model\ResourceModel\Order\Grid</argument>
         </arguments>
     </type>
-
     <!-- # interceptor plugins -->
     <type name="Magento\Eav\Model\Entity\Attribute\Backend\AbstractBackend">
         <plugin name="nrShippingValidateHsCodeAttribute" type="Netresearch\ShippingCore\Plugin\Eav\Attribute\Backend\ValidateHsCodeAttribute"/>

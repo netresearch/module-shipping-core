@@ -23,4 +23,8 @@ class Constants
     public const TABLE_ORDER_SHIPPING_OPTION_SELECTION = 'nrshipping_order_address_shipping_option_selection';
 
     public const TABLE_QUOTE_SHIPPING_OPTION_SELECTION = 'nrshipping_quote_address_shipping_option_selection';
+
+    public const TABLE_RETURN_SHIPMENT_TRACK = 'nrshipping_return_shipment_track';
+
+    public const TABLE_RETURN_SHIPMENT_DOCUMENT = 'nrshipping_return_shipment_document';
 }

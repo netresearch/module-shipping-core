@@ -1,6 +1,7 @@
 "A confirmation email will be sent to the customer when the shipment was successfully created.","Nach erfolgreicher Erstellung des Lieferscheins wird dem Kunden eine Versandbestätigung per E-Mail zugesandt."
 "Add Package","Paket hinzufügen"
 "Additional Fee",Zusatzkosten
+"An error occurred while creating the return shipment label.","Beim Erstellen des Retourenaufklebers ist ein Fehler aufgetreten."
 "An error occurred while updating the recipient street.","Beim Aktualisieren der Empfängeradresse ist ein Fehler aufgetreten."
 "Automatic label creation failed: %1","Die automatische Sendungserstellung ist fehlgeschlagen: %1"
 "Batch Processing",Massenverarbeitung
@@ -15,6 +16,7 @@ Container,Container
 "Could not delete service selection.","Die Serviceauswahl konnte nicht gelöscht werden."
 "Could not save service selection.","Die Serviceauswahl konnte nicht gespeichert werden."
 "Country of Origin",Ursprungsland
+"Create Returns","Rücksendung erzeugen"
 "Create a customized country list","Angepasste Länderliste erstellen"
 "Create shipments and retrieve labels via cron job.","Erstellen Sie Lieferscheine und Versandetiketten mittels Cron Job."
 "Customs Data",Zolldaten
@@ -41,9 +43,12 @@ Length,Länge
 "Length %1","Länge %1"
 "Mail item category for international, non EU shipments.","Art der Sendung für internationale Sendungen außerhalb der EU"
 "Module version:",Modulversion:
+"New Return","Neue Retoure"
+"New Return Shipment","Neue Retourenlieferung"
 "No additional attributes found for order item %1.","Es wurden keine Zusatzattribute für Artikel %1 gefunden."
 "No orders found (automatic label retrieval is not enabled).","Keine Bestellungen gefunden (automatische Sendungserstellung ist nicht aktiviert)."
 "No orders found for automatic label retrieval with status %1 in stores %2 for carriers %3.","Keine Bestellungen für die automatische Sendungserstellung mit Status %1 in den Stores %2 für die Carrier %3 gefunden."
+"Order # %1","Bestellung # %1"
 "Order %1: %2","Bestellung %1: %2"""
 "Order Status",Bestell-Status
 "Order Time",Bestellzeit
@@ -61,7 +66,10 @@ Quantity,Menge
 "Recipient street was successfully updated.","Empfängeradresse wurde erfolgreich aktualisiert."
 "Recipient street with ID ""%1"" does not exist.","Empfängeradresse mit der ID ""%1"" ist nicht vorhanden."
 "Retry Failed Shipments","Wiederholung fehlgeschlagener Sendungen"
+"Return Labels",Retourenetiketten
 "Return of Goods",Warenrücksendung
+"Return shipment %1 could not be deleted.","Retoure %1 konnte nicht gelöscht werden."
+"Return shipment %1 was successfully deleted.","Retoure %1 wurde erfolgreich entfernt."
 "Return shipments are not supported.","Retourenaufkleber werden nicht unterstützt."
 "Selected payment methods will be treated as CoD methods when booking a shipment label.","Die ausgewählten Zahlungsmethoden werden bei der Erstellung des Versandauftrags als Nachnahmemethoden behandelt."
 "Set Default","Als Standard festlegen"
@@ -71,6 +79,8 @@ Quantity,Menge
 "Shipping label(s) for the order(s) %1 could not be created.","Versandetiketten für die Bestellung(en) %1 konnten nicht erstellt werden."
 "Shipping label(s) for the order(s) %1 could not be requested. Please review shipment comments.","Versandetiketten für die Bestellung(en) %1 konnten nicht abgerufen werden. Bitte prüfen Sie die Lieferscheinkommentare."
 "Shipping label(s) for the order(s) %1 were successfully created.","Versandetiketten für die Bestellung(en) %1 wurden erfolgreich erstellt."
+"Shipping labels for the order #%1 could not be created: %2.","Versandetiketten für die Bestellung #%1 konnten nicht erstellt werden: %2."
+"Shipping labels for the order #%1 were successfully created.","Versandetiketten für die Bestellung #%1 wurden erfolgreich erstellt."
 "Tare Weight",Leergewicht
 "The content description is mandatory if export content type is <em>OTHER</em>.","Eine Inhaltsbeschreibung ist vorgeschrieben, wenn die Inhaltskategorie <em>SONSTIGES</em> ist."
 "The country code %1 is not available.","Ländercode %1 ist ungültig."
@@ -79,15 +89,22 @@ Quantity,Menge
 "The value of attribute ""%1"" must be either 6, 8 or 10 digits long.","Der Wert des Attributs ""%1"" muss entweder 6, 8 oder 10 Stellen lang sein."
 "The value of attribute ""%1"" must be numeric.","Der Wert des Attributes ""%1"" muss numerisch sein."
 "The value of attribute ""%1"" must not be longer than %2 characters.","Der Wert des Attributes ""%1"" darf nicht länger als %2 Zeichen sein."
+"This document cannot be loaded.","Das Dokument kann nicht geladen werden."
+"This order no longer exists.","Die Bestellung existiert nicht."
 Title,Titel
 "Total Weight",Gesamtgewicht
+"Unable to delete return shipment.","Die Retoure kann nicht gelöscht werden."
 "Unable to load additional attributes for order item %1.","Zusatzattribute für Artikel %1 konnten nicht geladen werden."
 "Unable to load recipient street with ID ""%1"".","Empfängeradresse mit der ID ""%1"" kann nicht geladen werden."
+"Unable to load return shipment document with id %1.","Retourendokument mit der ID %1 kann nicht geladen werden"
+"Unable to load return shipment with id %1.","Retoure mit der ID %1 kann nicht geladen werden."
 "Unable to process PDF content.","PDF-Inhalt kann nicht verarbeitet werden."
 "Unable to retrieve year %1 holidays for region %2.","Feiertage in Region %2 für das Jahr %1 konnten nicht ermittelt werden."
 "Unable to save additional attributes for order item %1: %2","Zusatzattribute für Artikel %1 konnten nicht gespeichert werden: %2"
 "Unable to save label status","Labelstatus kann nicht gespeichert werden"
 "Unable to save recipient street.","Empfängeradresse kann nicht gespeichert werden."
+"Unable to save return shipment document.","Retourendokument konnte nicht gespeichert werden."
+"Unable to save return shipment.","Retoure konnte nicht gespeichert werden."
 "Use countries from <a href=""%1"">Allowed Countries</a> setting.","Erlaubte Länder aus den <a href=""%1"">allgemeinen Einstellungen</a> verwenden."
 "Use this to create your own types of packages with your specific titles, sizes and tare weights.","Verwenden Sie diese Option, um Ihre eigenen Pakettypen mit Ihren spezifischen Titeln, Größen und Gewichten zu erstellen."
 Warnings,Warnungen
@@ -96,4 +113,6 @@ Weight,Gewicht
 Width,Breite
 "Width %1","Breite %1"
 "You can configure your preset package sizes in the system configuration","Ihre voreingestellten Paketgrößen können Sie in der Systemkonfiguration konfigurieren"
+"You cannot create a return shipment for order %1.","Sie können keine Retoure für Bestellung %1 anfordern."
+"You cannot create a return shipment for order %1: %2.","Sie können keine Retoure für Bestellung %1 anfordern: %2."
 "You need to have at least one drop off day.","Sie müssen mindestens einen Tag für die Paketübergabe angeben."

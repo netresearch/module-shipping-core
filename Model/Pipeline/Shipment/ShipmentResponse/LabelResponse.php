@@ -11,6 +11,7 @@ namespace Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentResponse;
 use Magento\Framework\DataObject;
 use Magento\Sales\Api\Data\ShipmentInterface;
 use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\LabelResponseInterface;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentDocumentInterface;
 
 /**
  * The response type consumed by the core carrier to persist label binary and tracking number.
@@ -50,6 +51,18 @@ class LabelResponse extends DataObject implements LabelResponseInterface
     }
 
     /**
+     * Get individual documents created for the shipment, e.g. shipping label, customs form, return label.
+     *
+     * @return ShipmentDocumentInterface[]
+     */
+    public function getDocuments(): array
+    {
+        return $this->hasData(self::DOCUMENTS) ? $this->getData(self::DOCUMENTS) : [];
+    }
+
+    /**
+     * Get the shipment that the label is requested for.
+     *
      * @return ShipmentInterface
      */
     public function getSalesShipment(): ShipmentInterface

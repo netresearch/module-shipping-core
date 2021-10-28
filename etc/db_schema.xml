@@ -81,4 +81,29 @@
         <column xsi:type="decimal" name="nrshipping_additional_fee" scale="4" precision="12" unsigned="false" nullable="true" comment="Shipping Additional Fee"/>
         <column xsi:type="decimal" name="nrshipping_additional_fee_incl_tax" scale="4" precision="12" unsigned="false" nullable="true" comment="Shipping Additional Fee (Incl. Tax)"/>
     </table>
+
+    <table name="nrshipping_return_shipment_track" resource="sales" engine="innodb" comment="Return Shipment Track">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Order ID"/>
+        <column xsi:type="varchar" name="carrier_code" length="32" nullable="false" comment="Carrier Code"/>
+        <column xsi:type="varchar" name="title" length="255" nullable="true" comment="Title"/>
+        <column xsi:type="text" name="track_number" nullable="true" comment="Tracking Number"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Track Creation Date"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="NRSHIPPING_RETURN_SHIPMENT_TRACK_ORDER_ID_SALES_ORDER_ENTITY_ID" table="nrshipping_return_shipment_track" column="order_id" referenceTable="sales_order" referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+    <table name="nrshipping_return_shipment_document" resource="sales" engine="innodb" comment="Return Shipment Document">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="track_id" unsigned="true" comment="Track ID"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Title"/>
+        <column xsi:type="mediumblob" name="label_data" comment="Label Data"/>
+        <column xsi:type="varchar" name="mime_type" length="32" nullable="false" comment="Mime Type"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Document Creation Date"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_8318CCC7D4A66AD295FEE10B5722C073" table="nrshipping_return_shipment_document" column="track_id" referenceTable="nrshipping_return_shipment_track" referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
 </schema>

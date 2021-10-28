@@ -1,99 +1,130 @@
 {
-  "sales_order_grid": {
-    "column": {
-      "nrshipping_label_status": true
-    }
-  },
-  "nrshipping_label_status": {
-    "column": {
-      "order_id": true,
-      "status_code": true
+    "sales_order_grid": {
+        "column": {
+            "nrshipping_label_status": true
+        }
     },
-    "constraint": {
-      "PRIMARY": true,
-      "NRSHIPPING_LABEL_STATUS_ORDER_ID_SALES_ORDER_ENTITY_ID": true
-    }
-  },
-  "nrshipping_recipient_street": {
-    "column": {
-      "order_address_id": true,
-      "name": true,
-      "number": true,
-      "supplement": true
+    "nrshipping_label_status": {
+        "column": {
+            "order_id": true,
+            "status_code": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "NRSHIPPING_LABEL_STATUS_ORDER_ID_SALES_ORDER_ENTITY_ID": true
+        }
     },
-    "constraint": {
-      "PRIMARY": true,
-      "NRSHIPPING_RECIPIENT_STREET_ORDER_ADDR_ID_SALES_ORDER_ADDR_ENTT_ID": true
-    }
-  },
-  "nrshipping_quote_address_shipping_option_selection": {
-    "column": {
-      "entity_id": true,
-      "parent_id": true,
-      "shipping_option_code": true,
-      "input_code": true,
-      "input_value": true
+    "nrshipping_recipient_street": {
+        "column": {
+            "order_address_id": true,
+            "name": true,
+            "number": true,
+            "supplement": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "NRSHIPPING_RECIPIENT_STREET_ORDER_ADDR_ID_SALES_ORDER_ADDR_ENTT_ID": true,
+            "NRSHPP_RECIPIENT_STREET_ORDER_ADDR_ID_SALES_ORDER_ADDR_ENTT_ID": true
+        }
     },
-    "constraint": {
-      "PRIMARY": true,
-      "NRSHIPPING_QUOTE_ADDR_SHPP_OPT_SELECTION_PARENT_ID_QUOTE_ADDR_ADDR_ID": true
-    }
-  },
-  "nrshipping_order_address_shipping_option_selection": {
-    "column": {
-      "entity_id": true,
-      "parent_id": true,
-      "shipping_option_code": true,
-      "input_code": true,
-      "input_value": true
+    "nrshipping_quote_address_shipping_option_selection": {
+        "column": {
+            "entity_id": true,
+            "parent_id": true,
+            "shipping_option_code": true,
+            "input_code": true,
+            "input_value": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "NRSHIPPING_QUOTE_ADDR_SHPP_OPT_SELECTION_PARENT_ID_QUOTE_ADDR_ADDR_ID": true,
+            "FK_88C6AA953F99BAB21D5F2D6017CD9D4A": true
+        }
     },
-    "constraint": {
-      "PRIMARY": true,
-      "NRSHIPPING_ORDER_ADDR_SHPP_OPT_SELECTION_PARENT_ID_SALES_ORDER_ADDRESS_ENTT_ID": true
-    }
-  },
-  "nrshipping_order_item": {
-    "column": {
-      "item_id": true,
-      "country_of_manufacture": true,
-      "export_description": true,
-      "hs_code": true
+    "nrshipping_order_address_shipping_option_selection": {
+        "column": {
+            "entity_id": true,
+            "parent_id": true,
+            "shipping_option_code": true,
+            "input_code": true,
+            "input_value": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "NRSHIPPING_ORDER_ADDR_SHPP_OPT_SELECTION_PARENT_ID_SALES_ORDER_ADDRESS_ENTT_ID": true,
+            "FK_377F25459A6EC5C0BBD7021BBE1F88E7": true
+        }
     },
-    "constraint": {
-      "PRIMARY": true,
-      "NRSHIPPING_ORDER_ITEM_ITEM_ID_SALES_ORDER_ITEM_ITEM_ID": true
+    "nrshipping_order_item": {
+        "column": {
+            "item_id": true,
+            "country_of_manufacture": true,
+            "export_description": true,
+            "hs_code": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "NRSHIPPING_ORDER_ITEM_ITEM_ID_SALES_ORDER_ITEM_ITEM_ID": true
+        }
+    },
+    "quote": {
+        "column": {
+            "base_nrshipping_additional_fee": true,
+            "base_nrshipping_additional_fee_incl_tax": true,
+            "nrshipping_additional_fee": true,
+            "nrshipping_additional_fee_incl_tax": true
+        }
+    },
+    "sales_order": {
+        "column": {
+            "base_nrshipping_additional_fee": true,
+            "base_nrshipping_additional_fee_incl_tax": true,
+            "nrshipping_additional_fee": true,
+            "nrshipping_additional_fee_incl_tax": true
+        }
+    },
+    "sales_invoice": {
+        "column": {
+            "base_nrshipping_additional_fee": true,
+            "base_nrshipping_additional_fee_incl_tax": true,
+            "nrshipping_additional_fee": true,
+            "nrshipping_additional_fee_incl_tax": true
+        }
+    },
+    "sales_creditmemo": {
+        "column": {
+            "base_nrshipping_additional_fee": true,
+            "base_nrshipping_additional_fee_incl_tax": true,
+            "nrshipping_additional_fee": true,
+            "nrshipping_additional_fee_incl_tax": true
+        }
+    },
+    "nrshipping_return_shipment_track": {
+        "column": {
+            "entity_id": true,
+            "order_id": true,
+            "carrier_code": true,
+            "title": true,
+            "track_number": true,
+            "created_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "NRSHIPPING_RETURN_SHIPMENT_TRACK_ORDER_ID_SALES_ORDER_ENTITY_ID": true
+        }
+    },
+    "nrshipping_return_shipment_document": {
+        "column": {
+            "entity_id": true,
+            "track_id": true,
+            "title": true,
+            "label_data": true,
+            "mime_type": true,
+            "created_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_8318CCC7D4A66AD295FEE10B5722C073": true
+        }
     }
-  },
-  "quote": {
-    "column": {
-      "base_nrshipping_additional_fee": true,
-      "base_nrshipping_additional_fee_incl_tax": true,
-      "nrshipping_additional_fee": true,
-      "nrshipping_additional_fee_incl_tax": true
-    }
-  },
-  "sales_order": {
-    "column": {
-      "base_nrshipping_additional_fee": true,
-      "base_nrshipping_additional_fee_incl_tax": true,
-      "nrshipping_additional_fee": true,
-      "nrshipping_additional_fee_incl_tax": true
-    }
-  },
-  "sales_invoice": {
-    "column": {
-      "base_nrshipping_additional_fee": true,
-      "base_nrshipping_additional_fee_incl_tax": true,
-      "nrshipping_additional_fee": true,
-      "nrshipping_additional_fee_incl_tax": true
-    }
-  },
-  "sales_creditmemo": {
-    "column": {
-      "base_nrshipping_additional_fee": true,
-      "base_nrshipping_additional_fee_incl_tax": true,
-      "nrshipping_additional_fee": true,
-      "nrshipping_additional_fee_incl_tax": true
-    }
-  }
 }
