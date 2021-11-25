@@ -19,8 +19,8 @@ use Netresearch\ShippingCore\Api\Data\OrderExport\ServiceDataInterface;
 use Netresearch\ShippingCore\Api\Data\OrderExport\ServiceDataInterfaceFactory;
 use Netresearch\ShippingCore\Api\Data\OrderExport\ShippingOptionInterface;
 use Netresearch\ShippingCore\Api\Data\OrderExport\ShippingOptionInterfaceFactory;
+use Netresearch\ShippingCore\Api\ShippingSettings\OrderDataProviderInterface;
 use Netresearch\ShippingCore\Model\AdditionalFee\TotalsManager;
-use Netresearch\ShippingCore\Model\ShippingSettings\OrderDataProvider;
 use Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 
 class ShippingBuilderPlugin
@@ -46,7 +46,7 @@ class ShippingBuilderPlugin
     private $keyValueObjectFactory;
 
     /**
-     * @var OrderDataProvider
+     * @var OrderDataProviderInterface
      */
     private $orderDataProvider;
 
@@ -60,7 +60,7 @@ class ShippingBuilderPlugin
         ServiceDataInterfaceFactory $serviceDataFactory,
         ShippingOptionInterfaceFactory $packageDataFactory,
         KeyValueObjectInterfaceFactory $keyValueObjectFactory,
-        OrderDataProvider $orderDataProvider,
+        OrderDataProviderInterface $orderDataProvider,
         TotalExtensionInterfaceFactory $totalExtensionFactory
     ) {
         $this->shippingExtensionFactory = $shippingExtensionFactory;

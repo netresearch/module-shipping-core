@@ -7,6 +7,8 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <!-- # service interface preferences -->
     <preference for="Netresearch\ShippingCore\Api\AdditionalFee\TaxConfigInterface" type="Netresearch\ShippingCore\Model\Config\TaxConfig"/>
+    <preference for="Netresearch\ShippingCore\Api\BulkShipment\Interactive\InputsProviderInterface" type="Netresearch\ShippingCore\Model\BulkShipment\Interactive\InputsProvider"/>
+    <preference for="Netresearch\ShippingCore\Api\BulkShipment\OrderLoaderInterface" type="Netresearch\ShippingCore\Model\BulkShipment\OrderLoader"/>
     <preference for="Netresearch\ShippingCore\Api\Config\CarrierConfigInterface" type="Netresearch\ShippingCore\Model\Config\CarrierConfig"/>
     <preference for="Netresearch\ShippingCore\Api\Config\MapBoxConfigInterface" type="Netresearch\ShippingCore\Model\Config\MapBoxDummyConfig"/>
     <preference for="Netresearch\ShippingCore\Api\Config\ParcelProcessingConfigInterface" type="Netresearch\ShippingCore\Model\Config\ParcelProcessingConfig"/>
@@ -37,6 +39,7 @@
     <preference for="Netresearch\ShippingCore\Api\ShippingSettings\ArrayProcessor\ShippingSettingsProcessorInterface" type="Netresearch\ShippingCore\Model\ShippingSettings\ArrayProcessor\CompositeShippingSettingsProcessor"/>
     <preference for="Netresearch\ShippingCore\Api\ShippingSettings\CheckoutManagementInterface" type="Netresearch\ShippingCore\Model\ShippingSettings\CheckoutManagement"/>
     <preference for="Netresearch\ShippingCore\Api\ShippingSettings\GuestCheckoutManagementInterface" type="Netresearch\ShippingCore\Model\ShippingSettings\GuestCheckoutManagement"/>
+    <preference for="Netresearch\ShippingCore\Api\ShippingSettings\OrderDataProviderInterface" type="Netresearch\ShippingCore\Model\ShippingSettings\OrderDataProvider"/>
     <preference for="Netresearch\ShippingCore\Api\ShippingSettings\TypeProcessor\ShippingDataProcessorInterface" type="Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\CompositeShippingDataProcessor"/>
     <preference for="Netresearch\ShippingCore\Api\SplitAddress\RecipientStreetLoaderInterface" type="Netresearch\ShippingCore\Model\SplitAddress\RecipientStreetLoader"/>
     <preference for="Netresearch\ShippingCore\Api\SplitAddress\RecipientStreetRepositoryInterface" type="Netresearch\ShippingCore\Model\SplitAddress\RecipientStreetRepository"/>

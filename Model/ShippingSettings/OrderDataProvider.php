@@ -11,8 +11,9 @@ namespace Netresearch\ShippingCore\Model\ShippingSettings;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\ShipmentFactory;
 use Netresearch\ShippingCore\Api\Data\ShippingSettings\CarrierDataInterface;
+use Netresearch\ShippingCore\Api\ShippingSettings\OrderDataProviderInterface;
 
-class OrderDataProvider
+class OrderDataProvider implements OrderDataProviderInterface
 {
     /**
      * @var PackagingDataProvider
@@ -34,7 +35,7 @@ class OrderDataProvider
      * @param Order $order
      * @return CarrierDataInterface|null
      */
-    public function getShippingOptions(Order $order)
+    public function getShippingOptions(Order $order): ?CarrierDataInterface
     {
         /** need to create a tmp shipment for packagingDataProvider */
         try {

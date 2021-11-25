@@ -10,21 +10,18 @@ namespace Netresearch\ShippingCore\Model\BulkShipment;
 
 use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Api\ShipOrderInterface;
-use Magento\Sales\Model\Order;
 use Magento\Shipping\Model\Shipment\RequestFactory;
+use Netresearch\ShippingCore\Api\BulkShipment\OrderLoaderInterface;
 use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentResponseInterface;
 use Netresearch\ShippingCore\Api\Data\Pipeline\TrackResponse\TrackResponseInterface;
-use Netresearch\ShippingCore\Api\LabelStatus\LabelStatusManagementInterface;
-use Netresearch\ShippingCore\Model\Config\BatchProcessingConfig;
-use Netresearch\ShippingCore\Model\LabelStatus\LabelStatusProvider;
 use Psr\Log\LoggerInterface;
 
 class BulkShipmentManagement
 {
     /**
-     * @var BatchProcessingConfig
+     * @var OrderLoaderInterface
      */
-    private $batchConfig;
+    private $orderLoader;
 
     /**
      * @var BulkShipmentConfiguration
@@ -32,19 +29,9 @@ class BulkShipmentManagement
     private $serviceConfig;
 
     /**
-     * @var OrderCollectionLoader
-     */
-    private $orderCollectionLoader;
-
-    /**
      * @var ShipmentCollectionLoader
      */
     private $shipmentCollectionLoader;
-
-    /**
-     * @var LabelStatusProvider
-     */
-    private $labelStatusProvider;
 
     /**
      * @var ShipOrderInterface
@@ -72,22 +59,18 @@ class BulkShipmentManagement
     private $shipmentNotification;
 
     public function __construct(
-        BatchProcessingConfig $batchConfig,
+        OrderLoaderInterface $orderLoader,
         BulkShipmentConfiguration $serviceConfig,
-        OrderCollectionLoader $orderCollectionLoader,
         ShipmentCollectionLoader $shipmentCollectionLoader,
-        LabelStatusProvider $labelStatusProvider,
         ShipOrderInterface $shipOrder,
         CancelRequestBuilder $cancelRequestBuilder,
         LoggerInterface $logger,
         RequestFactory $requestFactory,
         ShipmentNotification $shipmentNotification
     ) {
-        $this->batchConfig = $batchConfig;
+        $this->orderLoader = $orderLoader;
         $this->serviceConfig = $serviceConfig;
-        $this->orderCollectionLoader = $orderCollectionLoader;
         $this->shipmentCollectionLoader = $shipmentCollectionLoader;
-        $this->labelStatusProvider = $labelStatusProvider;
         $this->shipOrder = $shipOrder;
         $this->cancelRequestBuilder = $cancelRequestBuilder;
         $this->logger = $logger;
@@ -104,42 +87,25 @@ class BulkShipmentManagement
     public function createShipments(array $orderIds): array
     {
         $result = [];
+        $orders = $this->orderLoader->load($orderIds);
 
-        $retryFailedShipments = $this->batchConfig->isRetryEnabled();
-
-        $fnFilter = function (string $carrierCode) {
-            try {
-                return $this->serviceConfig->getBulkShipmentService($carrierCode);
-            } catch (\RuntimeException $exception) {
-                return false;
-            }
-        };
-
-        $carrierCodes = array_filter($this->serviceConfig->getCarrierCodes(), $fnFilter);
-        $orders = $this->orderCollectionLoader->load($orderIds, $carrierCodes);
-        $ordersLabelStatus = $this->labelStatusProvider->getLabelStatus($orderIds);
-
-        /** @var Order $order */
         foreach ($orders as $order) {
+            // query all the order's existing shipments that have no label yet
             $shipmentsCollection = $order->getShipmentsCollection()
                 ->addFieldToFilter(ShipmentInterface::SHIPPING_LABEL, ['null' => true]);
+            $shipmentIds = $shipmentsCollection->getAllIds();
 
-            $labelStatus = $ordersLabelStatus[$order->getId()] ?? null;
-            if ($retryFailedShipments || $labelStatus !== LabelStatusManagementInterface::LABEL_STATUS_FAILED) {
-                $shipmentIds = $shipmentsCollection->getAllIds();
-            } else {
-                $shipmentIds = [];
-            }
-
+            // if there are still pending shipments for the order, create them
             if ($order->canShip()) {
                 try {
-                    $shipmentId = $this->shipOrder->execute($order->getId());
+                    $shipmentId = $this->shipOrder->execute($order->getEntityId());
                     $shipmentIds[] = $shipmentId;
                 } catch (\Exception $exception) {
                     $this->logger->error($exception->getMessage(), ['exception' => $exception]);
                 }
             }
 
+            // collect existing and new shipments
             $result[$order->getIncrementId()] = $shipmentIds;
         }
 
