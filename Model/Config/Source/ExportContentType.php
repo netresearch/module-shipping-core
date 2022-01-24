@@ -12,6 +12,7 @@ use Magento\Framework\Data\OptionSourceInterface;
 
 class ExportContentType implements OptionSourceInterface
 {
+    private const TYPE_COMMERCIAL_GOODS = 'COMMERCIAL_GOODS';
     private const TYPE_COMMERCIAL_SAMPLE = 'COMMERCIAL_SAMPLE';
     private const TYPE_DOCUMENT = 'DOCUMENT';
     private const TYPE_PRESENT = 'PRESENT';
@@ -43,6 +44,7 @@ class ExportContentType implements OptionSourceInterface
     public function toArray()
     {
         return [
+            self::TYPE_COMMERCIAL_GOODS => __('Commercial Goods'),
             self::TYPE_COMMERCIAL_SAMPLE => __('Commercial Sample'),
             self::TYPE_DOCUMENT => __('Document'),
             self::TYPE_PRESENT => __('Present'),
