@@ -28,4 +28,4 @@ License
 Copyright
 ---------
 
-(c) 2021 Netresearch DTT GmbH
+(c) 2022 Netresearch DTT GmbH
