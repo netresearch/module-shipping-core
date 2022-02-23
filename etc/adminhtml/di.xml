@@ -13,4 +13,7 @@
     <type name="Magento\Sales\Block\Adminhtml\Order\View">
         <plugin name="addReturnCreateButton" type="Netresearch\ShippingCore\Plugin\Adminhtml\Shipping\Block\View\AddReturnCreateButton"/>
     </type>
+    <type name="Magento\Framework\Data\Form\Element\Fieldset">
+        <plugin name="addCarrierLogosToConfigGroup" type="Netresearch\ShippingCore\Plugin\Adminhtml\Config\Form\AddCarrierLogosToGroup"/>
+    </type>
 </config>
