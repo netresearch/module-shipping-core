@@ -27,7 +27,14 @@ class CutOffTimeConverter implements CutOffTimeConverterInterface
                 continue;
             }
 
-            $cutOffTime =  explode(':', $cutOffTimes[$weekDay]);
+            if (strpos($cutOffTimes[$weekDay], ':') !== false) {
+                // configured format is hh:mm
+                $cutOffTime =  explode(':', $cutOffTimes[$weekDay]);
+            } else {
+                // configured format is hh
+                $cutOffTime = [$cutOffTimes[$weekDay], '00'];
+            }
+
             list($hours, $minutes) = array_map('intval', $cutOffTime);
             $cutOffDate->setTime($hours, $minutes);
             $cutOffDates[$weekDay] = $cutOffDate;
