@@ -383,6 +383,12 @@
             <argument name="orderGrid" xsi:type="object">Magento\Sales\Model\ResourceModel\Order\Grid</argument>
         </arguments>
     </type>
+    <type name="Netresearch\ShippingCore\Observer\UpdateLocationAddress">
+        <arguments>
+            <argument name="orderGrid" xsi:type="object">Magento\Sales\Model\ResourceModel\Order\Grid</argument>
+        </arguments>
+    </type>
+
     <!-- # interceptor plugins -->
     <type name="Magento\Eav\Model\Entity\Attribute\Backend\AbstractBackend">
         <plugin name="nrShippingValidateHsCodeAttribute" type="Netresearch\ShippingCore\Plugin\Eav\Attribute\Backend\ValidateHsCodeAttribute"/>

@@ -4,7 +4,7 @@
          colors="true"
          bootstrap="../../../../../dev/tests/integration/framework/bootstrap.php">
     <testsuites>
-        <testsuite name="GLS Webservice Integration Tests">
+        <testsuite name="Netresearch Shipping Core Integration Tests">
             <directory>.</directory>
         </testsuite>
     </testsuites>
