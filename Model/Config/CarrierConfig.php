@@ -24,6 +24,15 @@ class CarrierConfig implements CarrierConfigInterface
         $this->scopeConfig = $scopeConfig;
     }
 
+    public function isActive(string $carrierCode, $store = null): bool
+    {
+        return $this->scopeConfig->isSetFlag(
+            'carriers/' . $carrierCode . '/active',
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+    }
+
     public function getTitle(string $carrierCode, $store = null): string
     {
         return (string) $this->scopeConfig->getValue(

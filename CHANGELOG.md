@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Added
+
+- Carrier-agnostic framework for module configuration validation.
+- Display carrier icons in _Shipping Settings_ configuration groups.
+
+### Changed
+
+- Set selected delivery location as order shipping address.
+
+### Fixed
+
+- Accept full hours as cut-off time calculation input.
+
 ## 2.6.0
 
 ### Added

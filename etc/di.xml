@@ -52,6 +52,8 @@
     <preference for="Netresearch\ShippingCore\Api\Util\PdfCombinatorInterface" type="Netresearch\ShippingCore\Model\Util\PdfCombinator"/>
     <preference for="Netresearch\ShippingCore\Api\Util\UnitConverterInterface" type="Netresearch\ShippingCore\Model\Util\UnitConverter"/>
     <!-- # data interface preferences -->
+    <preference for="Netresearch\ShippingCore\Api\Data\Config\ItemValidator\ResultInterface" type="Netresearch\ShippingCore\Model\Config\ItemValidator\Result"/>
+    <preference for="Netresearch\ShippingCore\Api\Data\Config\ValidationResultInterface" type="Netresearch\ShippingCore\Model\Config\ValidationResult"/>
     <preference for="Netresearch\ShippingCore\Api\Data\DeliveryLocation\AddressInterface" type="Netresearch\ShippingCore\Model\DeliveryLocation\Address"/>
     <preference for="Netresearch\ShippingCore\Api\Data\DeliveryLocation\LocationInterface" type="Netresearch\ShippingCore\Model\DeliveryLocation\Location"/>
     <preference for="Netresearch\ShippingCore\Api\Data\DeliveryLocation\OpeningHoursInterface" type="Netresearch\ShippingCore\Model\DeliveryLocation\OpeningHours"/>

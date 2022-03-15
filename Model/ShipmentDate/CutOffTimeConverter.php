@@ -36,7 +36,10 @@ class CutOffTimeConverter implements CutOffTimeConverterInterface
             }
 
             list($hours, $minutes) = array_map('intval', $cutOffTime);
-            $cutOffDate->setTime($hours, $minutes);
+            $cutOffDate = $cutOffDate->setTime($hours, $minutes);
+            if ($cutOffDate < new \DateTime('now')) {
+                $cutOffDate = $cutOffDate->modify("+1 week");
+            }
             $cutOffDates[$weekDay] = $cutOffDate;
         }
 
