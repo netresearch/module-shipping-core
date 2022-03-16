@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
+- Prevent comma as decimal separator in _Packages_ configuration.
 - Accept full hours as cut-off time calculation input.
 
 ## 2.6.0

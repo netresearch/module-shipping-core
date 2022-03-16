@@ -57,7 +57,7 @@ class PackageParamsArray extends AbstractFieldArray
             [
                 'label' => __('Length %1', $this->getMeasureLengthUnit()),
                 'style' => 'width:50px',
-                'class' => 'validate-not-negative-number required',
+                'class' => 'validate-greater-than-zero validate-number required',
             ]
         );
         $this->addColumn(
@@ -65,7 +65,7 @@ class PackageParamsArray extends AbstractFieldArray
             [
                 'label' => __('Width %1', $this->getMeasureLengthUnit()),
                 'style' => 'width:50px',
-                'class' => 'validate-not-negative-number required',
+                'class' => 'validate-greater-than-zero validate-number required',
             ]
         );
         $this->addColumn(
@@ -73,7 +73,7 @@ class PackageParamsArray extends AbstractFieldArray
             [
                 'label' => __('Height %1', $this->getMeasureLengthUnit()),
                 'style' => 'width:50px',
-                'class' => 'validate-not-negative-number required',
+                'class' => 'validate-greater-than-zero validate-number required',
             ]
         );
 
@@ -82,7 +82,7 @@ class PackageParamsArray extends AbstractFieldArray
             [
                 'label' => __('Weight %1', $this->getWeightUnit()),
                 'style' => 'width:50px',
-                'class' => 'validate-not-negative-number required',
+                'class' => 'validate-greater-than-zero validate-number required',
             ]
         );
 
