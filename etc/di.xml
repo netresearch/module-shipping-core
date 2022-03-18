@@ -418,6 +418,9 @@
     <type name="Magento\Sales\Api\OrderRepositoryInterface">
         <plugin name="nrShippingAddTotalsAsExtensionAttributes" type="Netresearch\ShippingCore\Plugin\AdditionalFee\Order\AddTotalsAsExtensionAttributes"/>
     </type>
+    <type name="Magento\Sales\Model\Order\Shipment">
+        <plugin name="updateTrackTitle" type="Netresearch\ShippingCore\Plugin\Order\UpdateTrackTitle"/>
+    </type>
     <type name="Magento\Sales\Model\ResourceModel\Order\Address\Collection">
         <plugin name="nrShippingAddSplitAddressAsExtensionAttributes" type="Netresearch\ShippingCore\Plugin\Order\AddRecipientStreetToAddressCollection"/>
     </type>
