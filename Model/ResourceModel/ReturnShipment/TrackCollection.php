@@ -20,4 +20,22 @@ class TrackCollection extends AbstractCollection
     {
         $this->_init(ReturnShipmentTrack::class, Track::class);
     }
+
+    private function joinOrder()
+    {
+        $this->getSelect()
+             ->join(
+                 ['order' => $this->getTable('sales_order')],
+                 'main_table.order_id = order.entity_id',
+                 [
+                     'order_increment_id' => 'order.increment_id'
+                 ]
+             );
+    }
+
+    public function setCustomerIdFilter(int $customerId)
+    {
+        $this->joinOrder();
+        $this->addFieldToFilter('customer_id', ['eq' => $customerId]);
+    }
 }

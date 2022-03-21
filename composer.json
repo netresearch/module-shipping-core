@@ -50,8 +50,8 @@
         "phpunit/phpunit": "^6.5.0 || ^9.0.0",
         "symfony/yaml": "^3.3.0 || ^4.0.0",
         "tddwizard/magento2-fixtures": "^1.1.0",
-        "magento/module-customer": "^102.0.0 || ^103.0.0",
-        "magento/module-checkout": "^100.3.0"
+        "magento/module-checkout": "^100.3.0",
+        "magento/module-customer":  "^102.0.0 || ^103.0.0"
     },
     "suggest": {
         "magento/module-rma": "^101.1.0",
@@ -61,7 +61,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "2.7.x-dev"
+            "dev-DHLGW-1208": "2.8.x-dev"
         }
     }
 }

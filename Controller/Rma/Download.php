@@ -6,24 +6,29 @@
 
 declare(strict_types=1);
 
-namespace Netresearch\ShippingCore\Controller\Adminhtml\Order\Rma;
+namespace Netresearch\ShippingCore\Controller\Rma;
 
-use Magento\Backend\App\Action;
-use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
+use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\App\Response\Http\FileFactory;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Controller\ResultInterface;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
+use Magento\Sales\Controller\AbstractController\OrderViewAuthorizationInterface;
 use Netresearch\ShippingCore\Api\Data\ReturnShipment\DocumentInterface;
 use Netresearch\ShippingCore\Api\Data\ReturnShipment\TrackInterface;
+use Netresearch\ShippingCore\Api\ReturnShipment\CanCreateReturnInterface;
 use Netresearch\ShippingCore\Api\ReturnShipment\DocumentRepositoryInterface;
 use Netresearch\ShippingCore\Api\ReturnShipment\TrackRepositoryInterface;
+use Netresearch\ShippingCore\Api\Util\OrderProviderInterface;
 
-class Download extends Action implements HttpGetActionInterface
+/**
+ * Download return shipment document from customer account.
+ */
+class Download extends ReturnAction
 {
-    const ADMIN_RESOURCE = 'Magento_Sales::sales_order';
-
     /**
      * @var DocumentRepositoryInterface
      */
@@ -35,9 +40,9 @@ class Download extends Action implements HttpGetActionInterface
     private $trackRepository;
 
     /**
-     * @var OrderRepositoryInterface
+     * @var OrderProviderInterface
      */
-    private $orderRepository;
+    private $orderProvider;
 
     /**
      * @var FileFactory
@@ -46,17 +51,20 @@ class Download extends Action implements HttpGetActionInterface
 
     public function __construct(
         Context $context,
+        OrderRepositoryInterface $orderRepository,
+        OrderViewAuthorizationInterface $orderAuthorization,
+        OrderProviderInterface $orderProvider,
+        CanCreateReturnInterface $canCreateReturn,
         DocumentRepositoryInterface $documentRepository,
         TrackRepositoryInterface $trackRepository,
-        OrderRepositoryInterface $orderRepository,
         FileFactory $fileFactory
     ) {
+        $this->orderProvider = $orderProvider;
         $this->documentRepository = $documentRepository;
         $this->trackRepository = $trackRepository;
-        $this->orderRepository = $orderRepository;
         $this->fileFactory = $fileFactory;
 
-        parent::__construct($context);
+        parent::__construct($context, $orderRepository, $orderAuthorization, $orderProvider, $canCreateReturn);
     }
 
     private function getFileName(OrderInterface $order, TrackInterface $track, DocumentInterface $document): string
@@ -81,6 +89,9 @@ class Download extends Action implements HttpGetActionInterface
         );
     }
 
+    /**
+     * @return ResultInterface|ResponseInterface
+     */
     public function execute()
     {
         $trackId = (int) $this->getRequest()->getParam('track_id', 0);
@@ -89,7 +100,7 @@ class Download extends Action implements HttpGetActionInterface
         try {
             $document = $this->documentRepository->get($documentId);
             $track = $this->trackRepository->get($trackId);
-            $order = $this->orderRepository->get($track->getOrderId());
+            $order = $this->orderProvider->getOrder();
 
             return $this->fileFactory->create(
                 $this->getFileName($order, $track, $document),
@@ -100,13 +111,8 @@ class Download extends Action implements HttpGetActionInterface
         } catch (\Exception $exception) {
             $this->messageManager->addErrorMessage(__('This document cannot be loaded.'));
 
-            $resultRedirect = $this->resultRedirectFactory->create();
-            if (isset($order)) {
-                $resultRedirect->setPath('sales/order/view', ['order_id' => $order->getEntityId()]);
-            } else {
-                $resultRedirect->setPath('sales/order/index');
-            }
-
+            $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+            $resultRedirect->setUrl($this->_redirect->getRefererUrl());
             return $resultRedirect;
         }
     }

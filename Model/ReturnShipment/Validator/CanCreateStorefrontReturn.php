@@ -6,11 +6,12 @@
 
 declare(strict_types=1);
 
-namespace Netresearch\ShippingCore\Model\ReturnShipment;
+namespace Netresearch\ShippingCore\Model\ReturnShipment\Validator;
 
 use Magento\Sales\Api\Data\OrderInterface;
 use Netresearch\ShippingCore\Api\Config\RmaConfigInterface;
 use Netresearch\ShippingCore\Api\ReturnShipment\CanCreateReturnInterface;
+use Netresearch\ShippingCore\Model\ReturnShipment\Validator\CanCreateReturn;
 
 class CanCreateStorefrontReturn implements CanCreateReturnInterface
 {

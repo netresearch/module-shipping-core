@@ -16,8 +16,9 @@ use Netresearch\ShippingCore\Api\Data\ReturnShipment\DocumentLinkInterface;
 interface GetDocumentLinksInterface
 {
     /**
+     * @param int $orderId
      * @param int $trackId
      * @return DocumentLinkInterface[]
      */
-    public function execute(int $trackId): array;
+    public function execute(int $orderId, int $trackId): array;
 }

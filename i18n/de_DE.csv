@@ -10,7 +10,7 @@
 "Cash On Delivery Payment Methods",Nachnahmezahlungsmethoden
 "Cash on Delivery",Nachnahmezahlung
 "Cash on Delivery Reason for Payment","Verwendungszweck Nachnahmezahlung"
-"Commercial Goods","Handelsware"
+"Commercial Goods",Handelsware
 "Commercial Sample",Warenmuster
 "Configure bulk shipping label retrieval via mass action and cron.","Konfigurieren Sie die das Erzeugen von Versandetiketten via Mass-Action und Cron."
 Container,Container
@@ -44,6 +44,7 @@ Length,Länge
 "Length %1","Länge %1"
 "Mail item category for international, non EU shipments.","Art der Sendung für internationale Sendungen außerhalb der EU"
 "Module version:",Modulversion:
+"My Return Labels","Meine Rücksendeetiketten"
 "New Return","Neue Retoure"
 "New Return Shipment","Neue Retourenlieferung"
 "No additional attributes found for order item %1.","Es wurden keine Zusatzattribute für Artikel %1 gefunden."

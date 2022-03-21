@@ -30,10 +30,10 @@
     <preference for="Netresearch\ShippingCore\Api\Pipeline\TrackResponseProcessorInterface" type="Netresearch\ShippingCore\Model\Pipeline\Track\TrackResponseProcessor"/>
     <preference for="Netresearch\ShippingCore\Api\Rate\ProxyCarrierFactoryInterface" type="Netresearch\ShippingCore\Model\Rate\Emulation\ProxyCarrierFactory"/>
     <preference for="Netresearch\ShippingCore\Api\Rate\RateRequestEmulationInterface" type="Netresearch\ShippingCore\Model\Rate\Emulation\RateRequestService"/>
-    <preference for="Netresearch\ShippingCore\Api\ReturnShipment\CanCreateReturnInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\CanCreateStorefrontReturn"/>
     <preference for="Netresearch\ShippingCore\Api\ReturnShipment\DocumentRepositoryInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\DocumentRepository"/>
-    <preference for="Netresearch\ShippingCore\Api\ReturnShipment\GetDocumentLinksInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\GetDocumentLinks"/>
+    <preference for="Netresearch\ShippingCore\Api\ReturnShipment\GetDocumentLinksInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\Provider\GetDocumentLinks"/>
     <preference for="Netresearch\ShippingCore\Api\ReturnShipment\TrackRepositoryInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\TrackRepository"/>
+    <preference for="Netresearch\ShippingCore\Api\ReturnShipment\CanCreateReturnInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\Validator\CanCreateStorefrontReturn"/>
     <preference for="Netresearch\ShippingCore\Api\ShipmentDate\CutOffTimeConverterInterface" type="Netresearch\ShippingCore\Model\ShipmentDate\CutOffTimeConverter"/>
     <preference for="Netresearch\ShippingCore\Api\ShipmentDate\ShipmentDateCalculatorInterface" type="Netresearch\ShippingCore\Model\ShipmentDate\ShipmentDateCalculator"/>
     <preference for="Netresearch\ShippingCore\Api\ShippingSettings\ArrayProcessor\ShippingSettingsProcessorInterface" type="Netresearch\ShippingCore\Model\ShippingSettings\ArrayProcessor\CompositeShippingSettingsProcessor"/>
@@ -428,5 +428,11 @@
     </type>
     <type name="Magento\Tax\Model\Calculation\AbstractCalculator">
         <plugin name="nrShippingFixAdditionalFeeTax" type="Netresearch\ShippingCore\Plugin\AdditionalFee\Tax\FixTaxItemDetailAmounts"/>
+    </type>
+    <type name="Netresearch\ShippingCore\Controller\Rma\Download">
+        <plugin name="authentication" type="Magento\Sales\Controller\Order\Plugin\Authentication"/>
+    </type>
+    <type name="Netresearch\ShippingCore\Controller\Rma\Index">
+        <plugin name="authentication" type="Magento\Sales\Controller\Order\Plugin\Authentication"/>
     </type>
 </config>

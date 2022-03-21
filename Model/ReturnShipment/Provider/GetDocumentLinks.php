@@ -6,12 +6,15 @@
 
 declare(strict_types=1);
 
-namespace Netresearch\ShippingCore\Model\ReturnShipment;
+namespace Netresearch\ShippingCore\Model\ReturnShipment\Provider;
 
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\SearchCriteriaBuilderFactory;
 use Magento\Framework\UrlInterface;
+use Netresearch\ShippingCore\Api\Data\ReturnShipment\DocumentInterface;
+use Netresearch\ShippingCore\Api\Data\ReturnShipment\DocumentLinkInterfaceFactory;
 use Netresearch\ShippingCore\Api\ReturnShipment\GetDocumentLinksInterface;
+use Netresearch\ShippingCore\Model\ReturnShipment\DocumentRepository;
 
 class GetDocumentLinks implements GetDocumentLinksInterface
 {
@@ -36,7 +39,7 @@ class GetDocumentLinks implements GetDocumentLinksInterface
     private $documentRepository;
 
     /**
-     * @var DocumentLinkFactory
+     * @var DocumentLinkInterfaceFactory
      */
     private $linkFactory;
 
@@ -45,14 +48,14 @@ class GetDocumentLinks implements GetDocumentLinksInterface
      * @param SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory
      * @param FilterBuilder $filterBuilder
      * @param DocumentRepository $documentRepository
-     * @param DocumentLinkFactory $linkFactory
+     * @param DocumentLinkInterfaceFactory $linkFactory
      */
     public function __construct(
         UrlInterface $urlBuilder,
         SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory,
         FilterBuilder $filterBuilder,
         DocumentRepository $documentRepository,
-        DocumentLinkFactory $linkFactory
+        DocumentLinkInterfaceFactory $linkFactory
     ) {
         $this->urlBuilder = $urlBuilder;
         $this->searchCriteriaBuilderFactory = $searchCriteriaBuilderFactory;
@@ -61,10 +64,10 @@ class GetDocumentLinks implements GetDocumentLinksInterface
         $this->linkFactory = $linkFactory;
     }
 
-    public function execute(int $trackId): array
+    public function execute(int $orderId, int $trackId): array
     {
         $parentIdFilter = $this->filterBuilder
-            ->setField(Document::TRACK_ID)
+            ->setField(DocumentInterface::TRACK_ID)
             ->setValue($trackId)
             ->setConditionType('eq')
             ->create();
@@ -73,8 +76,9 @@ class GetDocumentLinks implements GetDocumentLinksInterface
         $searchCriteria = $searchCriteriaBuilder->addFilter($parentIdFilter)->create();
 
         return array_map(
-            function (Document $document) use ($trackId) {
+            function (DocumentInterface $document) use ($orderId, $trackId) {
                 $url = $this->urlBuilder->getUrl('nrshipping/order_rma/download', [
+                    'order_id' => $orderId,
                     'track_id' => $trackId,
                     'document_id' => $document->getId(),
                 ]);
