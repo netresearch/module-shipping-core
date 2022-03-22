@@ -137,6 +137,7 @@
         <arguments>
             <argument name="processors" xsi:type="array">
                 <item name="updateLabelStatus" xsi:type="object">Netresearch\ShippingCore\Model\Pipeline\Shipment\ResponseProcessor\UpdateLabelStatus</item>
+                <item name="saveReturnShipmentDocuments" xsi:type="object">Netresearch\ShippingCore\Model\Pipeline\Shipment\ResponseProcessor\SaveReturnShipmentDocuments</item>
             </argument>
         </arguments>
     </virtualType>
