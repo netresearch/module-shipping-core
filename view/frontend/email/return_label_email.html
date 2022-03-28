@@ -1,0 +1,20 @@
+<!--@subject {{trans "Shipping label for your return delivery to %store_name" store_name=$store_name}} @-->
+<!--@vars {
+"var store_name":"Store Name",
+"var customer_name":"Customer Name",
+"var order_increment_id":"Order Id"
+} @-->
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">{{trans "%name," name=$customer_name}}</p>
+            <p>
+                {{trans "please find attached the shipping label for returning your order #%order_id to %store_name." order_id=$order_increment_id store_name=$store_name}}
+            </p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

@@ -8,7 +8,9 @@ declare(strict_types=1);
 
 namespace Netresearch\ShippingCore\Model\ResourceModel\ReturnShipment;
 
+use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
+use Netresearch\ShippingCore\Api\Data\ReturnShipment\TrackInterface;
 use Netresearch\ShippingCore\Model\ReturnShipment\Track as ReturnShipmentTrack;
 
 /**
@@ -33,9 +35,30 @@ class TrackCollection extends AbstractCollection
              );
     }
 
+    public function setOrderIdFilter(int $orderId)
+    {
+        $this->addFieldToFilter('order_id', ['eq' => $orderId]);
+    }
+
     public function setCustomerIdFilter(int $customerId)
     {
         $this->joinOrder();
         $this->addFieldToFilter('customer_id', ['eq' => $customerId]);
+    }
+
+    public function setTrackingNumberFilter(string $trackingNumber)
+    {
+        $this->addFieldToFilter(TrackInterface::TRACK_NUMBER, ['eq' => $trackingNumber]);
+    }
+
+    protected function _afterLoad()
+    {
+        parent::_afterLoad();
+
+        foreach ($this->_items as $item) {
+            if ($item instanceof AbstractModel) {
+                $this->getResource()->afterLoad($item);
+            }
+        }
     }
 }

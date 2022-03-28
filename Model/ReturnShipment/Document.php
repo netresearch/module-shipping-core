@@ -44,9 +44,9 @@ class Document extends AbstractModel implements DocumentInterface
         return (string)$this->getData(self::LABEL_DATA);
     }
 
-    public function getMimeType(): string
+    public function getMediaType(): string
     {
-        return (string)$this->getData(self::MIME_TYPE);
+        return (string)$this->getData(self::MEDIA_TYPE);
     }
 
     public function getCreatedAt(): string

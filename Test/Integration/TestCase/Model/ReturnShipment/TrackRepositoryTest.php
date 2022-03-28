@@ -13,6 +13,8 @@ use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Model\Order;
 use Magento\TestFramework\Helper\Bootstrap;
+use Netresearch\ShippingCore\Api\Data\ReturnShipment\DocumentInterface;
+use Netresearch\ShippingCore\Api\Data\ReturnShipment\DocumentInterfaceFactory;
 use Netresearch\ShippingCore\Api\Data\ReturnShipment\TrackInterface;
 use Netresearch\ShippingCore\Api\Data\ReturnShipment\TrackInterfaceFactory;
 use Netresearch\ShippingCore\Api\ReturnShipment\TrackRepositoryInterface;
@@ -64,68 +66,78 @@ class TrackRepositoryTest extends TestCase
     public function saveAndLoadTracks()
     {
         $trackFactory = Bootstrap::getObjectManager()->create(TrackInterfaceFactory::class);
+        $documentFactory = Bootstrap::getObjectManager()->create(DocumentInterfaceFactory::class);
         $trackRepository = Bootstrap::getObjectManager()->create(TrackRepositoryInterface::class);
-        $searchCriteriaBuilder = Bootstrap::getObjectManager()->get(SearchCriteriaBuilder::class);
 
-        $trackDataA = [
-            TrackInterface::ORDER_ID => self::$order->getEntityId(),
-            TrackInterface::TITLE => 'Carrier Name and Method',
-            TrackInterface::TRACK_NUMBER => '12345',
-            TrackInterface::CARRIER_CODE => 'carrier_method',
+        $tracksData = [
+            [
+                TrackInterface::ORDER_ID => (int) self::$order->getEntityId(),
+                TrackInterface::TITLE => 'Carrier Name and Method',
+                TrackInterface::TRACK_NUMBER => '12345',
+                TrackInterface::CARRIER_CODE => 'carrier_method',
+                TrackInterface::DOCUMENTS => [
+                    [
+                        DocumentInterface::TITLE => 'PDF A',
+                        DocumentInterface::LABEL_DATA => 'binary foo A',
+                        DocumentInterface::MEDIA_TYPE => 'application/pdf',
+                    ],
+                    [
+                        DocumentInterface::TITLE => 'Image A',
+                        DocumentInterface::LABEL_DATA => 'binary bar A',
+                        DocumentInterface::MEDIA_TYPE => 'image/png',
+                    ],
+                ],
+            ],
+            [
+                TrackInterface::ORDER_ID => (int) self::$order->getEntityId(),
+                TrackInterface::TITLE => 'Carrier Retoure',
+                TrackInterface::TRACK_NUMBER => '67890',
+                TrackInterface::CARRIER_CODE => 'carrier_method',
+                TrackInterface::DOCUMENTS => [
+                    [
+                        DocumentInterface::TITLE => 'PDF B',
+                        DocumentInterface::LABEL_DATA => 'binary foo B',
+                        DocumentInterface::MEDIA_TYPE => 'application/pdf',
+                    ],
+                    [
+                        DocumentInterface::TITLE => 'Image B',
+                        DocumentInterface::LABEL_DATA => 'binary bar B',
+                        DocumentInterface::MEDIA_TYPE => 'image/png',
+                    ],
+                ],
+            ],
         ];
-        $trackDataB = [
-            TrackInterface::ORDER_ID => self::$order->getEntityId(),
-            TrackInterface::TITLE => 'Carrier Retoure',
-            TrackInterface::TRACK_NUMBER => '67890',
-            TrackInterface::CARRIER_CODE => 'carrier_method',
-        ];
-        $tracksData = [$trackDataA, $trackDataB];
+
         foreach ($tracksData as $trackData) {
+            $documentsData = $trackData[TrackInterface::DOCUMENTS];
+            $trackData[TrackInterface::DOCUMENTS] = array_map(
+                function (array $documentData) use ($documentFactory) {
+                    return $documentFactory->create(['data' => $documentData]);
+                },
+                $documentsData
+            );
+
             $track = $trackFactory->create(['data' => $trackData]);
             $trackRepository->save($track);
-        }
 
-        // assert that all tracks were persisted and loaded again
-        $trackCollection = $trackRepository->getList($searchCriteriaBuilder->create());
-        $tracks = $trackCollection->getItems();
-        self::assertCount(count($tracksData), $tracks);
-
-        foreach ($tracks as $track) {
-            // some sanity checks for the getters
             self::assertNotEmpty($track->getEntityId());
-            self::assertEquals(self::$order->getEntityId(), $track->getOrderId());
-            self::assertNotEmpty($track->getCarrierCode());
-            self::assertNotEmpty($track->getTitle());
-            self::assertNotEmpty($track->getTrackNumber());
-            self::assertNotEmpty($track->getCreatedAt());
 
-            // find original track's data for the current track model
-            $key = array_search($track->getTrackNumber(), array_column($tracksData, TrackInterface::TRACK_NUMBER));
-            $originalData = $tracksData[$key];
+            $loadedTrack = $trackRepository->get($track->getEntityId());
+            self::assertSame($trackData[TrackInterface::ORDER_ID], $loadedTrack->getOrderId());
+            self::assertSame($trackData[TrackInterface::TITLE], $loadedTrack->getTitle());
+            self::assertSame($trackData[TrackInterface::TRACK_NUMBER], $loadedTrack->getTrackNumber());
+            self::assertSame($trackData[TrackInterface::CARRIER_CODE], $loadedTrack->getCarrierCode());
+            self::assertCount(count($documentsData), $loadedTrack->getDocuments());
 
-            // read data from track model and compare with original data
-            $data = $track->getData();
-            self::assertEmpty(array_diff($originalData, $data));
-        }
-
-        // now load the tracks individually
-        foreach ($tracks as $track) {
-            if ($track->getTrackNumber() === $trackDataA[TrackInterface::TRACK_NUMBER]) {
-                // via search criteria
-                $searchCriteriaBuilder = $searchCriteriaBuilder->addFilter(
-                    TrackInterface::TRACK_NUMBER,
-                    $trackDataA[TrackInterface::TRACK_NUMBER]
-                );
-                $trackSearchResults = $trackRepository->getList($searchCriteriaBuilder->create())->getItems();
-                self::assertCount(1, $trackSearchResults);
-                $loadedTrack = array_shift($trackSearchResults);
-                self::assertInstanceOf(Track::class, $loadedTrack);
-                self::assertSame($track->getData(), $loadedTrack->getData());
-            } elseif ($track->getTrackNumber() === $trackDataB[TrackInterface::TRACK_NUMBER]) {
-                // via ID
-                $loadedTrack = $trackRepository->get($track->getEntityId());
-                self::assertInstanceOf(Track::class, $loadedTrack);
-                self::assertSame($track->getData(), $loadedTrack->getData());
+            foreach ($documentsData as $documentData) {
+                foreach ($loadedTrack->getDocuments() as $loadedDocument) {
+                    if ($documentData[DocumentInterface::TITLE] === $loadedDocument->getTitle()) {
+                        self::assertNotEmpty($loadedDocument->getEntityId());
+                        self::assertSame($track->getEntityId(), $loadedDocument->getTrackId());
+                        self::assertSame($documentData[DocumentInterface::MEDIA_TYPE], $loadedDocument->getMediaType());
+                        self::assertSame($documentData[DocumentInterface::LABEL_DATA], $loadedDocument->getLabelData());
+                    }
+                }
             }
         }
     }

@@ -17,7 +17,7 @@ interface DocumentInterface
     public const TRACK_ID = 'track_id';
     public const TITLE = 'title';
     public const LABEL_DATA = 'label_data';
-    public const MIME_TYPE = 'mime_type';
+    public const MEDIA_TYPE = 'mime_type';
     public const CREATED_AT = 'created_at';
 
     public function getEntityId(): ?int;
@@ -28,7 +28,7 @@ interface DocumentInterface
 
     public function getLabelData(): string;
 
-    public function getMimeType(): string;
+    public function getMediaType(): string;
 
     public function getCreatedAt(): string;
 }

@@ -30,10 +30,10 @@
     <preference for="Netresearch\ShippingCore\Api\Pipeline\TrackResponseProcessorInterface" type="Netresearch\ShippingCore\Model\Pipeline\Track\TrackResponseProcessor"/>
     <preference for="Netresearch\ShippingCore\Api\Rate\ProxyCarrierFactoryInterface" type="Netresearch\ShippingCore\Model\Rate\Emulation\ProxyCarrierFactory"/>
     <preference for="Netresearch\ShippingCore\Api\Rate\RateRequestEmulationInterface" type="Netresearch\ShippingCore\Model\Rate\Emulation\RateRequestService"/>
-    <preference for="Netresearch\ShippingCore\Api\ReturnShipment\DocumentRepositoryInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\DocumentRepository"/>
-    <preference for="Netresearch\ShippingCore\Api\ReturnShipment\GetDocumentLinksInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\Provider\GetDocumentLinks"/>
-    <preference for="Netresearch\ShippingCore\Api\ReturnShipment\TrackRepositoryInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\TrackRepository"/>
     <preference for="Netresearch\ShippingCore\Api\ReturnShipment\CanCreateReturnInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\Validator\CanCreateStorefrontReturn"/>
+    <preference for="Netresearch\ShippingCore\Api\ReturnShipment\CurrentTrackInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\Provider\CurrentTrack"/>
+    <preference for="Netresearch\ShippingCore\Api\ReturnShipment\DocumentDownloadInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\Provider\DocumentDownload"/>
+    <preference for="Netresearch\ShippingCore\Api\ReturnShipment\TrackRepositoryInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\TrackRepository"/>
     <preference for="Netresearch\ShippingCore\Api\ShipmentDate\CutOffTimeConverterInterface" type="Netresearch\ShippingCore\Model\ShipmentDate\CutOffTimeConverter"/>
     <preference for="Netresearch\ShippingCore\Api\ShipmentDate\ShipmentDateCalculatorInterface" type="Netresearch\ShippingCore\Model\ShipmentDate\ShipmentDateCalculator"/>
     <preference for="Netresearch\ShippingCore\Api\ShippingSettings\ArrayProcessor\ShippingSettingsProcessorInterface" type="Netresearch\ShippingCore\Model\ShippingSettings\ArrayProcessor\CompositeShippingSettingsProcessor"/>
@@ -47,7 +47,6 @@
     <preference for="Netresearch\ShippingCore\Api\Util\CountryCodeInterface" type="Netresearch\ShippingCore\Model\Util\CountryCode"/>
     <preference for="Netresearch\ShippingCore\Api\Util\DeliveryAreaInterface" type="Netresearch\ShippingCore\Model\Util\DeliveryArea"/>
     <preference for="Netresearch\ShippingCore\Api\Util\ItemAttributeReaderInterface" type="Netresearch\ShippingCore\Model\ItemAttribute\ItemAttributeReader"/>
-    <preference for="Netresearch\ShippingCore\Api\Util\LabelDataProviderInterface" type="Netresearch\ShippingCore\Model\Util\LabelDataProvider"/>
     <preference for="Netresearch\ShippingCore\Api\Util\OrderProviderInterface" type="Netresearch\ShippingCore\Model\Util\OrderProvider"/>
     <preference for="Netresearch\ShippingCore\Api\Util\PdfCombinatorInterface" type="Netresearch\ShippingCore\Model\Util\PdfCombinator"/>
     <preference for="Netresearch\ShippingCore\Api\Util\UnitConverterInterface" type="Netresearch\ShippingCore\Model\Util\UnitConverter"/>
@@ -77,10 +76,7 @@
     <preference for="Netresearch\ShippingCore\Api\Data\Pipeline\TrackResponse\TrackResponseInterface" type="Netresearch\ShippingCore\Model\Pipeline\Track\TrackResponse\TrackResponse"/>
     <preference for="Netresearch\ShippingCore\Api\Data\RecipientStreetInterface" type="Netresearch\ShippingCore\Model\SplitAddress\RecipientStreet"/>
     <preference for="Netresearch\ShippingCore\Api\Data\ReturnShipment\DocumentInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\Document"/>
-    <preference for="Netresearch\ShippingCore\Api\Data\ReturnShipment\DocumentLinkInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\DocumentLink"/>
-    <preference for="Netresearch\ShippingCore\Api\Data\ReturnShipment\DocumentSearchResultsInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\DocumentSearchResults"/>
     <preference for="Netresearch\ShippingCore\Api\Data\ReturnShipment\TrackInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\Track"/>
-    <preference for="Netresearch\ShippingCore\Api\Data\ReturnShipment\TrackSearchResultsInterface" type="Netresearch\ShippingCore\Model\ReturnShipment\TrackSearchResults"/>
     <preference for="Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMap\InputValueInterface" type="Netresearch\ShippingCore\Model\ShippingSettings\Data\ValueMap\InputValue"/>
     <preference for="Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMapInterface" type="Netresearch\ShippingCore\Model\ShippingSettings\Data\ValueMap"/>
     <preference for="Netresearch\ShippingCore\Api\Data\ShippingSettings\CarrierDataInterface" type="Netresearch\ShippingCore\Model\ShippingSettings\Data\CarrierData"/>
@@ -270,6 +266,11 @@
             <argument name="orderAuthorization" xsi:type="object">Magento\Sales\Controller\Guest\OrderViewAuthorization</argument>
         </arguments>
     </type>
+    <type name="Netresearch\ShippingCore\Controller\Rma\View\Guest">
+        <arguments>
+            <argument name="orderAuthorization" xsi:type="object">Magento\Sales\Controller\Guest\OrderViewAuthorization</argument>
+        </arguments>
+    </type>
     <type name="Netresearch\ShippingCore\Cron\AutoCreate\OrderCollectionLoader">
         <arguments>
             <argument name="orderRepository" xsi:type="object">Netresearch\ShippingCore\Model\BulkShipment\OrderRepository\Virtual</argument>
@@ -333,6 +334,11 @@
     <type name="Netresearch\ShippingCore\Model\ResourceModel\ReturnShipment\Track">
         <arguments>
             <argument name="connectionName" xsi:type="const">Netresearch\ShippingCore\Setup\Module\Constants::SALES_CONNECTION_NAME</argument>
+        </arguments>
+    </type>
+    <type name="Netresearch\ShippingCore\Model\ReturnShipment\Provider\DocumentDownload">
+        <arguments>
+            <argument name="urlBuilder" xsi:type="object">Netresearch\ShippingCore\Model\ReturnShipment\Provider\Download\FrontendUrl</argument>
         </arguments>
     </type>
     <type name="Netresearch\ShippingCore\Model\ShipmentDate\ShipmentDateCalculator">

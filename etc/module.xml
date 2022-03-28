@@ -15,6 +15,7 @@
             <module name="Magento_Cron"/>
             <module name="Magento_Directory"/>
             <module name="Magento_Eav"/>
+            <module name="Magento_Email"/>
             <module name="Magento_Framework"/>
             <module name="Magento_Payment"/>
             <module name="Magento_Quote"/>

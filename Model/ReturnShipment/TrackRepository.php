@@ -8,17 +8,12 @@ declare(strict_types=1);
 
 namespace Netresearch\ShippingCore\Model\ReturnShipment;
 
-use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
-use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Netresearch\ShippingCore\Api\Data\ReturnShipment\TrackInterface;
-use Netresearch\ShippingCore\Api\Data\ReturnShipment\TrackSearchResultsInterface;
-use Netresearch\ShippingCore\Api\Data\ReturnShipment\TrackSearchResultsInterfaceFactory;
 use Netresearch\ShippingCore\Api\ReturnShipment\TrackRepositoryInterface;
 use Netresearch\ShippingCore\Model\ResourceModel\ReturnShipment\Track as TrackResource;
-use Netresearch\ShippingCore\Model\ResourceModel\ReturnShipment\TrackCollectionFactory;
 
 class TrackRepository implements TrackRepositoryInterface
 {
@@ -32,33 +27,10 @@ class TrackRepository implements TrackRepositoryInterface
      */
     private $trackResource;
 
-    /**
-     * @var TrackCollectionFactory
-     */
-    private $collectionFactory;
-
-    /**
-     * @var CollectionProcessorInterface
-     */
-    private $collectionProcessor;
-
-    /**
-     * @var TrackSearchResultsInterfaceFactory
-     */
-    protected $searchResultsFactory;
-
-    public function __construct(
-        TrackFactory $trackFactory,
-        TrackResource $trackResource,
-        TrackCollectionFactory $collectionFactory,
-        CollectionProcessorInterface $collectionProcessor,
-        TrackSearchResultsInterfaceFactory $searchResultsFactory
-    ) {
+    public function __construct(TrackFactory $trackFactory, TrackResource $trackResource)
+    {
         $this->trackFactory = $trackFactory;
         $this->trackResource = $trackResource;
-        $this->collectionFactory = $collectionFactory;
-        $this->collectionProcessor = $collectionProcessor;
-        $this->searchResultsFactory = $searchResultsFactory;
     }
 
     /**
@@ -81,18 +53,6 @@ class TrackRepository implements TrackRepositoryInterface
         }
 
         return $track;
-    }
-
-    public function getList(SearchCriteriaInterface $searchCriteria): TrackSearchResultsInterface
-    {
-        $collection = $this->collectionFactory->create();
-        $this->collectionProcessor->process($searchCriteria, $collection);
-
-        $searchResults = $this->searchResultsFactory->create();
-        $searchResults->setSearchCriteria($searchCriteria);
-        $searchResults->setItems($collection->getItems());
-        $searchResults->setTotalCount($collection->getSize());
-        return $searchResults;
     }
 
     /**

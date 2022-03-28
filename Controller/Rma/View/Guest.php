@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Netresearch\ShippingCore\Controller\Rma\Label;
+namespace Netresearch\ShippingCore\Controller\Rma\View;
 
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\RequestInterface;
@@ -16,18 +16,16 @@ use Magento\Framework\Exception\NotFoundException;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Controller\AbstractController\OrderViewAuthorizationInterface;
 use Magento\Sales\Helper\Guest as GuestHelper;
-use Magento\Shipping\Model\Shipment\ReturnShipmentFactory;
 use Netresearch\ShippingCore\Api\ReturnShipment\CanCreateReturnInterface;
+use Netresearch\ShippingCore\Api\ReturnShipment\CurrentTrackInterface;
+use Netresearch\ShippingCore\Api\ReturnShipment\TrackRepositoryInterface;
 use Netresearch\ShippingCore\Api\Util\OrderProviderInterface;
-use Netresearch\ShippingCore\Controller\Rma\Label;
-use Netresearch\ShippingCore\Model\BulkShipment\ReturnShipmentManagement;
-use Netresearch\ShippingCore\Model\ResourceModel\ReturnShipment\TrackCollectionFactory;
-use Psr\Log\LoggerInterface;
+use Netresearch\ShippingCore\Controller\Rma\View;
 
 /**
- * Request return shipment labels for guests.
+ * Display return shipment labels for guests.
  */
-class Guest extends Label
+class Guest extends View
 {
     /**
      * @var GuestHelper
@@ -40,10 +38,8 @@ class Guest extends Label
         OrderViewAuthorizationInterface $orderAuthorization,
         OrderProviderInterface $orderProvider,
         CanCreateReturnInterface $canCreateReturn,
-        ReturnShipmentFactory $shipmentRequestFactory,
-        ReturnShipmentManagement $returnShipmentManagement,
-        TrackCollectionFactory $trackCollectionFactory,
-        LoggerInterface $logger,
+        TrackRepositoryInterface $trackRepository,
+        CurrentTrackInterface $trackProvider,
         GuestHelper $guestHelper
     ) {
         $this->guestHelper = $guestHelper;
@@ -54,10 +50,8 @@ class Guest extends Label
             $orderAuthorization,
             $orderProvider,
             $canCreateReturn,
-            $shipmentRequestFactory,
-            $returnShipmentManagement,
-            $trackCollectionFactory,
-            $logger
+            $trackRepository,
+            $trackProvider
         );
     }
 

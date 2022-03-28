@@ -14,13 +14,10 @@ use Magento\Framework\App\Response\Http\FileFactory;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
-use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Controller\AbstractController\OrderViewAuthorizationInterface;
-use Netresearch\ShippingCore\Api\Data\ReturnShipment\DocumentInterface;
-use Netresearch\ShippingCore\Api\Data\ReturnShipment\TrackInterface;
 use Netresearch\ShippingCore\Api\ReturnShipment\CanCreateReturnInterface;
-use Netresearch\ShippingCore\Api\ReturnShipment\DocumentRepositoryInterface;
+use Netresearch\ShippingCore\Api\ReturnShipment\DocumentDownloadInterface;
 use Netresearch\ShippingCore\Api\ReturnShipment\TrackRepositoryInterface;
 use Netresearch\ShippingCore\Api\Util\OrderProviderInterface;
 
@@ -30,11 +27,6 @@ use Netresearch\ShippingCore\Api\Util\OrderProviderInterface;
 class Download extends ReturnAction
 {
     /**
-     * @var DocumentRepositoryInterface
-     */
-    private $documentRepository;
-
-    /**
      * @var TrackRepositoryInterface
      */
     private $trackRepository;
@@ -43,6 +35,11 @@ class Download extends ReturnAction
      * @var OrderProviderInterface
      */
     private $orderProvider;
+
+    /**
+     * @var DocumentDownloadInterface
+     */
+    private $download;
 
     /**
      * @var FileFactory
@@ -55,38 +52,16 @@ class Download extends ReturnAction
         OrderViewAuthorizationInterface $orderAuthorization,
         OrderProviderInterface $orderProvider,
         CanCreateReturnInterface $canCreateReturn,
-        DocumentRepositoryInterface $documentRepository,
         TrackRepositoryInterface $trackRepository,
+        DocumentDownloadInterface $download,
         FileFactory $fileFactory
     ) {
         $this->orderProvider = $orderProvider;
-        $this->documentRepository = $documentRepository;
         $this->trackRepository = $trackRepository;
+        $this->download = $download;
         $this->fileFactory = $fileFactory;
 
         parent::__construct($context, $orderRepository, $orderAuthorization, $orderProvider, $canCreateReturn);
-    }
-
-    private function getFileName(OrderInterface $order, TrackInterface $track, DocumentInterface $document): string
-    {
-        switch ($document->getMimeType()) {
-            case 'application/pdf':
-                $ext = 'pdf';
-                break;
-            case 'image/png':
-                $ext = 'png';
-                break;
-            default:
-                throw new \RuntimeException('File extension for ' . $document->getMimeType() . ' is not defined.');
-        }
-
-        return sprintf(
-            '%s-%s-%s.%s',
-            $order->getIncrementId(),
-            $track->getTrackNumber(),
-            str_replace(' ', '_', strtolower($document->getTitle())),
-            $ext
-        );
     }
 
     /**
@@ -98,15 +73,15 @@ class Download extends ReturnAction
         $documentId = (int) $this->getRequest()->getParam('document_id', 0);
 
         try {
-            $document = $this->documentRepository->get($documentId);
             $track = $this->trackRepository->get($trackId);
+            $document = $track->getDocument($documentId);
             $order = $this->orderProvider->getOrder();
 
             return $this->fileFactory->create(
-                $this->getFileName($order, $track, $document),
+                $this->download->getFileName($document, $track, $order),
                 $document->getLabelData(),
                 DirectoryList::TMP,
-                $document->getMimeType()
+                $document->getMediaType()
             );
         } catch (\Exception $exception) {
             $this->messageManager->addErrorMessage(__('This document cannot be loaded.'));

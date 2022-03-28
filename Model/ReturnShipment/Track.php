@@ -8,7 +8,9 @@ declare(strict_types=1);
 
 namespace Netresearch\ShippingCore\Model\ReturnShipment;
 
+use Magento\Framework\Exception\NotFoundException;
 use Magento\Framework\Model\AbstractModel;
+use Netresearch\ShippingCore\Api\Data\ReturnShipment\DocumentInterface;
 use Netresearch\ShippingCore\Api\Data\ReturnShipment\TrackInterface;
 use Netresearch\ShippingCore\Model\ResourceModel\ReturnShipment\Track as TrackResource;
 
@@ -52,5 +54,25 @@ class Track extends AbstractModel implements TrackInterface
     public function getCreatedAt(): string
     {
         return (string)$this->getData(self::CREATED_AT);
+    }
+
+    public function getDocuments(): array
+    {
+        if (!$this->hasData(self::DOCUMENTS)) {
+            return [];
+        }
+
+        return $this->getData(self::DOCUMENTS);
+    }
+
+    public function getDocument(int $documentId): DocumentInterface
+    {
+        foreach ($this->getDocuments() as $document) {
+            if ($document->getEntityId() === $documentId) {
+                return $document;
+            }
+        }
+
+        throw new NotFoundException(__('Document %1 does not exist for track %2.', $documentId, $this->getEntityId()));
     }
 }

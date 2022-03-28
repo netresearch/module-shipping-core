@@ -20,7 +20,6 @@ use Netresearch\ShippingCore\Api\Data\ReturnShipment\DocumentInterfaceFactory;
 use Netresearch\ShippingCore\Api\Data\ReturnShipment\TrackInterface;
 use Netresearch\ShippingCore\Api\Data\ReturnShipment\TrackInterfaceFactory;
 use Netresearch\ShippingCore\Api\Pipeline\ShipmentResponseProcessorInterface;
-use Netresearch\ShippingCore\Api\ReturnShipment\DocumentRepositoryInterface;
 use Netresearch\ShippingCore\Api\ReturnShipment\TrackRepositoryInterface;
 use Psr\Log\LoggerInterface;
 
@@ -47,11 +46,6 @@ class SaveReturnShipmentDocuments implements ShipmentResponseProcessorInterface
     private $trackRepository;
 
     /**
-     * @var DocumentRepositoryInterface
-     */
-    private $documentRepository;
-
-    /**
      * @var LoggerInterface
      */
     private $logger;
@@ -61,14 +55,12 @@ class SaveReturnShipmentDocuments implements ShipmentResponseProcessorInterface
         TrackInterfaceFactory $trackFactory,
         DocumentInterfaceFactory $documentFactory,
         TrackRepositoryInterface $trackRepository,
-        DocumentRepositoryInterface $documentRepository,
         LoggerInterface $logger
     ) {
         $this->config = $config;
         $this->trackFactory = $trackFactory;
         $this->documentFactory = $documentFactory;
         $this->trackRepository = $trackRepository;
-        $this->documentRepository = $documentRepository;
         $this->logger = $logger;
     }
 
@@ -117,13 +109,27 @@ class SaveReturnShipmentDocuments implements ShipmentResponseProcessorInterface
             $carrierCode = strtok((string)$order->getShippingMethod(), '_');
 
             foreach ($labelResponseDocuments as $trackingNumber => $trackDocuments) {
-                // create and persists one track per tracking number
+                // create and persists one track with its documents per tracking number
                 $track = $this->trackFactory->create([
                     'data' => [
                         TrackInterface::ORDER_ID => $order->getEntityId(),
                         TrackInterface::CARRIER_CODE => $carrierCode,
                         TrackInterface::TITLE => $this->config->getTitle($carrierCode),
                         TrackInterface::TRACK_NUMBER => $trackingNumber,
+                        TrackInterface::DOCUMENTS => array_map(
+                            function (ReturnShipmentDocumentInterface $labelResponseDocument) {
+                                return $this->documentFactory->create(
+                                    [
+                                        'data' => [
+                                            DocumentInterface::TITLE => $labelResponseDocument->getTitle(),
+                                            DocumentInterface::LABEL_DATA => base64_decode($labelResponseDocument->getLabelData()),
+                                            DocumentInterface::MEDIA_TYPE => $labelResponseDocument->getMimeType(),
+                                        ]
+                                    ]
+                                );
+                            },
+                            $trackDocuments
+                        ),
                     ]
                 ]);
 
@@ -133,27 +139,6 @@ class SaveReturnShipmentDocuments implements ShipmentResponseProcessorInterface
                     $this->logger->error($exception->getMessage());
                     continue;
                 }
-
-                // persist label data per document
-                array_walk(
-                    $trackDocuments,
-                    function (ReturnShipmentDocumentInterface $labelResponseDocument) use ($track) {
-                        $document = $this->documentFactory->create([
-                            'data' => [
-                                DocumentInterface::TRACK_ID => $track->getId(),
-                                DocumentInterface::TITLE => $labelResponseDocument->getTitle(),
-                                DocumentInterface::LABEL_DATA => base64_decode($labelResponseDocument->getLabelData()),
-                                DocumentInterface::MIME_TYPE => $labelResponseDocument->getMimeType(),
-                            ]
-                        ]);
-
-                        try {
-                            $this->documentRepository->save($document);
-                        } catch (CouldNotSaveException $exception) {
-                            $this->logger->error($exception->getMessage());
-                        }
-                    }
-                );
             }
         }
     }

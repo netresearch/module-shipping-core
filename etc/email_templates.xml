@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="shipping_parcel_processing_return_label_template" label="Return Label Email Template" file="return_label_email.html" type="html" module="Netresearch_ShippingCore" area="frontend"/>
+</config>

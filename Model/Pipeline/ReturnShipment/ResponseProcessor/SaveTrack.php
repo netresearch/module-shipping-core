@@ -15,11 +15,10 @@ use Magento\Store\Model\ScopeInterface;
 use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\LabelResponseInterface;
 use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ReturnShipmentDocumentInterface;
 use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentErrorResponseInterface;
+use Netresearch\ShippingCore\Api\Data\ReturnShipment\DocumentInterface;
+use Netresearch\ShippingCore\Api\Data\ReturnShipment\TrackInterface;
 use Netresearch\ShippingCore\Api\Pipeline\ShipmentResponseProcessorInterface;
-use Netresearch\ShippingCore\Model\ReturnShipment\Document;
 use Netresearch\ShippingCore\Model\ReturnShipment\DocumentFactory;
-use Netresearch\ShippingCore\Model\ReturnShipment\DocumentRepository;
-use Netresearch\ShippingCore\Model\ReturnShipment\Track;
 use Netresearch\ShippingCore\Model\ReturnShipment\TrackFactory;
 use Netresearch\ShippingCore\Model\ReturnShipment\TrackRepository;
 use Psr\Log\LoggerInterface;
@@ -35,11 +34,6 @@ class SaveTrack implements ShipmentResponseProcessorInterface
      * @var DocumentFactory
      */
     private $documentFactory;
-
-    /**
-     * @var DocumentRepository
-     */
-    private $documentRepository;
 
     /**
      * @var TrackFactory
@@ -59,14 +53,12 @@ class SaveTrack implements ShipmentResponseProcessorInterface
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         DocumentFactory $documentFactory,
-        DocumentRepository $documentRepository,
         TrackFactory $trackFactory,
         TrackRepository $trackRepository,
         LoggerInterface $logger
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->documentFactory = $documentFactory;
-        $this->documentRepository = $documentRepository;
         $this->trackFactory = $trackFactory;
         $this->trackRepository = $trackRepository;
         $this->logger = $logger;
@@ -95,9 +87,9 @@ class SaveTrack implements ShipmentResponseProcessorInterface
                 }
 
                 $documents[] = $this->documentFactory->create(['data' => [
-                    Document::TITLE => $apiDocument->getTitle(),
-                    Document::LABEL_DATA => $apiDocument->getLabelData(),
-                    Document::MIME_TYPE => $apiDocument->getMimeType()
+                    DocumentInterface::TITLE => $apiDocument->getTitle(),
+                    DocumentInterface::LABEL_DATA => $apiDocument->getLabelData(),
+                    DocumentInterface::MEDIA_TYPE => $apiDocument->getMimeType()
                 ]]);
             }
 
@@ -115,10 +107,11 @@ class SaveTrack implements ShipmentResponseProcessorInterface
             );
 
             $track = $this->trackFactory->create(['data' => [
-                Track::ORDER_ID => $labelResponse->getSalesShipment()->getOrderId(),
-                Track::CARRIER_CODE => $carrierCode,
-                Track::TITLE => $carrierTitle,
-                Track::TRACK_NUMBER => $trackingNumber,
+                TrackInterface::ORDER_ID => $labelResponse->getSalesShipment()->getOrderId(),
+                TrackInterface::CARRIER_CODE => $carrierCode,
+                TrackInterface::TITLE => $carrierTitle,
+                TrackInterface::TRACK_NUMBER => $trackingNumber,
+                TrackInterface::DOCUMENTS => $documents,
             ]]);
 
             try {
@@ -127,18 +120,6 @@ class SaveTrack implements ShipmentResponseProcessorInterface
                 $this->logger->error($exception->getMessage());
                 continue;
             }
-
-            array_walk(
-                $documents,
-                function (Document $document) use ($track) {
-                    $document->setData(Document::TRACK_ID, $track->getId());
-                    try {
-                        $this->documentRepository->save($document);
-                    } catch (CouldNotSaveException $exception) {
-                        $this->logger->error($exception->getMessage());
-                    }
-                }
-            );
         }
     }
 }

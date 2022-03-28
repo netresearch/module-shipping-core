@@ -39,6 +39,7 @@
                     <comment>Mail item category for international, non EU shipments.</comment>
                     <source_model>Netresearch\ShippingCore\Model\Config\Source\ExportContentType</source_model>
                 </field>
+
                 <field id="export_content_explanation" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="60"
                        translate="label comment">
                     <label>Export Content Explanation</label>
@@ -47,6 +48,13 @@
                     <depends>
                         <field id="export_content_type">OTHER</field>
                     </depends>
+                </field>
+
+                <field id="return_label_template" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1" sortOrder="70"
+                       translate="label comment" type="select">
+                    <label>Return Label Email Template</label>
+                    <comment>The selected email template will be used when sending return shipment labels to the customer.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
                 </field>
             </group>
 

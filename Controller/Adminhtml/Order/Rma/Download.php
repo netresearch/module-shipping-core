@@ -13,21 +13,13 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\App\Response\Http\FileFactory;
-use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
-use Netresearch\ShippingCore\Api\Data\ReturnShipment\DocumentInterface;
-use Netresearch\ShippingCore\Api\Data\ReturnShipment\TrackInterface;
-use Netresearch\ShippingCore\Api\ReturnShipment\DocumentRepositoryInterface;
+use Netresearch\ShippingCore\Api\ReturnShipment\DocumentDownloadInterface;
 use Netresearch\ShippingCore\Api\ReturnShipment\TrackRepositoryInterface;
 
 class Download extends Action implements HttpGetActionInterface
 {
     const ADMIN_RESOURCE = 'Magento_Sales::sales_order';
-
-    /**
-     * @var DocumentRepositoryInterface
-     */
-    private $documentRepository;
 
     /**
      * @var TrackRepositoryInterface
@@ -40,45 +32,28 @@ class Download extends Action implements HttpGetActionInterface
     private $orderRepository;
 
     /**
+     * @var DocumentDownloadInterface
+     */
+    private $download;
+
+    /**
      * @var FileFactory
      */
     private $fileFactory;
 
     public function __construct(
         Context $context,
-        DocumentRepositoryInterface $documentRepository,
         TrackRepositoryInterface $trackRepository,
         OrderRepositoryInterface $orderRepository,
+        DocumentDownloadInterface $download,
         FileFactory $fileFactory
     ) {
-        $this->documentRepository = $documentRepository;
         $this->trackRepository = $trackRepository;
         $this->orderRepository = $orderRepository;
+        $this->download = $download;
         $this->fileFactory = $fileFactory;
 
         parent::__construct($context);
-    }
-
-    private function getFileName(OrderInterface $order, TrackInterface $track, DocumentInterface $document): string
-    {
-        switch ($document->getMimeType()) {
-            case 'application/pdf':
-                $ext = 'pdf';
-                break;
-            case 'image/png':
-                $ext = 'png';
-                break;
-            default:
-                throw new \RuntimeException('File extension for ' . $document->getMimeType() . ' is not defined.');
-        }
-
-        return sprintf(
-            '%s-%s-%s.%s',
-            $order->getIncrementId(),
-            $track->getTrackNumber(),
-            str_replace(' ', '_', strtolower($document->getTitle())),
-            $ext
-        );
     }
 
     public function execute()
@@ -87,15 +62,15 @@ class Download extends Action implements HttpGetActionInterface
         $documentId = (int) $this->getRequest()->getParam('document_id', 0);
 
         try {
-            $document = $this->documentRepository->get($documentId);
             $track = $this->trackRepository->get($trackId);
+            $document = $track->getDocument($documentId);
             $order = $this->orderRepository->get($track->getOrderId());
 
             return $this->fileFactory->create(
-                $this->getFileName($order, $track, $document),
+                $this->download->getFileName($document, $track, $order),
                 $document->getLabelData(),
                 DirectoryList::TMP,
-                $document->getMimeType()
+                $document->getMediaType()
             );
         } catch (\Exception $exception) {
             $this->messageManager->addErrorMessage(__('This document cannot be loaded.'));
