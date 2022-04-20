@@ -16,6 +16,7 @@ namespace Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption;
 interface InputInterface
 {
     public const INPUT_TYPE_CHECKBOX = 'checkbox';
+    public const INPUT_TYPE_LOCATION_FINDER = 'locationfinder';
     public const INPUT_TYPE_DATE = 'date';
     public const INPUT_TYPE_NUMBER = 'number';
     public const INPUT_TYPE_RADIO = 'radio';

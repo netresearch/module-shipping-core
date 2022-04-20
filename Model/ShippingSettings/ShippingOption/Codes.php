@@ -60,13 +60,19 @@ class Codes
 
     // delivery location service
     public const SERVICE_OPTION_DELIVERY_LOCATION = 'deliveryLocation';
-    public const INPUT_TYPE_LOCATION_FINDER = 'locationfinder';
     public const SERVICE_INPUT_DELIVERY_LOCATION_TYPE = 'type';
     public const SERVICE_INPUT_DELIVERY_LOCATION_ID = 'id';
     public const SERVICE_INPUT_DELIVERY_LOCATION_NUMBER = 'number';
+    public const SERVICE_INPUT_DELIVERY_LOCATION_NAME = 'displayName';
     public const SERVICE_INPUT_DELIVERY_LOCATION_COMPANY = 'company';
     public const SERVICE_INPUT_DELIVERY_LOCATION_COUNTRY_CODE = 'countryCode';
     public const SERVICE_INPUT_DELIVERY_LOCATION_POSTAL_CODE = 'postalCode';
     public const SERVICE_INPUT_DELIVERY_LOCATION_CITY = 'city';
     public const SERVICE_INPUT_DELIVERY_LOCATION_STREET = 'street';
+
+    /**
+     * @deprecated
+     * @see InputInterface::INPUT_TYPE_LOCATION_FINDER
+     */
+    public const INPUT_TYPE_LOCATION_FINDER = 'locationfinder';
 }
