@@ -15,7 +15,7 @@ use Magento\Framework\Controller\ResultInterface;
 
 class Edit extends Action
 {
-    const ADMIN_RESOURCE = 'Magento_Sales::actions_edit';
+    public const ADMIN_RESOURCE = 'Magento_Sales::actions_edit';
 
     /**
      * @var ResultFactory

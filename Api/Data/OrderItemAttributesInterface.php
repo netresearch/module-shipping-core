@@ -35,15 +35,15 @@ interface OrderItemAttributesInterface
     /**
      * @param int $itemId
      */
-    public function setItemId(int $itemId);
+    public function setItemId(int $itemId): void;
 
     /**
      * @param string|null $hsCode
      */
-    public function setHsCode(string $hsCode = null);
+    public function setHsCode(string $hsCode = null): void;
 
     /**
      * @param string|null $countryOfManufacture
      */
-    public function setCountryOfManufacture(string $countryOfManufacture = null);
+    public function setCountryOfManufacture(string $countryOfManufacture = null): void;
 }

@@ -81,7 +81,7 @@ class ShipmentItemAttributeReader
      */
     public function getTotalWeight(ShipmentInterface $shipment): float
     {
-        $fnAdd = function ($totalWeight, Item $shipmentItem) {
+        $fnAdd = static function ($totalWeight, Item $shipmentItem) {
             $totalWeight += $shipmentItem->getWeight() * $shipmentItem->getQty();
             return $totalWeight;
         };
@@ -98,7 +98,7 @@ class ShipmentItemAttributeReader
      */
     public function getTotalPrice(ShipmentInterface $shipment): float
     {
-        $fnAdd = function ($price, Item $shipmentItem) {
+        $fnAdd = static function ($price, Item $shipmentItem) {
             $totalAmount = $shipmentItem->getOrderItem()->getBaseRowTotal()
                 - $shipmentItem->getOrderItem()->getBaseDiscountAmount()
                 + $shipmentItem->getOrderItem()->getBaseTaxAmount()

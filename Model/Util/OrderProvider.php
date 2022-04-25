@@ -18,7 +18,7 @@ class OrderProvider implements OrderProviderInterface
      */
     private $order = null;
 
-    public function setOrder(OrderInterface $order)
+    public function setOrder(OrderInterface $order): void
     {
         $this->order = $order;
     }

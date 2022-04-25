@@ -20,7 +20,7 @@ interface ValidationResultInterface
     /**
      * @param ResultInterface[] $results
      */
-    public function set(array $results);
+    public function set(array $results): void;
 
     /**
      * @return ResultInterface[]

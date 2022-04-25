@@ -37,12 +37,12 @@ interface InputValueInterface
      *
      * @return void
      */
-    public function setCode(string $code);
+    public function setCode(string $code): void;
 
     /**
      * @param string $value
      *
      * @return void
      */
-    public function setValue(string $value);
+    public function setValue(string $value): void;
 }

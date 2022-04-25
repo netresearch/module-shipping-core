@@ -25,7 +25,7 @@ class DataInstaller
      * @throws LocalizedException
      * @throws \Zend_Validate_Exception
      */
-    public static function addExportDescriptionAttribute(EavSetup $eavSetup)
+    public static function addExportDescriptionAttribute(EavSetup $eavSetup): void
     {
         $eavSetup->addAttribute(
             Product::ENTITY,
@@ -50,7 +50,7 @@ class DataInstaller
      * @throws LocalizedException
      * @throws \Zend_Validate_Exception
      */
-    public static function addHsCodeAttribute(EavSetup $eavSetup)
+    public static function addHsCodeAttribute(EavSetup $eavSetup): void
     {
         $eavSetup->addAttribute(
             Product::ENTITY,

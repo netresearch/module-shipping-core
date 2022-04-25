@@ -21,7 +21,7 @@ class Uninstaller
      *
      * @param SchemaSetupInterface|Setup $schemaSetup
      */
-    public static function deleteConfig(SchemaSetupInterface $schemaSetup)
+    public static function deleteConfig(SchemaSetupInterface $schemaSetup): void
     {
         $defaultConnection = $schemaSetup->getConnection(ResourceConnection::DEFAULT_CONNECTION);
         $configTable = $schemaSetup->getTable('core_config_data', ResourceConnection::DEFAULT_CONNECTION);
@@ -32,7 +32,7 @@ class Uninstaller
     /**
      * @param EavSetup $eavSetup
      */
-    public static function deleteAttributes(EavSetup $eavSetup)
+    public static function deleteAttributes(EavSetup $eavSetup): void
     {
         $eavSetup->removeAttribute(Product::ENTITY, DataInstaller::ATTRIBUTE_CODE_HS_CODE);
         $eavSetup->removeAttribute(Product::ENTITY, DataInstaller::ATTRIBUTE_CODE_EXPORT_DESCRIPTION);

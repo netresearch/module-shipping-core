@@ -12,8 +12,8 @@ use Netresearch\ShippingCore\Api\Config\ShippingConfigInterface;
 
 class CustomsRegulationsProvider
 {
-    const DUTIABLE = 'dutiable';
-    const NON_DUTIABLE = 'non_dutiable';
+    public const DUTIABLE = 'dutiable';
+    public const NON_DUTIABLE = 'non_dutiable';
 
     private $dutiableRoutes = [
         'eu' => [

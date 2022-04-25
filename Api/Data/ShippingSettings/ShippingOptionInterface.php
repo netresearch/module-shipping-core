@@ -71,47 +71,47 @@ interface ShippingOptionInterface
      *
      * @return void
      */
-    public function setCode(string $code);
+    public function setCode(string $code): void;
 
     /**
      * @param string $available
      *
      * @return void
      */
-    public function setAvailable(string $available);
+    public function setAvailable(string $available): void;
 
     /**
      * @param string $label
      *
      * @return void
      */
-    public function setLabel(string $label);
+    public function setLabel(string $label): void;
 
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\InputInterface[] $inputs
      *
      * @return void
      */
-    public function setInputs(array $inputs);
+    public function setInputs(array $inputs): void;
 
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\RouteInterface[] $routes
      *
      * @return void
      */
-    public function setRoutes(array $routes);
+    public function setRoutes(array $routes): void;
 
     /**
      * @param int $sortOrder
      *
      * @return void
      */
-    public function setSortOrder(int $sortOrder);
+    public function setSortOrder(int $sortOrder): void;
 
     /**
      * @param int[] $requiredItemIds
      *
      * @return void
      */
-    public function setRequiredItemIds(array $requiredItemIds);
+    public function setRequiredItemIds(array $requiredItemIds): void;
 }

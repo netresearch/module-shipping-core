@@ -102,7 +102,7 @@ class UpdateLabelStatus implements ShipmentResponseProcessorInterface
      */
     private function isOrderShipped(Shipment $shipment): bool
     {
-        $fnCollectItems = function (array $orderItems, Item $orderItem) {
+        $fnCollectItems = static function (array $orderItems, Item $orderItem) {
             if (($orderItem->getProductType() === Type::TYPE_CODE)
                 && ((int) $orderItem->getProductOptionByCode('shipment_type') === AbstractType::SHIPMENT_SEPARATELY)
             ) {
@@ -114,12 +114,12 @@ class UpdateLabelStatus implements ShipmentResponseProcessorInterface
             return $orderItems;
         };
 
-        $fnSumOrdered = function ($qtyOrdered, Item $orderItem) {
+        $fnSumOrdered = static function ($qtyOrdered, Item $orderItem) {
             $qtyOrdered += $orderItem->getQtyOrdered();
             return $qtyOrdered;
         };
 
-        $fnSumShipped = function ($qtyShipped, Item $orderItem) {
+        $fnSumShipped = static function ($qtyShipped, Item $orderItem) {
             if ($orderItem->getIsVirtual()) {
                 $qtyShipped += $orderItem->getQtyOrdered();
             } else {

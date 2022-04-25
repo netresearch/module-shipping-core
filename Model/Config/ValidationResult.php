@@ -18,7 +18,7 @@ class ValidationResult implements ValidationResultInterface
      */
     private $results = [];
 
-    public function set(array $results)
+    public function set(array $results): void
     {
         $this->results = $results;
     }

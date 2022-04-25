@@ -38,12 +38,12 @@ interface ValidationRuleInterface
      *
      * @return void
      */
-    public function setName(string $name);
+    public function setName(string $name): void;
 
     /**
      * @param mixed $param
      *
      * @return void
      */
-    public function setParam($param);
+    public function setParam($param): void;
 }

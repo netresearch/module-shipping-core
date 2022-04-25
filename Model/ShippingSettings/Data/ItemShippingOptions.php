@@ -43,7 +43,7 @@ class ItemShippingOptions implements ItemShippingOptionsInterface
      *
      * @return void
      */
-    public function setItemId(int $itemId)
+    public function setItemId(int $itemId): void
     {
         $this->itemId = $itemId;
     }
@@ -53,7 +53,7 @@ class ItemShippingOptions implements ItemShippingOptionsInterface
      *
      * @return void
      */
-    public function setShippingOptions(array $shippingOptions)
+    public function setShippingOptions(array $shippingOptions): void
     {
         $this->shippingOptions = $shippingOptions;
     }

@@ -38,8 +38,8 @@ class ShipmentDateCalculator implements ShipmentDateCalculatorInterface
 
     public function getDate(array $dropOffTimes, $store = null): \DateTimeInterface
     {
-        usort($dropOffTimes, function (\DateTimeInterface $a, \DateTimeInterface $b) {
-            return $a->getTimestamp() > $b->getTimestamp();
+        usort($dropOffTimes, static function (\DateTimeInterface $a, \DateTimeInterface $b) {
+            return $a->getTimestamp() <=> $b->getTimestamp();
         });
 
         $currentTime = $this->timezone->scopeDate($store, null, true);

@@ -8,7 +8,9 @@ declare(strict_types=1);
 
 namespace Netresearch\ShippingCore\Model\ShippingSettings\Data;
 
+use Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CommentInterface;
 use Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\InputInterface;
+use Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ItemCombinationRuleInterface;
 
 class Input implements InputInterface
 {
@@ -173,7 +175,7 @@ class Input implements InputInterface
     /**
      * @return \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CommentInterface|null
      */
-    public function getComment()
+    public function getComment(): ?CommentInterface
     {
         return $this->comment;
     }
@@ -181,7 +183,7 @@ class Input implements InputInterface
     /**
      * @return \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ItemCombinationRuleInterface|null
      */
-    public function getItemCombinationRule()
+    public function getItemCombinationRule(): ?ItemCombinationRuleInterface
     {
         return $this->itemCombinationRule;
     }
@@ -197,7 +199,7 @@ class Input implements InputInterface
     /**
      * @param string $code
      */
-    public function setCode(string $code)
+    public function setCode(string $code): void
     {
         $this->code = $code;
     }
@@ -205,7 +207,7 @@ class Input implements InputInterface
     /**
      * @param string $inputType
      */
-    public function setInputType(string $inputType)
+    public function setInputType(string $inputType): void
     {
         $this->inputType = $inputType;
     }
@@ -213,7 +215,7 @@ class Input implements InputInterface
     /**
      * @param string $defaultValue
      */
-    public function setDefaultValue(string $defaultValue)
+    public function setDefaultValue(string $defaultValue): void
     {
         $this->defaultValue = $defaultValue;
     }
@@ -221,7 +223,7 @@ class Input implements InputInterface
     /**
      * @param bool $disabled
      */
-    public function setDisabled(bool $disabled)
+    public function setDisabled(bool $disabled): void
     {
         $this->disabled = $disabled;
     }
@@ -229,7 +231,7 @@ class Input implements InputInterface
     /**
      * @param string $label
      */
-    public function setLabel(string $label)
+    public function setLabel(string $label): void
     {
         $this->label = $label;
     }
@@ -237,7 +239,7 @@ class Input implements InputInterface
     /**
      * @param bool $labelVisible
      */
-    public function setLabelVisible(bool $labelVisible)
+    public function setLabelVisible(bool $labelVisible): void
     {
         $this->labelVisible = $labelVisible;
     }
@@ -245,7 +247,7 @@ class Input implements InputInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\OptionInterface[] $options
      */
-    public function setOptions(array $options)
+    public function setOptions(array $options): void
     {
         $this->options = $options;
     }
@@ -253,7 +255,7 @@ class Input implements InputInterface
     /**
      * @param string $tooltip
      */
-    public function setTooltip(string $tooltip)
+    public function setTooltip(string $tooltip): void
     {
         $this->tooltip = $tooltip;
     }
@@ -261,7 +263,7 @@ class Input implements InputInterface
     /**
      * @param string $placeholder
      */
-    public function setPlaceholder(string $placeholder)
+    public function setPlaceholder(string $placeholder): void
     {
         $this->placeholder = $placeholder;
     }
@@ -269,7 +271,7 @@ class Input implements InputInterface
     /**
      * @param int $sortOrder
      */
-    public function setSortOrder(int $sortOrder)
+    public function setSortOrder(int $sortOrder): void
     {
         $this->sortOrder = $sortOrder;
     }
@@ -277,7 +279,7 @@ class Input implements InputInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValidationRuleInterface[] $validationRules
      */
-    public function setValidationRules(array $validationRules)
+    public function setValidationRules(array $validationRules): void
     {
         $this->validationRules = $validationRules;
     }
@@ -285,7 +287,7 @@ class Input implements InputInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CommentInterface|null $comment
      */
-    public function setComment($comment)
+    public function setComment($comment): void
     {
         $this->comment = $comment;
     }
@@ -293,7 +295,7 @@ class Input implements InputInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ItemCombinationRuleInterface|null $itemCombinationRule
      */
-    public function setItemCombinationRule($itemCombinationRule)
+    public function setItemCombinationRule($itemCombinationRule): void
     {
         $this->itemCombinationRule = $itemCombinationRule;
     }
@@ -301,7 +303,7 @@ class Input implements InputInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMapInterface[] $valueMaps
      */
-    public function setValueMaps(array $valueMaps)
+    public function setValueMaps(array $valueMaps): void
     {
         $this->valueMaps = $valueMaps;
     }

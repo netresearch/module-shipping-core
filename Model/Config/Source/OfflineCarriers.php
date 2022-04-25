@@ -33,7 +33,7 @@ class OfflineCarriers implements OptionSourceInterface
         if ($carriers) {
             $carriers = array_filter(
                 $carriers,
-                function ($carrier) {
+                static function ($carrier) {
                     // Only use offline carriers
                     return !array_key_exists('is_online', $carrier) || (bool)$carrier['is_online'] === false;
                 }

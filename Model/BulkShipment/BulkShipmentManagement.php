@@ -175,7 +175,7 @@ class BulkShipmentManagement
      * @param int[] $shipmentIds
      * @return TrackResponseInterface[]
      */
-    public function cancelLabels(array $shipmentIds)
+    public function cancelLabels(array $shipmentIds): array
     {
         $shipmentCollection = $this->shipmentCollectionLoader->load($shipmentIds);
         $carrierShipments = [];

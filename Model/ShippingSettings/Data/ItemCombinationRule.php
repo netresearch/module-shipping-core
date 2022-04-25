@@ -46,7 +46,7 @@ class ItemCombinationRule implements ItemCombinationRuleInterface
     /**
      * @param string $sourceItemInputCode
      */
-    public function setSourceItemInputCode(string $sourceItemInputCode)
+    public function setSourceItemInputCode(string $sourceItemInputCode): void
     {
         $this->sourceItemInputCode = $sourceItemInputCode;
     }
@@ -70,7 +70,7 @@ class ItemCombinationRule implements ItemCombinationRuleInterface
     /**
      * @param string $action
      */
-    public function setAction(string $action)
+    public function setAction(string $action): void
     {
         $this->action = $action;
     }

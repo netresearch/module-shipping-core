@@ -36,12 +36,12 @@ interface ItemShippingOptionsInterface
      *
      * @return void
      */
-    public function setItemId(int $itemId);
+    public function setItemId(int $itemId): void;
 
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface[] $shippingOptions
      *
      * @return void
      */
-    public function setShippingOptions(array $shippingOptions);
+    public function setShippingOptions(array $shippingOptions): void;
 }

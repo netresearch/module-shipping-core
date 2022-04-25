@@ -39,32 +39,32 @@ interface AddressInterface
     public function getCompany(): string;
 
     /**
-     * @param string $string
+     * @param string $street
      * @return void
      */
-    public function setStreet(string $string);
+    public function setStreet(string $street): void;
 
     /**
-     * @param string $string
+     * @param string $city
      * @return void
      */
-    public function setCity(string $string);
+    public function setCity(string $city): void;
 
     /**
-     * @param string $string
+     * @param string $countryCode
      * @return void
      */
-    public function setCountryCode(string $string);
+    public function setCountryCode(string $countryCode): void;
 
     /**
-     * @param string $string
+     * @param string $postalCode
      * @return void
      */
-    public function setPostalCode(string $string);
+    public function setPostalCode(string $postalCode): void;
 
     /**
-     * @param string $string
+     * @param string $company
      * @return void
      */
-    public function setCompany(string $string);
+    public function setCompany(string $company): void;
 }

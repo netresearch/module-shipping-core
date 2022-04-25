@@ -63,7 +63,7 @@ class RequestModifier implements RequestModifierInterface
      *
      * @param Request $shipmentRequest
      */
-    private function modifyGeneralParams(Request $shipmentRequest)
+    private function modifyGeneralParams(Request $shipmentRequest): void
     {
         $orderShipment = $shipmentRequest->getOrderShipment();
         $order = $orderShipment->getOrder();
@@ -81,12 +81,12 @@ class RequestModifier implements RequestModifierInterface
      *
      * @param Request $shipmentRequest
      */
-    private function modifyReceiver(Request $shipmentRequest)
+    private function modifyReceiver(Request $shipmentRequest): void
     {
         $address = $shipmentRequest->getOrderShipment()->getShippingAddress();
         $personName = trim($address->getFirstname() . ' ' . $address->getLastname());
         $addressStreet = trim($address->getStreetLine(1) . ' ' . $address->getStreetLine(2));
-        $region = $address->getRegionCode() ? $address->getRegionCode() : $address->getRegion();
+        $region = $address->getRegionCode() ?: $address->getRegion();
 
         $shipmentRequest->setRecipientContactPersonName((string)$personName);
         $shipmentRequest->setRecipientContactPersonFirstName((string)$address->getFirstname());
@@ -109,7 +109,7 @@ class RequestModifier implements RequestModifierInterface
      *
      * @param Request $shipmentRequest
      */
-    private function modifyShipper(Request $shipmentRequest)
+    private function modifyShipper(Request $shipmentRequest): void
     {
         $storeId = $shipmentRequest->getOrderShipment()->getStoreId();
 

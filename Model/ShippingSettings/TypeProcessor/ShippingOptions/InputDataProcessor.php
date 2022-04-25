@@ -73,7 +73,7 @@ class InputDataProcessor implements ShippingOptionsProcessorInterface
      * @param ShippingOptionInterface $shippingOption
      * @param ShipmentInterface $shipment
      */
-    private function processInputs(ShippingOptionInterface $shippingOption, ShipmentInterface $shipment)
+    private function processInputs(ShippingOptionInterface $shippingOption, ShipmentInterface $shipment): void
     {
         $defaultPackage = $this->parcelConfig->getDefaultPackage($shipment->getStoreId());
 

@@ -112,7 +112,7 @@ interface InputInterface
      *
      * @return \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CommentInterface|null
      */
-    public function getComment();
+    public function getComment(): ?CommentInterface;
 
     /**
      * Retrieve an optional combination rule for this input.
@@ -120,7 +120,7 @@ interface InputInterface
      *
      * @return \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ItemCombinationRuleInterface|null
      */
-    public function getItemCombinationRule();
+    public function getItemCombinationRule(): ?ItemCombinationRuleInterface;
 
     /**
      * Retrieve a list of mappings of input values to "input code" => "value maps"
@@ -137,96 +137,96 @@ interface InputInterface
      *
      * @return void
      */
-    public function setInputType(string $inputType);
+    public function setInputType(string $inputType): void;
 
     /**
      * @param string $code
      *
      * @return void
      */
-    public function setCode(string $code);
+    public function setCode(string $code): void;
 
     /**
      * @param string $defaultValue
      *
      * @return void
      */
-    public function setDefaultValue(string $defaultValue);
+    public function setDefaultValue(string $defaultValue): void;
 
     /**
      * @param bool $disabled
      *
      * @return void
      */
-    public function setDisabled(bool $disabled);
+    public function setDisabled(bool $disabled): void;
 
     /**
      * @param string $label
      *
      * @return void
      */
-    public function setLabel(string $label);
+    public function setLabel(string $label): void;
 
     /**
      * @param bool $labelVisible
      *
      * @return void
      */
-    public function setLabelVisible(bool $labelVisible);
+    public function setLabelVisible(bool $labelVisible): void;
 
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\OptionInterface[] $options
      *
      * @return void
      */
-    public function setOptions(array $options);
+    public function setOptions(array $options): void;
 
     /**
      * @param string $tooltip
      *
      * @return void
      */
-    public function setTooltip(string $tooltip);
+    public function setTooltip(string $tooltip): void;
 
     /**
      * @param string $placeholder
      *
      * @return void
      */
-    public function setPlaceholder(string $placeholder);
+    public function setPlaceholder(string $placeholder): void;
 
     /**
      * @param int $sortOrder
      *
      * @return void
      */
-    public function setSortOrder(int $sortOrder);
+    public function setSortOrder(int $sortOrder): void;
 
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValidationRuleInterface[] $validationRules
      *
      * @return void
      */
-    public function setValidationRules(array $validationRules);
+    public function setValidationRules(array $validationRules): void;
 
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CommentInterface|null $comment
      *
      * @return void
      */
-    public function setComment($comment);
+    public function setComment($comment): void;
 
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ItemCombinationRuleInterface|null $itemCombinationRule
      *
      * @return void
      */
-    public function setItemCombinationRule($itemCombinationRule);
+    public function setItemCombinationRule($itemCombinationRule): void;
 
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMapInterface[] $valueMaps
      *
      * @return void
      */
-    public function setValueMaps(array $valueMaps);
+    public function setValueMaps(array $valueMaps): void;
 }

@@ -106,7 +106,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @param string $code
      */
-    public function setCode(string $code)
+    public function setCode(string $code): void
     {
         $this->code = $code;
     }
@@ -114,7 +114,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @param string $available
      */
-    public function setAvailable(string $available)
+    public function setAvailable(string $available): void
     {
         $this->available = $available;
     }
@@ -122,7 +122,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @param string $label
      */
-    public function setLabel(string $label)
+    public function setLabel(string $label): void
     {
         $this->label = $label;
     }
@@ -130,7 +130,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\InputInterface[] $inputs
      */
-    public function setInputs(array $inputs)
+    public function setInputs(array $inputs): void
     {
         $this->inputs = $inputs;
     }
@@ -138,7 +138,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\RouteInterface[] $routes
      */
-    public function setRoutes(array $routes)
+    public function setRoutes(array $routes): void
     {
         $this->routes = $routes;
     }
@@ -146,7 +146,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @param int $sortOrder
      */
-    public function setSortOrder(int $sortOrder)
+    public function setSortOrder(int $sortOrder): void
     {
         $this->sortOrder = $sortOrder;
     }
@@ -154,7 +154,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @param int[] $requiredItemIds
      */
-    public function setRequiredItemIds(array $requiredItemIds)
+    public function setRequiredItemIds(array $requiredItemIds): void
     {
         $this->requiredItemIds = $requiredItemIds;
     }

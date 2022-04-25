@@ -108,7 +108,7 @@ class ArraySerialized extends Value implements ProcessorInterface
             // remove row with empty values
             $value = array_filter(
                 $value,
-                function (array $row) {
+                static function (array $row) {
                     return $row === array_filter($row);
                 }
             );

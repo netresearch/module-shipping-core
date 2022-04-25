@@ -14,7 +14,7 @@ use Netresearch\ShippingCore\Model\Config\ParcelProcessingConfig;
 /**
  * Handle the `is_default` radio group before saving the serialized data.
  */
-class PackageParams extends ArraySerialized implements ProcessorInterface
+class PackageParams extends ArraySerialized
 {
     /**
      * Move `is_default` setting to proper row

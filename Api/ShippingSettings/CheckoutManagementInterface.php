@@ -36,5 +36,5 @@ interface CheckoutManagementInterface
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\Selection\SelectionInterface[] $shippingOptionSelections
      * @return void
      */
-    public function updateShippingOptionSelections(int $cartId, array $shippingOptionSelections);
+    public function updateShippingOptionSelections(int $cartId, array $shippingOptionSelections): void;
 }

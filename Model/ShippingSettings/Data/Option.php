@@ -67,7 +67,7 @@ class Option implements OptionInterface
     /**
      * @param string $id
      */
-    public function setId(string $id)
+    public function setId(string $id): void
     {
         $this->id = $id;
     }
@@ -75,7 +75,7 @@ class Option implements OptionInterface
     /**
      * @param string $label
      */
-    public function setLabel(string $label)
+    public function setLabel(string $label): void
     {
         $this->label = $label;
     }
@@ -83,7 +83,7 @@ class Option implements OptionInterface
     /**
      * @param string $value
      */
-    public function setValue(string $value)
+    public function setValue(string $value): void
     {
         $this->value = $value;
     }
@@ -91,7 +91,7 @@ class Option implements OptionInterface
     /**
      * @param bool $disabled
      */
-    public function setDisabled(bool $disabled)
+    public function setDisabled(bool $disabled): void
     {
         $this->disabled = $disabled;
     }

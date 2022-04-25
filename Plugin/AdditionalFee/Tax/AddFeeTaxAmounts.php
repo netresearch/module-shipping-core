@@ -60,7 +60,7 @@ class AddFeeTaxAmounts
         $items = $orderTaxDetails->getItems() ?? [];
         $feeTax = array_filter(
             $items,
-            function (OrderTaxDetailsItemInterface $item) {
+            static function (OrderTaxDetailsItemInterface $item) {
                 return $item->getType() === Total::NRSHIPPING_FEE_TAX_TYPE;
             }
         );

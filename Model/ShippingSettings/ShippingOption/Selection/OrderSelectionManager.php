@@ -57,7 +57,7 @@ class OrderSelectionManager
      *
      * @return SelectionInterface[]|OrderSelection[]
      */
-    public function load(int $addressId)
+    public function load(int $addressId): array
     {
         $addressFilter = $this->filterBuilder
             ->setField(AssignedSelectionInterface::PARENT_ID)
@@ -80,7 +80,7 @@ class OrderSelectionManager
      * @throws CouldNotDeleteException
      * @throws CouldNotSaveException
      */
-    public function save(int $addressId, array $serviceSelection)
+    public function save(int $addressId, array $serviceSelection): void
     {
         foreach ($this->load($addressId) as $selection) {
             $this->selectionRepository->delete($selection);
@@ -108,12 +108,12 @@ class OrderSelectionManager
      *
      * @return void
      */
-    public function apply(int $addressId, array $shippingOptions)
+    public function apply(int $addressId, array $shippingOptions): void
     {
         // re-build service array, index by service option code
         $serviceSelection = array_reduce(
             $this->load($addressId),
-            function (array $carry, SelectionInterface $selection) {
+            static function (array $carry, SelectionInterface $selection) {
                 $carry[$selection->getShippingOptionCode()][$selection->getInputCode()] = $selection->getInputValue();
                 return $carry;
             },

@@ -40,12 +40,12 @@ interface ValueMapInterface
      *
      * @return void
      */
-    public function setSourceValue(string $sourceValue);
+    public function setSourceValue(string $sourceValue): void;
 
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMap\InputValueInterface[] $inputValues
      *
      * @return void
      */
-    public function setInputValues(array $inputValues);
+    public function setInputValues(array $inputValues): void;
 }

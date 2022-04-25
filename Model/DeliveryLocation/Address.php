@@ -37,82 +37,52 @@ class Address implements AddressInterface
      */
     private $company;
 
-    /**
-     * @return string
-     */
     public function getStreet(): string
     {
         return $this->street;
     }
 
-    /**
-     * @return string
-     */
     public function getCity(): string
     {
         return $this->city;
     }
 
-    /**
-     * @return string
-     */
     public function getCountryCode(): string
     {
         return $this->countryCode;
     }
 
-    /**
-     * @return string
-     */
     public function getPostalCode(): string
     {
         return $this->postalCode;
     }
 
-    /**
-     * @return string
-     */
     public function getCompany(): string
     {
         return $this->company;
     }
 
-    /**
-     * @param string $street
-     */
-    public function setStreet(string $street)
+    public function setStreet(string $street): void
     {
         $this->street = $street;
     }
 
-    /**
-     * @param string $city
-     */
-    public function setCity(string $city)
+    public function setCity(string $city): void
     {
         $this->city = $city;
     }
 
-    /**
-     * @param string $countryCode
-     */
-    public function setCountryCode(string $countryCode)
+    public function setCountryCode(string $countryCode): void
     {
         $this->countryCode = $countryCode;
     }
 
-    /**
-     * @param string $postalCode
-     */
-    public function setPostalCode(string $postalCode)
+    public function setPostalCode(string $postalCode): void
     {
         $this->postalCode = $postalCode;
     }
 
-    /**
-     * @param string $company
-     */
-    public function setCompany(string $company)
+    public function setCompany(string $company): void
     {
         $this->company = $company;
     }

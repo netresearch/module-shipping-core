@@ -33,7 +33,7 @@ class Comment implements CommentInterface
     /**
      * @return string|null
      */
-    public function getFootnoteId()
+    public function getFootnoteId(): ?string
     {
         return $this->footnoteId;
     }
@@ -41,15 +41,15 @@ class Comment implements CommentInterface
     /**
      * @param string $content
      */
-    public function setContent(string $content)
+    public function setContent(string $content): void
     {
         $this->content = $content;
     }
 
     /**
-     * @param string|null $footnoteId
+     * @param string $footnoteId
      */
-    public function setFootnoteId(string $footnoteId)
+    public function setFootnoteId(string $footnoteId): void
     {
         $this->footnoteId = $footnoteId;
     }

@@ -67,7 +67,7 @@ class CancelRequestBuilder
      * @param ShipmentInterface[] $shipments
      * @return void
      */
-    public function setShipments(array $shipments)
+    public function setShipments(array $shipments): void
     {
         $this->shipments = $shipments;
     }
@@ -88,7 +88,7 @@ class CancelRequestBuilder
         $this->filterBuilder->setValue($carrierCode);
         $carrierCodeFilter = $this->filterBuilder->create();
 
-        $getId = function (ShipmentInterface $shipment) {
+        $getId = static function (ShipmentInterface $shipment) {
             return $shipment->getEntityId();
         };
         $this->filterBuilder->setField(ShipmentTrackInterface::PARENT_ID);

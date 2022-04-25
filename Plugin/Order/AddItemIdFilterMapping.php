@@ -27,7 +27,7 @@ class AddItemIdFilterMapping
     /**
      * @param Collection $collection
      */
-    public function beforeAddIdFilter(Collection $collection)
+    public function beforeAddIdFilter(Collection $collection): void
     {
         $collection->addFilterToMap('item_id', 'main_table.item_id');
     }

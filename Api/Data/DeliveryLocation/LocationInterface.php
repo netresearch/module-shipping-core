@@ -67,59 +67,59 @@ interface LocationInterface
      * @param string $shopType
      * @return void
      */
-    public function setShopType(string $shopType);
+    public function setShopType(string $shopType): void;
 
     /**
      * @param string $shopNumber
      * @return void
      */
-    public function setShopNumber(string $shopNumber);
+    public function setShopNumber(string $shopNumber): void;
 
     /**
      * @param string $shopId
      * @return void
      */
-    public function setShopId(string $shopId);
+    public function setShopId(string $shopId): void;
 
     /**
      * @param string[] $services
      * @return void
      */
-    public function setServices(array $services);
+    public function setServices(array $services): void;
 
     /**
      * @param \Netresearch\ShippingCore\Api\Data\DeliveryLocation\AddressInterface $address
      * @return void
      */
-    public function setAddress(AddressInterface $address);
+    public function setAddress(AddressInterface $address): void;
 
     /**
      * @param \Netresearch\ShippingCore\Api\Data\DeliveryLocation\OpeningHoursInterface[] $openingHours
      * @return void
      */
-    public function setOpeningHours(array $openingHours);
+    public function setOpeningHours(array $openingHours): void;
 
     /**
      * @param string $icon
      * @return void
      */
-    public function setIcon(string $icon);
+    public function setIcon(string $icon): void;
 
     /**
      * @param float $latitude
      * @return void
      */
-    public function setLatitude(float $latitude);
+    public function setLatitude(float $latitude): void;
 
     /**
      * @param float $longitude
      * @return void
      */
-    public function setLongitude(float $longitude);
+    public function setLongitude(float $longitude): void;
 
     /**
      * @param string $displayName
      * @return void
      */
-    public function setDisplayName(string $displayName);
+    public function setDisplayName(string $displayName): void;
 }

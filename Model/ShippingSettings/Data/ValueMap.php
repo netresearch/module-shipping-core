@@ -39,7 +39,7 @@ class ValueMap implements ValueMapInterface
     /**
      * @param string $sourceValue
      */
-    public function setSourceValue(string $sourceValue)
+    public function setSourceValue(string $sourceValue): void
     {
         $this->sourceValue = $sourceValue;
     }
@@ -55,7 +55,7 @@ class ValueMap implements ValueMapInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMap\InputValueInterface[] $inputValues
      */
-    public function setInputValues(array $inputValues)
+    public function setInputValues(array $inputValues): void
     {
         $this->inputValues = $inputValues;
     }

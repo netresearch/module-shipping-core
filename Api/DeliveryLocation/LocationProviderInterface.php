@@ -27,5 +27,5 @@ interface LocationProviderInterface
     /**
      * @return string
      */
-    public function getCarrierCode():string;
+    public function getCarrierCode(): string;
 }

@@ -36,7 +36,7 @@ class InputValue implements InputValueInterface
     /**
      * @param string $code
      */
-    public function setCode(string $code)
+    public function setCode(string $code): void
     {
         $this->code = $code;
     }
@@ -52,7 +52,7 @@ class InputValue implements InputValueInterface
     /**
      * @param string $value
      */
-    public function setValue(string $value)
+    public function setValue(string $value): void
     {
         $this->value = $value;
     }

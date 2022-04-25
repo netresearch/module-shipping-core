@@ -38,7 +38,7 @@ class Route implements RouteInterface
     /**
      * @param string $origin
      */
-    public function setOrigin(string $origin)
+    public function setOrigin(string $origin): void
     {
         $this->origin = $origin;
     }
@@ -54,7 +54,7 @@ class Route implements RouteInterface
     /**
      * @param string[] $includeDestinations
      */
-    public function setIncludeDestinations(array $includeDestinations)
+    public function setIncludeDestinations(array $includeDestinations): void
     {
         $this->includeDestinations = $includeDestinations;
     }
@@ -70,7 +70,7 @@ class Route implements RouteInterface
     /**
      * @param string[] $excludeDestinations
      */
-    public function setExcludeDestinations(array $excludeDestinations)
+    public function setExcludeDestinations(array $excludeDestinations): void
     {
         $this->excludeDestinations = $excludeDestinations;
     }

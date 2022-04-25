@@ -80,7 +80,7 @@ class Footnote implements FootnoteInterface
     /**
      * @param string $id
      */
-    public function setId(string $id)
+    public function setId(string $id): void
     {
         $this->id = $id;
     }
@@ -88,7 +88,7 @@ class Footnote implements FootnoteInterface
     /**
      * @param string $content
      */
-    public function setContent(string $content)
+    public function setContent(string $content): void
     {
         $this->content = $content;
     }
@@ -96,7 +96,7 @@ class Footnote implements FootnoteInterface
     /**
      * @param string[] $subjects
      */
-    public function setSubjects(array $subjects)
+    public function setSubjects(array $subjects): void
     {
         $this->subjects = $subjects;
     }
@@ -104,7 +104,7 @@ class Footnote implements FootnoteInterface
     /**
      * @param bool $subjectsMustBeSelected
      */
-    public function setSubjectsMustBeSelected(bool $subjectsMustBeSelected)
+    public function setSubjectsMustBeSelected(bool $subjectsMustBeSelected): void
     {
         $this->subjectsMustBeSelected = $subjectsMustBeSelected;
     }
@@ -112,7 +112,7 @@ class Footnote implements FootnoteInterface
     /**
      * @param bool $subjectsMustBeAvailable
      */
-    public function setSubjectsMustBeAvailable(bool $subjectsMustBeAvailable)
+    public function setSubjectsMustBeAvailable(bool $subjectsMustBeAvailable): void
     {
         $this->subjectsMustBeAvailable = $subjectsMustBeAvailable;
     }

@@ -51,26 +51,26 @@ interface OptionInterface
      *
      * @return void
      */
-    public function setId(string $id);
+    public function setId(string $id): void;
 
     /**
      * @param string $label
      *
      * @return void
      */
-    public function setLabel(string $label);
+    public function setLabel(string $label): void;
 
     /**
      * @param string $value
      *
      * @return void
      */
-    public function setValue(string $value);
+    public function setValue(string $value): void;
 
     /**
      * @param bool $disabled
      *
      * @return void
      */
-    public function setDisabled(bool $disabled);
+    public function setDisabled(bool $disabled): void;
 }

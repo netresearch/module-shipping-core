@@ -41,7 +41,7 @@ class ExportContentType implements OptionSourceInterface
      *
      * @return mixed[]
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             self::TYPE_COMMERCIAL_GOODS => __('Commercial Goods'),

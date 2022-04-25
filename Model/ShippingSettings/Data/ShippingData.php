@@ -38,7 +38,7 @@ class ShippingData implements ShippingDataInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\CarrierDataInterface[] $carriers
      */
-    public function setCarriers(array $carriers)
+    public function setCarriers(array $carriers): void
     {
         $this->carriers = $carriers;
     }

@@ -12,11 +12,11 @@ use Netresearch\ShippingCore\Api\AdditionalFee\AdditionalFeeConfigurationInterfa
 
 class FakeAdditionalFeeConfiguration implements AdditionalFeeConfigurationInterface
 {
-    const CARRIERCODE = 'testcarrier';
+    public const CARRIERCODE = 'testcarrier';
 
-    const LABEL = 'testlabel';
+    public const LABEL = 'testlabel';
 
-    const CHARGE = 22.22;
+    public const CHARGE = 22.22;
 
     public function getCarrierCode(): string
     {

@@ -28,7 +28,7 @@ class StreetSplitter
      * @param string $street
      * @return string[]
      */
-    public function splitStreet(string $street)
+    public function splitStreet(string $street): array
     {
         $result = [
             'street_name'   => $street,
@@ -83,7 +83,7 @@ class StreetSplitter
      *
      * @return string
      */
-    private function getRegex()
+    private function getRegex(): string
     {
         return "/\\A\\s*
 (?:

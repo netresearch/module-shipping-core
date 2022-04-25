@@ -41,7 +41,7 @@ class TimeFrame implements TimeFrameInterface
     /**
      * @param string $opens
      */
-    public function setOpens(string $opens)
+    public function setOpens(string $opens): void
     {
         $this->opens = $opens;
     }
@@ -49,7 +49,7 @@ class TimeFrame implements TimeFrameInterface
     /**
      * @param string $closes
      */
-    public function setCloses(string $closes)
+    public function setCloses(string $closes): void
     {
         $this->closes = $closes;
     }

@@ -42,7 +42,7 @@ class PackagingOptionReader implements PackagingOptionReaderInterface
      * @return CarrierDataInterface
      * @throws \RuntimeException
      */
-    private function getCarrierData()
+    private function getCarrierData(): CarrierDataInterface
     {
         if (!$this->carrierData) {
             if (!isset($this->shipment)) {

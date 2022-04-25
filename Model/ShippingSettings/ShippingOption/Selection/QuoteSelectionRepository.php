@@ -82,7 +82,7 @@ class QuoteSelectionRepository
      * @param QuoteSelection $serviceSelection
      * @throws CouldNotDeleteException
      */
-    public function delete(QuoteSelection $serviceSelection)
+    public function delete(QuoteSelection $serviceSelection): void
     {
         try {
             $this->resource->delete($serviceSelection);

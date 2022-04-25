@@ -45,10 +45,10 @@ interface ItemCombinationRuleInterface
     public function getAction(): string;
 
     /**
-     * @param string $action
+     * @param string $sourceItemInputCode
      * @return void
      */
-    public function setSourceItemInputCode(string $action);
+    public function setSourceItemInputCode(string $sourceItemInputCode): void;
 
     /**
      * @param string[] $additionalServiceInputCodes
@@ -60,5 +60,5 @@ interface ItemCombinationRuleInterface
      * @param string $action
      * @return void
      */
-    public function setAction(string $action);
+    public function setAction(string $action): void;
 }

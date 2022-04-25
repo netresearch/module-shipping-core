@@ -10,7 +10,6 @@ namespace Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest;
 
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Shipping\Model\Shipment\Request;
@@ -90,11 +89,6 @@ class RequestExtractor implements RequestExtractorInterface
     private $serviceOptionReaderFactory;
 
     /**
-     * @var TimezoneInterface
-     */
-    private $timezone;
-
-    /**
      * @var ShipperInterface
      */
     private $shipper;
@@ -123,8 +117,7 @@ class RequestExtractor implements RequestExtractorInterface
         PackageInterfaceFactory $packageFactory,
         PackageAdditionalInterfaceFactory $packageAdditionalFactory,
         PackageItemInterfaceFactory $packageItemFactory,
-        ServiceOptionReaderInterfaceFactory $serviceOptionReaderFactory,
-        TimezoneInterface $timezone
+        ServiceOptionReaderInterfaceFactory $serviceOptionReaderFactory
     ) {
         $this->shipmentRequest = $shipmentRequest;
         $this->streetSplitter = $streetSplitter;
@@ -135,7 +128,6 @@ class RequestExtractor implements RequestExtractorInterface
         $this->packageAdditionalFactory = $packageAdditionalFactory;
         $this->packageItemFactory = $packageItemFactory;
         $this->serviceOptionReaderFactory = $serviceOptionReaderFactory;
-        $this->timezone = $timezone;
     }
 
     /**

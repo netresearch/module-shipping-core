@@ -22,7 +22,7 @@ class ValidateExportDescriptionAttribute
      * @return bool
      * @throws LocalizedException
      */
-    public function afterValidate(AbstractBackend $backendModel, $result, $eavEntity)
+    public function afterValidate(AbstractBackend $backendModel, $result, $eavEntity): bool
     {
         if (!$eavEntity instanceof Product) {
             return $result;

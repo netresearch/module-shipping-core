@@ -29,5 +29,5 @@ interface ShippingDataInterface
      *
      * @return void
      */
-    public function setCarriers(array $carriers);
+    public function setCarriers(array $carriers): void;
 }

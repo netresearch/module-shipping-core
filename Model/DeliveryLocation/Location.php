@@ -27,11 +27,6 @@ class Location implements LocationInterface
     /**
      * @var string
      */
-    private $shopTypeName;
-
-    /**
-     * @var string
-     */
     private $shopId;
 
     /**
@@ -151,7 +146,7 @@ class Location implements LocationInterface
     /**
      * @param string $shopType
      */
-    public function setShopType(string $shopType)
+    public function setShopType(string $shopType): void
     {
         $this->shopType = $shopType;
     }
@@ -159,7 +154,7 @@ class Location implements LocationInterface
     /**
      * @param string $shopNumber
      */
-    public function setShopNumber(string $shopNumber)
+    public function setShopNumber(string $shopNumber): void
     {
         $this->shopNumber = $shopNumber;
     }
@@ -167,7 +162,7 @@ class Location implements LocationInterface
     /**
      * @param string $shopId
      */
-    public function setShopId(string $shopId)
+    public function setShopId(string $shopId): void
     {
         $this->shopId = $shopId;
     }
@@ -175,7 +170,7 @@ class Location implements LocationInterface
     /**
      * @param string[] $services
      */
-    public function setServices(array $services)
+    public function setServices(array $services): void
     {
         $this->services = $services;
     }
@@ -183,7 +178,7 @@ class Location implements LocationInterface
     /**
      * @param AddressInterface $address
      */
-    public function setAddress(AddressInterface $address)
+    public function setAddress(AddressInterface $address): void
     {
         $this->address = $address;
     }
@@ -191,7 +186,7 @@ class Location implements LocationInterface
     /**
      * @param OpeningHoursInterface[] $openingHours
      */
-    public function setOpeningHours(array $openingHours)
+    public function setOpeningHours(array $openingHours): void
     {
         $this->openingHours = $openingHours;
     }
@@ -199,7 +194,7 @@ class Location implements LocationInterface
     /**
      * @param string $icon
      */
-    public function setIcon(string $icon)
+    public function setIcon(string $icon): void
     {
         $this->icon = $icon;
     }
@@ -207,7 +202,7 @@ class Location implements LocationInterface
     /**
      * @param float $latitude
      */
-    public function setLatitude(float $latitude)
+    public function setLatitude(float $latitude): void
     {
         $this->latitude = $latitude;
     }
@@ -215,7 +210,7 @@ class Location implements LocationInterface
     /**
      * @param float $longitude
      */
-    public function setLongitude(float $longitude)
+    public function setLongitude(float $longitude): void
     {
         $this->longitude = $longitude;
     }
@@ -223,7 +218,7 @@ class Location implements LocationInterface
     /**
      * @param string $displayName
      */
-    public function setDisplayName(string $displayName)
+    public function setDisplayName(string $displayName): void
     {
         $this->displayName = $displayName;
     }

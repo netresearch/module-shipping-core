@@ -12,7 +12,6 @@ use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
-use Magento\Store\Model\StoreManagerInterface;
 use Netresearch\ShippingCore\Api\Data\Config\ValidationResultInterface;
 use Netresearch\ShippingCore\Model\Config\Validator;
 
@@ -24,11 +23,6 @@ class Validate extends Action
      * @see _isAllowed()
      */
     public const ADMIN_RESOURCE = 'Magento_Sales::ship';
-
-    /**
-     * @var StoreManagerInterface
-     */
-    private $storeManager;
 
     /**
      * @var Validator
@@ -47,12 +41,10 @@ class Validate extends Action
 
     public function __construct(
         Context $context,
-        StoreManagerInterface $storeManager,
         Validator $validator,
         ValidationResultInterface $result,
         ResultFactory $resultPageFactory
     ) {
-        $this->storeManager = $storeManager;
         $this->validator = $validator;
         $this->result = $result;
         $this->resultPageFactory = $resultPageFactory;

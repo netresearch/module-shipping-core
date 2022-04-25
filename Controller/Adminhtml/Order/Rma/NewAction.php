@@ -13,7 +13,7 @@ use Magento\Framework\Controller\ResultInterface;
 
 class NewAction extends ReturnAction implements HttpGetActionInterface
 {
-    const ADMIN_RESOURCE = 'Magento_Sales::sales_order';
+    public const ADMIN_RESOURCE = 'Magento_Sales::sales_order';
 
     public function execute(): ResultInterface
     {

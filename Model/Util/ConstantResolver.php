@@ -25,7 +25,7 @@ class ConstantResolver
     public function resolve(string $constantReference): string
     {
         $references = explode('.', $constantReference);
-        $resolvedReferences = array_map(function (string $reference) {
+        $resolvedReferences = array_map(static function (string $reference) {
             if (preg_match(self::PHP_CONSTANT_PATTERN, $reference) === 1) {
                 list($className, $constName) = explode('::', $reference);
                 try {

@@ -22,7 +22,7 @@ class DocumentCollection extends AbstractCollection
         $this->_init(ReturnShipmentDocument::class, Document::class);
     }
 
-    public function setTrackIdFilter(int $trackId)
+    public function setTrackIdFilter(int $trackId): void
     {
         $this->addFieldToFilter(DocumentInterface::TRACK_ID, ['eq' => $trackId]);
     }

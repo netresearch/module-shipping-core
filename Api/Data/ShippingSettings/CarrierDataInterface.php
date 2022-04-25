@@ -29,7 +29,7 @@ interface CarrierDataInterface
      *
      * @return \Netresearch\ShippingCore\Api\Data\ShippingSettings\MetadataInterface|null
      */
-    public function getMetadata();
+    public function getMetadata(): ?MetadataInterface;
 
     /**
      * Retrieve rendering information about the shipping options the carrier offers on package level.
@@ -64,40 +64,40 @@ interface CarrierDataInterface
      *
      * @return void
      */
-    public function setCode(string $code);
+    public function setCode(string $code): void;
 
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\MetadataInterface $metadata
      *
      * @return void
      */
-    public function setMetadata(MetadataInterface $metadata);
+    public function setMetadata(MetadataInterface $metadata): void;
 
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface[] $packageOptions
      *
      * @return void
      */
-    public function setPackageOptions(array $packageOptions);
+    public function setPackageOptions(array $packageOptions): void;
 
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ItemShippingOptionsInterface[] $itemOptions
      *
      * @return void
      */
-    public function setItemOptions(array $itemOptions);
+    public function setItemOptions(array $itemOptions): void;
 
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface[] $serviceOptions
      *
      * @return void
      */
-    public function setServiceOptions(array $serviceOptions);
+    public function setServiceOptions(array $serviceOptions): void;
 
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CompatibilityInterface[] $compatibilityData
      *
      * @return void
      */
-    public function setCompatibilityData(array $compatibilityData);
+    public function setCompatibilityData(array $compatibilityData): void;
 }

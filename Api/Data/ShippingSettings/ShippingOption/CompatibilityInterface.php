@@ -90,35 +90,35 @@ interface CompatibilityInterface
      *
      * @return void
      */
-    public function setId(string $id);
+    public function setId(string $id): void;
 
     /**
      * @param string[] $subjects
      *
      * @return void
      */
-    public function setSubjects(array $subjects);
+    public function setSubjects(array $subjects): void;
 
     /**
      * @param string $errorMessage
      *
      * @return void
      */
-    public function setErrorMessage(string $errorMessage);
+    public function setErrorMessage(string $errorMessage): void;
 
     /**
      * @param array $masters
      *
      * @return void
      */
-    public function setMasters(array $masters);
+    public function setMasters(array $masters): void;
 
     /**
      * @param string $triggerValue
      *
      * @return void
      */
-    public function setTriggerValue(string $triggerValue);
+    public function setTriggerValue(string $triggerValue): void;
 
     /**
      *

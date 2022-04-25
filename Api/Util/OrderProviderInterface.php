@@ -18,7 +18,7 @@ use Magento\Sales\Model\Order;
  */
 interface OrderProviderInterface
 {
-    public function setOrder(OrderInterface $order);
+    public function setOrder(OrderInterface $order): void;
 
     /**
      * @return OrderInterface|Order|null

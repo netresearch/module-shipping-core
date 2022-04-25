@@ -61,7 +61,7 @@ class AutoCreate
     /**
      * Collect orders with pending labels and try to create shipments for them via the corresponding API.
      */
-    public function execute()
+    public function execute(): void
     {
         $fnFilter = function (string $carrierCode) {
             try {

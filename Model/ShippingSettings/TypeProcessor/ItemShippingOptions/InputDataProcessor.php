@@ -103,7 +103,7 @@ class InputDataProcessor implements ItemShippingOptionsProcessorInterface
      * @param ShippingOptionInterface $shippingOption
      * @param ShipmentItemInterface|Item $shipmentItem
      */
-    private function processInputs(ShippingOptionInterface $shippingOption, ShipmentItemInterface $shipmentItem)
+    private function processInputs(ShippingOptionInterface $shippingOption, ShipmentItemInterface $shipmentItem): void
     {
         foreach ($shippingOption->getInputs() as $input) {
             switch ($input->getCode()) {

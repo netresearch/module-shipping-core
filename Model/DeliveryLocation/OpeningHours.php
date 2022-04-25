@@ -26,7 +26,7 @@ class OpeningHours implements OpeningHoursInterface
     /**
      * @param string $dayOfWeek
      */
-    public function setDayOfWeek(string $dayOfWeek)
+    public function setDayOfWeek(string $dayOfWeek): void
     {
         $this->dayOfWeek = $dayOfWeek;
     }
@@ -34,7 +34,7 @@ class OpeningHours implements OpeningHoursInterface
     /**
      * @param TimeFrameInterface[] $timeFrames
      */
-    public function setTimeFrames(array $timeFrames)
+    public function setTimeFrames(array $timeFrames): void
     {
         $this->timeFrames = $timeFrames;
     }

@@ -40,7 +40,7 @@ class ApiLogAnonymizer
      * @param string $message
      * @return string
      */
-    public function anonymize(string $message)
+    public function anonymize(string $message): string
     {
         return preg_replace_callback(
             $this->patterns,

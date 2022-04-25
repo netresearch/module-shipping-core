@@ -59,7 +59,7 @@ class ContainerInputDataProcessor implements ShippingOptionsProcessorInterface
      * @param InputInterface $input
      * @param Package[] $packages
      */
-    private function setOptions(InputInterface $input, array $packages)
+    private function setOptions(InputInterface $input, array $packages): void
     {
         $options = [];
         $defaultValue = '';

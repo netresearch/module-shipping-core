@@ -57,7 +57,7 @@ class QuoteSelectionManager
      *
      * @return SelectionInterface[]|QuoteSelection[]
      */
-    public function load(int $addressId)
+    public function load(int $addressId): array
     {
         $addressFilter = $this->filterBuilder
             ->setField(AssignedSelectionInterface::PARENT_ID)
@@ -80,7 +80,7 @@ class QuoteSelectionManager
      * @throws CouldNotDeleteException
      * @throws CouldNotSaveException
      */
-    public function save(int $addressId, array $serviceSelection)
+    public function save(int $addressId, array $serviceSelection): void
     {
         foreach ($this->load($addressId) as $selection) {
             $this->selectionRepository->delete($selection);
@@ -108,7 +108,7 @@ class QuoteSelectionManager
      *
      * @return void
      */
-    public function apply(int $addressId, array $shippingOptions)
+    public function apply(int $addressId, array $shippingOptions): void
     {
         // re-build service array, index by service option code
         $serviceSelection = array_reduce(

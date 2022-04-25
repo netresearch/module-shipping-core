@@ -58,33 +58,33 @@ interface FootnoteInterface
      *
      * @return void
      */
-    public function setId(string $id);
+    public function setId(string $id): void;
 
     /**
      * @param string $content
      *
      * @return void
      */
-    public function setContent(string $content);
+    public function setContent(string $content): void;
 
     /**
      * @param string[] $subjects
      *
      * @return void
      */
-    public function setSubjects(array $subjects);
+    public function setSubjects(array $subjects): void;
 
     /**
      * @param bool $subjectsMustBeSelected
      *
      * @return void
      */
-    public function setSubjectsMustBeSelected(bool $subjectsMustBeSelected);
+    public function setSubjectsMustBeSelected(bool $subjectsMustBeSelected): void;
 
     /**
      * @param bool $subjectsMustBeAvailable
      *
      * @return void
      */
-    public function setSubjectsMustBeAvailable(bool $subjectsMustBeAvailable);
+    public function setSubjectsMustBeAvailable(bool $subjectsMustBeAvailable): void;
 }

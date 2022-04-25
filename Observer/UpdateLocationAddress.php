@@ -115,7 +115,7 @@ class UpdateLocationAddress implements ObserverInterface
 
         $location = array_reduce(
             $locationSettings,
-            function (array $carry, QuoteSelection $item) {
+            static function (array $carry, QuoteSelection $item) {
                 $carry[$item->getInputCode()] = $item->getInputValue();
                 return $carry;
             },

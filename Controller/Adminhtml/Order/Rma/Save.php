@@ -21,7 +21,7 @@ use Netresearch\ShippingCore\Model\BulkShipment\ReturnShipmentManagement;
 
 class Save extends ReturnAction
 {
-    const ADMIN_RESOURCE = 'Magento_Sales::actions_edit';
+    public const ADMIN_RESOURCE = 'Magento_Sales::actions_edit';
 
     /**
      * @var OrderProviderInterface

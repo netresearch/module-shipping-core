@@ -73,7 +73,7 @@ class CheckoutManagement implements CheckoutManagementInterface
      * @throws CouldNotSaveException
      * @throws NoSuchEntityException
      */
-    public function updateShippingOptionSelections(int $cartId, array $shippingOptionSelections)
+    public function updateShippingOptionSelections(int $cartId, array $shippingOptionSelections): void
     {
         $shippingAddressId = (int) $this->addressManagement->get($cartId)->getId();
         $this->selectionManager->save($shippingAddressId, $shippingOptionSelections);

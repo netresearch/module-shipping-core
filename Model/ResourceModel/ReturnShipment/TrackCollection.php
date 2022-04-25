@@ -23,7 +23,7 @@ class TrackCollection extends AbstractCollection
         $this->_init(ReturnShipmentTrack::class, Track::class);
     }
 
-    private function joinOrder()
+    private function joinOrder(): void
     {
         $this->getSelect()
              ->join(
@@ -35,18 +35,18 @@ class TrackCollection extends AbstractCollection
              );
     }
 
-    public function setOrderIdFilter(int $orderId)
+    public function setOrderIdFilter(int $orderId): void
     {
         $this->addFieldToFilter('order_id', ['eq' => $orderId]);
     }
 
-    public function setCustomerIdFilter(int $customerId)
+    public function setCustomerIdFilter(int $customerId): void
     {
         $this->joinOrder();
         $this->addFieldToFilter('customer_id', ['eq' => $customerId]);
     }
 
-    public function setTrackingNumberFilter(string $trackingNumber)
+    public function setTrackingNumberFilter(string $trackingNumber): void
     {
         $this->addFieldToFilter(TrackInterface::TRACK_NUMBER, ['eq' => $trackingNumber]);
     }

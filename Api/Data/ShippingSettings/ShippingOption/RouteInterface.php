@@ -43,19 +43,19 @@ interface RouteInterface
      *
      * @return void
      */
-    public function setOrigin(string $origin);
+    public function setOrigin(string $origin): void;
 
     /**
      * @param string[] $includeDestinations
      *
      * @return void
      */
-    public function setIncludeDestinations(array $includeDestinations);
+    public function setIncludeDestinations(array $includeDestinations): void;
 
     /**
      * @param string[] $excludeDestinations
      *
      * @return void
      */
-    public function setExcludeDestinations(array $excludeDestinations);
+    public function setExcludeDestinations(array $excludeDestinations): void;
 }

@@ -48,7 +48,7 @@ class ShippingOption implements ShippingOptionInterface
      * @param KeyValueObjectInterface[] $package
      * @return $this
      */
-    public function setPackage(array $package)
+    public function setPackage(array $package): self
     {
         $this->package = $package;
 
@@ -67,7 +67,7 @@ class ShippingOption implements ShippingOptionInterface
      * @param ServiceDataInterface[] $services
      * @return $this
      */
-    public function setServices(array $services)
+    public function setServices(array $services): self
     {
         $this->services = $services;
 

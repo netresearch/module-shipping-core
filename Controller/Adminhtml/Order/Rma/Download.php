@@ -19,7 +19,7 @@ use Netresearch\ShippingCore\Api\ReturnShipment\TrackRepositoryInterface;
 
 class Download extends Action implements HttpGetActionInterface
 {
-    const ADMIN_RESOURCE = 'Magento_Sales::sales_order';
+    public const ADMIN_RESOURCE = 'Magento_Sales::sales_order';
 
     /**
      * @var TrackRepositoryInterface

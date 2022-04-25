@@ -53,7 +53,7 @@ class Compatibility implements CompatibilityInterface
     /**
      * @param string $id
      */
-    public function setId(string $id)
+    public function setId(string $id): void
     {
         $this->id = $id;
     }
@@ -69,7 +69,7 @@ class Compatibility implements CompatibilityInterface
     /**
      * @param string[] $subjects
      */
-    public function setSubjects(array $subjects)
+    public function setSubjects(array $subjects): void
     {
         $this->subjects = $subjects;
     }
@@ -85,7 +85,7 @@ class Compatibility implements CompatibilityInterface
     /**
      * @param string $errorMessage
      */
-    public function setErrorMessage(string $errorMessage)
+    public function setErrorMessage(string $errorMessage): void
     {
         $this->errorMessage = $errorMessage;
     }
@@ -101,7 +101,7 @@ class Compatibility implements CompatibilityInterface
     /**
      * @param string[] $masters
      */
-    public function setMasters(array $masters)
+    public function setMasters(array $masters): void
     {
         $this->masters = $masters;
     }
@@ -117,7 +117,7 @@ class Compatibility implements CompatibilityInterface
     /**
      * @param string $triggerValue
      */
-    public function setTriggerValue(string $triggerValue)
+    public function setTriggerValue(string $triggerValue): void
     {
         $this->triggerValue = $triggerValue;
     }

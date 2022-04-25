@@ -41,7 +41,7 @@ class ValidationRule implements ValidationRuleInterface
     /**
      * @param string $name
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -49,7 +49,7 @@ class ValidationRule implements ValidationRuleInterface
     /**
      * @param mixed $param
      */
-    public function setParam($param)
+    public function setParam($param): void
     {
         $this->param = $param;
     }

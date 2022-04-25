@@ -54,7 +54,7 @@ class CarrierData implements CarrierDataInterface
     /**
      * @return \Netresearch\ShippingCore\Api\Data\ShippingSettings\MetadataInterface|null
      */
-    public function getMetadata()
+    public function getMetadata(): ?MetadataInterface
     {
         return $this->metadata;
     }
@@ -94,7 +94,7 @@ class CarrierData implements CarrierDataInterface
     /**
      * @param string $code
      */
-    public function setCode(string $code)
+    public function setCode(string $code): void
     {
         $this->code = $code;
     }
@@ -102,7 +102,7 @@ class CarrierData implements CarrierDataInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\MetadataInterface $metadata
      */
-    public function setMetadata(MetadataInterface $metadata)
+    public function setMetadata(MetadataInterface $metadata): void
     {
         $this->metadata = $metadata;
     }
@@ -110,7 +110,7 @@ class CarrierData implements CarrierDataInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface[] $packageOptions
      */
-    public function setPackageOptions(array $packageOptions)
+    public function setPackageOptions(array $packageOptions): void
     {
         $this->packageOptions = $packageOptions;
     }
@@ -118,7 +118,7 @@ class CarrierData implements CarrierDataInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ItemShippingOptionsInterface[] $itemOptions
      */
-    public function setItemOptions(array $itemOptions)
+    public function setItemOptions(array $itemOptions): void
     {
         $this->itemOptions = $itemOptions;
     }
@@ -126,7 +126,7 @@ class CarrierData implements CarrierDataInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface[] $serviceOptions
      */
-    public function setServiceOptions(array $serviceOptions)
+    public function setServiceOptions(array $serviceOptions): void
     {
         $this->serviceOptions = $serviceOptions;
     }
@@ -134,7 +134,7 @@ class CarrierData implements CarrierDataInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CompatibilityInterface[] $compatibilityData
      */
-    public function setCompatibilityData(array $compatibilityData)
+    public function setCompatibilityData(array $compatibilityData): void
     {
         $this->compatibilityData = $compatibilityData;
     }

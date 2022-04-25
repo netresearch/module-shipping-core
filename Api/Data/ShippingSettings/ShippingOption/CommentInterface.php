@@ -29,19 +29,19 @@ interface CommentInterface
      *
      * @return string|null
      */
-    public function getFootnoteId();
+    public function getFootnoteId(): ?string;
 
     /**
      * @param string $content
      *
      * @return void
      */
-    public function setContent(string $content);
+    public function setContent(string $content): void;
 
     /**
-     * @param string $id
+     * @param string $footnoteId
      *
      * @return void
      */
-    public function setFootnoteId(string $id);
+    public function setFootnoteId(string $footnoteId): void;
 }
