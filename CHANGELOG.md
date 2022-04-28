@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+Magento 2.4.4 compatibility release
+
+### Added
+
+- Support for Magento 2.4.4
+- Send shipping label to configured email address, suggested via issue [#45](https://github.com/netresearch/dhl-shipping-m2/issues/45).
+
+### Removed
+
+- Support for PHP 7.1
+
 ## 2.7.1
 
 ### Fixed

@@ -62,6 +62,7 @@ Other,Sonstiges
 "Package Details",Paket-Details
 Packages,Paketgrößen
 "Parcel Processing",Sendungsverarbeitung
+"Please find attached the shipping label for shipment # %1.","Im Anhang finden Sie das Versandetikett zum Lieferschein # %1."
 Present,Geschenk
 "Processing of shipments with <em>Label Status: Failed</em> will automatically be retried.","Die Verarbeitung von Sendungen mit <em>Label Status: Fehlgeschlagen</em> wird automatisch erneut ausgeführt."
 Quantity,Menge
@@ -78,10 +79,14 @@ Quantity,Menge
 "Return shipment labels were sent to the customer.","Die Retourenaufkleber wurden dem Kunden zugesendet."
 "Return shipments are not supported.","Retourenaufkleber werden nicht unterstützt."
 "Selected payment methods will be treated as CoD methods when booking a shipment label.","Die ausgewählten Zahlungsmethoden werden bei der Erstellung des Versandauftrags als Nachnahmemethoden behandelt."
+"Send new shipping labels to the specified email address.","Senden Sie neu erzeugte Versandetiketten an die angegebene E-Mail-Adresse."
 "Set Default","Als Standard festlegen"
 "Shipment(s) for the order(s) %1 could not be created.","Lieferschein(e) für die Bestellung(en) %1 konnten nicht erstellt werden."
 "Shipping Label Automation","Automatische Erzeugung von Versandetiketten"
+"Shipping Label Email","Label-E-Mail"
+"Shipping Label Email Address","Empfängeradresse der Label-E-Mail"
 "Shipping Product",Versandprodukt
+"Shipping label for shipment # %1","Versandetikett für Lieferschein # %1"
 "Shipping label for your return delivery to %store_name","Retourenlabel für Ihre Rücksendung an %store_name"
 "Shipping label(s) for the order(s) %1 could not be created.","Versandetiketten für die Bestellung(en) %1 konnten nicht erstellt werden."
 "Shipping label(s) for the order(s) %1 could not be requested. Please review shipment comments.","Versandetiketten für die Bestellung(en) %1 konnten nicht abgerufen werden. Bitte prüfen Sie die Lieferscheinkommentare."

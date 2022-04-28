@@ -50,7 +50,22 @@
                     </depends>
                 </field>
 
-                <field id="return_label_template" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1" sortOrder="70"
+                <field id="label_email_enabled" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="70"
+                       translate="label button_label" type="Netresearch\ConfigFields\Model\Type\Checkbox">
+                    <label>Shipping Label Email</label>
+                    <button_label>Send new shipping labels to the specified email address.</button_label>
+                </field>
+
+                <field id="label_email_address" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="71"
+                       translate="label">
+                    <label>Shipping Label Email Address</label>
+                    <validate>required-entry validate-email</validate>
+                    <depends>
+                        <field id="label_email_enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="return_label_template" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1" sortOrder="80"
                        translate="label comment" type="select">
                     <label>Return Label Email Template</label>
                     <comment>The selected email template will be used when sending return shipment labels to the customer.</comment>

@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Netresearch\ShippingCore\Model\ReturnShipment\Email;
+namespace Netresearch\ShippingCore\Model\Email\ReturnShipment;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\TemplateTypesInterface;
@@ -39,7 +39,7 @@ class TransportBuilder
     /**
      * @var ScopeConfigInterface
      */
-    protected $scopeConfig;
+    private $scopeConfig;
 
     /**
      * @var ShipmentIdentity

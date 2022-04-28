@@ -16,7 +16,7 @@ use Magento\Sales\Api\OrderRepositoryInterface;
 use Netresearch\ShippingCore\Api\ReturnShipment\CurrentTrackInterface;
 use Netresearch\ShippingCore\Api\ReturnShipment\TrackRepositoryInterface;
 use Netresearch\ShippingCore\Api\Util\OrderProviderInterface;
-use Netresearch\ShippingCore\Model\ReturnShipment\Email\TransportBuilder;
+use Netresearch\ShippingCore\Model\Email\ReturnShipment\TransportBuilder;
 
 class SendEmail extends Action
 {

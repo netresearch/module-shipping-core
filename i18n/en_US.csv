@@ -62,6 +62,7 @@ Other,Other
 "Package Details","Package Details"
 Packages,Packages
 "Parcel Processing","Parcel Processing"
+"Please find attached the shipping label for shipment # %1.","Please find attached the shipping label for shipment # %1."
 Present,Present
 "Processing of shipments with <em>Label Status: Failed</em> will automatically be retried.","Processing of shipments with <em>Label Status: Failed</em> will automatically be retried."
 Quantity,Quantity
@@ -78,10 +79,14 @@ Quantity,Quantity
 "Return shipment labels were sent to the customer.","Return shipment labels were sent to the customer."
 "Return shipments are not supported.","Return shipments are not supported."
 "Selected payment methods will be treated as CoD methods when booking a shipment label.","Selected payment methods will be treated as CoD methods when booking a shipment label."
+"Send new shipping labels to the specified email address.","Send new shipping labels to the specified email address."
 "Set Default","Set Default"
 "Shipment(s) for the order(s) %1 could not be created.","Shipment(s) for the order(s) %1 could not be created."
 "Shipping Label Automation","Shipping Label Automation"
+"Shipping Label Email","Shipping Label Email"
+"Shipping Label Email Address","Shipping Label Email Address"
 "Shipping Product","Shipping Product"
+"Shipping label for shipment # %1","Shipping label for shipment # %1"
 "Shipping label for your return delivery to %store_name","Shipping label for your return delivery to %store_name"
 "Shipping label(s) for the order(s) %1 could not be created.","Shipping label(s) for the order(s) %1 could not be created."
 "Shipping label(s) for the order(s) %1 could not be requested. Please review shipment comments.","Shipping label(s) for the order(s) %1 could not be requested. Please review shipment comments."

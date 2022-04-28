@@ -89,4 +89,22 @@ class ParcelProcessingConfig implements ParcelProcessingConfigInterface
 
         return null;
     }
+
+    public function isShippingLabelEmailEnabled($store = null): bool
+    {
+        return $this->scopeConfig->isSetFlag(
+            self::CONFIG_PATH_LABEL_EMAIL_ENABLED,
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+    }
+
+    public function getShippingLabelEmailAddress($store = null): string
+    {
+        return $this->scopeConfig->getValue(
+            self::CONFIG_PATH_LABEL_EMAIL_ADDRESS,
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+    }
 }

@@ -14,6 +14,8 @@ interface ParcelProcessingConfigInterface
     public const CONFIG_PATH_PACKAGES = 'shipping/parcel_processing/packages';
     public const CONFIG_PATH_CONTENT_TYPE = 'shipping/parcel_processing/export_content_type';
     public const CONFIG_PATH_CONTENT_EXPLANATION = 'shipping/parcel_processing/export_content_explanation';
+    public const CONFIG_PATH_LABEL_EMAIL_ENABLED = 'shipping/parcel_processing/label_email_enabled';
+    public const CONFIG_PATH_LABEL_EMAIL_ADDRESS = 'shipping/parcel_processing/label_email_address';
 
     public const CONFIG_FIELD_PACKAGE_ID = 'id';
     public const CONFIG_FIELD_PACKAGE_TITLE = 'title';
@@ -55,4 +57,20 @@ interface ParcelProcessingConfigInterface
      * @return Package|null
      */
     public function getDefaultPackage($store = null): ?Package;
+
+    /**
+     * Check if created shipping labels should be sent via email.
+     *
+     * @param mixed $store
+     * @return bool
+     */
+    public function isShippingLabelEmailEnabled($store = null): bool;
+
+    /**
+     * Obtain the email address that new shipping labels should be sent to.
+     *
+     * @param mixed $store
+     * @return string
+     */
+    public function getShippingLabelEmailAddress($store = null): string;
 }

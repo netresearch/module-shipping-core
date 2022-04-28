@@ -8,6 +8,9 @@
     <event name="sales_order_save_after">
         <observer name="nrshipping_set_initial_label_status" instance="Netresearch\ShippingCore\Observer\SetInitialLabelStatus" />
     </event>
+    <event name="sales_order_shipment_save_commit_after">
+        <observer name="nrshipping_email_shipping_label" instance="Netresearch\ShippingCore\Observer\EmailShippingLabel" />
+    </event>
     <event name="payment_method_is_active">
         <observer name="nrshipping_disable_cod_payment" instance="Netresearch\ShippingCore\Observer\DisableCodPaymentMethods" />
     </event>
