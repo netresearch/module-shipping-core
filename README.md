@@ -23,7 +23,7 @@ Features
 Requirements
 ------------
 
-* PHP >= 7.1.3
+* PHP >= 7.2
 
 Compatibility
 -------------

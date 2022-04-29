@@ -1,6 +1,6 @@
 {
     "name": "netresearch/module-shipping-core",
-    "version": "2.7.1",
+    "version": "2.8.0",
     "type": "magento2-module",
     "description": "Netresearch component providing utilities and frameworks for advanced shipping features",
     "license": "OSL-3.0",
@@ -59,10 +59,5 @@
         "magento/module-scalable-checkout": "^100.2.0",
         "magento/module-scalable-oms": "^100.2.0",
         "netresearch/module-shipping-inventory": "^1.0.0"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-develop": "2.8.0.x-dev"
-        }
     }
 }
