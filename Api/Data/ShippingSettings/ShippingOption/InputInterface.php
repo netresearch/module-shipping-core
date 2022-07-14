@@ -20,6 +20,7 @@ interface InputInterface
     public const INPUT_TYPE_DATE = 'date';
     public const INPUT_TYPE_NUMBER = 'number';
     public const INPUT_TYPE_RADIO = 'radio';
+    public const INPUT_TYPE_RADIOSET = 'radioset';
     public const INPUT_TYPE_SELECT = 'select';
     public const INPUT_TYPE_TEXT = 'text';
     public const INPUT_TYPE_TIME = 'time';

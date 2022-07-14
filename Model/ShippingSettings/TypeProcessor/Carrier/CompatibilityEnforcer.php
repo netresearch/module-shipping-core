@@ -68,7 +68,7 @@ class CompatibilityEnforcer implements CarrierDataProcessorInterface
                 $valueMatches = true;
             }
             if ($valueMatches) {
-                $actions = [CompatibilityInterface::ACTION_DISABLE, CompatibilityInterface::ACTION_HIDE ];
+                $actions = [CompatibilityInterface::ACTION_DISABLE, CompatibilityInterface::ACTION_HIDE];
                 if (in_array($rule->getAction(), $actions, true)) {
                     foreach ($subjectInputs as $input) {
                         if ($input->getDefaultValue() !== '') {
