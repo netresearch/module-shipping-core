@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Netresearch\ShippingCore\Plugin\Order;
 
+use Magento\Sales\Api\Data\OrderItemInterface;
 use Magento\Sales\Model\ResourceModel\Order\Item\Collection;
 
 /**
@@ -20,15 +21,21 @@ use Magento\Sales\Model\ResourceModel\Order\Item\Collection;
  * filter is set with no table alias. To fix this, we add the filter mapping.
  *
  * @see \Magento\Sales\Model\ResourceModel\Order\Item\Collection::addIdFilter
+ * @see \Magento\Framework\Data\Collection\AbstractDb::addFieldToFilter
  * @see \Netresearch\ShippingCore\Observer\JoinOrderItemAttributes
  */
 class AddItemIdFilterMapping
 {
     /**
      * @param Collection $collection
+     * @param mixed $field
      */
-    public function beforeAddIdFilter(Collection $collection): void
+    public function beforeAddFieldToFilter(Collection $collection, $field): void
     {
-        $collection->addFilterToMap('item_id', 'main_table.item_id');
+        $idField = OrderItemInterface::ITEM_ID;
+
+        if (($field === $idField) || (is_array($field) && in_array($idField, $field))) {
+            $collection->addFilterToMap($idField, "main_table.$idField");
+        }
     }
 }
