@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Netresearch\ShippingCore\Model\BulkShipment;
 
 use Magento\Sales\Api\Data\ShipmentInterface;
+use Magento\Sales\Api\ShipmentRepositoryInterface;
 use Magento\Sales\Api\ShipOrderInterface;
 use Magento\Shipping\Model\Shipment\RequestFactory;
 use Netresearch\ShippingCore\Api\BulkShipment\OrderLoaderInterface;
@@ -54,6 +55,11 @@ class BulkShipmentManagement
     private $requestFactory;
 
     /**
+     * @var ShipmentRepositoryInterface
+     */
+    private $shipmentRepository;
+
+    /**
      * @var ShipmentNotification
      */
     private $shipmentNotification;
@@ -66,6 +72,7 @@ class BulkShipmentManagement
         CancelRequestBuilder $cancelRequestBuilder,
         LoggerInterface $logger,
         RequestFactory $requestFactory,
+        ShipmentRepositoryInterface $shipmentRepository,
         ShipmentNotification $shipmentNotification
     ) {
         $this->orderLoader = $orderLoader;
@@ -75,6 +82,7 @@ class BulkShipmentManagement
         $this->cancelRequestBuilder = $cancelRequestBuilder;
         $this->logger = $logger;
         $this->requestFactory = $requestFactory;
+        $this->shipmentRepository = $shipmentRepository;
         $this->shipmentNotification = $shipmentNotification;
     }
 
@@ -155,8 +163,10 @@ class BulkShipmentManagement
             $carrierResults[$carrierCode] = $labelService->createLabels($carrierShipmentRequests);
         }
 
-        // persist labels and tracks added during api action post processing
-        $shipmentCollection->save();
+        // persist labels and tracks added during api action post-processing
+        foreach ($shipmentCollection->getItems() as $shipment) {
+            $this->shipmentRepository->save($shipment);
+        }
 
         if (!empty($carrierResults)) {
             // convert results per carrier to flat response
