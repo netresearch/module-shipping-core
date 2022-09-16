@@ -36,7 +36,7 @@ class CutOffTimes extends AbstractFieldArray
                 ['data' => ['is_render_to_js_template' => true]]
             );
 
-            $this->templateRenderer->setClass('weekdays');
+            $this->templateRenderer->setClass('select admin__control-select');
         }
 
         return $this->templateRenderer;
@@ -78,7 +78,7 @@ class CutOffTimes extends AbstractFieldArray
         $this->addColumn('time', [
             'label' => __('Order Time'),
             'style' => 'width: 80px',
-            'class' => 'validate-no-empty time'
+            'class' => 'validate-no-empty time input-text admin__control-text'
         ]);
 
         // Hide "Add after" button

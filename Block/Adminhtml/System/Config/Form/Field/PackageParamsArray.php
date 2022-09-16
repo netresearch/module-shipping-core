@@ -49,7 +49,7 @@ class PackageParamsArray extends AbstractFieldArray
             [
                 'label' => __('Title'),
                 'style' => 'width:100px',
-                'class' => 'required',
+                'class' => 'required input-text admin__control-text',
             ]
         );
         $this->addColumn(
@@ -57,7 +57,7 @@ class PackageParamsArray extends AbstractFieldArray
             [
                 'label' => __('Length %1', $this->getMeasureLengthUnit()),
                 'style' => 'width:50px',
-                'class' => 'validate-greater-than-zero validate-number required',
+                'class' => 'validate-greater-than-zero validate-number required input-text admin__control-text',
             ]
         );
         $this->addColumn(
@@ -65,7 +65,7 @@ class PackageParamsArray extends AbstractFieldArray
             [
                 'label' => __('Width %1', $this->getMeasureLengthUnit()),
                 'style' => 'width:50px',
-                'class' => 'validate-greater-than-zero validate-number required',
+                'class' => 'validate-greater-than-zero validate-number required input-text admin__control-text',
             ]
         );
         $this->addColumn(
@@ -73,7 +73,7 @@ class PackageParamsArray extends AbstractFieldArray
             [
                 'label' => __('Height %1', $this->getMeasureLengthUnit()),
                 'style' => 'width:50px',
-                'class' => 'validate-greater-than-zero validate-number required',
+                'class' => 'validate-greater-than-zero validate-number required input-text admin__control-text',
             ]
         );
 
@@ -82,7 +82,7 @@ class PackageParamsArray extends AbstractFieldArray
             [
                 'label' => __('Weight %1', $this->getWeightUnit()),
                 'style' => 'width:50px',
-                'class' => 'validate-greater-than-zero validate-number required',
+                'class' => 'validate-greater-than-zero validate-number required input-text admin__control-text',
             ]
         );
 
