@@ -25,6 +25,7 @@ use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\ShipperInterfaceF
 use Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestExtractor\ServiceOptionReaderInterface;
 use Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestExtractor\ServiceOptionReaderInterfaceFactory;
 use Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestExtractorInterface;
+use Netresearch\ShippingCore\Api\Util\CountryCodeConverterInterface;
 use Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Codes;
 use Netresearch\ShippingCore\Model\SplitAddress\RecipientStreetRepository;
 use Netresearch\ShippingCore\Model\Util\StreetSplitter;
@@ -47,6 +48,11 @@ class RequestExtractor implements RequestExtractorInterface
      * @var StreetSplitter
      */
     private $streetSplitter;
+
+    /**
+     * @var CountryCodeConverterInterface
+     */
+    private $countryCodeConverter;
 
     /**
      * @var RecipientStreetRepository
@@ -111,6 +117,7 @@ class RequestExtractor implements RequestExtractorInterface
     public function __construct(
         Request $shipmentRequest,
         StreetSplitter $streetSplitter,
+        CountryCodeConverterInterface $countryCodeConverter,
         RecipientStreetRepository $recipientStreetRepository,
         ShipperInterfaceFactory $shipperFactory,
         RecipientInterfaceFactory $recipientFactory,
@@ -121,6 +128,7 @@ class RequestExtractor implements RequestExtractorInterface
     ) {
         $this->shipmentRequest = $shipmentRequest;
         $this->streetSplitter = $streetSplitter;
+        $this->countryCodeConverter = $countryCodeConverter;
         $this->recipientStreetRepository = $recipientStreetRepository;
         $this->shipperFactory = $shipperFactory;
         $this->recipientFactory = $recipientFactory;
@@ -196,7 +204,9 @@ class RequestExtractor implements RequestExtractorInterface
                 'city' => (string) $this->shipmentRequest->getShipperAddressCity(),
                 'state' => (string) $this->shipmentRequest->getShipperAddressStateOrProvinceCode(),
                 'postalCode' => (string) $this->shipmentRequest->getShipperAddressPostalCode(),
-                'countryCode' => (string) $this->shipmentRequest->getShipperAddressCountryCode(),
+                'countryCode' => $this->countryCodeConverter->convert(
+                    (string) $this->shipmentRequest->getShipperAddressCountryCode()
+                ),
             ];
 
             $shipperData = array_merge($shipperData, $streetData);
@@ -244,7 +254,9 @@ class RequestExtractor implements RequestExtractorInterface
                 'city' => (string) $this->shipmentRequest->getRecipientAddressCity(),
                 'state' => (string) $this->shipmentRequest->getRecipientAddressStateOrProvinceCode(),
                 'postalCode' => (string) $this->shipmentRequest->getRecipientAddressPostalCode(),
-                'countryCode' => (string) $this->shipmentRequest->getRecipientAddressCountryCode(),
+                'countryCode' => $this->countryCodeConverter->convert(
+                    (string) $this->shipmentRequest->getRecipientAddressCountryCode()
+                ),
                 'regionCode' => (string) $this->shipmentRequest->getData('recipient_address_region_code'),
             ];
 
@@ -316,7 +328,9 @@ class RequestExtractor implements RequestExtractorInterface
                         'price' => (float)$itemData['price'],
                         'customsValue' => isset($itemData['customs_value']) ? (float)$itemData['customs_value'] : null,
                         'sku' => $itemData['sku'] ?? '',
-                        'countryOfOrigin' => $itemData['customs']['countryOfOrigin'] ?? '',
+                        'countryOfOrigin' => $this->countryCodeConverter->convert(
+                            $itemData['customs']['countryOfOrigin'] ?? ''
+                        ),
                         'exportDescription' => $itemData['customs']['exportDescription'] ?? '',
                         'hsCode' => $itemData['customs']['hsCode'] ?? '',
                     ]);
@@ -390,10 +404,12 @@ class RequestExtractor implements RequestExtractorInterface
 
     public function getDeliveryLocationCountryCode(): string
     {
-        return $this->getServiceOptionReader()->getServiceOptionValue(
+        $countryCode = $this->getServiceOptionReader()->getServiceOptionValue(
             Codes::SERVICE_OPTION_DELIVERY_LOCATION,
             Codes::SERVICE_INPUT_DELIVERY_LOCATION_COUNTRY_CODE
         );
+
+        return $this->countryCodeConverter->convert($countryCode);
     }
 
     public function getDeliveryLocationPostalCode(): string

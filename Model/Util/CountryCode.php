@@ -14,6 +14,10 @@ use Magento\Directory\Model\ResourceModel\Country\CollectionFactory;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Netresearch\ShippingCore\Api\Util\CountryCodeInterface;
 
+/**
+ * @deprecated
+ * @see Alpha3Converter::convert
+ */
 class CountryCode implements CountryCodeInterface
 {
     /**

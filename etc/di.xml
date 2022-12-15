@@ -45,6 +45,7 @@
     <preference for="Netresearch\ShippingCore\Api\SplitAddress\RecipientStreetRepositoryInterface" type="Netresearch\ShippingCore\Model\SplitAddress\RecipientStreetRepository"/>
     <preference for="Netresearch\ShippingCore\Api\Util\AssetUrlInterface" type="Netresearch\ShippingCore\Model\Util\AssetUrl"/>
     <preference for="Netresearch\ShippingCore\Api\Util\CountryCodeInterface" type="Netresearch\ShippingCore\Model\Util\CountryCode"/>
+    <preference for="Netresearch\ShippingCore\Api\Util\CountryCodeConverterInterface" type="Netresearch\ShippingCore\Model\Util\Alpha2Converter"/>
     <preference for="Netresearch\ShippingCore\Api\Util\DeliveryAreaInterface" type="Netresearch\ShippingCore\Model\Util\DeliveryArea"/>
     <preference for="Netresearch\ShippingCore\Api\Util\ItemAttributeReaderInterface" type="Netresearch\ShippingCore\Model\ItemAttribute\ItemAttributeReader"/>
     <preference for="Netresearch\ShippingCore\Api\Util\OrderProviderInterface" type="Netresearch\ShippingCore\Model\Util\OrderProvider"/>

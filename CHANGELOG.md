@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Add compound rule for processing multiple street splitting rules per region/country.
+- Utilities to convert ISO-3166-1 country codes from Alpha2 to Alpha3 and vice versa.
 
 ## 2.8.2
 

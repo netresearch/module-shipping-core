@@ -14,6 +14,9 @@ use Magento\Framework\Exception\NoSuchEntityException;
  * Utility for retrieving a country's ISO 3166 ALPHA-3 code
  *
  * @api
+ *
+ * @deprecated
+ * @see CountryCodeConverterInterface
  */
 interface CountryCodeInterface
 {
