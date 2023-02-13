@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
 
 class CompatibilityEnforcerTest extends TestCase
 {
-    public function testEnforce()
+    public function testEnforce(): void
     {
         $subject = new CompatibilityEnforcer();
 
@@ -32,26 +32,44 @@ class CompatibilityEnforcerTest extends TestCase
         $subjectInput->setCode('subjectInput');
         $subjectInput->setDefaultValue('shouldBeRemovedByEnforcer');
 
+        $subjectOptions= [];
         $subjectOption = new ShippingOption();
         $subjectOption->setCode('subjectOption');
         $subjectOption->setInputs([$subjectInput]);
+        $subjectOptions[] = $subjectOption;
+        $subjectOption = new ShippingOption();
+        $subjectOption->setCode('subjectOption2');
+        $subjectOption->setInputs([$subjectInput]);
+        $subjectOptions[] = $subjectOption;
 
+        $compatibilities = [];
         $compatibility = new Compatibility();
         $compatibility->setMasters(['masterOption.masterInput']);
         $compatibility->setSubjects(['subjectOption.subjectInput']);
         $compatibility->setAction('disable');
         $compatibility->setTriggerValue('shouldTriggerRule');
+        $compatibilities[] = $compatibility;
+        $compatibility = new Compatibility();
+        $compatibility->setMasters(['masterOption.masterInput']);
+        $compatibility->setSubjects(['subjectOption2.subjectInput']);
+        $compatibility->setAction('disable');
+        $compatibility->setTriggerValue('/^(shouldTriggerRule)$/');
+        $compatibilities[] = $compatibility;
 
         $carrier = new CarrierData();
         $carrier->setPackageOptions([$masterOption]);
-        $carrier->setServiceOptions([$subjectOption]);
-        $carrier->setCompatibilityData([$compatibility]);
+        $carrier->setServiceOptions($subjectOptions);
+        $carrier->setCompatibilityData($compatibilities);
 
         $result = $subject->process($carrier, 0, 'DE', '04229');
 
         // The subject input should be disabled and have a value of ""
         self::assertTrue(
             $result->getServiceOptions()[0]->getInputs()[0]->isDisabled(),
+            'The subject was not disabled according to the rule action'
+        );
+        self::assertTrue(
+            $result->getServiceOptions()[1]->getInputs()[0]->isDisabled(),
             'The subject was not disabled according to the rule action'
         );
         self::assertEmpty(
@@ -71,7 +89,7 @@ class CompatibilityEnforcerTest extends TestCase
         );
     }
 
-    public function testEnforceException()
+    public function testEnforceException(): void
     {
         $subject = new CompatibilityEnforcer();
 

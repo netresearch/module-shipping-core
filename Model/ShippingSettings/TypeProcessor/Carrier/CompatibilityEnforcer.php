@@ -13,7 +13,6 @@ use Magento\Sales\Api\Data\ShipmentInterface;
 use Netresearch\ShippingCore\Api\Data\ShippingSettings\CarrierDataInterface;
 use Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CompatibilityInterface;
 use Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\InputInterface;
-use Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface;
 use Netresearch\ShippingCore\Api\ShippingSettings\TypeProcessor\CarrierDataProcessorInterface;
 
 class CompatibilityEnforcer implements CarrierDataProcessorInterface
@@ -25,13 +24,12 @@ class CompatibilityEnforcer implements CarrierDataProcessorInterface
      */
     private function getInputByCode(string $compoundCode, CarrierDataInterface $carrierData): ?InputInterface
     {
-        /** @var ShippingOptionInterface[] $shippingOptions */
         $shippingOptions = array_merge(
             $carrierData->getServiceOptions(),
             $carrierData->getPackageOptions()
         );
 
-        list($optionCode, $inputCode) = explode('.', $compoundCode);
+        [$optionCode, $inputCode] = explode('.', $compoundCode);
         foreach ($shippingOptions as $option) {
             if ($optionCode !== $option->getCode()) {
                 continue;
@@ -47,8 +45,43 @@ class CompatibilityEnforcer implements CarrierDataProcessorInterface
     }
 
     /**
+     * Disable and/or clear values of given input list according to the current action
+     *
+     * @param string $action Current rule action
+     * @param InputInterface[] $inputs Subject inputs
+     * @param string[] $emptyActions Inputs to clear of any default value
+     * @param string[] $disableActions Inputs to set as disabled
+     * @return bool
+     */
+    private function emptyAndDisableInputs(
+        string $action,
+        array $inputs,
+        array $emptyActions,
+        array $disableActions
+    ): bool {
+        $inputModified = false;
+        if (in_array($action, $emptyActions, true)) {
+            foreach ($inputs as $input) {
+                if ($input->getDefaultValue() !== '') {
+                    $input->setDefaultValue('');
+                    $inputModified = true;
+                }
+            }
+        }
+        if (in_array($action, $disableActions, true)) {
+            foreach ($inputs as $input) {
+                if (!$input->isDisabled()) {
+                    $input->setDisabled(true);
+                    $inputModified = true;
+                }
+            }
+        }
+        return $inputModified;
+    }
+
+    /**
      * @param InputInterface[] $masterInputs
-     * @param InputInterface[] $subjectInputs   Will be mutated according to the rule
+     * @param InputInterface[] $subjectInputs Will be mutated according to the rule
      * @param CompatibilityInterface $rule
      * @return bool                             Returns "true" if any subject inputs were modified by applying the rule
      * @throws LocalizedException               Thrown if a required input is missing a value
@@ -64,27 +97,19 @@ class CompatibilityEnforcer implements CarrierDataProcessorInterface
             if ($rule->getTriggerValue() === '*' && $masterInput->getDefaultValue() !== '') {
                 $valueMatches = true;
             }
+            if (str_starts_with($rule->getTriggerValue(), '/') && str_ends_with($rule->getTriggerValue(), '/')) {
+                $valueMatches = preg_match($rule->getTriggerValue(), $masterInput->getDefaultValue()) === 1;
+            }
             if ($masterInput->getDefaultValue() === $rule->getTriggerValue()) {
                 $valueMatches = true;
             }
             if ($valueMatches) {
-                $actions = [CompatibilityInterface::ACTION_DISABLE, CompatibilityInterface::ACTION_HIDE];
-                if (in_array($rule->getAction(), $actions, true)) {
-                    foreach ($subjectInputs as $input) {
-                        if ($input->getDefaultValue() !== '') {
-                            $input->setDefaultValue('');
-                            $inputModified = true;
-                        }
-                    }
-                }
-                if ($rule->getAction() === CompatibilityInterface::ACTION_DISABLE) {
-                    foreach ($subjectInputs as $input) {
-                        if (!$input->isDisabled()) {
-                            $input->setDisabled(true);
-                            $inputModified = true;
-                        }
-                    }
-                }
+                $inputModified = $this->emptyAndDisableInputs(
+                    $rule->getAction(),
+                    $subjectInputs,
+                    [CompatibilityInterface::ACTION_DISABLE, CompatibilityInterface::ACTION_HIDE],
+                    [CompatibilityInterface::ACTION_DISABLE]
+                );
 
                 if ($rule->getAction() === CompatibilityInterface::ACTION_REQUIRE) {
                     foreach ($subjectInputs as $input) {
@@ -93,6 +118,13 @@ class CompatibilityEnforcer implements CarrierDataProcessorInterface
                         }
                     }
                 }
+            } else {
+                $inputModified = $this->emptyAndDisableInputs(
+                    $rule->getAction(),
+                    $subjectInputs,
+                    [CompatibilityInterface::ACTION_ENABLE, CompatibilityInterface::ACTION_SHOW],
+                    [CompatibilityInterface::ACTION_ENABLE]
+                );
             }
         }
 
