@@ -5,12 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## 2.9.0
 
 ### Added
 
-- Add compound rule for processing multiple street splitting rules per region/country.
-- Utilities to convert ISO-3166-1 country codes from Alpha2 to Alpha3 and vice versa.
+- Add composite rule for processing multiple street splitting rules per region/country.
+- Provide utilities for converting ISO-3166-1 country codes from Alpha2 to Alpha3 and vice versa.
+- Validate shipping option compatibility using regular expressions.
+
+### Fixed
+
+- Prevent broken styling in module configuration, reported via [#50](https://github.com/netresearch/dhl-shipping-m2/issues/50).
 
 ## 2.8.2
 
