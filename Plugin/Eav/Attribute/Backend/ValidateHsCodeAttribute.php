@@ -25,17 +25,17 @@ class ValidateHsCodeAttribute
     public function afterValidate(AbstractBackend $backendModel, $result, $eavEntity): bool
     {
         if (!$eavEntity instanceof Product) {
-            return $result;
+            return (bool) $result;
         }
 
         $attrCode = $backendModel->getAttribute()->getAttributeCode();
         if ($attrCode !== DataInstaller::ATTRIBUTE_CODE_HS_CODE) {
-            return $result;
+            return (bool) $result;
         }
 
         $value = $eavEntity->getData($attrCode);
         if (!$value) {
-            return $result;
+            return (bool) $result;
         }
 
         $label = $backendModel->getAttribute()->getData('frontend_label');
