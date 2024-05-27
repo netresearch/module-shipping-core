@@ -19,10 +19,10 @@ class ValidateExportDescriptionAttribute
      * @param AbstractBackend $backendModel
      * @param bool|mixed $result
      * @param mixed $eavEntity
-     * @return bool
+     * @return bool|mixed
      * @throws LocalizedException
      */
-    public function afterValidate(AbstractBackend $backendModel, $result, $eavEntity): bool
+    public function afterValidate(AbstractBackend $backendModel, $result, $eavEntity)
     {
         if (!$eavEntity instanceof Product) {
             return $result;

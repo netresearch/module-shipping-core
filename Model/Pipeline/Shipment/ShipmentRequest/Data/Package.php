@@ -118,7 +118,7 @@ class Package implements PackageInterface
     /**
      * Obtain weight unit of measurement.
      *
-     * Note: Shipment request passes them in as \Zend_Measure values.
+     * Note: Shipment request passes them in as Magento\Framework\Measure values.
      *
      * @return string
      */

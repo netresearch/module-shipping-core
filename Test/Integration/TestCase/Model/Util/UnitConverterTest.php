@@ -7,6 +7,8 @@
 namespace Netresearch\ShippingCore\Test\Integration\TestCase\Model\Util;
 
 use Magento\Directory\Model\CurrencyFactory;
+use Magento\Framework\Measure\Length;
+use Magento\Framework\Measure\Weight;
 use Magento\TestFramework\ObjectManager;
 use Netresearch\ShippingCore\Api\Util\UnitConverterInterface;
 use PHPUnit\Framework\TestCase;
@@ -76,15 +78,15 @@ class UnitConverterTest extends TestCase
 
         $conversionResult = $this->unitConverter->convertDimension(
             $valueInKm,
-            \Zend_Measure_Length::KILOMETER,
-            \Zend_Measure_Length::METER
+            Length::KILOMETER,
+            Length::METER
         );
         $this->assertEquals($valueInM, $conversionResult);
 
         $conversionResult = $this->unitConverter->convertDimension(
             $valueInKm,
-            \Zend_Measure_Length::KILOMETER,
-            \Zend_Measure_Length::INCH
+            Length::KILOMETER,
+            Length::INCH
         );
         $this->assertEquals($valueInInches, $conversionResult);
     }
@@ -121,15 +123,15 @@ class UnitConverterTest extends TestCase
 
         $conversionResult = $this->unitConverter->convertWeight(
             $valueInKg,
-            \Zend_Measure_Weight::KILOGRAM,
-            \Zend_Measure_Weight::GRAM
+            Weight::KILOGRAM,
+            Weight::GRAM
         );
         $this->assertEquals($valueInG, $conversionResult);
 
         $conversionResult = $this->unitConverter->convertWeight(
             $valueInKg,
-            \Zend_Measure_Weight::KILOGRAM,
-            \Zend_Measure_Weight::LBS
+            Weight::KILOGRAM,
+            Weight::LBS
         );
         $this->assertEquals($valueInLbs, $conversionResult);
     }
@@ -149,8 +151,8 @@ class UnitConverterTest extends TestCase
 
         $conversionResult = $this->unitConverter->convertWeight(
             $valueInLbs,
-            \Zend_Measure_Weight::LBS,
-            \Zend_Measure_Weight::GRAM
+            Weight::LBS,
+            Weight::GRAM
         );
         $this->assertEquals($valueInG, $conversionResult);
 
@@ -176,8 +178,8 @@ class UnitConverterTest extends TestCase
 
         $conversionResult = $this->unitConverter->convertWeight(
             $valueInLbs,
-            \Zend_Measure_Weight::LBS,
-            \Zend_Measure_Weight::GRAM
+            Weight::LBS,
+            Weight::GRAM
         );
         $this->assertEquals($valueInG, $conversionResult);
 

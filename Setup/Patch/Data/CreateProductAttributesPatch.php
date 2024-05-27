@@ -13,6 +13,7 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Framework\Setup\Patch\PatchRevertableInterface;
+use Magento\Framework\Validator\ValidateException;
 use Netresearch\ShippingCore\Setup\Module\DataInstaller;
 use Netresearch\ShippingCore\Setup\Module\Uninstaller;
 
@@ -51,7 +52,7 @@ class CreateProductAttributesPatch implements PatchRevertableInterface, DataPatc
      *
      * @return void
      * @throws LocalizedException
-     * @throws \Zend_Validate_Exception
+     * @throws LocalizedException|ValidateException
      */
     public function apply()
     {

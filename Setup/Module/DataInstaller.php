@@ -14,6 +14,7 @@ use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 use Magento\Eav\Setup\EavSetup;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Validator\ValidateException;
 
 class DataInstaller
 {
@@ -21,9 +22,10 @@ class DataInstaller
     public const ATTRIBUTE_CODE_EXPORT_DESCRIPTION = 'nrshipping_export_description';
 
     /**
+     *
      * @param EavSetup $eavSetup
      * @throws LocalizedException
-     * @throws \Zend_Validate_Exception
+     * @throws LocalizedException|ValidateException
      */
     public static function addExportDescriptionAttribute(EavSetup $eavSetup): void
     {

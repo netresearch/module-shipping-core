@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions;
 
+use Magento\Framework\Measure\Length;
+use Magento\Framework\Measure\Weight;
 use Magento\Sales\Api\Data\ShipmentInterface;
 use Netresearch\ShippingCore\Api\Config\ShippingConfigInterface;
 use Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CommentInterfaceFactory;
@@ -114,8 +116,8 @@ class InputDataProcessor implements ShippingOptionsProcessorInterface
 
                 case Codes::PACKAGE_INPUT_WEIGHT_UNIT:
                     $weightUnit = $this->shippingConfig->getWeightUnit($shipment->getStoreId()) === 'kg'
-                        ? \Zend_Measure_Weight::KILOGRAM
-                        : \Zend_Measure_Weight::POUND;
+                        ? Weight::KILOGRAM
+                        : Weight::POUND;
                     $input->setDefaultValue($weightUnit);
                     break;
 
@@ -143,8 +145,8 @@ class InputDataProcessor implements ShippingOptionsProcessorInterface
 
                 case Codes::PACKAGE_INPUT_SIZE_UNIT:
                     $dimensionsUnit = $this->shippingConfig->getDimensionUnit($shipment->getStoreId()) === 'cm'
-                        ? \Zend_Measure_Length::CENTIMETER
-                        : \Zend_Measure_Length::INCH;
+                        ? Length::CENTIMETER
+                        : Length::INCH;
                     $input->setDefaultValue($dimensionsUnit);
                     break;
 

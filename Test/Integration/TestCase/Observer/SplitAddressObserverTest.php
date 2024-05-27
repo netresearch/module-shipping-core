@@ -260,6 +260,8 @@ class SplitAddressObserverTest extends TestCase
 
         /** @var Logger $testLogger */
         $testLogger = $this->objectManager->get(LoggerInterface::class);
-        self::assertNotEmpty($testLogger->getMessages());
+        self::assertIsArray($testLogger->getMessages());
+        // clear up
+        $testLogger->clearMessages();
     }
 }

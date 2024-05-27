@@ -2,7 +2,6 @@
 
 namespace Netresearch\ShippingCore\Api\PackagingPopup;
 
-
 use Netresearch\ShippingCore\Model\PackagingPopup\RequestData;
 
 /**

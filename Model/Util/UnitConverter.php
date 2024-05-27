@@ -10,6 +10,8 @@ namespace Netresearch\ShippingCore\Model\Util;
 
 use Magento\Directory\Helper\Data;
 use Magento\Framework\Locale\FormatInterface;
+use Magento\Framework\Measure\Length;
+use Magento\Framework\Measure\Weight;
 use Magento\Shipping\Helper\Carrier;
 use Netresearch\ShippingCore\Api\Util\UnitConverterInterface;
 
@@ -70,10 +72,10 @@ class UnitConverter implements UnitConverterInterface
     public function normalizeWeightUnit($weightUnit): string
     {
         switch (strtoupper($weightUnit)) {
-            case \Zend_Measure_Weight::KILOGRAM:
+            case Weight::KILOGRAM:
             case 'KGS':
                 return 'kg';
-            case \Zend_Measure_Weight::POUND:
+            case Weight::POUND:
             case 'LBS':
                 return 'lb';
             default:
@@ -84,9 +86,9 @@ class UnitConverter implements UnitConverterInterface
     public function normalizeDimensionUnit($dimensionUnit): string
     {
         switch (strtoupper($dimensionUnit)) {
-            case \Zend_Measure_Length::CENTIMETER:
+            case Length::CENTIMETER:
                 return 'cm';
-            case \Zend_Measure_Length::INCH:
+            case Length::INCH:
                 return 'in';
             default:
                 return $dimensionUnit;
