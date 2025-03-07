@@ -299,6 +299,7 @@
         <arguments>
             <argument name="validators" xsi:type="array">
                 <item name="noReturnShipment" xsi:type="object">Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Validator\NoReturnValidator</item>
+                <item name="hsCode" xsi:type="object">Netresearch\ShippingCore\Model\Pipeline\Shipment\ShipmentRequest\Validator\HsCodeValidator</item>
             </argument>
         </arguments>
     </type>

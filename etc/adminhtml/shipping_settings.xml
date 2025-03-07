@@ -74,11 +74,9 @@
                             <input code="Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Codes::ITEM_INPUT_HS_CODE">
                                 <sortOrder>20</sortOrder>
                                 <label translate="true">HS Code</label>
+                                <tooltip translate="true">6 digits for shipments without export declaration, 8 digits with export declaration</tooltip>
                                 <inputType>text</inputType>
                                 <validationRules>
-                                    <rule name="max_text_length">
-                                        <param>10</param>
-                                    </rule>
                                     <rule name="validate-digits"/>
                                 </validationRules>
                             </input>

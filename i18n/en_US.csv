@@ -1,3 +1,4 @@
+"6 digits for shipments without export declaration, 8 digits with export declaration","6 digits for shipments without export declaration, 8 digits with export declaration"
 "%name,","%name,"
 "A confirmation email will be sent to the customer when the shipment was successfully created.","A confirmation email will be sent to the customer when the shipment was successfully created."
 "Add Package","Add Package"
@@ -34,6 +35,7 @@ Errors,Errors
 "Export Content Explanation","Export Content Explanation"
 "Export Content Type","Export Content Type"
 "Export Description","Export Description"
+"For shipments with an export declaration, customs tariff numbers must be 8 or 10 digits.","For shipments with an export declaration, customs tariff numbers must be 8 or 10 digits."
 "HS Code","HS Code"
 Height,Height
 "Height %1","Height %1"
@@ -99,6 +101,7 @@ Quantity,Quantity
 "The money transfer purpose for cash on delivery payments can include the following placeholders: {{entity_id}}, {{increment_id}}, {{firstname}}, {{lastname}}. They will be replaced by the respective order's values.","The money transfer purpose for cash on delivery payments can include the following placeholders: {{entity_id}}, {{increment_id}}, {{firstname}}, {{lastname}}. They will be replaced by the respective order's values."
 "The selected email template will be used when sending return shipment labels to the customer.","The selected email template will be used when sending return shipment labels to the customer."
 "The shipment was successfully cancelled.","The shipment was successfully cancelled."
+"The tariff number must be numeric and 6, 8, or 10 digits long.","The tariff number must be numeric and 6, 8, or 10 digits long."
 "The value of attribute ""%1"" must be either 6, 8 or 10 digits long.","The value of attribute ""%1"" must be either 6, 8 or 10 digits long."
 "The value of attribute ""%1"" must be numeric.","The value of attribute ""%1"" must be numeric."
 "The value of attribute ""%1"" must not be longer than %2 characters.","The value of attribute ""%1"" must not be longer than %2 characters."
