@@ -28,7 +28,7 @@ Requirements
 Compatibility
 -------------
 
-* Magento >= 2.4.6
+* Magento >= 2.4.8
 
 License
 -------

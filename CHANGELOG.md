@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 4.0.0
+
+Magento 2.4.8 compatibility release with breaking changes
+
+### Breaking Changes
+
+- **Error Response Interface**: Changed `getErrors()` return type from `Phrase` to `string[]` for Magento 2.4.8 compatibility
+
+### Added
+
+- Support for PHP 8.3 and 8.4 features
+- PHPUnit 10.x compatibility and modern test patterns
+- Rector and PHPStan configuration for code quality
+
+### Changed
+
+- Error response interfaces now return arrays of strings instead of single Phrase objects
+- Updated all Magento dependencies to 2.4.8 compatible versions
+- Modernized codebase with PHP 8.3+ features and type declarations
+- Migrated development toolchain to modern standards
+
+### Removed
+
+- Support for PHP 8.2
+- Support for Magento versions prior to 2.4.8
+
 ## 3.1.0
 
 ### Added
