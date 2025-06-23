@@ -25,6 +25,7 @@ class ValidationRule implements ValidationRuleInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getName(): string
     {
         return $this->name;
@@ -33,6 +34,7 @@ class ValidationRule implements ValidationRuleInterface
     /**
      * @return mixed|null
      */
+    #[\Override]
     public function getParam()
     {
         return $this->param;
@@ -41,6 +43,7 @@ class ValidationRule implements ValidationRuleInterface
     /**
      * @param string $name
      */
+    #[\Override]
     public function setName(string $name): void
     {
         $this->name = $name;
@@ -49,6 +52,7 @@ class ValidationRule implements ValidationRuleInterface
     /**
      * @param mixed $param
      */
+    #[\Override]
     public function setParam($param): void
     {
         $this->param = $param;

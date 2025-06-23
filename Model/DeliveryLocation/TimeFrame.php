@@ -25,6 +25,7 @@ class TimeFrame implements TimeFrameInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getOpens(): string
     {
         return $this->opens;
@@ -33,6 +34,7 @@ class TimeFrame implements TimeFrameInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getCloses(): string
     {
         return $this->closes;

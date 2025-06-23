@@ -63,6 +63,7 @@ class Autocreate extends Action
      * @return ResultInterface
      * @throws LocalizedException
      */
+    #[\Override]
     public function execute(): ResultInterface
     {
         // create shipments for requested orders
@@ -101,7 +102,8 @@ class Autocreate extends Action
                 $incrementIds['error'][$orderIncrementId] = $orderIncrementId;
                 if ($shipmentResponse instanceof ShipmentErrorResponseInterface) {
                     // add error message if details are available
-                    $this->messageManager->addErrorMessage(__('Order %1: %2', $orderIncrementId, $shipmentResponse->getErrors()));
+                    $errors = $shipmentResponse->getErrors();
+                    $this->messageManager->addErrorMessage(__('Order %1: %2', $orderIncrementId, implode('; ', $errors)));
                 }
             }
 

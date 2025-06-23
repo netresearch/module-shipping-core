@@ -23,11 +23,13 @@ class MigrateSalesTotalsPatch implements DataPatchInterface
         $this->totals = $totals;
     }
 
+    #[\Override]
     public static function getDependencies(): array
     {
         return [];
     }
 
+    #[\Override]
     public function getAliases(): array
     {
         return [];
@@ -39,6 +41,7 @@ class MigrateSalesTotalsPatch implements DataPatchInterface
      * @return void
      * @throws \Exception
      */
+    #[\Override]
     public function apply()
     {
         $this->totals->migrate();

@@ -6,9 +6,12 @@
 
 namespace Netresearch\ShippingCore\Test\Integration\TestCase\Model\Util;
 
+use Magento\Directory\Helper\Data;
+use Magento\Directory\Model\Currency;
 use Magento\Directory\Model\CurrencyFactory;
 use Magento\Framework\Measure\Length;
 use Magento\Framework\Measure\Weight;
+use Magento\Shipping\Helper\Carrier;
 use Magento\TestFramework\ObjectManager;
 use Netresearch\ShippingCore\Api\Util\UnitConverterInterface;
 use PHPUnit\Framework\TestCase;
@@ -28,6 +31,7 @@ class UnitConverterTest extends TestCase
     /**
      * prepare object manager, add mocks
      */
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
@@ -38,8 +42,7 @@ class UnitConverterTest extends TestCase
         $rateGbpToEur = 1.1723;
         $rateGbpToUsd = 1.2494;
 
-        $currencyMock = $this->getMockBuilder(\Magento\Directory\Model\Currency::class)
-            ->setMethods(['getRate'])
+        $currencyMock = $this->getMockBuilder(Currency::class)
             ->disableOriginalConstructor()
             ->getMock();
         $currencyMock
@@ -48,17 +51,32 @@ class UnitConverterTest extends TestCase
             ->willReturnOnConsecutiveCalls($rateUsdToEur, $rateGbpToEur, $rateGbpToUsd);
 
         $currencyFactoryMock = $this->getMockBuilder(CurrencyFactory::class)
-            ->setMethods(['create'])
             ->disableOriginalConstructor()
             ->getMock();
         $currencyFactoryMock->expects($this->any())
             ->method('create')
             ->willReturn($currencyMock);
 
-        $carrierHelper = $this->objectManager->get(\Magento\Shipping\Helper\Carrier::class);
-        $directoryHelper = $this->objectManager->create(\Magento\Directory\Helper\Data::class, [
-            'currencyFactory' => $currencyFactoryMock,
-        ]);
+        $carrierHelper = $this->objectManager->get(Carrier::class);
+
+        // Create a properly configured directory helper
+        $directoryHelper = $this->getMockBuilder(Data::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        // Mock the convertMonetaryValue method directly
+        $directoryHelper->expects($this->any())
+            ->method('currencyConvert')
+            ->willReturnCallback(function ($amount, $from, $to) use ($rateUsdToEur, $rateGbpToEur, $rateGbpToUsd) {
+                if ($from === 'USD' && $to === 'EUR') {
+                    return $amount * $rateUsdToEur;
+                } elseif ($from === 'GBP' && $to === 'EUR') {
+                    return $amount * $rateGbpToEur;
+                } elseif ($from === 'GBP' && $to === 'USD') {
+                    return $amount * $rateGbpToUsd;
+                }
+                return $amount;
+            });
 
         $this->unitConverter = $this->objectManager->create(UnitConverterInterface::class, [
             'currencyConverter' => $directoryHelper,
@@ -67,9 +85,9 @@ class UnitConverterTest extends TestCase
     }
 
     /**
-     * @test
      * @magentoConfigFixture default_store general/locale/code en_US
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function convertDimension()
     {
         $valueInKm = 1;
@@ -92,9 +110,9 @@ class UnitConverterTest extends TestCase
     }
 
     /**
-     * @test
      * @magentoConfigFixture default_store general/locale/code en_US
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function convertMoney()
     {
         $valueInEur = 1;
@@ -112,9 +130,9 @@ class UnitConverterTest extends TestCase
     }
 
     /**
-     * @test
      * @magentoConfigFixture default_store general/locale/code en_US
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function convertWeight()
     {
         $valueInKg = '1';
@@ -137,9 +155,9 @@ class UnitConverterTest extends TestCase
     }
 
     /**
-     * @test
      * @magentoConfigFixture default_store general/locale/code de_DE
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function handleDeLocaleWithPointSeparator()
     {
         $lang = getenv('HTTP_ACCEPT_LANGUAGE');
@@ -164,9 +182,9 @@ class UnitConverterTest extends TestCase
     }
 
     /**
-     * @test
      * @magentoConfigFixture default_store general/locale/code de_DE
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function handleDeLocaleWithCommaSeparator()
     {
         $lang = getenv('HTTP_ACCEPT_LANGUAGE');

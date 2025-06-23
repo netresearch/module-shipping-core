@@ -28,49 +28,43 @@ interface ParcelProcessingConfigInterface
     /**
      * Get payment methods that were marked as cash on delivery methods in configuration
      *
-     * @param mixed $store
      * @return string[]
      */
-    public function getCodMethods($store = null): array;
+    public function getCodMethods(mixed $store = null): array;
 
     /**
      * Check whether a payment method code was marked as cash on delivery method
      *
      * @param string $methodCode
-     * @param mixed $store
      * @return bool
      */
-    public function isCodPaymentMethod(string $methodCode, $store = null): bool;
+    public function isCodPaymentMethod(string $methodCode, mixed $store = null): bool;
 
     /**
      * Obtain all configured packages.
      *
-     * @param mixed $store
      * @return Package[]
      */
-    public function getPackages($store = null): array;
+    public function getPackages(mixed $store = null): array;
 
     /**
      * Obtain the package configured as default
      *
-     * @param mixed $store
      * @return Package|null
      */
-    public function getDefaultPackage($store = null): ?Package;
+    public function getDefaultPackage(mixed $store = null): ?Package;
 
     /**
      * Check if created shipping labels should be sent via email.
      *
-     * @param mixed $store
      * @return bool
      */
-    public function isShippingLabelEmailEnabled($store = null): bool;
+    public function isShippingLabelEmailEnabled(mixed $store = null): bool;
 
     /**
      * Obtain the email address that new shipping labels should be sent to.
      *
-     * @param mixed $store
      * @return string
      */
-    public function getShippingLabelEmailAddress($store = null): string;
+    public function getShippingLabelEmailAddress(mixed $store = null): string;
 }

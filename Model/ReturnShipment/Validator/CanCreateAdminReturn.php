@@ -40,7 +40,8 @@ class CanCreateAdminReturn implements CanCreateReturnInterface
      * @param string|null $carrierCode
      * @return bool
      */
-    public function execute(OrderInterface $order, string $carrierCode = null): bool
+    #[\Override]
+    public function execute(OrderInterface $order, ?string $carrierCode = null): bool
     {
         return !$this->moduleList->has('Magento_Rma') && $this->canCreateReturn->execute($order, $carrierCode);
     }

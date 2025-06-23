@@ -29,6 +29,7 @@ class SetInitialLabelStatus implements ObserverInterface
      *
      * @param Observer $observer
      */
+    #[\Override]
     public function execute(Observer $observer)
     {
         $order = $observer->getData('order');

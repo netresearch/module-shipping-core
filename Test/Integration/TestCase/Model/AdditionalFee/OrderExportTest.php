@@ -128,9 +128,9 @@ class OrderExportTest extends TestCase
     /**
      * Assert `OrderRepository::get` behaviour.
      *
-     * @test
      * @magentoDataFixture createOrder
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function getById()
     {
         /** @var OrderRepositoryInterface $orderRepository */
@@ -146,9 +146,9 @@ class OrderExportTest extends TestCase
     /**
      * Assert `OrderRepository::getList` behaviour.
      *
-     * @test
      * @magentoDataFixture createOrder
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function getList()
     {
         /** @var SearchCriteriaBuilder $searchCriteriaBuilder */

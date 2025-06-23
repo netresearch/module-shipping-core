@@ -20,7 +20,7 @@ class CountryCodeConverterTest extends TestCase
      */
     private $objectManager;
 
-    public function countryCodesProvider(): array
+    public static function countryCodesProvider(): array
     {
         return [
             ['DE', 'DEU'],
@@ -34,7 +34,7 @@ class CountryCodeConverterTest extends TestCase
         ];
     }
 
-    public function invalidCodesProvider(): array
+    public static function invalidCodesProvider(): array
     {
         return [
             ['', ''],
@@ -48,6 +48,7 @@ class CountryCodeConverterTest extends TestCase
     /**
      * prepare object manager, add mocks
      */
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
@@ -56,10 +57,10 @@ class CountryCodeConverterTest extends TestCase
     }
 
     /**
-     * @test
-     * @dataProvider countryCodesProvider
      * @throws NoSuchEntityException
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('countryCodesProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function toAlpha2(string $alpha2, string $alpha3)
     {
         $this->objectManager->configure(['preferences' => [
@@ -74,10 +75,10 @@ class CountryCodeConverterTest extends TestCase
     }
 
     /**
-     * @test
-     * @dataProvider countryCodesProvider
      * @throws NoSuchEntityException
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('countryCodesProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function toAlpha3(string $alpha2, string $alpha3)
     {
         $this->objectManager->configure(['preferences' => [
@@ -92,10 +93,10 @@ class CountryCodeConverterTest extends TestCase
     }
 
     /**
-     * @test
-     * @dataProvider invalidCodesProvider
      * @throws NoSuchEntityException
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('invalidCodesProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function invalidToAlpha3(string $alpha2, string $alpha3)
     {
         $this->objectManager->configure(['preferences' => [
@@ -116,10 +117,10 @@ class CountryCodeConverterTest extends TestCase
     }
 
     /**
-     * @test
-     * @dataProvider invalidCodesProvider
      * @throws NoSuchEntityException
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('invalidCodesProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function invalidAlpha3(string $alpha2, string $alpha3)
     {
         $this->objectManager->configure(['preferences' => [

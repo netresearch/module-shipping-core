@@ -26,6 +26,7 @@ class CustomizeApplicableCountries implements OptionSourceInterface
         $this->urlBuilder = $urlBuilder;
     }
 
+    #[\Override]
     public function toOptionArray(): array
     {
         $configUrl = $this->urlBuilder->getUrl('adminhtml/system_config/edit', [

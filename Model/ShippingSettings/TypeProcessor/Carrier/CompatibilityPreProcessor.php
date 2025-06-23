@@ -46,7 +46,7 @@ class CompatibilityPreProcessor implements CarrierDataProcessorInterface
     {
         $result = [];
         foreach ($codes as $code) {
-            if (strpos($code, '.') !== false) {
+            if (str_contains($code, '.')) {
                 $result[] = $code;
                 continue;
             }
@@ -86,12 +86,13 @@ class CompatibilityPreProcessor implements CarrierDataProcessorInterface
      * @return CarrierDataInterface
      * @throws \InvalidArgumentException
      */
+    #[\Override]
     public function process(
         CarrierDataInterface $shippingSettings,
         int $storeId,
         string $countryCode,
         string $postalCode,
-        ShipmentInterface $shipment = null
+        ?ShipmentInterface $shipment = null
     ): CarrierDataInterface {
         $processedRules = [];
         $shippingOptions = array_merge($shippingSettings->getServiceOptions(), $shippingSettings->getPackageOptions());

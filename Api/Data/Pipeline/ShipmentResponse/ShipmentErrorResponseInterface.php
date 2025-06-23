@@ -8,8 +8,6 @@ declare(strict_types=1);
 
 namespace Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse;
 
-use Magento\Framework\Phrase;
-
 /**
  * A negative label response with reason phrase.
  *
@@ -20,7 +18,7 @@ interface ShipmentErrorResponseInterface extends ShipmentResponseInterface
     public const ERRORS = 'errors';
 
     /**
-     * @return Phrase
+     * @return String[]
      */
-    public function getErrors(): Phrase;
+    public function getErrors(): array;
 }

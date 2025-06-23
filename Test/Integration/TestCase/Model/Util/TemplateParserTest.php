@@ -48,9 +48,9 @@ class TemplateParserTest extends TestCase
     }
 
     /**
-     * @test
      * @magentoDataFixture createOrder
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function parse()
     {
         $entityId = self::$order->getEntityId();

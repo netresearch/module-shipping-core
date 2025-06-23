@@ -31,6 +31,7 @@ class ValueMap implements ValueMapInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getSourceValue(): string
     {
         return $this->sourceValue;
@@ -39,6 +40,7 @@ class ValueMap implements ValueMapInterface
     /**
      * @param string $sourceValue
      */
+    #[\Override]
     public function setSourceValue(string $sourceValue): void
     {
         $this->sourceValue = $sourceValue;
@@ -47,6 +49,7 @@ class ValueMap implements ValueMapInterface
     /**
      * @return \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMap\InputValueInterface[]
      */
+    #[\Override]
     public function getInputValues(): array
     {
         return $this->inputValues;
@@ -55,6 +58,7 @@ class ValueMap implements ValueMapInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ValueMap\InputValueInterface[] $inputValues
      */
+    #[\Override]
     public function setInputValues(array $inputValues): void
     {
         $this->inputValues = $inputValues;

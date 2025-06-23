@@ -17,6 +17,7 @@ use Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Selection\Ord
  */
 class ShippingOptionSelectionCollection extends AbstractCollection
 {
+    #[\Override]
     protected function _construct()
     {
         $this->_init(OrderSelection::class, ServiceSelectionResource::class);

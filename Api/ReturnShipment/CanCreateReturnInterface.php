@@ -24,5 +24,5 @@ interface CanCreateReturnInterface
      * @param string|null $carrierCode
      * @return bool
      */
-    public function execute(OrderInterface $order, string $carrierCode = null): bool;
+    public function execute(OrderInterface $order, ?string $carrierCode = null): bool;
 }

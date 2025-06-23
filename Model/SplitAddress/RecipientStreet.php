@@ -17,6 +17,7 @@ class RecipientStreet extends AbstractModel implements RecipientStreetInterface
     /**
      * Initialize RecipientStreet resource model.
      */
+    #[\Override]
     protected function _construct()
     {
         $this->_init(RecipientStreetResource::class);
@@ -28,6 +29,7 @@ class RecipientStreet extends AbstractModel implements RecipientStreetInterface
      *
      * @return int|null
      */
+    #[\Override]
     public function getOrderAddressId(): ?int
     {
         return $this->hasData(self::ORDER_ADDRESS_ID) ? (int) $this->getData(self::ORDER_ADDRESS_ID) : null;
@@ -38,6 +40,7 @@ class RecipientStreet extends AbstractModel implements RecipientStreetInterface
      *
      * @return string
      */
+    #[\Override]
     public function getName(): string
     {
         return (string) $this->getData(self::NAME);
@@ -48,6 +51,7 @@ class RecipientStreet extends AbstractModel implements RecipientStreetInterface
      *
      * @return string
      */
+    #[\Override]
     public function getNumber(): string
     {
         return (string) $this->getData(self::NUMBER);
@@ -58,6 +62,7 @@ class RecipientStreet extends AbstractModel implements RecipientStreetInterface
      *
      * @return string
      */
+    #[\Override]
     public function getSupplement(): string
     {
         return (string) $this->getData(self::SUPPLEMENT);

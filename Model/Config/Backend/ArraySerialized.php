@@ -49,8 +49,8 @@ class ArraySerialized extends Value implements ProcessorInterface
         ScopeConfigInterface $config,
         TypeListInterface $cacheTypeList,
         Json $serializer,
-        AbstractResource $resource = null,
-        AbstractDb $resourceCollection = null,
+        ?AbstractResource $resource = null,
+        ?AbstractDb $resourceCollection = null,
         array $data = []
     ) {
         $this->serializer = $serializer;
@@ -63,6 +63,7 @@ class ArraySerialized extends Value implements ProcessorInterface
      *
      * @return $this
      */
+    #[\Override]
     protected function _afterLoad()
     {
         $value = $this->getValue();
@@ -84,6 +85,7 @@ class ArraySerialized extends Value implements ProcessorInterface
      * @param string $value
      * @return string|int|float|bool|array|null
      */
+    #[\Override]
     public function processValue($value)
     {
         if ($value) {
@@ -98,6 +100,7 @@ class ArraySerialized extends Value implements ProcessorInterface
      *
      * @return ArraySerialized
      */
+    #[\Override]
     public function beforeSave()
     {
         $value = $this->getValue();
@@ -131,6 +134,7 @@ class ArraySerialized extends Value implements ProcessorInterface
      *
      * @return string
      */
+    #[\Override]
     public function getOldValue()
     {
         $oldValue = $this->_config->getValue(

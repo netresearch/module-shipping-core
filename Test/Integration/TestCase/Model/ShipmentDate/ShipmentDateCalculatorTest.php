@@ -54,7 +54,7 @@ class ShipmentDateCalculatorTest extends TestCase
      *
      * @return \DateTime[][]|string[][]
      */
-    public function dataProvider(): array
+    public static function dataProvider(): array
     {
         // cut-off times, shipments created before that time are handed over to the carrier on the same day.
         $fri = new \DateTimeImmutable('2019-12-25 17:00:00');
@@ -70,33 +70,33 @@ class ShipmentDateCalculatorTest extends TestCase
         return [
             // ship same day
             'before_cut_off_on_regular_day' => [
-                'cut_off_times' => $cutOffTimes,
-                'current_time' => $wed->setTime(10, 0),
-                'drop_off_time' => $wed,
+                $cutOffTimes,
+                $wed->setTime(10, 0),
+                $wed,
             ],
             // ship on next day
             'before_cut_off_on_holiday' => [
-                'cut_off_times' => $cutOffTimes,
-                'current_time' => $fri->setTime(10, 0),
-                'drop_off_time' => $mon,
+                $cutOffTimes,
+                $fri->setTime(10, 0),
+                $mon,
             ],
             // ship on next day
             'after_cut_off_on_regular_day' => [
-                'cut_off_times' => $cutOffTimes,
-                'current_time' => $mon->setTime(17, 10),
-                'drop_off_time' => $wed,
+                $cutOffTimes,
+                $mon->setTime(17, 10),
+                $wed,
             ],
             // skip one drop-off, ship on day after the next configured day
             'after_cut_off_upcoming_holiday' => [
-                'cut_off_times' => $cutOffTimes,
-                'current_time' => $wed->modify('-1 weeks')->setTime(17, 10),
-                'drop_off_time' => $mon,
+                $cutOffTimes,
+                $wed->modify('-1 weeks')->setTime(17, 10),
+                $mon,
             ],
             // skip two drop-offs
             'before_cut_off_on_holiday_with_upcoming_holiday' => [
-                'cut_off_times' => [$fri->format('N') => $fri],
-                'current_time' => $fri->setTime(10, 0),
-                'drop_off_time' => $fri->modify('+2 weeks'),
+                [$fri->format('N') => $fri],
+                $fri->setTime(10, 0),
+                $fri->modify('+2 weeks'),
             ],
         ];
     }
@@ -106,8 +106,6 @@ class ShipmentDateCalculatorTest extends TestCase
      *
      * Calculation takes into account current time, cut-off time, and holidays.
      *
-     * @test
-     * @dataProvider dataProvider
      * @magentoDataFixture createOrder
      *
      * @magentoConfigFixture default_store shipping/origin/country_id DE
@@ -122,6 +120,8 @@ class ShipmentDateCalculatorTest extends TestCase
      *
      * @throws \RuntimeException
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function calculateShipmentDate(
         array $cutOffTimes,
         \DateTimeInterface $currentTime,
@@ -157,9 +157,8 @@ class ShipmentDateCalculatorTest extends TestCase
      * @magentoConfigFixture default_store shipping/origin/postcode 04229
      * @magentoConfigFixture default_store shipping/origin/city Leipzig
      * @magentoConfigFixture default_store shipping/origin/street_line1 Nonnenstraße 11
-     *
-     * @test
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function calculationError()
     {
         $this->expectException(\RuntimeException::class);

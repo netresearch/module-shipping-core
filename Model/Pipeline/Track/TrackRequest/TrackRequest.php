@@ -45,8 +45,8 @@ class TrackRequest implements TrackRequestInterface
     public function __construct(
         int $storeId,
         string $trackNumber,
-        ShipmentInterface $salesShipment = null,
-        ShipmentTrackInterface $salesTrack = null
+        ?ShipmentInterface $salesShipment = null,
+        ?ShipmentTrackInterface $salesTrack = null
     ) {
         $this->storeId = $storeId;
         $this->trackNumber = $trackNumber;
@@ -59,6 +59,7 @@ class TrackRequest implements TrackRequestInterface
      *
      * @return int
      */
+    #[\Override]
     public function getStoreId(): int
     {
         return $this->storeId;
@@ -69,6 +70,7 @@ class TrackRequest implements TrackRequestInterface
      *
      * @return string
      */
+    #[\Override]
     public function getTrackNumber(): string
     {
         return $this->trackNumber;
@@ -77,6 +79,7 @@ class TrackRequest implements TrackRequestInterface
     /**
      * @return ShipmentInterface|null
      */
+    #[\Override]
     public function getSalesShipment(): ?ShipmentInterface
     {
         return $this->salesShipment;
@@ -85,6 +88,7 @@ class TrackRequest implements TrackRequestInterface
     /**
      * @return ShipmentTrackInterface|null
      */
+    #[\Override]
     public function getSalesTrack(): ?ShipmentTrackInterface
     {
         return $this->salesTrack;

@@ -98,6 +98,7 @@ class Package implements \JsonSerializable
         return $this->isDefault;
     }
 
+    #[\Override]
     public function jsonSerialize(): array
     {
         return get_object_vars($this);

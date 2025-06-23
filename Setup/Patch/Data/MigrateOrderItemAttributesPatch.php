@@ -24,11 +24,13 @@ class MigrateOrderItemAttributesPatch implements DataPatchInterface
         $this->itemAttributes = $itemAttributes;
     }
 
+    #[\Override]
     public static function getDependencies(): array
     {
         return [];
     }
 
+    #[\Override]
     public function getAliases(): array
     {
         return [];
@@ -40,6 +42,7 @@ class MigrateOrderItemAttributesPatch implements DataPatchInterface
      * @return void
      * @throws \Exception
      */
+    #[\Override]
     public function apply()
     {
         $this->itemAttributes->migrate([

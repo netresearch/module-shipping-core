@@ -56,6 +56,7 @@ class Download extends Action implements HttpGetActionInterface
         parent::__construct($context);
     }
 
+    #[\Override]
     public function execute()
     {
         $trackId = (int) $this->getRequest()->getParam('track_id', 0);
@@ -72,7 +73,7 @@ class Download extends Action implements HttpGetActionInterface
                 DirectoryList::TMP,
                 $document->getMediaType()
             );
-        } catch (\Exception $exception) {
+        } catch (\Exception) {
             $this->messageManager->addErrorMessage(__('This document cannot be loaded.'));
 
             $resultRedirect = $this->resultRedirectFactory->create();

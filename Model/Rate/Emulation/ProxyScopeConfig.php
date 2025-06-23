@@ -28,6 +28,7 @@ class ProxyScopeConfig implements ScopeConfigInterface
         $this->overrideMap = $overrideMap;
     }
 
+    #[\Override]
     public function getValue($path, $scopeType = ScopeConfigInterface::SCOPE_TYPE_DEFAULT, $scopeCode = null)
     {
         if (array_key_exists($path, $this->overrideMap)) {
@@ -37,6 +38,7 @@ class ProxyScopeConfig implements ScopeConfigInterface
         return $this->scopeConfig->getValue($path, $scopeType, $scopeCode);
     }
 
+    #[\Override]
     public function isSetFlag($path, $scopeType = ScopeConfigInterface::SCOPE_TYPE_DEFAULT, $scopeCode = null)
     {
         if (array_key_exists($path, $this->overrideMap)) {

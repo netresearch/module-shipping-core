@@ -66,36 +66,43 @@ class Result implements ResultInterface
         $this->groupName = $groupName;
     }
 
+    #[\Override]
     public function getStatus(): string
     {
         return $this->status;
     }
 
+    #[\Override]
     public function getName(): Phrase
     {
         return $this->name;
     }
 
+    #[\Override]
     public function getMessage(): Phrase
     {
         return $this->message;
     }
 
+    #[\Override]
     public function getSectionCode(): string
     {
         return $this->sectionCode;
     }
 
+    #[\Override]
     public function getSectionName(): ?Phrase
     {
         return $this->sectionName;
     }
 
+    #[\Override]
     public function getGroupCode(): string
     {
         return $this->groupCode;
     }
 
+    #[\Override]
     public function getGroupName(): ?Phrase
     {
         return $this->groupName;

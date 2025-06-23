@@ -23,11 +23,13 @@ class MigrateLabelStatusPatch implements DataPatchInterface
         $this->labelStatus = $labelStatus;
     }
 
+    #[\Override]
     public static function getDependencies(): array
     {
         return [];
     }
 
+    #[\Override]
     public function getAliases(): array
     {
         return [];
@@ -39,6 +41,7 @@ class MigrateLabelStatusPatch implements DataPatchInterface
      * @return void
      * @throws \Exception
      */
+    #[\Override]
     public function apply()
     {
         $this->labelStatus->migrate();

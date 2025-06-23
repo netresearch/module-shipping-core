@@ -34,6 +34,7 @@ class ParcelProcessingConfig implements ParcelProcessingConfigInterface
         $this->packageFactory = $packageFactory;
     }
 
+    #[\Override]
     public function getCodMethods($store = null): array
     {
         $paymentMethods = $this->scopeConfig->getValue(
@@ -46,14 +47,16 @@ class ParcelProcessingConfig implements ParcelProcessingConfigInterface
             return [];
         }
 
-        return explode(',', $paymentMethods);
+        return explode(',', (string) $paymentMethods);
     }
 
+    #[\Override]
     public function isCodPaymentMethod(string $methodCode, $store = null): bool
     {
         return \in_array($methodCode, $this->getCodMethods($store), true);
     }
 
+    #[\Override]
     public function getPackages($store = null): array
     {
         $packages = [];
@@ -79,6 +82,7 @@ class ParcelProcessingConfig implements ParcelProcessingConfigInterface
         return $packages;
     }
 
+    #[\Override]
     public function getDefaultPackage($store = null): ?Package
     {
         foreach ($this->getPackages($store) as $package) {
@@ -90,6 +94,7 @@ class ParcelProcessingConfig implements ParcelProcessingConfigInterface
         return null;
     }
 
+    #[\Override]
     public function isShippingLabelEmailEnabled($store = null): bool
     {
         return $this->scopeConfig->isSetFlag(
@@ -99,6 +104,7 @@ class ParcelProcessingConfig implements ParcelProcessingConfigInterface
         );
     }
 
+    #[\Override]
     public function getShippingLabelEmailAddress($store = null): string
     {
         return $this->scopeConfig->getValue(

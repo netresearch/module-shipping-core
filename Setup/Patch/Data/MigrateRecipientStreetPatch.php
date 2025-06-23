@@ -23,11 +23,13 @@ class MigrateRecipientStreetPatch implements DataPatchInterface
         $this->recipientStreet = $recipientStreet;
     }
 
+    #[\Override]
     public static function getDependencies(): array
     {
         return [];
     }
 
+    #[\Override]
     public function getAliases(): array
     {
         return [];
@@ -39,6 +41,7 @@ class MigrateRecipientStreetPatch implements DataPatchInterface
      * @return void
      * @throws \Exception
      */
+    #[\Override]
     public function apply()
     {
         $this->recipientStreet->migrate();

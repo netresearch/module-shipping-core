@@ -34,11 +34,13 @@ class KeyValueObject implements KeyValueObjectInterface
         $this->value = $value;
     }
 
+    #[\Override]
     public function getKey(): string
     {
         return $this->key;
     }
 
+    #[\Override]
     public function setKey($key)
     {
         $this->key = $key;
@@ -49,6 +51,7 @@ class KeyValueObject implements KeyValueObjectInterface
     /**
      * @return bool|float|int|string
      */
+    #[\Override]
     public function getValue()
     {
         return $this->value;
@@ -58,6 +61,7 @@ class KeyValueObject implements KeyValueObjectInterface
      * @param bool|float|int|string $value
      * @return $this
      */
+    #[\Override]
     public function setValue($value)
     {
         $this->value = $value;

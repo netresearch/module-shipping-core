@@ -77,6 +77,7 @@ class UpdateLocationAddress implements ObserverInterface
         $this->directoryHelper = $directoryHelper;
     }
 
+    #[\Override]
     public function execute(Observer $observer): void
     {
         /** @var Order $order */

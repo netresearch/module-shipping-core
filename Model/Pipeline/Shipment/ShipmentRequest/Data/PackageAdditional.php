@@ -17,6 +17,7 @@ class PackageAdditional implements PackageAdditionalInterface
      *
      * @return mixed[]
      */
+    #[\Override]
     public function getData(): array
     {
         return [];

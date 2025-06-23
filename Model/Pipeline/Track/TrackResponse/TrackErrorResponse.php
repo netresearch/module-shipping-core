@@ -14,10 +14,14 @@ use Netresearch\ShippingCore\Api\Data\Pipeline\TrackResponse\TrackErrorResponseI
 class TrackErrorResponse extends TrackResponse implements TrackErrorResponseInterface
 {
     /**
-     * @return Phrase
+     * @return string[]
      */
-    public function getErrors(): Phrase
+    #[\Override]
+    public function getErrors(): array
     {
-        return $this->getData(self::ERRORS);
+        $errors = $this->getData(self::ERRORS) ?? [];
+        return array_map(static function ($error): string {
+            return $error instanceof Phrase ? $error->render() : (string) $error;
+        }, $errors);
     }
 }

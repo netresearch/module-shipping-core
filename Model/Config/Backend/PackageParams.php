@@ -21,6 +21,7 @@ class PackageParams extends ArraySerialized
      *
      * @return ArraySerialized
      */
+    #[\Override]
     public function beforeSave()
     {
         $key = ParcelProcessingConfig::CONFIG_FIELD_PACKAGE_IS_DEFAULT;

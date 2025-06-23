@@ -33,6 +33,7 @@ class AddAdditionalFeeToOrder implements ObserverInterface
      *
      * @param Observer $observer
      */
+    #[\Override]
     public function execute(Observer $observer)
     {
         /** @var Quote $quote */

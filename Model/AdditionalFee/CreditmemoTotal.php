@@ -35,6 +35,7 @@ class CreditmemoTotal extends AbstractTotal
      * @param Creditmemo $creditmemo
      * @return self|AbstractTotal
      */
+    #[\Override]
     public function collect(Creditmemo $creditmemo)
     {
         foreach ($creditmemo->getOrder()->getCreditmemosCollection() as $previousCreditmemo) {

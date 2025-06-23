@@ -28,7 +28,8 @@ class CompositeShippingSettingsProcessor implements ShippingSettingsProcessorInt
         $this->processors = $processors;
     }
 
-    public function process(array $shippingSettings, int $storeId, ShipmentInterface $shipment = null): array
+    #[\Override]
+    public function process(array $shippingSettings, int $storeId, ?ShipmentInterface $shipment = null): array
     {
         foreach ($this->processors as $processor) {
             $shippingSettings = $processor->process($shippingSettings, $storeId, $shipment);

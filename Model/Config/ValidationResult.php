@@ -18,11 +18,13 @@ class ValidationResult implements ValidationResultInterface
      */
     private $results = [];
 
+    #[\Override]
     public function set(array $results): void
     {
         $this->results = $results;
     }
 
+    #[\Override]
     public function get(): array
     {
         return $this->results;

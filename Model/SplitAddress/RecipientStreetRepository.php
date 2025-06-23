@@ -43,6 +43,7 @@ class RecipientStreetRepository implements RecipientStreetRepositoryInterface
      * @return RecipientStreetInterface
      * @throws CouldNotSaveException
      */
+    #[\Override]
     public function save(RecipientStreetInterface $recipientStreet): RecipientStreetInterface
     {
         try {
@@ -66,6 +67,7 @@ class RecipientStreetRepository implements RecipientStreetRepositoryInterface
      * @return RecipientStreetInterface
      * @throws NoSuchEntityException
      */
+    #[\Override]
     public function get(int $orderAddressId): RecipientStreetInterface
     {
         /** @var RecipientStreet $recipientStreet */
@@ -73,7 +75,7 @@ class RecipientStreetRepository implements RecipientStreetRepositoryInterface
 
         try {
             $this->resource->load($recipientStreet, $orderAddressId);
-        } catch (\Exception $exception) {
+        } catch (\Exception) {
             throw new NoSuchEntityException(__('Unable to load recipient street with ID "%1".', $orderAddressId));
         }
 

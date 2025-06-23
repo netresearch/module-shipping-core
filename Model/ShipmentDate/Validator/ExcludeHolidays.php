@@ -49,6 +49,7 @@ class ExcludeHolidays implements DayValidatorInterface
      *
      * @return bool
      */
+    #[\Override]
     public function validate(\DateTimeInterface $dateTime, $store = null): bool
     {
         try {

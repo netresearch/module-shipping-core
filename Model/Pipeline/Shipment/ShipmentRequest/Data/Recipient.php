@@ -139,76 +139,91 @@ class Recipient implements RecipientInterface
         $this->addressAddition = $addressAddition;
     }
 
+    #[\Override]
     public function getContactPersonName(): string
     {
         return $this->contactPersonName;
     }
 
+    #[\Override]
     public function getContactPersonFirstName(): string
     {
         return $this->contactPersonFirstName;
     }
 
+    #[\Override]
     public function getContactPersonLastName(): string
     {
         return $this->contactPersonLastName;
     }
 
+    #[\Override]
     public function getContactEmail(): string
     {
         return $this->contactEmail;
     }
 
+    #[\Override]
     public function getContactCompanyName(): string
     {
         return $this->contactCompanyName;
     }
 
+    #[\Override]
     public function getContactPhoneNumber(): string
     {
         return $this->contactPhoneNumber;
     }
 
+    #[\Override]
     public function getStreet(): array
     {
         return $this->street;
     }
 
+    #[\Override]
     public function getCity(): string
     {
         return $this->city;
     }
 
+    #[\Override]
     public function getState(): string
     {
         return $this->state;
     }
 
+    #[\Override]
     public function getPostalCode(): string
     {
         return $this->postalCode;
     }
 
+    #[\Override]
     public function getCountryCode(): string
     {
         return $this->countryCode;
     }
 
+    #[\Override]
     public function getRegionCode(): string
     {
         return $this->regionCode;
     }
 
+    #[\Override]
     public function getStreetName(): string
     {
         return $this->streetName;
     }
 
+    #[\Override]
     public function getStreetNumber(): string
     {
         return $this->streetNumber;
     }
 
+    #[\Override]
     public function getAddressAddition(): string
     {
         return $this->addressAddition;

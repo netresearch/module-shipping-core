@@ -41,6 +41,7 @@ class CollectRatesPipeline implements CollectRatesPipelineInterface
         $this->stages = $stages;
     }
 
+    #[\Override]
     public function run(int $storeId, RateRequest $request): ArtifactsContainerInterface
     {
         $artifactsContainer = $this->artifactsContainerFactory->create();

@@ -15,6 +15,7 @@ use Magento\Framework\Data\OptionSourceInterface;
  */
 class ShowIfNotApplicable implements OptionSourceInterface
 {
+    #[\Override]
     public function toOptionArray(): array
     {
         return [

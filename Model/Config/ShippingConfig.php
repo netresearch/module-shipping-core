@@ -45,6 +45,7 @@ class ShippingConfig implements ShippingConfigInterface
         $this->dataObjectFactory = $dataObjectFactory;
     }
 
+    #[\Override]
     public function getOriginCountry($store = null): string
     {
         return (string) $this->scopeConfig->getValue(
@@ -54,6 +55,7 @@ class ShippingConfig implements ShippingConfigInterface
         );
     }
 
+    #[\Override]
     public function getOriginRegion($store = null): int
     {
         return (int) $this->scopeConfig->getValue(
@@ -63,6 +65,7 @@ class ShippingConfig implements ShippingConfigInterface
         );
     }
 
+    #[\Override]
     public function getOriginCity($store = null): string
     {
         return (string) $this->scopeConfig->getValue(
@@ -72,6 +75,7 @@ class ShippingConfig implements ShippingConfigInterface
         );
     }
 
+    #[\Override]
     public function getOriginPostcode($store = null): string
     {
         return (string) $this->scopeConfig->getValue(
@@ -81,6 +85,7 @@ class ShippingConfig implements ShippingConfigInterface
         );
     }
 
+    #[\Override]
     public function getOriginStreet($store = null): array
     {
         $scope = ScopeInterface::SCOPE_STORE;
@@ -91,6 +96,7 @@ class ShippingConfig implements ShippingConfigInterface
         ];
     }
 
+    #[\Override]
     public function getStoreInformation($store = null): DataObject
     {
         $storeInfo = (array) $this->scopeConfig->getValue(
@@ -102,6 +108,7 @@ class ShippingConfig implements ShippingConfigInterface
         return $this->dataObjectFactory->create(['data' => $storeInfo]);
     }
 
+    #[\Override]
     public function getEuCountries($store = null): array
     {
         $euCountries = $this->scopeConfig->getValue(
@@ -110,9 +117,10 @@ class ShippingConfig implements ShippingConfigInterface
             $store
         );
 
-        return explode(',', $euCountries);
+        return explode(',', (string) $euCountries);
     }
 
+    #[\Override]
     public function isDutiableRoute(string $receiverCountry, $store = null): bool
     {
         $originCountry = $this->getOriginCountry($store);
@@ -123,6 +131,7 @@ class ShippingConfig implements ShippingConfigInterface
         return $receiverCountry !== $originCountry && !$bothEU;
     }
 
+    #[\Override]
     public function getWeightUnit($store = null): string
     {
         $weightUOM = $this->scopeConfig->getValue(
@@ -134,6 +143,7 @@ class ShippingConfig implements ShippingConfigInterface
         return $this->unitConverter->normalizeWeightUnit($weightUOM);
     }
 
+    #[\Override]
     public function getDimensionUnit($store = null): string
     {
         $weightUOM = $this->getWeightUnit($store);

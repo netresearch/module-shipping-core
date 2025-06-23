@@ -26,6 +26,7 @@ class OfflineCarriers implements OptionSourceInterface
         $this->scopeConfig = $scopeConfig;
     }
 
+    #[\Override]
     public function toOptionArray(): array
     {
         $result = [];

@@ -24,6 +24,7 @@ class ExportContentType implements OptionSourceInterface
      *
      * @return mixed[]
      */
+    #[\Override]
     public function toOptionArray()
     {
         $optionArray = [];

@@ -32,5 +32,5 @@ interface ShippingSettingsProcessorInterface
      * @return mixed[] Processed shipping settings, indexed by carrier code.
      * @throws \InvalidArgumentException
      */
-    public function process(array $shippingSettings, int $storeId, ShipmentInterface $shipment = null): array;
+    public function process(array $shippingSettings, int $storeId, ?ShipmentInterface $shipment = null): array;
 }

@@ -30,6 +30,7 @@ class ItemCombinationRule implements ItemCombinationRuleInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getSourceItemInputCode(): string
     {
         return $this->sourceItemInputCode;
@@ -38,6 +39,7 @@ class ItemCombinationRule implements ItemCombinationRuleInterface
     /**
      * @return string[]
      */
+    #[\Override]
     public function getAdditionalSourceInputCodes(): array
     {
         return $this->additionalSourceInputCodes;
@@ -46,6 +48,7 @@ class ItemCombinationRule implements ItemCombinationRuleInterface
     /**
      * @param string $sourceItemInputCode
      */
+    #[\Override]
     public function setSourceItemInputCode(string $sourceItemInputCode): void
     {
         $this->sourceItemInputCode = $sourceItemInputCode;
@@ -54,6 +57,7 @@ class ItemCombinationRule implements ItemCombinationRuleInterface
     /**
      * @param string[] $additionalServiceInputCodes
      */
+    #[\Override]
     public function setAdditionalSourceInputCodes(array $additionalServiceInputCodes)
     {
         $this->additionalSourceInputCodes = $additionalServiceInputCodes;
@@ -62,6 +66,7 @@ class ItemCombinationRule implements ItemCombinationRuleInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getAction(): string
     {
         return $this->action;
@@ -70,6 +75,7 @@ class ItemCombinationRule implements ItemCombinationRuleInterface
     /**
      * @param string $action
      */
+    #[\Override]
     public function setAction(string $action): void
     {
         $this->action = $action;

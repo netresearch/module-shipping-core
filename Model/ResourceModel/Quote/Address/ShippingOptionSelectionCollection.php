@@ -16,6 +16,7 @@ use Netresearch\ShippingCore\Model\ShippingSettings\ShippingOption\Selection\Quo
  */
 class ShippingOptionSelectionCollection extends AbstractCollection
 {
+    #[\Override]
     protected function _construct()
     {
         $this->_init(QuoteSelection::class, ShippingOptionSelection::class);

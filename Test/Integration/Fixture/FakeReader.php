@@ -16,6 +16,7 @@ class FakeReader implements ReaderInterface
      * @param null $scope
      * @return array
      */
+    #[\Override]
     public function read($scope = null)
     {
         return \json_decode(file_get_contents(__DIR__ . '/Data/fake_packaging_data.json'), true);

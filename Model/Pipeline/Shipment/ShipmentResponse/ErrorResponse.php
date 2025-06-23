@@ -25,6 +25,7 @@ class ErrorResponse extends DataObject implements ShipmentErrorResponseInterface
      *
      * @return string
      */
+    #[\Override]
     public function getRequestIndex(): string
     {
         return $this->getData(self::REQUEST_INDEX);
@@ -35,6 +36,7 @@ class ErrorResponse extends DataObject implements ShipmentErrorResponseInterface
      *
      * @return ShipmentInterface
      */
+    #[\Override]
     public function getSalesShipment(): ShipmentInterface
     {
         return $this->getData(self::SALES_SHIPMENT);
@@ -43,10 +45,14 @@ class ErrorResponse extends DataObject implements ShipmentErrorResponseInterface
     /**
      * Get errors from response.
      *
-     * @return Phrase
+     * @return string[]
      */
-    public function getErrors(): Phrase
+    #[\Override]
+    public function getErrors(): array
     {
-        return $this->getData(self::ERRORS);
+        $errors = $this->getData(self::ERRORS);
+        return array_map(function ($error) {
+            return $error instanceof Phrase ? $error->render() : $error;
+        }, $errors);
     }
 }

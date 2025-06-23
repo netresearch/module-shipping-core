@@ -37,6 +37,7 @@ class Search implements SearchInterface
      * @return LocationInterface[]
      * @throws LocalizedException
      */
+    #[\Override]
     public function search(string $carrierCode, AddressInterface $searchAddress): array
     {
         foreach ($this->locationProviders as $provider) {

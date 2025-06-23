@@ -25,6 +25,7 @@ class LabelResponse extends DataObject implements LabelResponseInterface
      *
      * @return string
      */
+    #[\Override]
     public function getRequestIndex(): string
     {
         return $this->getData(self::REQUEST_INDEX);
@@ -35,6 +36,7 @@ class LabelResponse extends DataObject implements LabelResponseInterface
      *
      * @return string
      */
+    #[\Override]
     public function getTrackingNumber(): string
     {
         return $this->getData(self::TRACKING_NUMBER);
@@ -45,6 +47,7 @@ class LabelResponse extends DataObject implements LabelResponseInterface
      *
      * @return string
      */
+    #[\Override]
     public function getShippingLabelContent(): string
     {
         return $this->getData(self::SHIPPING_LABEL_CONTENT);
@@ -55,6 +58,7 @@ class LabelResponse extends DataObject implements LabelResponseInterface
      *
      * @return ShipmentDocumentInterface[]
      */
+    #[\Override]
     public function getDocuments(): array
     {
         return $this->hasData(self::DOCUMENTS) ? $this->getData(self::DOCUMENTS) : [];
@@ -65,6 +69,7 @@ class LabelResponse extends DataObject implements LabelResponseInterface
      *
      * @return ShipmentInterface
      */
+    #[\Override]
     public function getSalesShipment(): ShipmentInterface
     {
         return $this->getData(self::SALES_SHIPMENT);

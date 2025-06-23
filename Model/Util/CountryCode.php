@@ -30,6 +30,7 @@ class CountryCode implements CountryCodeInterface
         $this->countryCollection = $countryCollectionFactory->create();
     }
 
+    #[\Override]
     public function getIso3Code(string $iso2Code): string
     {
         $country = $this->countryCollection->load()->getItemById($iso2Code);

@@ -42,6 +42,7 @@ class UnitConverter implements UnitConverterInterface
         $this->unitConverter = $unitConverter;
     }
 
+    #[\Override]
     public function convertDimension(float $value, string $unitIn, string $unitOut): float
     {
         $localFormatValue = (float) $this->localeFormat->getNumber($value);
@@ -50,6 +51,7 @@ class UnitConverter implements UnitConverterInterface
         return round($converted, self::CONVERSION_PRECISION);
     }
 
+    #[\Override]
     public function convertMonetaryValue(float $value, string $unitIn, string $unitOut): float
     {
         $amount = $this->currencyConverter->currencyConvert($value, $unitIn, $unitOut);
@@ -57,6 +59,7 @@ class UnitConverter implements UnitConverterInterface
         return round($amount, self::CONVERSION_PRECISION);
     }
 
+    #[\Override]
     public function convertWeight(float $value, string $unitIn, string $unitOut): float
     {
         $value = (float) $this->localeFormat->getNumber($value);
@@ -69,29 +72,23 @@ class UnitConverter implements UnitConverterInterface
         return round($converted, self::CONVERSION_PRECISION);
     }
 
+    #[\Override]
     public function normalizeWeightUnit($weightUnit): string
     {
-        switch (strtoupper($weightUnit)) {
-            case Weight::KILOGRAM:
-            case 'KGS':
-                return 'kg';
-            case Weight::POUND:
-            case 'LBS':
-                return 'lb';
-            default:
-                return $weightUnit;
-        }
+        return match (strtoupper((string) $weightUnit)) {
+            Weight::KILOGRAM, 'KGS' => 'kg',
+            Weight::POUND, 'LBS' => 'lb',
+            default => $weightUnit,
+        };
     }
 
+    #[\Override]
     public function normalizeDimensionUnit($dimensionUnit): string
     {
-        switch (strtoupper($dimensionUnit)) {
-            case Length::CENTIMETER:
-                return 'cm';
-            case Length::INCH:
-                return 'in';
-            default:
-                return $dimensionUnit;
-        }
+        return match (strtoupper((string) $dimensionUnit)) {
+            Length::CENTIMETER => 'cm',
+            Length::INCH => 'in',
+            default => $dimensionUnit,
+        };
     }
 }

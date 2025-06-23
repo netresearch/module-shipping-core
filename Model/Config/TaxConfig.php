@@ -24,6 +24,7 @@ class TaxConfig implements TaxConfigInterface
         $this->scopeConfig = $scopeConfig;
     }
 
+    #[\Override]
     public function getShippingTaxClass($scopeId = null): int
     {
         return (int) $this->scopeConfig->getValue(
@@ -33,6 +34,7 @@ class TaxConfig implements TaxConfigInterface
         );
     }
 
+    #[\Override]
     public function isShippingPriceInclTax($scopeId = null): bool
     {
         return (bool) $this->scopeConfig->getValue(
@@ -42,21 +44,25 @@ class TaxConfig implements TaxConfigInterface
         );
     }
 
+    #[\Override]
     public function displayCartPriceIncludingTax($scopeId = null): bool
     {
         return $this->getCartPriceDisplayType($scopeId) === self::DISPLAY_TYPE_INCLUDING_TAX;
     }
 
+    #[\Override]
     public function displayCartPriceExcludingTax($scopeId = null): bool
     {
         return $this->getCartPriceDisplayType($scopeId) === self::DISPLAY_TYPE_EXCLUDING_TAX;
     }
 
+    #[\Override]
     public function displayCartBothPrices($scopeId = null): bool
     {
         return $this->getCartPriceDisplayType($scopeId) === self::DISPLAY_TYPE_BOTH;
     }
 
+    #[\Override]
     public function getCartPriceDisplayType($scopeId = null): int
     {
         return (int) $this->scopeConfig->getValue(
@@ -66,21 +72,25 @@ class TaxConfig implements TaxConfigInterface
         );
     }
 
+    #[\Override]
     public function displaySalesPriceIncludingTax($scopeId = null): bool
     {
         return $this->getSalesPriceDisplayType($scopeId) === self::DISPLAY_TYPE_INCLUDING_TAX;
     }
 
+    #[\Override]
     public function displaySalesPriceExcludingTax($scopeId = null): bool
     {
         return $this->getSalesPriceDisplayType($scopeId) === self::DISPLAY_TYPE_EXCLUDING_TAX;
     }
 
+    #[\Override]
     public function displaySalesBothPrices($scopeId = null): bool
     {
         return $this->getSalesPriceDisplayType($scopeId) === self::DISPLAY_TYPE_BOTH;
     }
 
+    #[\Override]
     public function getSalesPriceDisplayType($scopeId = null): int
     {
         return (int) $this->scopeConfig->getValue(

@@ -18,7 +18,7 @@ interface TrackErrorResponseInterface extends TrackResponseInterface
     public const ERRORS = 'errors';
 
     /**
-     * @return Phrase
+     * @return string[]
      */
-    public function getErrors(): Phrase;
+    public function getErrors(): array;
 }

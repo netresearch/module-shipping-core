@@ -77,7 +77,7 @@ class AddRecipientStreetToAddress
             $extensionAttributes->setNrshippingStreetName($recipientStreet->getName());
             $extensionAttributes->setNrshippingStreetNumber($recipientStreet->getNumber());
             $extensionAttributes->setNrshippingStreetSupplement($recipientStreet->getSupplement());
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             $extensionAttributes->setNrshippingStreetName(null);
             $extensionAttributes->setNrshippingStreetNumber(null);
             $extensionAttributes->setNrshippingStreetSupplement(null);

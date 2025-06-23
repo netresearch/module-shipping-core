@@ -37,7 +37,7 @@ class AddShipmentCancelButton
 
         try {
             $this->bulkConfigProvider->getBulkCancellationService($carrierCode);
-        } catch (\RuntimeException $exception) {
+        } catch (\RuntimeException) {
             // cancellation not supported by given carrier
             return null;
         }

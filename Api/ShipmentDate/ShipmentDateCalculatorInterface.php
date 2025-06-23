@@ -19,10 +19,9 @@ interface ShipmentDateCalculatorInterface
      * The current time will be considered, any other rules may be added via validators.
      *
      * @param \DateTimeInterface[] $dropOffTimes upcoming shipment dates, indexed by ISO-8601 numeric dow representation
-     * @param mixed $store
      *
      * @return \DateTimeInterface
      * @throws \RuntimeException
      */
-    public function getDate(array $dropOffTimes, $store = null): \DateTimeInterface;
+    public function getDate(array $dropOffTimes, mixed $store = null): \DateTimeInterface;
 }

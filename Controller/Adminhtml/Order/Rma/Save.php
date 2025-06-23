@@ -55,6 +55,7 @@ class Save extends ReturnAction
     /**
      * @return ResultInterface
      */
+    #[\Override]
     public function execute(): ResultInterface
     {
         $resultRedirect = $this->resultRedirectFactory->create();
@@ -102,10 +103,11 @@ class Save extends ReturnAction
         }
 
         if ($shipmentResponse instanceof ShipmentErrorResponseInterface) {
+            $errors = $shipmentResponse->getErrors();
             $message = __(
                 'Shipping labels for the order #%1 could not be created: %2.',
                 $this->orderProvider->getOrder()->getIncrementId(),
-                $shipmentResponse->getErrors()
+                implode('; ', $errors)
             );
             $this->messageManager->addErrorMessage($message);
         }

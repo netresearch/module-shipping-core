@@ -16,8 +16,7 @@ interface ProxyCarrierConfigInterface
     /**
      * Get the code of the carrier to forward rate requests to.
      *
-     * @param mixed $store
      * @return string
      */
-    public function getProxyCarrierCode($store = null): string;
+    public function getProxyCarrierCode(mixed $store = null): string;
 }

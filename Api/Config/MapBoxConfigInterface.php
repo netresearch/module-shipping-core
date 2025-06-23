@@ -14,20 +14,17 @@ namespace Netresearch\ShippingCore\Api\Config;
 interface MapBoxConfigInterface
 {
     /**
-     * @param mixed $store
      * @return string
      */
-    public function getApiToken($store = null): string;
+    public function getApiToken(mixed $store = null): string;
 
     /**
-     * @param mixed $store
      * @return string
      */
-    public function getMapTileUrl($store = null): string;
+    public function getMapTileUrl(mixed $store = null): string;
 
     /**
-     * @param mixed $store
      * @return string
      */
-    public function getMapAttribution($store = null): string;
+    public function getMapAttribution(mixed $store = null): string;
 }

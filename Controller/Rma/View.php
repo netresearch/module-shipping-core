@@ -60,6 +60,7 @@ class View extends ReturnAction implements HttpGetActionInterface
     /**
      * @return ResultInterface|ResponseInterface
      */
+    #[\Override]
     public function execute()
     {
         $order = $this->orderProvider->getOrder();

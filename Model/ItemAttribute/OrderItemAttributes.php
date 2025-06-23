@@ -17,6 +17,7 @@ class OrderItemAttributes extends AbstractModel implements OrderItemAttributesIn
     /**
      * Initialize OrderItemAttributes resource model.
      */
+    #[\Override]
     protected function _construct()
     {
         $this->_init(OrderItemAttributesResource::class);
@@ -26,6 +27,7 @@ class OrderItemAttributes extends AbstractModel implements OrderItemAttributesIn
     /**
      * @return int
      */
+    #[\Override]
     public function getItemId(): int
     {
         return (int) $this->getData(self::ITEM_ID);
@@ -34,6 +36,7 @@ class OrderItemAttributes extends AbstractModel implements OrderItemAttributesIn
     /**
      * @return string
      */
+    #[\Override]
     public function getHsCode(): string
     {
         return (string) $this->getData(self::HS_CODE);
@@ -42,6 +45,7 @@ class OrderItemAttributes extends AbstractModel implements OrderItemAttributesIn
     /**
      * @return string
      */
+    #[\Override]
     public function getCountryOfManufacture(): string
     {
         return (string) $this->getData(self::COUNTRY_OF_MANUFACTURE);
@@ -50,6 +54,7 @@ class OrderItemAttributes extends AbstractModel implements OrderItemAttributesIn
     /**
      * @param int $itemId
      */
+    #[\Override]
     public function setItemId(int $itemId): void
     {
         $this->setData(self::ITEM_ID, $itemId);
@@ -58,7 +63,8 @@ class OrderItemAttributes extends AbstractModel implements OrderItemAttributesIn
     /**
      * @param string|null $hsCode
      */
-    public function setHsCode(string $hsCode = null): void
+    #[\Override]
+    public function setHsCode(?string $hsCode = null): void
     {
         $this->setData(self::HS_CODE, $hsCode);
     }
@@ -66,7 +72,8 @@ class OrderItemAttributes extends AbstractModel implements OrderItemAttributesIn
     /**
      * @param string|null $countryOfManufacture
      */
-    public function setCountryOfManufacture(string $countryOfManufacture = null): void
+    #[\Override]
+    public function setCountryOfManufacture(?string $countryOfManufacture = null): void
     {
         $this->setData(self::COUNTRY_OF_MANUFACTURE, $countryOfManufacture);
     }

@@ -66,7 +66,7 @@ class AutoCreate
         $fnFilter = function (string $carrierCode) {
             try {
                 return $this->bulkConfig->getBulkShipmentService($carrierCode);
-            } catch (\RuntimeException $exception) {
+            } catch (\RuntimeException) {
                 return false;
             }
         };
@@ -116,7 +116,8 @@ class AutoCreate
                 $incrementIds['error'][] = $orderIncrementId;
                 if ($shipmentResponse instanceof ShipmentErrorResponseInterface) {
                     // add error message if details are available
-                    $message = sprintf('Order %s: %s.', $orderIncrementId, $shipmentResponse->getErrors());
+                    $errors = $shipmentResponse->getErrors();
+                    $message = sprintf('Order %s: %s.', $orderIncrementId, implode('; ', $errors));
                     $this->logger->error($message);
                 }
             }

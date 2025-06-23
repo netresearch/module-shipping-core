@@ -28,9 +28,9 @@ class Selection implements SelectionInterface
     private $inputValue;
 
     public function __construct(
-        string $shippingOptionCode = null,
-        string $inputCode = null,
-        string $inputValue = null
+        ?string $shippingOptionCode = null,
+        ?string $inputCode = null,
+        ?string $inputValue = null
     ) {
         $this->shippingOptionCode = $shippingOptionCode;
         $this->inputCode = $inputCode;
@@ -40,6 +40,7 @@ class Selection implements SelectionInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getShippingOptionCode(): string
     {
         return $this->shippingOptionCode;
@@ -50,6 +51,7 @@ class Selection implements SelectionInterface
      *
      * @return SelectionInterface
      */
+    #[\Override]
     public function setShippingOptionCode(string $shippingOptionCode): SelectionInterface
     {
         $this->shippingOptionCode = $shippingOptionCode;
@@ -59,6 +61,7 @@ class Selection implements SelectionInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getInputCode(): string
     {
         return $this->inputCode;
@@ -69,6 +72,7 @@ class Selection implements SelectionInterface
      *
      * @return SelectionInterface
      */
+    #[\Override]
     public function setInputCode(string $inputCode): SelectionInterface
     {
         $this->inputCode = $inputCode;
@@ -78,6 +82,7 @@ class Selection implements SelectionInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getInputValue(): string
     {
         return $this->inputValue;
@@ -88,6 +93,7 @@ class Selection implements SelectionInterface
      *
      * @return SelectionInterface
      */
+    #[\Override]
     public function setInputValue(string $inputValue): SelectionInterface
     {
         $this->inputValue = $inputValue;

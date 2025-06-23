@@ -141,10 +141,9 @@ class ShippingDataHydrator
 
     /**
      * @param string $key
-     * @param mixed $data
      * @return mixed
      */
-    private function recursiveToObject(string $key, $data)
+    private function recursiveToObject(string $key, mixed $data)
     {
         if (array_key_exists($key, self::CLASSMAP)) {
             $className = self::CLASSMAP[$key]['className'];
@@ -155,7 +154,7 @@ class ShippingDataHydrator
                 foreach ($data as $arrayKey => $arrayItem) {
                     $result[$arrayKey] = new $className();
                     foreach ($arrayItem as $property => $value) {
-                        $result[$arrayKey]->{'set' . ucfirst($property)}(
+                        $result[$arrayKey]->{'set' . ucfirst((string) $property)}(
                             $this->recursiveToObject($property, $value)
                         );
                     }
@@ -163,7 +162,7 @@ class ShippingDataHydrator
             } else {
                 $result = new $className();
                 foreach ($data as $property => $value) {
-                    $result->{'set' . ucfirst($property)}(
+                    $result->{'set' . ucfirst((string) $property)}(
                         $this->recursiveToObject($property, $value)
                     );
                 }

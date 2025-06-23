@@ -26,6 +26,7 @@ class CompositeValidator implements RequestValidatorInterface
         $this->validators = $validators;
     }
 
+    #[\Override]
     public function validate(Request $shipmentRequest): void
     {
         foreach ($this->validators as $validator) {

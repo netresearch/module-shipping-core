@@ -145,9 +145,9 @@ class CreditmemoExportTest extends TestCase
     /**
      * Assert `CreditmemoRepository::get` behaviour.
      *
-     * @test
      * @magentoDataFixture createCreditMemo
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function getById()
     {
         /** @var CreditmemoRepositoryInterface $creditMemoRepository */
@@ -163,9 +163,9 @@ class CreditmemoExportTest extends TestCase
     /**
      * Assert `CreditmemoRepository::getList` behaviour.
      *
-     * @test
      * @magentoDataFixture createCreditMemo
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function getList()
     {
         /** @var SearchCriteriaBuilder $searchCriteriaBuilder */

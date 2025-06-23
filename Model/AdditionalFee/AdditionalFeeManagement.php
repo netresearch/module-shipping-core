@@ -44,7 +44,7 @@ class AdditionalFeeManagement
             $configuration = $this->getConfigurationForCarrierCode($carrierCode);
 
             return $configuration->isActive($quote);
-        } catch (\RuntimeException $e) {
+        } catch (\RuntimeException) {
             return false;
         }
     }
@@ -64,7 +64,7 @@ class AdditionalFeeManagement
             $configuration = $this->getConfigurationForCarrierCode($carrierCode);
 
             return $configuration->getServiceCharge($quote);
-        } catch (\RuntimeException $e) {
+        } catch (\RuntimeException) {
             return 0.0;
         }
     }
@@ -75,7 +75,7 @@ class AdditionalFeeManagement
             $configuration = $this->getConfigurationForCarrierCode($carrierCode);
 
             return $configuration->getLabel();
-        } catch (\RuntimeException $e) {
+        } catch (\RuntimeException) {
             return __('Additional Fee');
         }
     }

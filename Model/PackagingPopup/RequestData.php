@@ -51,26 +51,31 @@ class RequestData implements RequestDataInterface
         $this->shipmentNotificationEnabled = $shipmentNotificationEnabled;
     }
 
+    #[\Override]
     public function getPackages(): array
     {
         return $this->packages;
     }
 
+    #[\Override]
     public function getShipmentItems(): array
     {
         return $this->shipmentItems;
     }
 
+    #[\Override]
     public function getShipmentComment(): string
     {
         return $this->shipmentComment;
     }
 
+    #[\Override]
     public function isCommentNotificationEnabled(): ?bool
     {
         return $this->commentNotificationEnabled;
     }
 
+    #[\Override]
     public function isShipmentNotificationEnabled(): ?bool
     {
         return $this->shipmentNotificationEnabled;

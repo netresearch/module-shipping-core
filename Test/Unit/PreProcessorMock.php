@@ -16,12 +16,13 @@ class PreProcessorMock extends CompatibilityPreProcessor
     {
     }
 
+    #[\Override]
     public function process(
         CarrierDataInterface $shippingSettings,
         int $storeId,
         string $countryCode,
         string $postalCode,
-        ShipmentInterface $shipment = null
+        ?ShipmentInterface $shipment = null
     ): CarrierDataInterface {
         return $shippingSettings;
     }

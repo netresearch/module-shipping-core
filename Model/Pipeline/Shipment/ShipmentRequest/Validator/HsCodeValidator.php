@@ -30,6 +30,7 @@ class HsCodeValidator implements RequestValidatorInterface
      * @param Request $shipmentRequest
      * @throws ValidatorException
      */
+    #[\Override]
     public function validate(Request $shipmentRequest): void
     {
         $packages = $shipmentRequest->getData('packages') ?? [];

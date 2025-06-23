@@ -38,6 +38,7 @@ class RecipientStreet extends AbstractDb
      *
      * @return void
      */
+    #[\Override]
     protected function _construct()
     {
         $this->_init(
@@ -54,6 +55,7 @@ class RecipientStreet extends AbstractDb
      * @param AbstractModel $object
      * @return AbstractDb
      */
+    #[\Override]
     protected function _beforeSave(AbstractModel $object)
     {
         $select = $this->_getLoadSelect($object->getIdFieldName(), $object->getId(), $object);

@@ -128,6 +128,7 @@ class OrderLoader implements OrderLoaderInterface
         }
     }
 
+    #[\Override]
     public function load(array $orderIds): array
     {
         // obtain carrier codes that support bulk processing
@@ -136,7 +137,7 @@ class OrderLoader implements OrderLoaderInterface
             function (string $carrierCode) {
                 try {
                     return $this->serviceConfig->getBulkShipmentService($carrierCode);
-                } catch (\RuntimeException $exception) {
+                } catch (\RuntimeException) {
                     return false;
                 }
             }

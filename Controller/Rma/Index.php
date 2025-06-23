@@ -29,6 +29,7 @@ class Index extends Action implements OrderInterface, HttpGetActionInterface
         parent::__construct($context);
     }
 
+    #[\Override]
     public function execute()
     {
         /** @var \Magento\Framework\View\Result\Page $resultPage */

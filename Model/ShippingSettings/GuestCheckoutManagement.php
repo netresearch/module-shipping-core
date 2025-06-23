@@ -44,6 +44,7 @@ class GuestCheckoutManagement implements GuestCheckoutManagementInterface
      * @throws CouldNotSaveException
      * @throws NoSuchEntityException
      */
+    #[\Override]
     public function updateShippingOptionSelections(string $cartId, array $shippingOptionSelections): void
     {
         $shippingAddressId = (int) $this->addressManagement->get($cartId)->getId();

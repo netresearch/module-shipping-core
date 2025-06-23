@@ -19,6 +19,7 @@ class LabelStatus extends AbstractModel
     /**
      * Initialize LabelStatus resource model.
      */
+    #[\Override]
     protected function _construct()
     {
         $this->_init(ResourceModel\LabelStatus::class);

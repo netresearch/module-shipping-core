@@ -41,6 +41,7 @@ class Delete extends Action
         parent::__construct($context);
     }
 
+    #[\Override]
     public function execute(): ResultInterface
     {
         $resultRedirect = $this->resultRedirectFactory->create();

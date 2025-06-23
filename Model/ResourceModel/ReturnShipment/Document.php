@@ -18,6 +18,7 @@ class Document extends AbstractDb
      *
      * @return void
      */
+    #[\Override]
     protected function _construct()
     {
         $this->_init(

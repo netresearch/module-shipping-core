@@ -74,7 +74,7 @@ class OrderItemAttributesRepository
 
         try {
             $this->resource->load($orderItemAttribute, $orderItemId);
-        } catch (\Exception $exception) {
+        } catch (\Exception) {
             throw new NoSuchEntityException(__('Unable to load additional attributes for order item %1.', $orderItemId));
         }
 

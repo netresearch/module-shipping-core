@@ -49,6 +49,7 @@ class DisableCodPaymentMethods implements ObserverInterface
      *
      * @param Observer $observer
      */
+    #[\Override]
     public function execute(Observer $observer)
     {
         /** @var DataObject $checkResult */

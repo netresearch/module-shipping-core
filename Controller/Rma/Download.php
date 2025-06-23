@@ -73,7 +73,6 @@ class Download implements HttpGetActionInterface
         RequestInterface $request,
         OrderRepositoryInterface $orderRepository,
         OrderViewAuthorizationInterface $orderAuthorization,
-        CanCreateReturnInterface $canCreateReturn,
         TrackRepositoryInterface $trackRepository,
         DocumentDownloadInterface $download,
         FileFactory $fileFactory,
@@ -93,6 +92,7 @@ class Download implements HttpGetActionInterface
     /**
      * @return ResultInterface|ResponseInterface
      */
+    #[\Override]
     public function execute()
     {
         $orderId = (int) $this->request->getParam('order_id', 0);
@@ -116,7 +116,7 @@ class Download implements HttpGetActionInterface
             } else {
                 $this->messageManager->addErrorMessage(__('This document cannot be loaded.'));
             }
-        } catch (\Exception $exception) {
+        } catch (\Exception) {
             $this->messageManager->addErrorMessage(__('This document cannot be loaded.'));
         }
 

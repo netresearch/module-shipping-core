@@ -45,6 +45,7 @@ class Create extends ReturnAction
      *
      * @return ResultInterface|ResponseInterface
      */
+    #[\Override]
     public function execute()
     {
         /** @var Page $resultPage */

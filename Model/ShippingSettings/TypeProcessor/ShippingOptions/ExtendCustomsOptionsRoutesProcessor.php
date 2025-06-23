@@ -60,13 +60,14 @@ class ExtendCustomsOptionsRoutesProcessor implements ShippingOptionsProcessorInt
      *
      * @return ShippingOptionInterface[] Processed shipping option list
      */
+    #[\Override]
     public function process(
         string $carrierCode,
         array $shippingOptions,
         int $storeId,
         string $countryCode,
         string $postalCode,
-        ShipmentInterface $shipment = null
+        ?ShipmentInterface $shipment = null
     ): array {
         if (!$shipment) {
             return $shippingOptions;

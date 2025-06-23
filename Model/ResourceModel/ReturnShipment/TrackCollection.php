@@ -18,6 +18,7 @@ use Netresearch\ShippingCore\Model\ReturnShipment\Track as ReturnShipmentTrack;
  */
 class TrackCollection extends AbstractCollection
 {
+    #[\Override]
     protected function _construct()
     {
         $this->_init(ReturnShipmentTrack::class, Track::class);
@@ -51,7 +52,8 @@ class TrackCollection extends AbstractCollection
         $this->addFieldToFilter(TrackInterface::TRACK_NUMBER, ['eq' => $trackingNumber]);
     }
 
-    protected function _afterLoad()
+    #[\Override]
+    protected function _afterLoad(): void
     {
         parent::_afterLoad();
 

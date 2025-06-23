@@ -49,6 +49,7 @@ class ProxyCarrierFactory implements ProxyCarrierFactoryInterface
      * @throws NotFoundException Requested carrier not found
      * @throws \Exception Object manager / factory error
      */
+    #[\Override]
     public function create(string $carrierCode): AbstractCarrierInterface
     {
         $carrierClass = $this->scopeConfig->getValue(

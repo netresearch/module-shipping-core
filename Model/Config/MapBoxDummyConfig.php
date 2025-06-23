@@ -17,16 +17,19 @@ use Netresearch\ShippingCore\Api\Config\MapBoxConfigInterface;
  */
 class MapBoxDummyConfig implements MapBoxConfigInterface
 {
+    #[\Override]
     public function getApiToken($store = null): string
     {
         return '';
     }
 
+    #[\Override]
     public function getMapTileUrl($store = null): string
     {
         return '';
     }
 
+    #[\Override]
     public function getMapAttribution($store = null): string
     {
         return '';

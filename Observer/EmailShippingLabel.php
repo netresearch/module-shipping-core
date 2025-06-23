@@ -51,6 +51,7 @@ class EmailShippingLabel implements ObserverInterface
         $this->carrierCodes = $carrierCodes;
     }
 
+    #[\Override]
     public function execute(Observer $observer)
     {
         /** @var Shipment $shipment */

@@ -18,20 +18,20 @@ use PHPUnit\Framework\TestCase;
 
 class RequestDataConverterTest extends TestCase
 {
-    public function dataProvider()
+    public static function dataProvider()
     {
+        $requestData = SaveShipmentRequestProvider::getRequestData();
         return [
-            'xb_two_packages' => SaveShipmentRequestProvider::getRequestData(),
+            'xb_two_packages' => [$requestData['post_data'], $requestData['packages']],
         ];
     }
 
     /**
-     * @test
-     * @dataProvider dataProvider
-     *
      * @param string $json nr packaging popup request data
      * @param mixed[] $packages core packaging popup request data
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function convert(string $json, array $packages)
     {
         /** @var RequestDataFactory|MockObject $requestDataFactory */

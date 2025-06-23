@@ -39,6 +39,7 @@ class PdfCombinator implements PdfCombinatorInterface
      * @return string Combined binary PDF file.
      * @throws RuntimeException
      */
+    #[\Override]
     public function combinePdfPages(array $pdfContent): string
     {
         if (empty($pdfContent)) {
@@ -66,6 +67,7 @@ class PdfCombinator implements PdfCombinatorInterface
      * @return string Combined binary PDF file.
      * @throws RuntimeException
      */
+    #[\Override]
     public function combineB64PdfPages(array $pdfContent): string
     {
         $pdfContent = array_map(function ($b64Data) {

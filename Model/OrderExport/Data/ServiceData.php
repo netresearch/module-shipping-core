@@ -35,6 +35,7 @@ class ServiceData implements ServiceDataInterface
         $this->details = $details;
     }
 
+    #[\Override]
     public function getCode(): string
     {
         return $this->code;
@@ -50,6 +51,7 @@ class ServiceData implements ServiceDataInterface
     /**
      * @return KeyValueObjectInterface[]
      */
+    #[\Override]
     public function getDetails(): array
     {
         return $this->details;

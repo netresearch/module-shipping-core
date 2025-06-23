@@ -30,6 +30,7 @@ class ShippingData implements ShippingDataInterface
     /**
      * @return \Netresearch\ShippingCore\Api\Data\ShippingSettings\CarrierDataInterface[]
      */
+    #[\Override]
     public function getCarriers(): array
     {
         return $this->carriers;
@@ -38,6 +39,7 @@ class ShippingData implements ShippingDataInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\CarrierDataInterface[] $carriers
      */
+    #[\Override]
     public function setCarriers(array $carriers): void
     {
         $this->carriers = $carriers;

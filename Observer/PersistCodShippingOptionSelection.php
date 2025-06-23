@@ -68,6 +68,7 @@ class PersistCodShippingOptionSelection implements ObserverInterface
      * @param Observer $observer
      * @return void
      */
+    #[\Override]
     public function execute(Observer $observer)
     {
         /** @var Order $order */

@@ -27,13 +27,14 @@ class SortOrderProcessor implements ShippingOptionsProcessorInterface
      *
      * @return ShippingOptionInterface[]
      */
+    #[\Override]
     public function process(
         string $carrierCode,
         array $shippingOptions,
         int $storeId,
         string $countryCode,
         string $postalCode,
-        ShipmentInterface $shipment = null
+        ?ShipmentInterface $shipment = null
     ): array {
         uasort($shippingOptions, static function (ShippingOptionInterface $a, ShippingOptionInterface $b) {
             return $a->getSortOrder() - $b->getSortOrder();

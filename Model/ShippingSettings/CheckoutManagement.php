@@ -59,6 +59,7 @@ class CheckoutManagement implements CheckoutManagementInterface
      * @throws NoSuchEntityException
      * @throws LocalizedException
      */
+    #[\Override]
     public function getCheckoutData(string $countryId, string $postalCode): ShippingDataInterface
     {
         $storeId = (int) $this->storeManager->getStore()->getId();
@@ -73,6 +74,7 @@ class CheckoutManagement implements CheckoutManagementInterface
      * @throws CouldNotSaveException
      * @throws NoSuchEntityException
      */
+    #[\Override]
     public function updateShippingOptionSelections(int $cartId, array $shippingOptionSelections): void
     {
         $shippingAddressId = (int) $this->addressManagement->get($cartId)->getId();

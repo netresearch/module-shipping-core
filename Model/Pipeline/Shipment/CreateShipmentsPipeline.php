@@ -55,6 +55,7 @@ class CreateShipmentsPipeline implements CreateShipmentsPipelineInterface
      * @param Request[] $requests
      * @return ArtifactsContainerInterface
      */
+    #[\Override]
     public function run(int $storeId, array $requests): ArtifactsContainerInterface
     {
         $artifactsContainer = $this->artifactsContainerFactory->create();

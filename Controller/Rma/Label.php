@@ -81,6 +81,7 @@ class Label extends ReturnAction implements HttpPostActionInterface
     /**
      * @return ResultInterface|ResponseInterface
      */
+    #[\Override]
     public function execute()
     {
         /** @var Redirect $resultRedirect */
@@ -131,7 +132,11 @@ class Label extends ReturnAction implements HttpPostActionInterface
             $resultRedirect->setUrl(str_replace('TRACK_ID', (string) $track->getEntityId(), $redirectUrl));
         } elseif ($response instanceof ShipmentErrorResponseInterface) {
             // unrecoverable error, log message
-            $this->logger->error($response->getErrors());
+            $errors = $response->getErrors();
+            $errorMessages = array_map(function ($error) {
+                return (string) $error;
+            }, $errors);
+            $this->logger->error(implode('; ', $errorMessages));
 
             // add generic message to UI
             $this->messageManager->addErrorMessage(__('An error occurred while creating the return shipment label.'));

@@ -63,6 +63,7 @@ class RateRequestService implements RateRequestEmulationInterface
      * @param RateRequest $request Original rate request
      * @return Result|bool
      */
+    #[\Override]
     public function emulateRateRequest(string $carrierCode, RateRequest $request)
     {
         if (!array_key_exists($carrierCode, $this->emulatedCarriers)) {

@@ -19,43 +19,51 @@ class Track extends AbstractModel implements TrackInterface
     /**
      * Initialize Track resource model.
      */
+    #[\Override]
     protected function _construct()
     {
         $this->_init(TrackResource::class);
         parent::_construct();
     }
 
+    #[\Override]
     public function getEntityId(): ?int
     {
         $entityId = $this->getData(self::ENTITY_ID);
         return $entityId ? (int) $entityId : null;
     }
 
+    #[\Override]
     public function getOrderId(): int
     {
         return (int)$this->getData(self::ORDER_ID);
     }
 
+    #[\Override]
     public function getCarrierCode(): string
     {
         return (string)$this->getData(self::CARRIER_CODE);
     }
 
+    #[\Override]
     public function getTitle(): string
     {
         return (string)$this->getData(self::TITLE);
     }
 
+    #[\Override]
     public function getTrackNumber(): string
     {
         return (string)$this->getData(self::TRACK_NUMBER);
     }
 
+    #[\Override]
     public function getCreatedAt(): string
     {
         return (string)$this->getData(self::CREATED_AT);
     }
 
+    #[\Override]
     public function getDocuments(): array
     {
         if (!$this->hasData(self::DOCUMENTS)) {
@@ -65,6 +73,7 @@ class Track extends AbstractModel implements TrackInterface
         return $this->getData(self::DOCUMENTS);
     }
 
+    #[\Override]
     public function getDocument(int $documentId): DocumentInterface
     {
         foreach ($this->getDocuments() as $document) {

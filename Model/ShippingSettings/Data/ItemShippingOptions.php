@@ -25,6 +25,7 @@ class ItemShippingOptions implements ItemShippingOptionsInterface
     /**
      * @return int
      */
+    #[\Override]
     public function getItemId(): int
     {
         return $this->itemId;
@@ -33,6 +34,7 @@ class ItemShippingOptions implements ItemShippingOptionsInterface
     /**
      * @return \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface[]
      */
+    #[\Override]
     public function getShippingOptions(): array
     {
         return $this->shippingOptions;
@@ -43,6 +45,7 @@ class ItemShippingOptions implements ItemShippingOptionsInterface
      *
      * @return void
      */
+    #[\Override]
     public function setItemId(int $itemId): void
     {
         $this->itemId = $itemId;
@@ -53,6 +56,7 @@ class ItemShippingOptions implements ItemShippingOptionsInterface
      *
      * @return void
      */
+    #[\Override]
     public function setShippingOptions(array $shippingOptions): void
     {
         $this->shippingOptions = $shippingOptions;

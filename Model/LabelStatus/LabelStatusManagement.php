@@ -114,6 +114,7 @@ class LabelStatusManagement implements LabelStatusManagementInterface
      * @param OrderInterface $order
      * @return bool
      */
+    #[\Override]
     public function setInitialStatus(OrderInterface $order): bool
     {
         $labelStatusCollection = $this->labelStatusCollectionFactory->create();
@@ -132,6 +133,7 @@ class LabelStatusManagement implements LabelStatusManagementInterface
      * @param OrderInterface $order
      * @return bool
      */
+    #[\Override]
     public function setLabelStatusPending(OrderInterface $order): bool
     {
         $labelStatus = $this->labelStatusFactory->create();
@@ -149,6 +151,7 @@ class LabelStatusManagement implements LabelStatusManagementInterface
      * @param OrderInterface $order
      * @return bool
      */
+    #[\Override]
     public function setLabelStatusProcessed(OrderInterface $order): bool
     {
         $labelStatus = $this->labelStatusFactory->create();
@@ -166,6 +169,7 @@ class LabelStatusManagement implements LabelStatusManagementInterface
      * @param OrderInterface $order
      * @return bool
      */
+    #[\Override]
     public function setLabelStatusFailed(OrderInterface $order): bool
     {
         $labelStatus = $this->labelStatusFactory->create();
@@ -183,6 +187,7 @@ class LabelStatusManagement implements LabelStatusManagementInterface
      * @param OrderInterface $order
      * @return bool
      */
+    #[\Override]
     public function setLabelStatusPartial(OrderInterface $order): bool
     {
         $labelStatus = $this->labelStatusFactory->create();

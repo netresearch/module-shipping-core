@@ -34,6 +34,7 @@ class TrackResponseProcessor implements TrackResponseProcessorInterface
      * @param TrackErrorResponseInterface[] $errorResponses
      * @return void
      */
+    #[\Override]
     public function processResponse(array $trackResponses, array $errorResponses): void
     {
         foreach ($this->processors as $processor) {

@@ -22,6 +22,7 @@ class ItemAttributeReader implements ItemAttributeReaderInterface
      * @param OrderItemInterface $orderItem
      * @return string
      */
+    #[\Override]
     public function getCountryOfManufacture(OrderItemInterface $orderItem): string
     {
         $extensionAttributes = $orderItem->getExtensionAttributes();
@@ -54,6 +55,7 @@ class ItemAttributeReader implements ItemAttributeReaderInterface
      * @param OrderItemInterface $orderItem
      * @return string
      */
+    #[\Override]
     public function getHsCode(OrderItemInterface $orderItem): string
     {
         $extensionAttributes = $orderItem->getExtensionAttributes();

@@ -23,6 +23,7 @@ class DropOffDays extends Value
      * @return $this|Value
      * @throws LocalizedException
      */
+    #[\Override]
     public function beforeSave()
     {
         $noDropOffConfig = explode(',', (string) $this->getValue());

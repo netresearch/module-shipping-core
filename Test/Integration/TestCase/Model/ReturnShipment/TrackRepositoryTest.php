@@ -57,12 +57,12 @@ class TrackRepositoryTest extends TestCase
     }
 
     /**
-     * @test
      * @magentoDataFixture createOrder
      *
      * @throws CouldNotSaveException
      * @throws NoSuchEntityException
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function saveAndLoadTracks()
     {
         $trackFactory = Bootstrap::getObjectManager()->create(TrackInterfaceFactory::class);

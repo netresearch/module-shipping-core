@@ -23,11 +23,13 @@ class MigrateServiceSelectionsPatch implements DataPatchInterface
         $this->selections = $selections;
     }
 
+    #[\Override]
     public static function getDependencies(): array
     {
         return [];
     }
 
+    #[\Override]
     public function getAliases(): array
     {
         return [];
@@ -39,6 +41,7 @@ class MigrateServiceSelectionsPatch implements DataPatchInterface
      * @return void
      * @throws \Exception
      */
+    #[\Override]
     public function apply()
     {
         $this->selections->migrate();

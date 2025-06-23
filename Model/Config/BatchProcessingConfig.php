@@ -71,10 +71,9 @@ class BatchProcessingConfig
     /**
      * Check whether or not a shipment confirmation email should be sent after successful bulk/cron processing.
      *
-     * @param mixed $store
      * @return bool
      */
-    public function isNotificationEnabled($store = null): bool
+    public function isNotificationEnabled(mixed $store = null): bool
     {
         return $this->scopeConfig->isSetFlag(
             self::CONFIG_PATH_NOTIFY_CUSTOMER,

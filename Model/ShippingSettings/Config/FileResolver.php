@@ -42,6 +42,7 @@ class FileResolver implements FileResolverInterface
      * @param string $scope
      * @return FileIterator
      */
+    #[\Override]
     public function get($filename, $scope): FileIterator
     {
         $paths = $this->moduleReader->getConfigurationFiles($filename)->toArray();

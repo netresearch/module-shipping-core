@@ -34,6 +34,7 @@ class LabelStatusJoinProcessor implements CollectionProcessorInterface
      * @param SearchCriteriaInterface $searchCriteria
      * @param AbstractDb $collection
      */
+    #[\Override]
     public function process(SearchCriteriaInterface $searchCriteria, AbstractDb $collection)
     {
         $tableName = $this->labelStatusResource->getTable(Constants::TABLE_LABEL_STATUS);

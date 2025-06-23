@@ -70,7 +70,6 @@ class JoinOrderItemAttributesTest extends TestCase
     }
 
     /**
-     * @test
      * @magentoDataFixture createOrder
      *
      * @magentoConfigFixture default_store shipping/origin/country_id DE
@@ -79,6 +78,7 @@ class JoinOrderItemAttributesTest extends TestCase
      * @magentoConfigFixture default_store shipping/origin/city Leipzig
      * @magentoConfigFixture default_store shipping/origin/street_line1 Nonnenstraße 11
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function loadOrderItems()
     {
         $itemIds = array_map(

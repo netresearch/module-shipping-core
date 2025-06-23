@@ -80,7 +80,7 @@ class Reader extends Filesystem
     {
         try {
             $storeId = $this->storeManager->getStore()->getId();
-        } catch (NoSuchEntityException $exception) {
+        } catch (NoSuchEntityException) {
             $storeId = 0;
         }
 
@@ -95,6 +95,7 @@ class Reader extends Filesystem
      * @param string|null $scope
      * @return array
      */
+    #[\Override]
     public function read($scope = null): array
     {
         $cacheKey = $this->getCacheKey($scope);

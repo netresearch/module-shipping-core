@@ -42,6 +42,7 @@ class JoinOrderItemAttributes implements ObserverInterface
      *
      * @param Observer $observer
      */
+    #[\Override]
     public function execute(Observer $observer)
     {
         $orderItemCollection = $observer->getData('order_item_collection');

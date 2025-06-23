@@ -17,6 +17,7 @@ use Netresearch\ShippingCore\Model\ReturnShipment\Document as ReturnShipmentDocu
  */
 class DocumentCollection extends AbstractCollection
 {
+    #[\Override]
     protected function _construct()
     {
         $this->_init(ReturnShipmentDocument::class, Document::class);

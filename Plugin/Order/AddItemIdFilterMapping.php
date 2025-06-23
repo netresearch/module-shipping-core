@@ -28,9 +28,8 @@ class AddItemIdFilterMapping
 {
     /**
      * @param Collection $collection
-     * @param mixed $field
      */
-    public function beforeAddFieldToFilter(Collection $collection, $field): void
+    public function beforeAddFieldToFilter(Collection $collection, mixed $field): void
     {
         $idField = OrderItemInterface::ITEM_ID;
 

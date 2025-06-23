@@ -27,6 +27,7 @@ class RmaConfig implements RmaConfigInterface
         $this->scopeConfig = $scopeConfig;
     }
 
+    #[\Override]
     public function isRmaEnabledOnStoreFront($store = null): bool
     {
         return $this->scopeConfig->isSetFlag(
@@ -36,6 +37,7 @@ class RmaConfig implements RmaConfigInterface
         );
     }
 
+    #[\Override]
     public function getReturnAddress($store = null): array
     {
         $scope = ScopeInterface::SCOPE_STORE;

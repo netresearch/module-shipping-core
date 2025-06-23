@@ -34,6 +34,7 @@ class CompositeRule implements SplittingRuleInterface
      * @param RecipientStreetInterface $recipientStreet
      * @return void
      */
+    #[\Override]
     public function apply(OrderAddressInterface $address, RecipientStreetInterface $recipientStreet): void
     {
         foreach ($this->rules as $rule) {

@@ -35,6 +35,7 @@ class Edit extends Action
      *
      * @return ResultInterface
      */
+    #[\Override]
     public function execute(): ResultInterface
     {
         return $this->resultPageFactory->create(ResultFactory::TYPE_PAGE);

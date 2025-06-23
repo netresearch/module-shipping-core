@@ -30,7 +30,7 @@ class ConstantResolver
                 list($className, $constName) = explode('::', $reference);
                 try {
                     $reflection = new \ReflectionClass($className);
-                } catch (\ReflectionException $exception) {
+                } catch (\ReflectionException) {
                     throw new \RuntimeException("Invalid constant '$reference' referenced in shipping_settings.xml");
                 }
                 if (isset($reflection->getConstants()[$constName])) {

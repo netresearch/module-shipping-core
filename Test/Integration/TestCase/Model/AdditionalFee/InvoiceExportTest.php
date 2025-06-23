@@ -142,9 +142,9 @@ class InvoiceExportTest extends TestCase
     /**
      * Assert `InvoiceRepository::get` behaviour.
      *
-     * @test
      * @magentoDataFixture createInvoice
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function getById()
     {
         /** @var InvoiceRepositoryInterface $invoiceRepository */
@@ -160,9 +160,9 @@ class InvoiceExportTest extends TestCase
     /**
      * Assert `InvoiceRepository::getList` behaviour.
      *
-     * @test
      * @magentoDataFixture createInvoice
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function getList()
     {
         /** @var SearchCriteriaBuilder $searchCriteriaBuilder */

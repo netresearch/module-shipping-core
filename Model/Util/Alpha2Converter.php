@@ -32,6 +32,7 @@ class Alpha2Converter implements CountryCodeConverterInterface
         $this->collectionFactory = $countryCollectionFactory;
     }
 
+    #[\Override]
     public function convert(string $countryCode): string
     {
         if (empty($countryCode)) {

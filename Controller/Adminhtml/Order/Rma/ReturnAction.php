@@ -51,6 +51,7 @@ abstract class ReturnAction extends Action
      * @param RequestInterface $request
      * @return ResultInterface|ResponseInterface
      */
+    #[\Override]
     public function dispatch(RequestInterface $request)
     {
         $orderId = (int) $this->getRequest()->getParam('order_id');
@@ -58,7 +59,7 @@ abstract class ReturnAction extends Action
         try {
             $order = $this->orderRepository->get($orderId);
             $this->orderProvider->setOrder($order);
-        } catch (LocalizedException $exception) {
+        } catch (LocalizedException) {
             $this->messageManager->addErrorMessage(__('This order no longer exists.'));
 
             $this->_actionFlag->set('', ActionInterface::FLAG_NO_DISPATCH, true);

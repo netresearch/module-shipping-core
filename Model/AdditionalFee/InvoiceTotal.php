@@ -35,6 +35,7 @@ class InvoiceTotal extends AbstractTotal
      * @param Invoice $invoice
      * @return $this
      */
+    #[\Override]
     public function collect(Invoice $invoice): self
     {
         /** @var Invoice $previousInvoice */

@@ -22,20 +22,20 @@ class ConverterTest extends TestCase
      */
     private $nesting = [''];
 
-    public function dataProvider(): array
+    public static function dataProvider(): array
     {
+        $shippingSettings = ShippingSettingsProvider::getShippingSettings();
         return [
-            'test case 1' => ShippingSettingsProvider::getShippingSettings(),
+            'test case 1' => [$shippingSettings['xml'], $shippingSettings['array']],
         ];
     }
 
     /**
-     * @test
-     * @dataProvider dataProvider
-     *
      * @param string $xml shipping settings xml
      * @param mixed[] $expected expected shipping settings array representation
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function testConvert(string $xml, array $expected)
     {
         $xmlDoc = new \DOMDocument();

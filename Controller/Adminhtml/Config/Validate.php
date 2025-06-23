@@ -55,6 +55,7 @@ class Validate extends Action
     /**
      * @return ResultInterface
      */
+    #[\Override]
     public function execute(): ResultInterface
     {
         $store = (int) $this->getRequest()->getParam('store');

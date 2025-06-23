@@ -25,6 +25,7 @@ class ShipmentResponseProcessor implements ShipmentResponseProcessorInterface
         $this->processors = $processors;
     }
 
+    #[\Override]
     public function processResponse(array $labelResponses, array $errorResponses): void
     {
         foreach ($this->processors as $processor) {

@@ -24,12 +24,12 @@ class PreProcessorTest extends TestCase
      */
     private $mockCompatibilityFactory;
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
         $this->mockCompatibilityFactory = $this->getMockBuilder(CompatibilityInterfaceFactory::class)
             ->disableOriginalConstructor()
-            ->setMethods(['create'])
             ->getMock();
         $this->mockCompatibilityFactory
             ->method('create')

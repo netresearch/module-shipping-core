@@ -41,6 +41,7 @@ class Cancel extends Action
      *
      * @return ResultInterface
      */
+    #[\Override]
     public function execute(): ResultInterface
     {
         $shipmentId = (int) $this->getRequest()->getParam('shipment_id');
@@ -51,7 +52,8 @@ class Cancel extends Action
             if ($trackResponse instanceof TrackErrorResponseInterface) {
                 // collect errors
                 $trackingNumbers['error'][] = $trackingNumber;
-                $this->messageManager->addErrorMessage($trackResponse->getErrors());
+                $errors = $trackResponse->getErrors();
+                $this->messageManager->addErrorMessage(implode('; ', $errors));
             } else {
                 // collect successfully cancelled tracks
                 $trackingNumbers['success'][] = $trackingNumber;

@@ -171,6 +171,7 @@ class RequestDataConverter implements RequestDataConverterInterface
         return $quantities;
     }
 
+    #[\Override]
     public function getData(string $json): RequestData
     {
         $data = $this->jsonSerializer->unserialize($json);
@@ -188,6 +189,7 @@ class RequestDataConverter implements RequestDataConverterInterface
         ]);
     }
 
+    #[\Override]
     public function getParams(string $json): array
     {
         $requestData = $this->getData($json);

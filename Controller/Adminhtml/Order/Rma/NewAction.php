@@ -15,6 +15,7 @@ class NewAction extends ReturnAction implements HttpGetActionInterface
 {
     public const ADMIN_RESOURCE = 'Magento_Sales::sales_order';
 
+    #[\Override]
     public function execute(): ResultInterface
     {
         $this->_view->loadLayout();

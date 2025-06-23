@@ -17,6 +17,7 @@ class Collection extends AbstractCollection
     /**
      * Initialization
      */
+    #[\Override]
     protected function _construct()
     {
         $this->_init(RecipientStreet::class, RecipientStreetResource::class);

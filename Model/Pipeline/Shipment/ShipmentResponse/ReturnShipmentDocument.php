@@ -20,6 +20,7 @@ class ReturnShipmentDocument extends ShipmentDocument implements ReturnShipmentD
      *
      * @return string
      */
+    #[\Override]
     public function getTrackingNumber(): string
     {
         return $this->getData(self::TRACKING_NUMBER);

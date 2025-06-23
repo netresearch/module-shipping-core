@@ -37,6 +37,7 @@ class PackageDefault extends AbstractBlock
      *
      * @return string
      */
+    #[\Override]
     protected function _toHtml()
     {
         if (!$this->_beforeToHtml()) {

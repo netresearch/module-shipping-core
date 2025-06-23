@@ -50,6 +50,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getCode(): string
     {
         return $this->code;
@@ -58,6 +59,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getAvailable(): string
     {
         return $this->available;
@@ -66,6 +68,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getLabel(): string
     {
         return $this->label;
@@ -74,6 +77,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @return \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\InputInterface[]
      */
+    #[\Override]
     public function getInputs(): array
     {
         return $this->inputs;
@@ -82,6 +86,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @return \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\RouteInterface[]
      */
+    #[\Override]
     public function getRoutes(): array
     {
         return $this->routes;
@@ -90,6 +95,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @return int
      */
+    #[\Override]
     public function getSortOrder(): int
     {
         return $this->sortOrder;
@@ -98,6 +104,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @return int[]
      */
+    #[\Override]
     public function getRequiredItemIds(): array
     {
         return $this->requiredItemIds;
@@ -106,6 +113,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @param string $code
      */
+    #[\Override]
     public function setCode(string $code): void
     {
         $this->code = $code;
@@ -114,6 +122,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @param string $available
      */
+    #[\Override]
     public function setAvailable(string $available): void
     {
         $this->available = $available;
@@ -122,6 +131,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @param string $label
      */
+    #[\Override]
     public function setLabel(string $label): void
     {
         $this->label = $label;
@@ -130,6 +140,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\InputInterface[] $inputs
      */
+    #[\Override]
     public function setInputs(array $inputs): void
     {
         $this->inputs = $inputs;
@@ -138,6 +149,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\RouteInterface[] $routes
      */
+    #[\Override]
     public function setRoutes(array $routes): void
     {
         $this->routes = $routes;
@@ -146,6 +158,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @param int $sortOrder
      */
+    #[\Override]
     public function setSortOrder(int $sortOrder): void
     {
         $this->sortOrder = $sortOrder;
@@ -154,6 +167,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @param int[] $requiredItemIds
      */
+    #[\Override]
     public function setRequiredItemIds(array $requiredItemIds): void
     {
         $this->requiredItemIds = $requiredItemIds;

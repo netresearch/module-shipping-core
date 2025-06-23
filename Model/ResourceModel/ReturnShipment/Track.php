@@ -56,6 +56,7 @@ class Track extends AbstractDb
      *
      * @return void
      */
+    #[\Override]
     protected function _construct()
     {
         $this->_init(
@@ -70,6 +71,7 @@ class Track extends AbstractDb
      * @param AbstractModel $object
      * @return Track
      */
+    #[\Override]
     protected function _afterSave(AbstractModel $object): self
     {
         parent::_afterSave($object);
@@ -93,6 +95,7 @@ class Track extends AbstractDb
         return $this;
     }
 
+    #[\Override]
     protected function _afterLoad(AbstractModel $object): self
     {
         parent::_afterLoad($object);

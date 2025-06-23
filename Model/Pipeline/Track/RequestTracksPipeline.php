@@ -55,6 +55,7 @@ class RequestTracksPipeline implements RequestTracksPipelineInterface
      * @param TrackRequestInterface[] $requests
      * @return ArtifactsContainerInterface
      */
+    #[\Override]
     public function run(int $storeId, array $requests): ArtifactsContainerInterface
     {
         $artifactsContainer = $this->artifactsContainerFactory->create();

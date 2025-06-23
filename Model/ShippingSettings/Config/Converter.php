@@ -58,6 +58,7 @@ class Converter implements ConverterInterface
      * @return mixed[]
      * @throws \RuntimeException
      */
+    #[\Override]
     public function convert($source): array
     {
         if ($source === null) {

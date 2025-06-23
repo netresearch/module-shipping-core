@@ -143,6 +143,7 @@ class UpdateLabelStatus implements ShipmentResponseProcessorInterface
      * @param LabelResponseInterface[] $labelResponses
      * @param ShipmentErrorResponseInterface[] $errorResponses
      */
+    #[\Override]
     public function processResponse(array $labelResponses, array $errorResponses): void
     {
         foreach ($errorResponses as $errorResponse) {

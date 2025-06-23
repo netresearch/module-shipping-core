@@ -39,6 +39,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @return KeyValueObjectInterface[]
      */
+    #[\Override]
     public function getPackage(): array
     {
         return $this->package;
@@ -58,6 +59,7 @@ class ShippingOption implements ShippingOptionInterface
     /**
      * @return ServiceDataInterface[]
      */
+    #[\Override]
     public function getServices(): array
     {
         return $this->services;

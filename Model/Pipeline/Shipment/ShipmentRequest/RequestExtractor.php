@@ -154,31 +154,37 @@ class RequestExtractor implements RequestExtractorInterface
         return $this->serviceOptionReader;
     }
 
+    #[\Override]
     public function isReturnShipmentRequest(): bool
     {
         return (bool) $this->shipmentRequest->getData('is_return');
     }
 
+    #[\Override]
     public function getStoreId(): int
     {
         return (int) $this->shipmentRequest->getData('store_id');
     }
 
+    #[\Override]
     public function getBaseCurrencyCode(): string
     {
         return (string) $this->shipmentRequest->getData('base_currency_code');
     }
 
+    #[\Override]
     public function getOrder(): Order
     {
         return $this->shipmentRequest->getOrderShipment()->getOrder();
     }
 
+    #[\Override]
     public function getShipment(): Shipment
     {
         return $this->shipmentRequest->getOrderShipment();
     }
 
+    #[\Override]
     public function getShipper(): ShipperInterface
     {
         if (empty($this->shipper)) {
@@ -216,11 +222,13 @@ class RequestExtractor implements RequestExtractorInterface
         return $this->shipper;
     }
 
+    #[\Override]
     public function getReturnRecipient(): ShipperInterface
     {
         return $this->getShipper();
     }
 
+    #[\Override]
     public function getRecipient(): RecipientInterface
     {
         if (empty($this->recipient)) {
@@ -232,7 +240,7 @@ class RequestExtractor implements RequestExtractorInterface
                     'streetNumber' => $recipientStreet->getNumber(),
                     'addressAddition' => $recipientStreet->getSupplement(),
                 ];
-            } catch (NoSuchEntityException $exception) {
+            } catch (NoSuchEntityException) {
                 $streetData = [
                     'streetName' => '',
                     'streetNumber' => '',
@@ -267,11 +275,13 @@ class RequestExtractor implements RequestExtractorInterface
         return $this->recipient;
     }
 
+    #[\Override]
     public function getPackageWeight(): float
     {
         return (float) $this->shipmentRequest->getPackageWeight();
     }
 
+    #[\Override]
     public function getPackages(): array
     {
         if (empty($this->packages)) {
@@ -310,6 +320,7 @@ class RequestExtractor implements RequestExtractorInterface
         return [$packageId => $this->packages[$packageId]];
     }
 
+    #[\Override]
     public function getAllItems(): array
     {
         if (empty($this->packageItems)) {
@@ -347,6 +358,7 @@ class RequestExtractor implements RequestExtractorInterface
         return $this->packageItems;
     }
 
+    #[\Override]
     public function getPackageItems(): array
     {
         $packageId = $this->shipmentRequest->getData('package_id');
@@ -360,11 +372,13 @@ class RequestExtractor implements RequestExtractorInterface
         return $items;
     }
 
+    #[\Override]
     public function isCashOnDelivery(): bool
     {
         return $this->getServiceOptionReader()->isServiceEnabled(Codes::SERVICE_OPTION_CASH_ON_DELIVERY);
     }
 
+    #[\Override]
     public function getCodReasonForPayment(): string
     {
         return $this->getServiceOptionReader()->getServiceOptionValue(
@@ -373,11 +387,13 @@ class RequestExtractor implements RequestExtractorInterface
         );
     }
 
+    #[\Override]
     public function isPickupLocationDelivery(): bool
     {
         return $this->getServiceOptionReader()->isServiceEnabled(Codes::SERVICE_OPTION_DELIVERY_LOCATION);
     }
 
+    #[\Override]
     public function getDeliveryLocationType(): string
     {
         return $this->getServiceOptionReader()->getServiceOptionValue(
@@ -386,6 +402,7 @@ class RequestExtractor implements RequestExtractorInterface
         );
     }
 
+    #[\Override]
     public function getDeliveryLocationId(): string
     {
         return $this->getServiceOptionReader()->getServiceOptionValue(
@@ -394,6 +411,7 @@ class RequestExtractor implements RequestExtractorInterface
         );
     }
 
+    #[\Override]
     public function getDeliveryLocationNumber(): string
     {
         return $this->getServiceOptionReader()->getServiceOptionValue(
@@ -402,6 +420,7 @@ class RequestExtractor implements RequestExtractorInterface
         );
     }
 
+    #[\Override]
     public function getDeliveryLocationCountryCode(): string
     {
         $countryCode = $this->getServiceOptionReader()->getServiceOptionValue(
@@ -412,6 +431,7 @@ class RequestExtractor implements RequestExtractorInterface
         return $this->countryCodeConverter->convert($countryCode);
     }
 
+    #[\Override]
     public function getDeliveryLocationPostalCode(): string
     {
         return $this->getServiceOptionReader()->getServiceOptionValue(
@@ -420,6 +440,7 @@ class RequestExtractor implements RequestExtractorInterface
         );
     }
 
+    #[\Override]
     public function getDeliveryLocationCity(): string
     {
         return $this->getServiceOptionReader()->getServiceOptionValue(
@@ -428,6 +449,7 @@ class RequestExtractor implements RequestExtractorInterface
         );
     }
 
+    #[\Override]
     public function getDeliveryLocationStreet(): string
     {
         return $this->getServiceOptionReader()->getServiceOptionValue(

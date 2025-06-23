@@ -33,7 +33,8 @@ class PrepareItemOptionsProcessor implements ShippingSettingsProcessorInterface
      *
      * @return mixed[]
      */
-    public function process(array $shippingSettings, int $storeId, ShipmentInterface $shipment = null): array
+    #[\Override]
+    public function process(array $shippingSettings, int $storeId, ?ShipmentInterface $shipment = null): array
     {
         if (!$shipment) {
             // no items available to apply the template for.

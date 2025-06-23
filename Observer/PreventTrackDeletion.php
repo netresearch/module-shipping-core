@@ -67,6 +67,7 @@ class PreventTrackDeletion implements ObserverInterface
      *
      * @param Observer $observer
      */
+    #[\Override]
     public function execute(Observer $observer)
     {
         /** @var Request $request */
@@ -77,7 +78,7 @@ class PreventTrackDeletion implements ObserverInterface
 
         try {
             $isAllowed = $this->bulkConfig->isSingleTrackDeletionAllowed($track->getCarrierCode());
-        } catch (\RuntimeException $exception) {
+        } catch (\RuntimeException) {
             // no restrictions given, continue with default behaviour
             return;
         }

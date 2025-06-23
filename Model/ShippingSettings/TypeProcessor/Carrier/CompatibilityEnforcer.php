@@ -184,12 +184,13 @@ class CompatibilityEnforcer implements CarrierDataProcessorInterface
      * @return CarrierDataInterface
      * @throws LocalizedException Thrown if a required input is missing a value
      */
+    #[\Override]
     public function process(
         CarrierDataInterface $shippingSettings,
         int $storeId,
         string $countryCode,
         string $postalCode,
-        ShipmentInterface $shipment = null
+        ?ShipmentInterface $shipment = null
     ): CarrierDataInterface {
         for ($iteration = 0; $iteration <= 5; $iteration++) {
             $inputsModified = $this->processRules($shippingSettings);

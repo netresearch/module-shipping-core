@@ -18,6 +18,7 @@ use Netresearch\ShippingCore\Api\Pipeline\ShipmentRequest\RequestValidatorInterf
  */
 class NoReturnValidator implements RequestValidatorInterface
 {
+    #[\Override]
     public function validate(Request $shipmentRequest): void
     {
         if (($shipmentRequest->getData('is_return') || $shipmentRequest instanceof ReturnShipment)) {

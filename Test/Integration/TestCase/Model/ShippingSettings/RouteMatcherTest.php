@@ -32,6 +32,7 @@ class RouteMatcherTest extends TestCase
      */
     private $routeMatcher;
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
@@ -40,13 +41,12 @@ class RouteMatcherTest extends TestCase
         $this->routeMatcher = $this->objectManger->create(RouteMatcher::class, [$this->config]);
     }
 
-    public function getRouteData(): array
+    public static function getRouteData(): array
     {
         return RouteProvider::getRoutes();
     }
 
     /**
-     * @dataProvider getRouteData
      *
      * @param array $routes
      * @param string $shippingOrigin
@@ -54,6 +54,7 @@ class RouteMatcherTest extends TestCase
      * @param int $storeId
      * @param bool $expected
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('getRouteData')]
     public function testMatch(
         $routes,
         $shippingOrigin,

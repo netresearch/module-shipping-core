@@ -40,10 +40,10 @@ interface OrderItemAttributesInterface
     /**
      * @param string|null $hsCode
      */
-    public function setHsCode(string $hsCode = null): void;
+    public function setHsCode(?string $hsCode = null): void;
 
     /**
      * @param string|null $countryOfManufacture
      */
-    public function setCountryOfManufacture(string $countryOfManufacture = null): void;
+    public function setCountryOfManufacture(?string $countryOfManufacture = null): void;
 }

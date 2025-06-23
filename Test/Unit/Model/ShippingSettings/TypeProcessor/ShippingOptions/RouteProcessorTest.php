@@ -23,6 +23,7 @@ class RouteProcessorTest extends TestCase
      */
     private $configMock;
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
@@ -33,7 +34,7 @@ class RouteProcessorTest extends TestCase
         $this->configMock->method('getEuCountries')->willReturn(['DE', 'AT', 'IT', 'UK']);
     }
 
-    public function dataProvider(): array
+    public static function dataProvider(): array
     {
         $optionNoRoute = new ShippingOption();
         $optionNoRoute->setCode('test');
@@ -110,13 +111,13 @@ class RouteProcessorTest extends TestCase
     }
 
     /**
-     * @dataProvider dataProvider
      *
      * @param mixed[] $optionsData
      * @param string $originCountryId
      * @param string $destinationCountryId
      * @param int $expectedCount
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
     public function testProcess(
         array $optionsData,
         string $originCountryId,

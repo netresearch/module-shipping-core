@@ -61,7 +61,7 @@ class OrderBuilder
         $this->additionalFees = [];
     }
 
-    public static function anOrder(ObjectManagerInterface $objectManager = null): OrderBuilder
+    public static function anOrder(?ObjectManagerInterface $objectManager = null): OrderBuilder
     {
         if ($objectManager === null) {
             $objectManager = Bootstrap::getObjectManager();
@@ -144,19 +144,12 @@ class OrderBuilder
             $this->orderRepository->save($order);
         }
 
-        switch ($this->labelStatus) {
-            case LabelStatusManagementInterface::LABEL_STATUS_PARTIAL:
-                $this->labelStatusManagement->setLabelStatusPartial($order);
-                break;
-            case LabelStatusManagementInterface::LABEL_STATUS_PROCESSED:
-                $this->labelStatusManagement->setLabelStatusProcessed($order);
-                break;
-            case LabelStatusManagementInterface::LABEL_STATUS_FAILED:
-                $this->labelStatusManagement->setLabelStatusFailed($order);
-                break;
-            default:
-                $this->labelStatusManagement->setInitialStatus($order);
-        }
+        match ($this->labelStatus) {
+            LabelStatusManagementInterface::LABEL_STATUS_PARTIAL => $this->labelStatusManagement->setLabelStatusPartial($order),
+            LabelStatusManagementInterface::LABEL_STATUS_PROCESSED => $this->labelStatusManagement->setLabelStatusProcessed($order),
+            LabelStatusManagementInterface::LABEL_STATUS_FAILED => $this->labelStatusManagement->setLabelStatusFailed($order),
+            default => $this->labelStatusManagement->setInitialStatus($order),
+        };
 
         return $order;
     }

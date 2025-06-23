@@ -34,7 +34,7 @@ class CanCreateReturn
      * @param string|null $carrierCode
      * @return bool
      */
-    public function execute(OrderInterface $order, string $carrierCode = null): bool
+    public function execute(OrderInterface $order, ?string $carrierCode = null): bool
     {
         $hasShipments = ($order->getShipmentsCollection()->getSize() > 0);
         $carrierCodes = $carrierCode ? [$carrierCode] : $this->returnShipmentConfiguration->getCarrierCodes();

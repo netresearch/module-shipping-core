@@ -20,6 +20,7 @@ class TrackResponse extends DataObject implements TrackResponseInterface
      *
      * @return string
      */
+    #[\Override]
     public function getTrackNumber(): string
     {
         return $this->getData(self::TRACK_NUMBER);
@@ -28,6 +29,7 @@ class TrackResponse extends DataObject implements TrackResponseInterface
     /**
      * @return ShipmentInterface|null
      */
+    #[\Override]
     public function getSalesShipment(): ?ShipmentInterface
     {
         return $this->getData(self::SALES_SHIPMENT);
@@ -36,6 +38,7 @@ class TrackResponse extends DataObject implements TrackResponseInterface
     /**
      * @return ShipmentTrackInterface|null
      */
+    #[\Override]
     public function getSalesTrack(): ?ShipmentTrackInterface
     {
         return $this->getData(self::SALES_TRACK);

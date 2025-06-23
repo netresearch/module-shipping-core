@@ -45,6 +45,7 @@ class Compatibility implements CompatibilityInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getId(): string
     {
         return $this->id;
@@ -53,6 +54,7 @@ class Compatibility implements CompatibilityInterface
     /**
      * @param string $id
      */
+    #[\Override]
     public function setId(string $id): void
     {
         $this->id = $id;
@@ -61,6 +63,7 @@ class Compatibility implements CompatibilityInterface
     /**
      * @return string[]
      */
+    #[\Override]
     public function getSubjects(): array
     {
         return $this->subjects;
@@ -69,6 +72,7 @@ class Compatibility implements CompatibilityInterface
     /**
      * @param string[] $subjects
      */
+    #[\Override]
     public function setSubjects(array $subjects): void
     {
         $this->subjects = $subjects;
@@ -77,6 +81,7 @@ class Compatibility implements CompatibilityInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getErrorMessage(): string
     {
         return $this->errorMessage;
@@ -85,6 +90,7 @@ class Compatibility implements CompatibilityInterface
     /**
      * @param string $errorMessage
      */
+    #[\Override]
     public function setErrorMessage(string $errorMessage): void
     {
         $this->errorMessage = $errorMessage;
@@ -93,6 +99,7 @@ class Compatibility implements CompatibilityInterface
     /**
      * @return string[]
      */
+    #[\Override]
     public function getMasters(): array
     {
         return $this->masters;
@@ -101,6 +108,7 @@ class Compatibility implements CompatibilityInterface
     /**
      * @param string[] $masters
      */
+    #[\Override]
     public function setMasters(array $masters): void
     {
         $this->masters = $masters;
@@ -109,6 +117,7 @@ class Compatibility implements CompatibilityInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getTriggerValue(): string
     {
         return $this->triggerValue;
@@ -117,6 +126,7 @@ class Compatibility implements CompatibilityInterface
     /**
      * @param string $triggerValue
      */
+    #[\Override]
     public function setTriggerValue(string $triggerValue): void
     {
         $this->triggerValue = $triggerValue;
@@ -125,6 +135,7 @@ class Compatibility implements CompatibilityInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getAction(): string
     {
         return $this->action;
@@ -133,6 +144,7 @@ class Compatibility implements CompatibilityInterface
     /**
      * @param string $action
      */
+    #[\Override]
     public function setAction(string $action)
     {
         $this->action = $action;

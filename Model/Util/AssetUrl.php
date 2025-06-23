@@ -41,6 +41,7 @@ class AssetUrl implements AssetUrlInterface
         $this->assetRepo = $assetRepo;
     }
 
+    #[\Override]
     public function get(string $assetId): string
     {
         $params = [];

@@ -28,6 +28,7 @@ class InputValue implements InputValueInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getCode(): string
     {
         return $this->code;
@@ -36,6 +37,7 @@ class InputValue implements InputValueInterface
     /**
      * @param string $code
      */
+    #[\Override]
     public function setCode(string $code): void
     {
         $this->code = $code;
@@ -44,6 +46,7 @@ class InputValue implements InputValueInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getValue(): string
     {
         return $this->value;
@@ -52,6 +55,7 @@ class InputValue implements InputValueInterface
     /**
      * @param string $value
      */
+    #[\Override]
     public function setValue(string $value): void
     {
         $this->value = $value;

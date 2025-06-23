@@ -80,7 +80,7 @@ class PackageItem implements PackageItemInterface
         float $qty,
         float $weight,
         float $price,
-        float $customsValue = null,
+        ?float $customsValue = null,
         string $sku = '',
         string $countryOfOrigin = '',
         string $exportDescription = '',
@@ -100,61 +100,73 @@ class PackageItem implements PackageItemInterface
         $this->hsCode = $hsCode;
     }
 
+    #[\Override]
     public function getOrderItemId(): int
     {
         return $this->orderItemId;
     }
 
+    #[\Override]
     public function getProductId(): int
     {
         return $this->productId;
     }
 
+    #[\Override]
     public function getPackageId(): int
     {
         return $this->packageId;
     }
 
+    #[\Override]
     public function getName(): string
     {
         return $this->name;
     }
 
+    #[\Override]
     public function getQty(): float
     {
         return $this->qty;
     }
 
+    #[\Override]
     public function getWeight(): float
     {
         return $this->weight;
     }
 
+    #[\Override]
     public function getPrice(): float
     {
         return $this->price;
     }
 
+    #[\Override]
     public function getCustomsValue(): ?float
     {
         return $this->customsValue;
     }
 
+    #[\Override]
     public function getSku(): string
     {
         return $this->sku;
     }
 
+    #[\Override]
     public function getCountryOfOrigin(): string
     {
         return $this->countryOfOrigin;
     }
 
+    #[\Override]
     public function getExportDescription(): string
     {
         return $this->exportDescription;
     }
 
+    #[\Override]
     public function getHsCode(): string
     {
         return $this->hsCode;

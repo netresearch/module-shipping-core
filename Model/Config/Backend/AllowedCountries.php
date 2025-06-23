@@ -27,6 +27,7 @@ class AllowedCountries extends Value
      * @return $this
      * @throws \Exception
      */
+    #[\Override]
     public function save()
     {
         if (empty($this->getValue())) {

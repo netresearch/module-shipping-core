@@ -42,6 +42,7 @@ class OpeningHours implements OpeningHoursInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getDayOfWeek(): string
     {
         return $this->dayOfWeek;
@@ -50,6 +51,7 @@ class OpeningHours implements OpeningHoursInterface
     /**
      * @return TimeFrameInterface[]
      */
+    #[\Override]
     public function getTimeFrames(): array
     {
         return  $this->timeFrames;

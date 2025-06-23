@@ -21,5 +21,5 @@ interface DayValidatorInterface
      *
      * @return bool
      */
-    public function validate(\DateTimeInterface $dateTime, $store = null): bool;
+    public function validate(\DateTimeInterface $dateTime, mixed $store = null): bool;
 }

@@ -31,6 +31,7 @@ class SchemaLocator implements SchemaLocatorInterface
      *
      * @return string|null
      */
+    #[\Override]
     public function getSchema(): string
     {
         return $this->reader->getModuleDir(Dir::MODULE_ETC_DIR, 'Netresearch_ShippingCore') . '/shipping_settings.xsd';
@@ -41,6 +42,7 @@ class SchemaLocator implements SchemaLocatorInterface
      *
      * @return string|null
      */
+    #[\Override]
     public function getPerFileSchema(): string
     {
         return $this->getSchema();

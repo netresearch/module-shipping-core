@@ -20,82 +20,72 @@ interface ShippingConfigInterface
     /**
      * Returns the shipping origin country code.
      *
-     * @param mixed $store
      * @return string
      */
-    public function getOriginCountry($store = null): string;
+    public function getOriginCountry(mixed $store = null): string;
 
     /**
      * Returns the shipping origin region ID.
      *
-     * @param mixed $store
      * @return int
      */
-    public function getOriginRegion($store = null): int;
+    public function getOriginRegion(mixed $store = null): int;
 
     /**
      * Returns the shipping origin city.
      *
-     * @param mixed $store
      * @return string
      */
-    public function getOriginCity($store = null): string;
+    public function getOriginCity(mixed $store = null): string;
 
     /**
      * Returns the shipping origin postal code.
      *
-     * @param mixed $store
      * @return string|int
      */
-    public function getOriginPostcode($store = null): string;
+    public function getOriginPostcode(mixed $store = null): string;
 
     /**
      * Returns the shipping origin street.
      *
-     * @param mixed $store
      * @return string[]
      */
-    public function getOriginStreet($store = null): array;
+    public function getOriginStreet(mixed $store = null): array;
 
     /**
      * Returns all the store information settings wrapped in a data object.
      *
-     * @param mixed $store
      * @return DataObject
      */
-    public function getStoreInformation($store = null): DataObject;
+    public function getStoreInformation(mixed $store = null): DataObject;
 
     /**
      * Returns countries that are marked as EU-Countries
      *
-     * @param mixed $store
      * @return string[]
      */
-    public function getEuCountries($store = null): array;
+    public function getEuCountries(mixed $store = null): array;
 
     /**
      * Checks if route is dutiable by stores origin country and eu country list
      *
      * @param string $receiverCountry
-     * @param mixed $store
      * @return bool
      *
      */
-    public function isDutiableRoute(string $receiverCountry, $store = null): bool;
+    public function isDutiableRoute(string $receiverCountry, mixed $store = null): bool;
 
     /**
      * Get the general weight unit.
      *
-     * @param mixed $store
      * @return string - either kg or lb
      */
-    public function getWeightUnit($store = null): string;
+    public function getWeightUnit(mixed $store = null): string;
 
     /**
      * Get the normalized dimension unit
      *
-     * @param mixed $store
      * @return string - either cm or in
      */
-    public function getDimensionUnit($store = null): string;
+    public function getDimensionUnit(mixed $store = null): string;
 }

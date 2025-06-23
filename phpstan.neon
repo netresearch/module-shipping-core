@@ -1,0 +1,9 @@
+parameters:
+    level: 1
+    treatPhpDocTypesAsCertain: false
+    paths:
+        - .
+    excludePaths:
+        - Test/*
+    ignoreErrors:
+        - '#Use service contracts to persist entities in favour of Magento\\Directory\\Model\\Region::load\(\) method#'

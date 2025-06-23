@@ -24,6 +24,7 @@ class BackendUrl extends AbstractUrl
         $this->urlBuilder = $urlBuilder;
     }
 
+    #[\Override]
     public function getDownloadUrl(DocumentInterface $document, TrackInterface $track): string
     {
         return $this->urlBuilder->getUrl('nrshipping/order_rma/download', [

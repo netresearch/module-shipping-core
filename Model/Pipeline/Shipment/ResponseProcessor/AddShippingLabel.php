@@ -34,6 +34,7 @@ class AddShippingLabel implements ShipmentResponseProcessorInterface
         $this->logger = $logger;
     }
 
+    #[\Override]
     public function processResponse(array $labelResponses, array $errorResponses): void
     {
         $shipmentLabels = [];

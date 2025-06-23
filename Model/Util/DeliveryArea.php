@@ -22,6 +22,7 @@ class DeliveryArea implements DeliveryAreaInterface
         ]
     ];
 
+    #[\Override]
     public function isIsland(string $countryCode, string $postalCode): bool
     {
         return isset($this->islandPostalCodes[$countryCode])

@@ -15,11 +15,13 @@ class CurrentTrack implements CurrentTrackInterface
 {
     private $track = null;
 
+    #[\Override]
     public function set(TrackInterface $track): void
     {
         $this->track = $track;
     }
 
+    #[\Override]
     public function get(): ?TrackInterface
     {
         return $this->track;

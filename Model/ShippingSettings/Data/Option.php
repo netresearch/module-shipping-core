@@ -35,6 +35,7 @@ class Option implements OptionInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getId(): string
     {
         return $this->id;
@@ -43,6 +44,7 @@ class Option implements OptionInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getLabel(): string
     {
         return $this->label;
@@ -51,6 +53,7 @@ class Option implements OptionInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getValue(): string
     {
         return $this->value;
@@ -59,6 +62,7 @@ class Option implements OptionInterface
     /**
      * @return bool
      */
+    #[\Override]
     public function isDisabled(): bool
     {
         return $this->disabled;
@@ -67,6 +71,7 @@ class Option implements OptionInterface
     /**
      * @param string $id
      */
+    #[\Override]
     public function setId(string $id): void
     {
         $this->id = $id;
@@ -75,6 +80,7 @@ class Option implements OptionInterface
     /**
      * @param string $label
      */
+    #[\Override]
     public function setLabel(string $label): void
     {
         $this->label = $label;
@@ -83,6 +89,7 @@ class Option implements OptionInterface
     /**
      * @param string $value
      */
+    #[\Override]
     public function setValue(string $value): void
     {
         $this->value = $value;
@@ -91,6 +98,7 @@ class Option implements OptionInterface
     /**
      * @param bool $disabled
      */
+    #[\Override]
     public function setDisabled(bool $disabled): void
     {
         $this->disabled = $disabled;

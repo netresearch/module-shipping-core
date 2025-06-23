@@ -37,11 +37,13 @@ class CreateProductAttributesPatch implements PatchRevertableInterface, DataPatc
         $this->eavSetupFactory = $eavSetupFactory;
     }
 
+    #[\Override]
     public static function getDependencies(): array
     {
         return [];
     }
 
+    #[\Override]
     public function getAliases(): array
     {
         return [];
@@ -54,6 +56,7 @@ class CreateProductAttributesPatch implements PatchRevertableInterface, DataPatc
      * @throws LocalizedException
      * @throws LocalizedException|ValidateException
      */
+    #[\Override]
     public function apply()
     {
         $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
@@ -61,6 +64,7 @@ class CreateProductAttributesPatch implements PatchRevertableInterface, DataPatc
         DataInstaller::addExportDescriptionAttribute($eavSetup);
     }
 
+    #[\Override]
     public function revert()
     {
         $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);

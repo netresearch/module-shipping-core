@@ -62,11 +62,12 @@ class Guest extends View
      * @return ResponseInterface
      * @throws NotFoundException
      */
+    #[\Override]
     public function dispatch(RequestInterface $request)
     {
         try {
             $this->guestHelper->loadValidOrder($request);
-        } catch (LocalizedException $exception) {
+        } catch (LocalizedException) {
             return $this->_redirect('sales/order/history');
         }
 

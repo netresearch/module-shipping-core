@@ -18,21 +18,25 @@ class FakeAdditionalFeeConfiguration implements AdditionalFeeConfigurationInterf
 
     public const CHARGE = 22.22;
 
+    #[\Override]
     public function getCarrierCode(): string
     {
         return self::CARRIERCODE;
     }
 
+    #[\Override]
     public function isActive(Quote $quote): bool
     {
         return true;
     }
 
+    #[\Override]
     public function getServiceCharge(Quote $quote): float
     {
         return self::CHARGE;
     }
 
+    #[\Override]
     public function getLabel(): Phrase
     {
         return __(self::LABEL);

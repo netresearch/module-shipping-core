@@ -46,6 +46,7 @@ class CarrierData implements CarrierDataInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getCode(): string
     {
         return $this->code;
@@ -54,6 +55,7 @@ class CarrierData implements CarrierDataInterface
     /**
      * @return \Netresearch\ShippingCore\Api\Data\ShippingSettings\MetadataInterface|null
      */
+    #[\Override]
     public function getMetadata(): ?MetadataInterface
     {
         return $this->metadata;
@@ -62,6 +64,7 @@ class CarrierData implements CarrierDataInterface
     /**
      * @return \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface[]
      */
+    #[\Override]
     public function getPackageOptions(): array
     {
         return $this->packageOptions;
@@ -70,6 +73,7 @@ class CarrierData implements CarrierDataInterface
     /**
      * @return \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ItemShippingOptionsInterface[]
      */
+    #[\Override]
     public function getItemOptions(): array
     {
         return $this->itemOptions;
@@ -78,6 +82,7 @@ class CarrierData implements CarrierDataInterface
     /**
      * @return \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface[]
      */
+    #[\Override]
     public function getServiceOptions(): array
     {
         return $this->serviceOptions;
@@ -86,6 +91,7 @@ class CarrierData implements CarrierDataInterface
     /**
      * @return \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CompatibilityInterface[]
      */
+    #[\Override]
     public function getCompatibilityData(): array
     {
         return $this->compatibilityData;
@@ -94,6 +100,7 @@ class CarrierData implements CarrierDataInterface
     /**
      * @param string $code
      */
+    #[\Override]
     public function setCode(string $code): void
     {
         $this->code = $code;
@@ -102,6 +109,7 @@ class CarrierData implements CarrierDataInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\MetadataInterface $metadata
      */
+    #[\Override]
     public function setMetadata(MetadataInterface $metadata): void
     {
         $this->metadata = $metadata;
@@ -110,6 +118,7 @@ class CarrierData implements CarrierDataInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface[] $packageOptions
      */
+    #[\Override]
     public function setPackageOptions(array $packageOptions): void
     {
         $this->packageOptions = $packageOptions;
@@ -118,6 +127,7 @@ class CarrierData implements CarrierDataInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\ItemShippingOptionsInterface[] $itemOptions
      */
+    #[\Override]
     public function setItemOptions(array $itemOptions): void
     {
         $this->itemOptions = $itemOptions;
@@ -126,6 +136,7 @@ class CarrierData implements CarrierDataInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOptionInterface[] $serviceOptions
      */
+    #[\Override]
     public function setServiceOptions(array $serviceOptions): void
     {
         $this->serviceOptions = $serviceOptions;
@@ -134,6 +145,7 @@ class CarrierData implements CarrierDataInterface
     /**
      * @param \Netresearch\ShippingCore\Api\Data\ShippingSettings\ShippingOption\CompatibilityInterface[] $compatibilityData
      */
+    #[\Override]
     public function setCompatibilityData(array $compatibilityData): void
     {
         $this->compatibilityData = $compatibilityData;

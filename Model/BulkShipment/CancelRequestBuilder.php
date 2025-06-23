@@ -109,7 +109,7 @@ class CancelRequestBuilder
         foreach ($trackCollection as $track) {
             try {
                 $shipment = $track->getShipment();
-            } catch (LocalizedException $exception) {
+            } catch (LocalizedException) {
                 // shipment no longer exists
                 return [];
             }

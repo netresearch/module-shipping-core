@@ -24,11 +24,13 @@ class MigrateProductAttributesPatch implements DataPatchInterface
         $this->productAttributes = $productAttributes;
     }
 
+    #[\Override]
     public static function getDependencies(): array
     {
         return [CreateProductAttributesPatch::class];
     }
 
+    #[\Override]
     public function getAliases(): array
     {
         return [];
@@ -40,6 +42,7 @@ class MigrateProductAttributesPatch implements DataPatchInterface
      * @return void
      * @throws \Exception
      */
+    #[\Override]
     public function apply()
     {
         $this->productAttributes->migrate([

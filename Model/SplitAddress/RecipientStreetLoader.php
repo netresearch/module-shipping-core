@@ -54,11 +54,12 @@ class RecipientStreetLoader implements RecipientStreetLoaderInterface
         $this->rules = $rules;
     }
 
+    #[\Override]
     public function load(OrderAddressInterface $address): RecipientStreetInterface
     {
         try {
             $recipientStreet = $this->recipientStreetRepository->get((int)$address->getEntityId());
-        } catch (NoSuchEntityException $exception) {
+        } catch (NoSuchEntityException) {
             $recipientStreet = $this->recipientStreetFactory->create();
         }
 

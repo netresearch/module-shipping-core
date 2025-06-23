@@ -37,7 +37,7 @@ class SaveSplitAddressTest extends TestCase
     /**
      * @return string[][]
      */
-    public function dataProvider(): array
+    public static function dataProvider(): array
     {
         return [
             'billing' => [
@@ -127,8 +127,6 @@ class SaveSplitAddressTest extends TestCase
      * - Save a shipping address that does not require splitting → no extension attributes are updated
      * - Save a shipping address that requires splitting → extension attributes are updated
      *
-     * @test
-     * @dataProvider dataProvider
      * @magentoDataFixture createOrder
      *
      * @param string $carrierCode
@@ -139,6 +137,8 @@ class SaveSplitAddressTest extends TestCase
      * @param string $expectedSupplement
      * @throws LocalizedException
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function saveAddress(
         string $carrierCode,
         string $addressType,

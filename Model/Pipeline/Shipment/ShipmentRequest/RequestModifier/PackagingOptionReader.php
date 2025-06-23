@@ -61,6 +61,7 @@ class PackagingOptionReader implements PackagingOptionReaderInterface
         return $this->carrierData;
     }
 
+    #[\Override]
     public function getPackageValues(): array
     {
         $packages = [];
@@ -74,6 +75,7 @@ class PackagingOptionReader implements PackagingOptionReaderInterface
         return $packages;
     }
 
+    #[\Override]
     public function getPackageOptionValues(string $optionCode): array
     {
         $packageValues = $this->getPackageValues();
@@ -90,6 +92,7 @@ class PackagingOptionReader implements PackagingOptionReaderInterface
         return $packageOptionValues;
     }
 
+    #[\Override]
     public function getPackageOptionValue(string $optionCode, string $inputCode)
     {
         $packageOptionValues = $this->getPackageOptionValues($optionCode);
@@ -103,6 +106,7 @@ class PackagingOptionReader implements PackagingOptionReaderInterface
         return $packageOptionValues[$inputCode];
     }
 
+    #[\Override]
     public function getItemValues(int $orderItemId): array
     {
         $itemOptions = $this->getCarrierData()->getItemOptions();
@@ -121,6 +125,7 @@ class PackagingOptionReader implements PackagingOptionReaderInterface
         return $itemValues;
     }
 
+    #[\Override]
     public function getItemOptionValues(int $orderItemId, string $optionCode): array
     {
         $itemValues = $this->getItemValues($orderItemId);
@@ -137,6 +142,7 @@ class PackagingOptionReader implements PackagingOptionReaderInterface
         return $itemOptionValues;
     }
 
+    #[\Override]
     public function getItemOptionValue(int $orderItemId, string $optionCode, string $inputCode)
     {
         $itemOptionValues = $this->getItemOptionValues($orderItemId, $optionCode);
@@ -149,6 +155,7 @@ class PackagingOptionReader implements PackagingOptionReaderInterface
         return $itemOptionValues[$inputCode];
     }
 
+    #[\Override]
     public function getServiceValues(): array
     {
         $services = [];
@@ -162,6 +169,7 @@ class PackagingOptionReader implements PackagingOptionReaderInterface
         return $services;
     }
 
+    #[\Override]
     public function getServiceOptionValues(string $serviceCode): array
     {
         $serviceValues = $this->getServiceValues();
@@ -178,6 +186,7 @@ class PackagingOptionReader implements PackagingOptionReaderInterface
         return $serviceOptionValues;
     }
 
+    #[\Override]
     public function getServiceOptionValue(string $serviceCode, string $inputCode)
     {
         $serviceOptionValues = $this->getServiceOptionValues($serviceCode);

@@ -70,6 +70,7 @@ abstract class ReturnAction extends Action
      * @return ResponseInterface
      * @throws NotFoundException
      */
+    #[\Override]
     public function dispatch(RequestInterface $request)
     {
         $orderId = (int) $request->getParam('order_id');
@@ -80,7 +81,7 @@ abstract class ReturnAction extends Action
             $this->orderProvider->setOrder($order);
             $canView = $this->orderAuthorization->canView($order) && $this->canCreateReturn->execute($order);
             $displayId = $canView ? $order->getRealOrderId() : $orderId;
-        } catch (LocalizedException $exception) {
+        } catch (LocalizedException) {
             $canView = false;
             $displayId = $orderId;
         }

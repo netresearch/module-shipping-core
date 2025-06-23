@@ -117,9 +117,9 @@ class UpdateLocationAddressTest extends TestCase
 
 
     /**
-     * @test
      * @magentoDataFixture createOrderWithServices
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function updateAddress()
     {
         $this->assertEquals(

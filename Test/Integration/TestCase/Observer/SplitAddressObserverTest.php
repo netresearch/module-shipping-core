@@ -47,6 +47,7 @@ class SplitAddressObserverTest extends TestCase
     /**
      * Init object manager
      */
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
@@ -68,6 +69,7 @@ class SplitAddressObserverTest extends TestCase
         );
     }
 
+    #[\Override]
     protected function tearDown(): void
     {
         $this->objectManager->removeSharedInstance(SplitAddress::class);
@@ -79,7 +81,7 @@ class SplitAddressObserverTest extends TestCase
     /**
      * @return string[][][]
      */
-    public function getStreetData(): array
+    public static function getStreetData(): array
     {
         return StreetDataProvider::getStreetData();
     }
@@ -94,12 +96,12 @@ class SplitAddressObserverTest extends TestCase
      * - the order address is the input for the observer/street splitter mechanism.
      * - the recipient street entity is the expected outcome of running the observer.
      *
-     * @test
-     * @dataProvider getStreetData
      *
      * @param string[] $street
      * @param string[] $expected
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('getStreetData')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function createRecipientStreetAndSave(array $street, array $expected)
     {
         /** @var Address $address */
@@ -155,9 +157,8 @@ class SplitAddressObserverTest extends TestCase
      *
      * In case a *billing* address is updated, the street splitter must not
      * create a new RecipientStreet entity.
-     *
-     * @test
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function orderAddressHasWrongAddressType()
     {
         /** @var Address $address */
@@ -194,9 +195,8 @@ class SplitAddressObserverTest extends TestCase
      * If an order shipping address is persisted and its order is *not* assigned to
      * a carrier which is registered for street splitting, then the street splitter
      * must not create a new RecipientStreet entity.
-     *
-     * @test
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function carrierIsNotRegistered()
     {
         /** @var Address $address */
@@ -229,9 +229,8 @@ class SplitAddressObserverTest extends TestCase
 
     /**
      * Observers must not throw exceptions. Make sure they are caught in the observer.
-     *
-     * @test
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function exceptionMustNotBubbleUp()
     {
         /** @var Address $address */

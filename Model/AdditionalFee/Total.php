@@ -90,7 +90,8 @@ class Total extends Address\Total\AbstractTotal
      * @param string|null $shippingMethod
      * @return Phrase
      */
-    public function getLabel(string $shippingMethod = null): Phrase
+    #[\Override]
+    public function getLabel(?string $shippingMethod = null): Phrase
     {
         $carrierCode = strtok((string) $shippingMethod, '_');
         return $this->additionalFeeManagement->getLabel((string) $carrierCode);
@@ -102,6 +103,7 @@ class Total extends Address\Total\AbstractTotal
      * @param Address\Total $total
      * @return self
      */
+    #[\Override]
     public function collect(Quote $quote, ShippingAssignmentInterface $shippingAssignment, Address\Total $total): self
     {
         parent::collect($quote, $shippingAssignment, $total);
@@ -179,6 +181,7 @@ class Total extends Address\Total\AbstractTotal
      * @param Address\Total $total
      * @return mixed[]
      */
+    #[\Override]
     public function fetch(Quote $quote, Address\Total $total): array
     {
         $result = [];
@@ -200,7 +203,7 @@ class Total extends Address\Total\AbstractTotal
                 $quote->getBaseCurrencyCode(),
                 $quote->getQuoteCurrencyCode()
             );
-        } catch (NoSuchEntityException $exception) {
+        } catch (NoSuchEntityException) {
             $fee = $baseFee;
         }
 

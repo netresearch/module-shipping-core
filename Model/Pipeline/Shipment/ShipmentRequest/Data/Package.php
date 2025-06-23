@@ -83,13 +83,13 @@ class Package implements PackageInterface
         string $weightUom,
         string $dimensionsUom,
         float $weight,
-        float $length = null,
-        float $width = null,
-        float $height = null,
-        float $customsValue = null,
+        ?float $length = null,
+        ?float $width = null,
+        ?float $height = null,
+        ?float $customsValue = null,
         string $contentType = '',
         string $contentExplanation = '',
-        PackageAdditionalInterface $packageAdditional = null
+        ?PackageAdditionalInterface $packageAdditional = null
     ) {
         $this->productCode = $productCode;
         $this->containerType = $containerType;
@@ -105,11 +105,13 @@ class Package implements PackageInterface
         $this->packageAdditional = $packageAdditional ?? new PackageAdditional();
     }
 
+    #[\Override]
     public function getProductCode(): string
     {
         return $this->productCode;
     }
 
+    #[\Override]
     public function getContainerType(): string
     {
         return $this->containerType;
@@ -122,51 +124,61 @@ class Package implements PackageInterface
      *
      * @return string
      */
+    #[\Override]
     public function getWeightUom(): string
     {
         return $this->weightUom;
     }
 
+    #[\Override]
     public function getDimensionsUom(): string
     {
         return $this->dimensionsUom;
     }
 
+    #[\Override]
     public function getWeight(): float
     {
         return $this->weight;
     }
 
+    #[\Override]
     public function getLength(): ?float
     {
         return $this->length;
     }
 
+    #[\Override]
     public function getWidth(): ?float
     {
         return $this->width;
     }
 
+    #[\Override]
     public function getHeight(): ?float
     {
         return $this->height;
     }
 
+    #[\Override]
     public function getCustomsValue(): ?float
     {
         return $this->customsValue;
     }
 
+    #[\Override]
     public function getContentType(): string
     {
         return $this->contentType;
     }
 
+    #[\Override]
     public function getContentExplanation(): string
     {
         return $this->contentExplanation;
     }
 
+    #[\Override]
     public function getPackageAdditional(): PackageAdditionalInterface
     {
         return $this->packageAdditional;

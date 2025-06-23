@@ -35,6 +35,7 @@ class OrderDataProvider implements OrderDataProviderInterface
      * @param Order $order
      * @return CarrierDataInterface|null
      */
+    #[\Override]
     public function getShippingOptions(Order $order): ?CarrierDataInterface
     {
         /** need to create a tmp shipment for packagingDataProvider */
@@ -42,7 +43,7 @@ class OrderDataProvider implements OrderDataProviderInterface
             /** @var Order\Shipment $shipment */
             $shipment = $this->shipmentFactory->create($order);
             $packagingData = $this->packageDataProvider->getData($shipment);
-        } catch (\RuntimeException $e) {
+        } catch (\RuntimeException) {
             return null;
         }
         $carrierCode = strtok((string) $order->getShippingMethod(), '_');

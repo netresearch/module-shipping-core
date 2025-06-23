@@ -26,23 +26,20 @@ class DocumentDownload implements DocumentDownloadInterface
         $this->urlBuilder = $urlBuilder;
     }
 
+    #[\Override]
     public function getUrl(DocumentInterface $document, TrackInterface $track): string
     {
         return $this->urlBuilder->getDownloadUrl($document, $track);
     }
 
+    #[\Override]
     public function getFileName(DocumentInterface $document, TrackInterface $track, OrderInterface $order): string
     {
-        switch ($document->getMediaType()) {
-            case 'application/pdf':
-                $fileExt = 'pdf';
-                break;
-            case 'image/png':
-                $fileExt = 'png';
-                break;
-            default:
-                throw new \RuntimeException('File extension for ' . $document->getMediaType() . ' is not defined.');
-        }
+        $fileExt = match ($document->getMediaType()) {
+            'application/pdf' => 'pdf',
+            'image/png' => 'png',
+            default => throw new \RuntimeException('File extension for ' . $document->getMediaType() . ' is not defined.'),
+        };
 
         $filename = sprintf(
             '%s-%s-(%s)-%s.%s',

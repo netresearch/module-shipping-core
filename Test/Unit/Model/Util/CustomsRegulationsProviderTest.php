@@ -19,6 +19,7 @@ class CustomsRegulationsProviderTest extends TestCase
      */
     private $config;
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
@@ -31,9 +32,8 @@ class CustomsRegulationsProviderTest extends TestCase
 
     /**
      * Assert that the provider recognizes destinations that do not require special handling.
-     *
-     * @test
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function regularDestination()
     {
         $provider = new CustomsRegulationsProvider($this->config);
@@ -46,9 +46,8 @@ class CustomsRegulationsProviderTest extends TestCase
 
     /**
      * Assert that the provider recognizes destination areas that do not need a customs form.
-     *
-     * @test
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function nonDutiableDestination()
     {
         $provider = new CustomsRegulationsProvider($this->config);
@@ -62,9 +61,8 @@ class CustomsRegulationsProviderTest extends TestCase
 
     /**
      * Assert that the provider recognizes destination areas that require a customs form.
-     *
-     * @test
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function dutiableDestination()
     {
         $provider = new CustomsRegulationsProvider($this->config);

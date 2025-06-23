@@ -46,13 +46,15 @@ class AddShipmentComment implements ShipmentResponseProcessorInterface
         $this->logger = $logger;
     }
 
+    #[\Override]
     public function processResponse(array $labelResponses, array $errorResponses): void
     {
         array_walk(
             $errorResponses,
             function (ShipmentErrorResponseInterface $errorResponse) {
+                $errors = $errorResponse->getErrors();
                 $comment = $this->commentFactory->create(['data' => [
-                    ShipmentCommentInterface::COMMENT => $errorResponse->getErrors(),
+                    ShipmentCommentInterface::COMMENT => implode('; ', $errors),
                     ShipmentCommentInterface::PARENT_ID => $errorResponse->getSalesShipment()->getEntityId(),
                     ShipmentCommentInterface::IS_VISIBLE_ON_FRONT => false,
                     ShipmentCommentInterface::IS_CUSTOMER_NOTIFIED => false,

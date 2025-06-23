@@ -18,11 +18,13 @@ class OrderProvider implements OrderProviderInterface
      */
     private $order = null;
 
+    #[\Override]
     public function setOrder(OrderInterface $order): void
     {
         $this->order = $order;
     }
 
+    #[\Override]
     public function getOrder(): ?OrderInterface
     {
         return $this->order;

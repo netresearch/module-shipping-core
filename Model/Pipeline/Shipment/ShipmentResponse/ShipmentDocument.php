@@ -18,16 +18,19 @@ use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentDocument
  */
 class ShipmentDocument extends DataObject implements ShipmentDocumentInterface
 {
+    #[\Override]
     public function getTitle(): string
     {
         return $this->getData(self::TITLE);
     }
 
+    #[\Override]
     public function getLabelData(): string
     {
         return $this->getData(self::LABEL_DATA);
     }
 
+    #[\Override]
     public function getMimeType(): string
     {
         return $this->getData(self::MIME_TYPE);

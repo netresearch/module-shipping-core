@@ -23,6 +23,7 @@ class ServiceOptionReader implements ServiceOptionReaderInterface
         $this->shipmentRequest = $shipmentRequest;
     }
 
+    #[\Override]
     public function getServiceOptionValue(string $optionCode, string $inputCode)
     {
         $packages = $this->shipmentRequest->getData('packages');
@@ -32,6 +33,7 @@ class ServiceOptionReader implements ServiceOptionReaderInterface
         return $option[$inputCode] ?? '';
     }
 
+    #[\Override]
     public function isServiceEnabled(string $optionCode, string $inputCode = 'enabled'): bool
     {
         return (bool) $this->getServiceOptionValue($optionCode, $inputCode);

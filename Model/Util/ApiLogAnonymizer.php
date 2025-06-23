@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Netresearch\ShippingCore\Model\Util;
 
+use Monolog\LogRecord;
+
 class ApiLogAnonymizer
 {
     /**
@@ -67,13 +69,11 @@ class ApiLogAnonymizer
     /**
      * Processor for Monolog log records.
      *
-     * @param mixed[] $record
-     * @return mixed[]
+     * @param LogRecord $record
+     * @return LogRecord
      */
-    public function __invoke(array $record)
+    public function __invoke(LogRecord $record): LogRecord
     {
-        $record['message'] = $this->anonymize($record['message']);
-
-        return $record;
+        return $record->with(message: $this->anonymize($record->message));
     }
 }

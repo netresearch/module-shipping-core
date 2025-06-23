@@ -37,7 +37,7 @@ class RouteMatcher
      *
      * @return bool
      */
-    public function match(array $routes, string $shippingOrigin, string $destination, int $scopeId = null): bool
+    public function match(array $routes, string $shippingOrigin, string $destination, ?int $scopeId = null): bool
     {
         // no routes means no limitations
         if (empty($routes)) {
@@ -80,7 +80,7 @@ class RouteMatcher
      * @return string[][][] Array with keys self::INCLUDED, self::EXCLUDED and self::ORIGIN, each being an array of
      *     country codes
      */
-    private function createRuleSet(array $routes, string $shippingOrigin, int $scopeId = null): array
+    private function createRuleSet(array $routes, string $shippingOrigin, ?int $scopeId = null): array
     {
         $rules = [];
 
@@ -110,7 +110,7 @@ class RouteMatcher
      *
      * @return string[]
      */
-    private function replacePlaceholders(array $countries, string $origin, int $scopeId = null): array
+    private function replacePlaceholders(array $countries, string $origin, ?int $scopeId = null): array
     {
         $replaced = [];
         foreach ($countries as $country) {

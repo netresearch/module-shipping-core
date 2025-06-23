@@ -38,6 +38,7 @@ class OrderItemAttributes extends AbstractDb
      *
      * @return void
      */
+    #[\Override]
     protected function _construct()
     {
         $this->_init(Constants::TABLE_ORDER_ITEM, OrderItemAttributesInterface::ITEM_ID);
@@ -51,6 +52,7 @@ class OrderItemAttributes extends AbstractDb
      * @param AbstractModel $object
      * @return AbstractDb
      */
+    #[\Override]
     protected function _beforeSave(AbstractModel $object)
     {
         $select = $this->_getLoadSelect($object->getIdFieldName(), $object->getId(), $object);

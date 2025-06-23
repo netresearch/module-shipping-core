@@ -76,12 +76,13 @@ class CompositeShippingDataProcessor implements ShippingDataProcessorInterface
      *
      * @return ShippingDataInterface
      */
+    #[\Override]
     public function process(
         ShippingDataInterface $shippingData,
         int $storeId,
         string $countryCode,
         string $postalCode,
-        ShipmentInterface $shipment = null
+        ?ShipmentInterface $shipment = null
     ): ShippingDataInterface {
         $carriers = [];
 

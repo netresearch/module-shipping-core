@@ -46,6 +46,7 @@ class InputsProvider implements InputsProviderInterface
         return $this->carrierData[$order->getEntityId()];
     }
 
+    #[\Override]
     public function getInput(OrderInterface $order, string $optionCode, string $inputCode): ?InputInterface
     {
         $carrierData = $this->getCarrierData($order);

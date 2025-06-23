@@ -49,6 +49,7 @@ class CutOffTimes extends AbstractFieldArray
      *
      * @throws LocalizedException
      */
+    #[\Override]
     protected function _prepareArrayRow(DataObject $row)
     {
         $hash = $this->getTemplateRenderer()->calcOptionHash(
@@ -68,6 +69,7 @@ class CutOffTimes extends AbstractFieldArray
      *
      * @throws LocalizedException
      */
+    #[\Override]
     protected function _prepareToRender()
     {
         $this->addColumn('day', [

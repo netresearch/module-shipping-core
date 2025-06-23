@@ -84,7 +84,7 @@ class ShippingBuilderPlugin
      */
     public function afterCreate(
         ShippingBuilder $shippingBuilder,
-        ShippingInterface $shipping = null
+        ?ShippingInterface $shipping = null
     ): ShippingInterface {
         if (!$shipping) {
             return $shipping;

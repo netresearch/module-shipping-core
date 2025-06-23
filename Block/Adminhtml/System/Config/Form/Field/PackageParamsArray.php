@@ -42,6 +42,7 @@ class PackageParamsArray extends AbstractFieldArray
     /**
      * Prepare to render
      */
+    #[\Override]
     protected function _prepareToRender()
     {
         $this->addColumn(

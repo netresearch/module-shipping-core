@@ -43,6 +43,7 @@ class Save extends Action
      *
      * @return ResultInterface
      */
+    #[\Override]
     public function execute(): ResultInterface
     {
         $json = $this->getRequest()->getParam('data');

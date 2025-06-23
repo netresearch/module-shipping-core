@@ -38,13 +38,14 @@ class TrackRepository implements TrackRepositoryInterface
      * @return TrackInterface
      * @throws NoSuchEntityException
      */
+    #[\Override]
     public function get(int $trackId): TrackInterface
     {
         $track = $this->trackFactory->create();
 
         try {
             $this->trackResource->load($track, $trackId);
-        } catch (\Exception $exception) {
+        } catch (\Exception) {
             throw new NoSuchEntityException(__('Unable to load return shipment with id %1.', $trackId));
         }
 
@@ -60,6 +61,7 @@ class TrackRepository implements TrackRepositoryInterface
      * @return TrackInterface|Track
      * @throws CouldNotSaveException
      */
+    #[\Override]
     public function save(TrackInterface $track): TrackInterface
     {
         try {
@@ -75,6 +77,7 @@ class TrackRepository implements TrackRepositoryInterface
      * @param TrackInterface|Track $track
      * @throws CouldNotDeleteException
      */
+    #[\Override]
     public function delete(TrackInterface $track): void
     {
         try {

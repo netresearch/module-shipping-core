@@ -40,6 +40,7 @@ class TotalTest extends TestCase
      */
     private $testQuote;
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
@@ -80,7 +81,7 @@ class TotalTest extends TestCase
     /**
      * @return array
      */
-    public function getCurrencyData(): array
+    public static function getCurrencyData(): array
     {
         return [
             'same currencies' => [
@@ -95,10 +96,10 @@ class TotalTest extends TestCase
     }
 
     /**
-     * @dataProvider getCurrencyData
      * @param string $baseCurrency
      * @param string $quoteCurrency
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('getCurrencyData')]
     public function testCollect(string $baseCurrency, string $quoteCurrency)
     {
         /** @var Total $subject */
@@ -155,10 +156,10 @@ class TotalTest extends TestCase
     }
 
     /**
-     * @dataProvider getCurrencyData
      * @param string $baseCurrency
      * @param string $quoteCurrency
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('getCurrencyData')]
     public function testFetch(string $baseCurrency, string $quoteCurrency)
     {
         /** @var Total $subject */
@@ -185,10 +186,10 @@ class TotalTest extends TestCase
     }
 
     /**
-     * @dataProvider getCurrencyData
      * @param string $baseCurrency
      * @param string $quoteCurrency
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('getCurrencyData')]
     public function testCreateTotalDisplayObject(string $baseCurrency, string $quoteCurrency)
     {
         /** @var Total $subject */

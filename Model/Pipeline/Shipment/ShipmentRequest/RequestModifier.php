@@ -157,7 +157,7 @@ class RequestModifier implements RequestModifierInterface
 
         try {
             $customs = $packagingOptionReader->getPackageOptionValues(Codes::PACKAGE_OPTION_CUSTOMS);
-        } catch (\RuntimeException $exception) {
+        } catch (\RuntimeException) {
             $customs = [];
         }
 
@@ -218,7 +218,7 @@ class RequestModifier implements RequestModifierInterface
                     $orderItemId,
                     Codes::ITEM_OPTION_CUSTOMS
                 );
-            } catch (\RuntimeException $exception) {
+            } catch (\RuntimeException) {
                 $itemCustoms = [];
             }
 
@@ -260,6 +260,7 @@ class RequestModifier implements RequestModifierInterface
      *
      * @param Request $shipmentRequest
      */
+    #[\Override]
     public function modify(Request $shipmentRequest): void
     {
         $this->modifyGeneralParams($shipmentRequest);

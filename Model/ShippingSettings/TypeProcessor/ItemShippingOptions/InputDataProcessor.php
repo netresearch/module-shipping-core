@@ -197,13 +197,14 @@ class InputDataProcessor implements ItemShippingOptionsProcessorInterface
      *
      * @return ItemShippingOptionsInterface[]
      */
+    #[\Override]
     public function process(
         string $carrierCode,
         array $itemOptions,
         int $storeId,
         string $countryCode,
         string $postalCode,
-        ShipmentInterface $shipment = null
+        ?ShipmentInterface $shipment = null
     ): array {
         if (!$shipment) {
             return $itemOptions;
@@ -214,7 +215,7 @@ class InputDataProcessor implements ItemShippingOptionsProcessorInterface
         foreach ($itemOptions as $itemOption) {
             try {
                 $shipmentItem = $this->getShipmentItemByOrderItemId($itemOption->getItemId(), $items);
-            } catch (\RuntimeException $exception) {
+            } catch (\RuntimeException) {
                 continue;
             }
 

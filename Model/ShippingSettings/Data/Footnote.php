@@ -40,6 +40,7 @@ class Footnote implements FootnoteInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getId(): string
     {
         return $this->id;
@@ -48,6 +49,7 @@ class Footnote implements FootnoteInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getContent(): string
     {
         return $this->content;
@@ -56,6 +58,7 @@ class Footnote implements FootnoteInterface
     /**
      * @return string[]
      */
+    #[\Override]
     public function getSubjects(): array
     {
         return $this->subjects;
@@ -64,6 +67,7 @@ class Footnote implements FootnoteInterface
     /**
      * @return bool
      */
+    #[\Override]
     public function isSubjectsMustBeSelected(): bool
     {
         return $this->subjectsMustBeSelected;
@@ -72,6 +76,7 @@ class Footnote implements FootnoteInterface
     /**
      * @return bool
      */
+    #[\Override]
     public function isSubjectsMustBeAvailable(): bool
     {
         return $this->subjectsMustBeAvailable;
@@ -80,6 +85,7 @@ class Footnote implements FootnoteInterface
     /**
      * @param string $id
      */
+    #[\Override]
     public function setId(string $id): void
     {
         $this->id = $id;
@@ -88,6 +94,7 @@ class Footnote implements FootnoteInterface
     /**
      * @param string $content
      */
+    #[\Override]
     public function setContent(string $content): void
     {
         $this->content = $content;
@@ -96,6 +103,7 @@ class Footnote implements FootnoteInterface
     /**
      * @param string[] $subjects
      */
+    #[\Override]
     public function setSubjects(array $subjects): void
     {
         $this->subjects = $subjects;
@@ -104,6 +112,7 @@ class Footnote implements FootnoteInterface
     /**
      * @param bool $subjectsMustBeSelected
      */
+    #[\Override]
     public function setSubjectsMustBeSelected(bool $subjectsMustBeSelected): void
     {
         $this->subjectsMustBeSelected = $subjectsMustBeSelected;
@@ -112,6 +121,7 @@ class Footnote implements FootnoteInterface
     /**
      * @param bool $subjectsMustBeAvailable
      */
+    #[\Override]
     public function setSubjectsMustBeAvailable(bool $subjectsMustBeAvailable): void
     {
         $this->subjectsMustBeAvailable = $subjectsMustBeAvailable;

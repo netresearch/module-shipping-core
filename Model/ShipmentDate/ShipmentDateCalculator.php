@@ -36,6 +36,7 @@ class ShipmentDateCalculator implements ShipmentDateCalculatorInterface
         $this->dayValidators = $dayValidators;
     }
 
+    #[\Override]
     public function getDate(array $dropOffTimes, $store = null): \DateTimeInterface
     {
         usort($dropOffTimes, static function (\DateTimeInterface $a, \DateTimeInterface $b) {

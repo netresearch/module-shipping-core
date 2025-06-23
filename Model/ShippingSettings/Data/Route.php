@@ -30,6 +30,7 @@ class Route implements RouteInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getOrigin(): string
     {
         return $this->origin;
@@ -38,6 +39,7 @@ class Route implements RouteInterface
     /**
      * @param string $origin
      */
+    #[\Override]
     public function setOrigin(string $origin): void
     {
         $this->origin = $origin;
@@ -46,6 +48,7 @@ class Route implements RouteInterface
     /**
      * @return string[]
      */
+    #[\Override]
     public function getIncludeDestinations(): array
     {
         return $this->includeDestinations;
@@ -54,6 +57,7 @@ class Route implements RouteInterface
     /**
      * @param string[] $includeDestinations
      */
+    #[\Override]
     public function setIncludeDestinations(array $includeDestinations): void
     {
         $this->includeDestinations = $includeDestinations;
@@ -62,6 +66,7 @@ class Route implements RouteInterface
     /**
      * @return string[]
      */
+    #[\Override]
     public function getExcludeDestinations(): array
     {
         return $this->excludeDestinations;
@@ -70,6 +75,7 @@ class Route implements RouteInterface
     /**
      * @param string[] $excludeDestinations
      */
+    #[\Override]
     public function setExcludeDestinations(array $excludeDestinations): void
     {
         $this->excludeDestinations = $excludeDestinations;

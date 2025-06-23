@@ -24,6 +24,7 @@ class CarrierConfig implements CarrierConfigInterface
         $this->scopeConfig = $scopeConfig;
     }
 
+    #[\Override]
     public function isActive(string $carrierCode, $store = null): bool
     {
         return $this->scopeConfig->isSetFlag(
@@ -33,6 +34,7 @@ class CarrierConfig implements CarrierConfigInterface
         );
     }
 
+    #[\Override]
     public function getTitle(string $carrierCode, $store = null): string
     {
         return (string) $this->scopeConfig->getValue(

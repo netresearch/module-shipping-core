@@ -67,6 +67,7 @@ class Location implements LocationInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getShopType(): string
     {
         return $this->shopType;
@@ -75,6 +76,7 @@ class Location implements LocationInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getShopNumber(): string
     {
         return $this->shopNumber;
@@ -83,6 +85,7 @@ class Location implements LocationInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getShopId(): string
     {
         return $this->shopId;
@@ -91,6 +94,7 @@ class Location implements LocationInterface
     /**
      * @return string[]
      */
+    #[\Override]
     public function getServices(): array
     {
         return $this->services;
@@ -99,6 +103,7 @@ class Location implements LocationInterface
     /**
      * @return AddressInterface
      */
+    #[\Override]
     public function getAddress(): AddressInterface
     {
         return $this->address;
@@ -107,6 +112,7 @@ class Location implements LocationInterface
     /**
      * @return OpeningHoursInterface[]
      */
+    #[\Override]
     public function getOpeningHours(): array
     {
         return $this->openingHours;
@@ -115,6 +121,7 @@ class Location implements LocationInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getIcon(): string
     {
         return $this->icon;
@@ -123,6 +130,7 @@ class Location implements LocationInterface
     /**
      * @return float
      */
+    #[\Override]
     public function getLongitude(): float
     {
         return $this->longitude;
@@ -131,6 +139,7 @@ class Location implements LocationInterface
     /**
      * @return float
      */
+    #[\Override]
     public function getLatitude(): float
     {
         return $this->latitude;
@@ -138,6 +147,7 @@ class Location implements LocationInterface
     /**
      * @return string
      */
+    #[\Override]
     public function getDisplayName(): string
     {
         return $this->displayName;
@@ -146,6 +156,7 @@ class Location implements LocationInterface
     /**
      * @param string $shopType
      */
+    #[\Override]
     public function setShopType(string $shopType): void
     {
         $this->shopType = $shopType;
@@ -154,6 +165,7 @@ class Location implements LocationInterface
     /**
      * @param string $shopNumber
      */
+    #[\Override]
     public function setShopNumber(string $shopNumber): void
     {
         $this->shopNumber = $shopNumber;
@@ -162,6 +174,7 @@ class Location implements LocationInterface
     /**
      * @param string $shopId
      */
+    #[\Override]
     public function setShopId(string $shopId): void
     {
         $this->shopId = $shopId;
@@ -170,6 +183,7 @@ class Location implements LocationInterface
     /**
      * @param string[] $services
      */
+    #[\Override]
     public function setServices(array $services): void
     {
         $this->services = $services;
@@ -178,6 +192,7 @@ class Location implements LocationInterface
     /**
      * @param AddressInterface $address
      */
+    #[\Override]
     public function setAddress(AddressInterface $address): void
     {
         $this->address = $address;
@@ -186,6 +201,7 @@ class Location implements LocationInterface
     /**
      * @param OpeningHoursInterface[] $openingHours
      */
+    #[\Override]
     public function setOpeningHours(array $openingHours): void
     {
         $this->openingHours = $openingHours;
@@ -194,6 +210,7 @@ class Location implements LocationInterface
     /**
      * @param string $icon
      */
+    #[\Override]
     public function setIcon(string $icon): void
     {
         $this->icon = $icon;
@@ -202,6 +219,7 @@ class Location implements LocationInterface
     /**
      * @param float $latitude
      */
+    #[\Override]
     public function setLatitude(float $latitude): void
     {
         $this->latitude = $latitude;
@@ -210,6 +228,7 @@ class Location implements LocationInterface
     /**
      * @param float $longitude
      */
+    #[\Override]
     public function setLongitude(float $longitude): void
     {
         $this->longitude = $longitude;
@@ -218,6 +237,7 @@ class Location implements LocationInterface
     /**
      * @param string $displayName
      */
+    #[\Override]
     public function setDisplayName(string $displayName): void
     {
         $this->displayName = $displayName;

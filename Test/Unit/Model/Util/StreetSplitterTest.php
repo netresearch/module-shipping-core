@@ -17,17 +17,17 @@ class StreetSplitterTest extends TestCase
     /**
      * @return string[][][]
      */
-    public function getStreetData(): array
+    public static function getStreetData(): array
     {
         return StreetDataProvider::getStreetData();
     }
 
     /**
-     * @dataProvider getStreetData
      *
      * @param string[] $street
      * @param string[] $expected
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('getStreetData')]
     public function testSplitStreet(array $street, array $expected)
     {
         $splitter = new StreetSplitter();

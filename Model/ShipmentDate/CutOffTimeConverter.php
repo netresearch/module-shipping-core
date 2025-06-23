@@ -12,6 +12,7 @@ use Netresearch\ShippingCore\Api\ShipmentDate\CutOffTimeConverterInterface;
 
 class CutOffTimeConverter implements CutOffTimeConverterInterface
 {
+    #[\Override]
     public function convert(\DateTimeInterface $currentDate, array $cutOffTimes): array
     {
         if ($currentDate instanceof \DateTime) {
@@ -27,7 +28,7 @@ class CutOffTimeConverter implements CutOffTimeConverterInterface
                 continue;
             }
 
-            if (strpos($cutOffTimes[$weekDay], ':') !== false) {
+            if (str_contains($cutOffTimes[$weekDay], ':')) {
                 // configured format is hh:mm
                 $cutOffTime =  explode(':', $cutOffTimes[$weekDay]);
             } else {
