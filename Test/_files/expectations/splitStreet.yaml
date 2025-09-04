@@ -210,3 +210,16 @@ jefferson_blvd_10441:
   street_name: "Jefferson Blvd."
   street_number: "10441"
   supplement: "Suite 200"
+# Expected results for data integrity validation cases  
+somerandomstreet_30_1_og:
+  street_name: "Somerandomstreet"
+  street_number: "30"
+  supplement: "1 OG"
+missing_dot_floor:
+  street_name: "Hauptstraße"
+  street_number: "15"
+  supplement: "2 OG"
+extra_comma_case:
+  street_name: "Musterweg"
+  street_number: "42"
+  supplement: ", Erdgeschoss"

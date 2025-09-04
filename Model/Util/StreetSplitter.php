@@ -36,6 +36,18 @@ class StreetSplitter
             'supplement'    => '',
         ];
 
+        // Try simple pattern first for common "Street Number, Floor" format (German addresses)
+        // Only match if: 1) exactly one comma, 2) supplement looks like floor indicator
+        if (substr_count($street, ',') === 1 &&
+            preg_match('/^(?P<street_name>.+?)\s+(?P<street_number>\d+[a-zA-Z]?)\s*,\s*(?P<supplement>\d+\.?\s*(og|ug|eg|dg|stock|floor|etage|obergeschoss|untergeschoss|erdgeschoss|dachgeschoss).*)$/iu', $street, $simpleMatches)) {
+            $result = [
+                'street_name' => trim($simpleMatches['street_name']),
+                'street_number' => trim($simpleMatches['street_number']),
+                'supplement' => trim($simpleMatches['supplement']),
+            ];
+            return $result;
+        }
+
         if (preg_match($this->getRegex(), $street, $matches)) {
             // Pattern A
             if (isset($matches[self::OPTION_A_STREET_NAME]) && !empty($matches[self::OPTION_A_STREET_NAME])) {
@@ -71,9 +83,58 @@ class StreetSplitter
                 $result['street_number'] = str_replace(' ', '', $result['street_number']);
                 $result['supplement'] = str_replace(' ', '', $result['supplement']);
             }
+
+            // Data integrity validation - prevent silent data loss
+            if (!$this->validateDataIntegrity($street, $result)) {
+                return [
+                    'street_name'   => $street,
+                    'street_number' => '',
+                    'supplement'    => '',
+                ];
+            }
         }
 
         return $result;
+    }
+
+    /**
+     * Validate data integrity after regex parsing to prevent silent data loss
+     *
+     * @param string $originalInput
+     * @param array $parsedResult
+     * @return bool
+     */
+    private function validateDataIntegrity(string $originalInput, array $parsedResult): bool
+    {
+        // Skip validation for empty results or when no parsing was attempted
+        if (empty(array_filter($parsedResult)) ||
+            ($parsedResult['street_name'] === $originalInput && empty($parsedResult['street_number']) && empty($parsedResult['supplement']))) {
+            return true;
+        }
+
+        // Detect obviously wrong parses - when street name is very short compared to input
+        $streetName = trim($parsedResult['street_name']);
+        if (strlen($streetName) < 3 && strlen($originalInput) > 10) {
+            return false;
+        }
+
+        // Detect when street name looks like a supplement (German floor indicators)
+        if (preg_match('/^(og|ug|eg|dg|\d+\.\s*og)$/i', $streetName)) {
+            return false;
+        }
+
+        // Character coverage analysis - only fail on severe data loss
+        $originalChars = strlen(preg_replace('/\s+/', '', $originalInput));
+        $parsedChars = strlen(preg_replace('/\s+/', '', implode('', array_filter($parsedResult))));
+
+        if ($originalChars > 0) {
+            $coverage = $parsedChars / $originalChars;
+            if ($coverage < 0.50) { // Only fail on >50% data loss
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -175,6 +236,6 @@ class StreetSplitter
   )?
   # Addition to address 2
 )
-\\s*\\Z/x";
+\\s*\\Z/xu";
     }
 }

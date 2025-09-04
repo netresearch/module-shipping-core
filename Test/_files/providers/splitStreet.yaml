@@ -108,3 +108,10 @@ san_millan_3_10:
 jefferson_blvd_10441:
   - "10441 Jefferson Blvd."
   - "Suite 200"
+# Test cases for data integrity validation
+somerandomstreet_30_1_og:
+  - "Somerandomstreet 30, 1 OG"
+missing_dot_floor:
+  - "Hauptstraße 15, 2 OG"
+extra_comma_case:
+  - "Musterweg 42,, Erdgeschoss"
