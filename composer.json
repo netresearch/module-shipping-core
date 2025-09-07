@@ -1,6 +1,6 @@
 {
     "name": "netresearch/module-shipping-core",
-    "version": "4.0.0",
+    "version": "4.0.1",
     "type": "magento2-module",
     "description": "Netresearch component providing utilities and frameworks for advanced shipping features",
     "license": "OSL-3.0",
