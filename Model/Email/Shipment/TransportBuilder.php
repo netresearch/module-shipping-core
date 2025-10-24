@@ -14,7 +14,6 @@ use Magento\Framework\Mail\Address;
 use Magento\Framework\Mail\AddressConverter;
 use Magento\Framework\Mail\EmailMessageInterfaceFactory;
 use Magento\Framework\Mail\MimeInterface;
-use Magento\Framework\Mail\MimeMessageInterfaceFactory;
 use Magento\Framework\Mail\MimePartInterface;
 use Magento\Framework\Mail\MimePartInterfaceFactory;
 use Magento\Framework\Mail\Template\SenderResolverInterface;
@@ -22,6 +21,10 @@ use Magento\Framework\Mail\TransportInterface;
 use Magento\Framework\Mail\TransportInterfaceFactory;
 use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Model\Order\Email\Container\ShipmentIdentity;
+use Netresearch\ShippingCore\Model\Email\MixedPartMimeMessage;
+use Symfony\Component\Mime\Part\AbstractPart;
+use Symfony\Component\Mime\Part\Multipart\MixedPart;
+use Symfony\Component\Mime\Part\TextPart;
 
 class TransportBuilder
 {
@@ -44,11 +47,6 @@ class TransportBuilder
      * @var MimePartInterfaceFactory
      */
     private $mimePartInterfaceFactory;
-
-    /**
-     * @var MimeMessageInterfaceFactory
-     */
-    private $mimeMessageInterfaceFactory;
 
     /**
      * @var EmailMessageInterfaceFactory
@@ -75,7 +73,6 @@ class TransportBuilder
         SenderResolverInterface $senderResolver,
         AddressConverter $addressConverter,
         MimePartInterfaceFactory $mimePartInterfaceFactory,
-        MimeMessageInterfaceFactory $mimeMessageInterfaceFactory,
         EmailMessageInterfaceFactory $emailMessageInterfaceFactory,
         TransportInterfaceFactory $mailTransportFactory
     ) {
@@ -83,7 +80,6 @@ class TransportBuilder
         $this->senderResolver = $senderResolver;
         $this->addressConverter = $addressConverter;
         $this->mimePartInterfaceFactory = $mimePartInterfaceFactory;
-        $this->mimeMessageInterfaceFactory = $mimeMessageInterfaceFactory;
         $this->emailMessageInterfaceFactory = $emailMessageInterfaceFactory;
         $this->mailTransportFactory = $mailTransportFactory;
 
@@ -117,6 +113,23 @@ class TransportBuilder
     }
 
     /**
+     * Build Symfony MixedPart with body (TextPart) and document attachment.
+     *
+     * @param AbstractPart $bodyPart Symfony TextPart for email body
+     * @return MixedPart
+     * @see MixedPartMimeMessage For workaround explanation
+     */
+    private function buildMixedPart(AbstractPart $bodyPart): MixedPart
+    {
+        $symfonyParts = [
+            $bodyPart,  // Now directly AbstractPart, not wrapped in MimePartInterface
+            $this->getAttachmentPart()->getMimePart()
+        ];
+
+        return new MixedPart(...$symfonyParts);
+    }
+
+    /**
      * Build the `subject`, `body` and `encoding` parts of the message.
      *
      * @return array
@@ -126,16 +139,15 @@ class TransportBuilder
         $subject = __('Shipping label for shipment # %1', $this->shipment->getIncrementId());
         $content = __('Please find attached the shipping label for shipment # %1.', $this->shipment->getIncrementId());
 
-        $mainPart = $this->mimePartInterfaceFactory->create(
-            [
-                'content' => (string) $content,
-                'type' =>  MimeInterface::TYPE_TEXT,
-            ]
-        );
+        // Create Symfony TextPart directly for plain text email body
+        $bodyPart = new TextPart((string) $content, 'utf-8', 'plain');
+
+        $mixedPart = $this->buildMixedPart($bodyPart);
+        $mimeMessage = new MixedPartMimeMessage($mixedPart);
 
         return [
-            'encoding' => $mainPart->getCharset(),
-            'body' => $this->mimeMessageInterfaceFactory->create(['parts' => [$mainPart, $this->getAttachmentPart()]]),
+            'encoding' => 'utf-8',  // Symfony parts use utf-8 encoding
+            'body' => $mimeMessage,
             'subject' => html_entity_decode((string) $subject, ENT_QUOTES),
         ];
     }

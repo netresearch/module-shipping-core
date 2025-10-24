@@ -10,7 +10,6 @@ namespace Netresearch\ShippingCore\Model\Email\ReturnShipment;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\TemplateTypesInterface;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\MailException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Mail\Address;
@@ -31,6 +30,12 @@ use Magento\Store\Model\ScopeInterface;
 use Netresearch\ShippingCore\Api\Data\ReturnShipment\DocumentInterface;
 use Netresearch\ShippingCore\Api\Data\ReturnShipment\TrackInterface;
 use Netresearch\ShippingCore\Api\ReturnShipment\DocumentDownloadInterface;
+use Netresearch\ShippingCore\Model\Email\MixedPartMimeMessage;
+use Symfony\Component\Mime\HtmlToTextConverter\DefaultHtmlToTextConverter;
+use Symfony\Component\Mime\Part\AbstractPart;
+use Symfony\Component\Mime\Part\Multipart\AlternativePart;
+use Symfony\Component\Mime\Part\Multipart\MixedPart;
+use Symfony\Component\Mime\Part\TextPart;
 
 class TransportBuilder
 {
@@ -148,20 +153,36 @@ class TransportBuilder
         return $this->templateFactory->get($templateIdentifier);
     }
 
-    private function getMainPart(TemplateInterface $template): MimePartInterface
+    /**
+     * Build RFC 2046 compliant body part with text/plain alternative for HTML emails.
+     *
+     * For HTML templates, creates multipart/alternative with both text/plain and text/html.
+     * For text templates, creates single text/plain part.
+     *
+     * @param TemplateInterface $template
+     * @return AbstractPart Symfony TextPart (text-only) or AlternativePart (HTML with text fallback)
+     */
+    private function buildBodyPart(TemplateInterface $template): AbstractPart
     {
-        // template must be processed BEFORE reading the template type!
+        // Template must be processed BEFORE reading the template type!
         $content = $template->processTemplate();
-        $mimePartType = ((int) $template->getType() === TemplateTypesInterface::TYPE_HTML)
-            ? MimeInterface::TYPE_HTML
-            : MimeInterface::TYPE_TEXT;
+        // Note: Using TemplateTypesInterface constants (deprecated but still used by Magento core)
+        $templateType = (int) $template->getType();
 
-        return $this->mimePartInterfaceFactory->create(
-            [
-                'content' => $content,
-                'type' =>  $mimePartType,
-            ]
-        );
+        if ($templateType === TemplateTypesInterface::TYPE_HTML) {
+            // Generate text/plain alternative using Symfony's email-specific converter
+            $converter = new DefaultHtmlToTextConverter();
+            $plainContent = $converter->convert($content, 'utf-8');
+
+            $plainPart = new TextPart($plainContent, 'utf-8', 'plain');
+            $htmlPart = new TextPart($content, 'utf-8', 'html');
+
+            // RFC 2046 Section 5.1.4: Plain text FIRST, HTML second
+            return new AlternativePart($plainPart, $htmlPart);
+        } else {
+            // Text-only template
+            return new TextPart($content, 'utf-8', 'plain');
+        }
     }
 
     private function getAttachmentPart(DocumentInterface $document): MimePartInterface
@@ -176,6 +197,26 @@ class TransportBuilder
     }
 
     /**
+     * Build Symfony MixedPart with body (AlternativePart or TextPart) and document attachments.
+     *
+     * @param AbstractPart $bodyPart Symfony TextPart or AlternativePart from buildBodyPart()
+     * @param DocumentInterface[] $documents
+     * @return MixedPart
+     * @see MixedPartMimeMessage For workaround explanation
+     */
+    private function buildMixedPart(AbstractPart $bodyPart, array $documents): MixedPart
+    {
+        $symfonyParts = [$bodyPart];  // Now directly AbstractPart, not wrapped in MimePartInterface
+
+        foreach ($documents as $document) {
+            $attachmentPart = $this->getAttachmentPart($document);
+            $symfonyParts[] = $attachmentPart->getMimePart();
+        }
+
+        return new MixedPart(...$symfonyParts);
+    }
+
+    /**
      * Build the `subject`, `body` and `encoding` parts of the message.
      *
      * @return array
@@ -184,33 +225,25 @@ class TransportBuilder
     private function buildMessageContent(): array
     {
         $template = $this->getTemplate();
-        $template->setVars(
-            [
-                'order_increment_id' => $this->order->getIncrementId(),
-                'store_name' => $this->order->getStore()->getFrontendName(),
-                'customer_name' => $this->order->getCustomerName(),
-            ]
-        );
-        $template->setOptions(
-            [
-                'area' => 'frontend',
-                'store' => $this->order->getStoreId(),
-            ]
-        );
+        $template->setVars([
+            'order_increment_id' => $this->order->getIncrementId(),
+            'store_name' => $this->order->getStore()->getFrontendName(),
+            'customer_name' => $this->order->getCustomerName(),
+        ]);
+        $template->setOptions([
+            'area' => 'frontend',
+            'store' => $this->order->getStoreId(),
+        ]);
 
-        $mainPart = $this->getMainPart($template);
-        $mimeParts = array_map(
-            function (DocumentInterface $document) {
-                return $this->getAttachmentPart($document);
-            },
-            $this->track->getDocuments()
-        );
+        $bodyPart = $this->buildBodyPart($template);
+        $documents = $this->track->getDocuments();
 
-        array_unshift($mimeParts, $mainPart);
+        $mixedPart = $this->buildMixedPart($bodyPart, $documents);
+        $mimeMessage = new MixedPartMimeMessage($mixedPart);
 
         return [
-            'encoding' => $mainPart->getCharset(),
-            'body' => $this->mimeMessageInterfaceFactory->create(['parts' => $mimeParts]),
+            'encoding' => 'utf-8',  // Symfony parts use utf-8 encoding
+            'body' => $mimeMessage,
             'subject' => html_entity_decode((string) $template->getSubject(), ENT_QUOTES),
         ];
     }
@@ -238,7 +271,8 @@ class TransportBuilder
     }
 
     /**
-     * @throws LocalizedException
+     * @throws NoSuchEntityException
+     * @throws MailException
      */
     public function build(): TransportInterface
     {
