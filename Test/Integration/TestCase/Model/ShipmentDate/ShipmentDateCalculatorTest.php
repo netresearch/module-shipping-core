@@ -127,8 +127,8 @@ class ShipmentDateCalculatorTest extends TestCase
         \DateTimeInterface $currentTime,
         \DateTimeInterface $expectedDate
     ) {
-        $timezoneMock = $this->getMockBuilder(TimezoneInterface::class)->disableOriginalConstructor()->getMock();
-        $timezoneMock->method('scopeDate')->with(self::anything(), null, true)->willReturn($currentTime);
+        $timezoneMock = $this->createStub(TimezoneInterface::class);
+        $timezoneMock->method('scopeDate')->willReturn($currentTime);
 
         $dayValidator = Bootstrap::getObjectManager()->create(ExcludeHolidays::class);
 
@@ -170,11 +170,11 @@ class ShipmentDateCalculatorTest extends TestCase
             $fri->format('N') => $fri,
         ];
 
-        $timezoneMock = $this->getMockBuilder(TimezoneInterface::class)->disableOriginalConstructor()->getMock();
-        $timezoneMock->method('scopeDate')->with(self::anything(), null, true)->willReturn($currentTime);
+        $timezoneMock = $this->createStub(TimezoneInterface::class);
+        $timezoneMock->method('scopeDate')->willReturn($currentTime);
 
         // every day is a holiday!
-        $dayValidatorMock = $this->getMockBuilder(ExcludeHolidays::class)->disableOriginalConstructor()->getMock();
+        $dayValidatorMock = $this->createStub(ExcludeHolidays::class);
         $dayValidatorMock->method('validate')->willReturn(false);
 
         /** @var ShipmentDateCalculator $subject */

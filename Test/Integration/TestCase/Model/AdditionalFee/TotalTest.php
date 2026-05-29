@@ -52,11 +52,9 @@ class TotalTest extends TestCase
         $testAddress->setShippingMethod(FakeAdditionalFeeConfiguration::CARRIERCODE . '_123');
         $testAddress->setId('testAddressId');
 
-        $mockShipping = $this->getMockBuilder(ShippingInterface::class)->getMock();
+        $mockShipping = $this->createStub(ShippingInterface::class);
         $mockShipping->method('getAddress')->willReturn($testAddress);
-        $this->mockShippingAssignment = $this->getMockBuilder(ShippingAssignment::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->mockShippingAssignment = $this->createStub(ShippingAssignment::class);
         $this->mockShippingAssignment->method('getShipping')->willReturn($mockShipping);
 
         /** @var Quote $testQuote */

@@ -42,30 +42,23 @@ class UnitConverterTest extends TestCase
         $rateGbpToEur = 1.1723;
         $rateGbpToUsd = 1.2494;
 
-        $currencyMock = $this->getMockBuilder(Currency::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $currencyMock = $this->createStub(Currency::class);
         $currencyMock
-            ->expects($this->any())
             ->method('getRate')
             ->willReturnOnConsecutiveCalls($rateUsdToEur, $rateGbpToEur, $rateGbpToUsd);
 
-        $currencyFactoryMock = $this->getMockBuilder(CurrencyFactory::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $currencyFactoryMock->expects($this->any())
+        $currencyFactoryMock = $this->createStub(CurrencyFactory::class);
+        $currencyFactoryMock
             ->method('create')
             ->willReturn($currencyMock);
 
         $carrierHelper = $this->objectManager->get(Carrier::class);
 
         // Create a properly configured directory helper
-        $directoryHelper = $this->getMockBuilder(Data::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $directoryHelper = $this->createStub(Data::class);
 
         // Mock the convertMonetaryValue method directly
-        $directoryHelper->expects($this->any())
+        $directoryHelper
             ->method('currencyConvert')
             ->willReturnCallback(function ($amount, $from, $to) use ($rateUsdToEur, $rateGbpToEur, $rateGbpToUsd) {
                 if ($from === 'USD' && $to === 'EUR') {
