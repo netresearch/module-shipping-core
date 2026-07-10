@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 5.0.0
+
+### Added
+
+- `locked` flag on shipping option inputs, marking a disabled state as fixed server-side so client-side logic must not re-enable the input.
+
+### Breaking Changes
+
+- **InputInterface**: Added `isLocked()`/`setLocked()`; custom implementations of the `@api` interface must implement both.
+
 ## 4.1.1
 
 ### Changed
