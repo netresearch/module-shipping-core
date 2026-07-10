@@ -35,6 +35,11 @@ class Input implements InputInterface
     private $disabled = false;
 
     /**
+     * @var bool
+     */
+    private $locked = false;
+
+    /**
      * @var string
      */
     private $label = '';
@@ -118,6 +123,15 @@ class Input implements InputInterface
     public function isDisabled(): bool
     {
         return $this->disabled;
+    }
+
+    /**
+     * @return bool
+     */
+    #[\Override]
+    public function isLocked(): bool
+    {
+        return $this->locked;
     }
 
     /**
@@ -244,6 +258,15 @@ class Input implements InputInterface
     public function setDisabled(bool $disabled): void
     {
         $this->disabled = $disabled;
+    }
+
+    /**
+     * @param bool $locked
+     */
+    #[\Override]
+    public function setLocked(bool $locked): void
+    {
+        $this->locked = $locked;
     }
 
     /**

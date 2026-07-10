@@ -58,6 +58,16 @@ interface InputInterface
     public function isDisabled(): bool;
 
     /**
+     * Declare if the input's disabled state was fixed server-side.
+     *
+     * Locked inputs must not be re-enabled by client-side logic such as the
+     * compatibility rule engine.
+     *
+     * @return bool
+     */
+    public function isLocked(): bool;
+
+    /**
      * Obtain the human-readable label corresponding to the input.
      *
      * @return string
@@ -160,6 +170,13 @@ interface InputInterface
      * @return void
      */
     public function setDisabled(bool $disabled): void;
+
+    /**
+     * @param bool $locked
+     *
+     * @return void
+     */
+    public function setLocked(bool $locked): void;
 
     /**
      * @param string $label
