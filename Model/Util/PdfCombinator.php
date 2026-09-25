@@ -42,6 +42,8 @@ class PdfCombinator implements PdfCombinatorInterface
     #[\Override]
     public function combinePdfPages(array $pdfContent): string
     {
+        $pdfContent = array_map($this->normalizePdfVersion(...), $pdfContent);
+
         if (empty($pdfContent)) {
             // no data given
             $pdfBinary = '';
@@ -75,5 +77,24 @@ class PdfCombinator implements PdfCombinatorInterface
         }, $pdfContent);
 
         return $this->combinePdfPages($pdfContent);
+    }
+
+    /**
+     * Declare a PDF 2.x document as PDF 1.7, which Zend_Pdf accepts.
+     *
+     * Zend_Pdf rejects PDF 2.x by its version header alone. The replacement keeps the
+     * byte length, so cross-reference offsets stay valid. Documents Zend_Pdf still cannot
+     * read, e.g. with cross-reference streams, fail with the parser's own error.
+     *
+     * @param string $content
+     * @return string
+     */
+    private function normalizePdfVersion(string $content): string
+    {
+        if (preg_match('/\A%PDF-2\.\d(?!\d)/', $content) !== 1) {
+            return $content;
+        }
+
+        return substr_replace($content, '%PDF-1.7', 0, 8);
     }
 }
