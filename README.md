@@ -23,12 +23,12 @@ Features
 Requirements
 ------------
 
-* PHP >= 8.3
+* PHP >= 8.2
 
 Compatibility
 -------------
 
-* Magento >= 2.4.8
+* Magento >= 2.4.7
 
 License
 -------
