@@ -55,12 +55,22 @@
         "symfony/yaml": "^6.4.0",
         "tddwizard/magento2-fixtures": "^1.2.0",
         "magento/module-checkout": "^100.4.8",
-        "magento/module-customer":  "^103.0.8"
+        "magento/module-customer":  "^103.0.8",
+        "magento/magento-coding-standard": "^41",
+        "phpstan/phpstan": "^2.1",
+        "bitexpert/phpstan-magento": "^0.44",
+        "phpstan/extension-installer": "^1.4"
     },
     "suggest": {
         "magento/module-rma": "*",
         "magento/module-scalable-checkout": "*",
         "magento/module-scalable-oms": "*",
         "netresearch/module-shipping-inventory": "^1.2.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true
+        }
     }
 }
