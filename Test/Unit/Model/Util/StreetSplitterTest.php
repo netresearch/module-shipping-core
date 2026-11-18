@@ -23,6 +23,7 @@ class StreetSplitterTest extends TestCase
     }
 
     /**
+     * @dataProvider getStreetData
      *
      * @param string[] $street
      * @param string[] $expected

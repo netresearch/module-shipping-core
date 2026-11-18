@@ -13,13 +13,13 @@ use Netresearch\ShippingCore\Model\ShippingSettings\Data\Route;
 use Netresearch\ShippingCore\Model\ShippingSettings\Data\ShippingOption;
 use Netresearch\ShippingCore\Model\ShippingSettings\RouteMatcher;
 use Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\ShippingOptions\RouteProcessor;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 
 class RouteProcessorTest extends TestCase
 {
     /**
-     * @var ShippingConfig|MockObject
+     * @var ShippingConfig|Stub
      */
     private $configMock;
 
@@ -28,9 +28,7 @@ class RouteProcessorTest extends TestCase
     {
         parent::setUp();
 
-        $this->configMock = $this->getMockBuilder(ShippingConfig::class)
-                                 ->disableOriginalConstructor()
-                                 ->getMock();
+        $this->configMock = $this->createStub(ShippingConfig::class);
         $this->configMock->method('getEuCountries')->willReturn(['DE', 'AT', 'IT', 'UK']);
     }
 
@@ -111,6 +109,7 @@ class RouteProcessorTest extends TestCase
     }
 
     /**
+     * @dataProvider dataProvider
      *
      * @param mixed[] $optionsData
      * @param string $originCountryId

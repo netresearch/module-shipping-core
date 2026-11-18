@@ -11,7 +11,6 @@ namespace Netresearch\ShippingCore\Model\Util;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Filesystem\DriverInterface;
 use Magento\Framework\Logger\Handler\Base;
-use Monolog\LogRecord;
 
 class ApiLogHandler extends Base
 {
@@ -60,12 +59,15 @@ class ApiLogHandler extends Base
         $this->pushProcessor($anonymizer);
     }
 
+    /**
+     * @param mixed $record
+     */
     #[\Override]
-    public function isHandling(LogRecord $record): bool
+    public function isHandling($record): bool
     {
         $loggingEnabled = (bool) $this->scopeConfig->getValue($this->logEnabledConfigPath);
         $logLevel = (int) $this->scopeConfig->getValue($this->logLevelConfigPath);
 
-        return $loggingEnabled && $record->level->value >= $logLevel && parent::isHandling($record);
+        return $loggingEnabled && $record['level'] >= $logLevel && parent::isHandling($record);
     }
 }
