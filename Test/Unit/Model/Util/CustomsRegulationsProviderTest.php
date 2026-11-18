@@ -25,12 +25,13 @@ class CustomsRegulationsProviderTest extends TestCase
         parent::setUp();
 
         $euCountries = explode(',', 'AT,BE,BG,HR,CY,CZ,DK,EE,FI,FR,DE,GR,HU,IE,IT,LV,LT,LU,MT,NL,PL,PT,RO,SK,SI,ES,SE');
-        $this->config = $this->createConfiguredMock(ShippingConfigInterface::class, [
-            'getEuCountries' => $euCountries,
-        ]);
+        $this->config = $this->createStub(ShippingConfigInterface::class);
+        $this->config->method('getEuCountries')->willReturn($euCountries);
     }
 
     /**
+     * @test
+     *
      * Assert that the provider recognizes destinations that do not require special handling.
      */
     #[\PHPUnit\Framework\Attributes\Test]
@@ -45,6 +46,8 @@ class CustomsRegulationsProviderTest extends TestCase
     }
 
     /**
+     * @test
+     *
      * Assert that the provider recognizes destination areas that do not need a customs form.
      */
     #[\PHPUnit\Framework\Attributes\Test]
@@ -60,6 +63,8 @@ class CustomsRegulationsProviderTest extends TestCase
     }
 
     /**
+     * @test
+     *
      * Assert that the provider recognizes destination areas that require a customs form.
      */
     #[\PHPUnit\Framework\Attributes\Test]

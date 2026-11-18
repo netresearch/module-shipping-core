@@ -88,6 +88,9 @@ class PdfCombinatorTest extends TestCase
         ];
     }
 
+    /**
+     * @dataProvider unchangedDocumentProvider
+     */
     #[DataProvider('unchangedDocumentProvider')]
     public function testSingleDocumentWithoutPdf2HeaderIsReturnedUnchanged(string $document): void
     {

@@ -21,28 +21,28 @@
         ]
     },
     "require": {
-        "php": "~8.3.0||~8.4.0||~8.5.0",
+        "php": "~8.2.0||~8.3.0||~8.4.0||~8.5.0",
         "ext-dom": "*",
         "ext-simplexml": "*",
         "azuyalabs/yasumi": "^2.0.0",
-        "magento/framework": "^103.0.8",
-        "magento/module-backend": "^102.0.8",
-        "magento/module-bundle": "^101.0.8",
-        "magento/module-catalog": "^104.0.8",
-        "magento/module-config": "^101.2.8",
-        "magento/module-configurable-product": "^100.4.8",
-        "magento/module-cron": "^100.4.8",
-        "magento/module-directory": "^100.4.8",
-        "magento/module-eav": "^102.1.8",
-        "magento/module-email": "^101.1.8",
-        "magento/module-payment": "^100.4.8",
-        "magento/module-quote": "^101.2.8",
-        "magento/module-sales": "^103.0.8",
-        "magento/module-shipping": "^100.4.8",
-        "magento/module-store": "^101.1.8",
-        "magento/module-tax": "^100.4.8",
-        "magento/module-ui": "^101.2.8",
-        "magento/module-webapi": "^100.4.7",
+        "magento/framework": "^103.0.7",
+        "magento/module-backend": "^102.0.7",
+        "magento/module-bundle": "^101.0.7",
+        "magento/module-catalog": "^104.0.7",
+        "magento/module-config": "^101.2.7",
+        "magento/module-configurable-product": "^100.4.7",
+        "magento/module-cron": "^100.4.7",
+        "magento/module-directory": "^100.4.7",
+        "magento/module-eav": "^102.1.7",
+        "magento/module-email": "^101.1.7",
+        "magento/module-payment": "^100.4.7",
+        "magento/module-quote": "^101.2.7",
+        "magento/module-sales": "^103.0.7",
+        "magento/module-shipping": "^100.4.7",
+        "magento/module-store": "^101.1.7",
+        "magento/module-tax": "^100.4.7",
+        "magento/module-ui": "^101.2.7",
+        "magento/module-webapi": "^100.4.6",
         "netresearch/config-fields-m2": "^1.3.0"
     },
     "extra": {
@@ -54,13 +54,23 @@
         "phpunit/phpunit": "^10.0.0",
         "symfony/yaml": "^6.4.0",
         "tddwizard/magento2-fixtures": "^1.2.0",
-        "magento/module-checkout": "^100.4.8",
-        "magento/module-customer":  "^103.0.8"
+        "magento/module-checkout": "^100.4.7",
+        "magento/module-customer":  "^103.0.7",
+        "magento/magento-coding-standard": "^41",
+        "phpstan/phpstan": "^2.1",
+        "bitexpert/phpstan-magento": "^0.44",
+        "phpstan/extension-installer": "^1.4"
     },
     "suggest": {
         "magento/module-rma": "*",
         "magento/module-scalable-checkout": "*",
         "magento/module-scalable-oms": "*",
         "netresearch/module-shipping-inventory": "^1.2.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true
+        }
     }
 }

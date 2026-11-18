@@ -13,7 +13,6 @@ use Netresearch\ShippingCore\Model\PackagingPopup\RequestData;
 use Netresearch\ShippingCore\Model\PackagingPopup\RequestDataConverter;
 use Netresearch\ShippingCore\Model\PackagingPopup\RequestDataFactory;
 use Netresearch\ShippingCore\Test\Unit\Provider\SaveShipmentRequestProvider;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class RequestDataConverterTest extends TestCase
@@ -27,6 +26,8 @@ class RequestDataConverterTest extends TestCase
     }
 
     /**
+     * @test
+     * @dataProvider dataProvider
      * @param string $json nr packaging popup request data
      * @param mixed[] $packages core packaging popup request data
      */
@@ -34,8 +35,7 @@ class RequestDataConverterTest extends TestCase
     #[\PHPUnit\Framework\Attributes\Test]
     public function convert(string $json, array $packages)
     {
-        /** @var RequestDataFactory|MockObject $requestDataFactory */
-        $requestDataFactory = $this->createMock(RequestDataFactory::class);
+        $requestDataFactory = $this->createStub(RequestDataFactory::class);
         $requestDataFactory->method('create')->willReturnCallback(
             function (array $args) {
                 return new RequestData(

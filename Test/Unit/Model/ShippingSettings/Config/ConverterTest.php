@@ -31,6 +31,7 @@ class ConverterTest extends TestCase
     }
 
     /**
+     * @dataProvider dataProvider
      * @param string $xml shipping settings xml
      * @param mixed[] $expected expected shipping settings array representation
      */

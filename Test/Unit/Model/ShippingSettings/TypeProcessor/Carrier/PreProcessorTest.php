@@ -14,13 +14,13 @@ use Netresearch\ShippingCore\Model\ShippingSettings\Data\Compatibility;
 use Netresearch\ShippingCore\Model\ShippingSettings\Data\Input;
 use Netresearch\ShippingCore\Model\ShippingSettings\Data\ShippingOption;
 use Netresearch\ShippingCore\Model\ShippingSettings\TypeProcessor\Carrier\CompatibilityPreProcessor;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 
 class PreProcessorTest extends TestCase
 {
     /**
-     * @var CompatibilityInterfaceFactory | MockObject
+     * @var CompatibilityInterfaceFactory | Stub
      */
     private $mockCompatibilityFactory;
 
@@ -28,9 +28,7 @@ class PreProcessorTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->mockCompatibilityFactory = $this->getMockBuilder(CompatibilityInterfaceFactory::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->mockCompatibilityFactory = $this->createStub(CompatibilityInterfaceFactory::class);
         $this->mockCompatibilityFactory
             ->method('create')
             ->willReturnCallback(static function () {
